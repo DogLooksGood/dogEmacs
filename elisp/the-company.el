@@ -10,4 +10,8 @@
   (setq company-idle-delay nil)
   (global-company-mode 1))
 
+;; (use-package company-posframe
+;;   :init
+;;   (company-posframe-mode 1))
+
 (provide 'the-company)

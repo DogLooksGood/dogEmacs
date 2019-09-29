@@ -1,8 +1,8 @@
-(use-package ag
-  :ensure t)
+(use-package ag)
+
+(use-package wgrep)
 
 (use-package projectile
-  :ensure t
   :bind
   ("C-c f" . 'counsel-projectile-find-file)
   ("C-c b" . 'counsel-projectile-switch-to-buffer)

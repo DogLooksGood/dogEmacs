@@ -1,19 +1,34 @@
+;;; Look & Feels
+
+;; Font Setup
+
 (progn
-  (setq my-font "Envy Code R-13")
+  (setq my-font "Hack-14")
   (set-default-font my-font)
   (add-to-list 'default-frame-alist `(font . ,my-font))
   (set-face-attribute 'default t :font my-font))
 
-;; (set-fontset-font t nil "NotoSansMono Nerd Font" nil 'prepend)
+;; For glyph
 
-(set-frame-parameter (selected-frame) 'alpha '(100 . 100))
-(add-to-list 'default-frame-alist '(alpha . (100 . 100)))
+(set-fontset-font t nil "NotoSansMono Nerd Font" nil 'prepend)
+
+;; For Org-mode
+
+(add-hook 'org-mode-hook
+          (lambda () (face-remap-add-relative 'default :family "等距更纱黑体 CL")))
+
+;; Transparency Setup
+
+(set-frame-parameter (selected-frame) 'alpha '(95 . 95))
+(add-to-list 'default-frame-alist '(alpha . (95 . 95)))
+
+;; Theme Setup
 
 (use-package zenburn-theme
-  :ensure t
-  :custom-face
-  (fringe ((t :background nil)))
   :init
-  (load-theme 'zenburn t))
+  (load-theme 'zenburn t)
+  (custom-theme-set-faces
+   'zenburn
+   '(fringe ((t :background nil)))))
 
 (provide 'the-look-and-feel)

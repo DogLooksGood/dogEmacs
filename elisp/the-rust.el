@@ -1,16 +1,22 @@
+;
+
 (defun user/rust-semicolon ()
   "Will insert a semicolon if we are at the end of line,
 otherwise will insert a colon."
   (interactive)
-  (if (and (or (nth 3 (syntax-ppss))
-               (nth 4 (syntax-ppss))
-               (let ((ln (buffer-substring-no-properties
-			  (line-beginning-position)
-			  (line-end-position))))
-		 (and (string-match-p "[=\.)}]\\|\\( return \\)\\|\\( break \\)" ln)
-		      (equal (point) (line-end-position))))))
-      (call-interactively #'self-insert-command)
-    (insert ":")))
+  (if (equal 59 (char-before))
+      (progn
+	(delete-char -1)
+	(insert "::"))
+    (if (and (or (nth 3 (syntax-ppss))
+		 (nth 4 (syntax-ppss))
+		 (let ((ln (buffer-substring-no-properties
+			    (line-beginning-position)
+			    (line-end-position))))
+		   (and (string-match-p "[=\.)}]\\|\\( return \\)\\|\\( break \\)" ln)
+			(equal (point) (line-end-position))))))
+	(call-interactively #'self-insert-command)
+      (insert ":"))))
 
 (defun user/rust-minus ()
   "Will insert a minus if we are after whitespace and not at the indentation,otherwise will insert a underscore."

@@ -12,6 +12,6 @@
 (bind-key "M-\\" 'split-window-right)
 (bind-key "M--" 'split-window-below)
 (bind-key "M-o" 'delete-other-windows)
-(bind-key "M-k" 'delete-window)
+(bind-key "M-q" 'delete-window)
 
 (provide 'the-window)

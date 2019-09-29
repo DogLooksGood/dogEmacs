@@ -17,11 +17,16 @@
   :ensure t
   :bind
   (("C-$" . end-of-line)
+   ("C-x C-k" . 'kill-buffer)
+   ("C-}" . 'scroll-up-command)
+   ("C-{" . 'scroll-down-command)
    ("<escape>" . mode-line-other-buffer)
    ("C-@" . delete-indentation)
    ("C-r" . 'point-to-register)
    ("C-z" . 'goto-line)
    ("C-;" . 'comment-dwim)
+   ("C-x C-x" . 'save-buffer)
+   ("C-=" . 'indent-region)
    ("C-." . 'xref-find-definitions)
    ("C-," . 'xref-pop-marker-stack)
    :map
@@ -45,7 +50,9 @@
    ("h" . 'backward-word)
    ("t" . 'forward-word)
    ("j" . 'jump-to-register)
-   ("&" . 'universal-argument))
+   ("&" . 'universal-argument)
+   ("q" . 'delete-window)
+   ("v" . 'kill-ring-save))
   :init
   (add-hook 'text-mode-hook 'god-local-mode)
   (add-hook 'prog-mode-hook 'god-local-mode)
@@ -57,5 +64,6 @@
 	  ("i" . "M-")
           ("o" . "C-M-")))
   (setq god-literal-key "SPC"))
+
 
 (provide 'the-modal)

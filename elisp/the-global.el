@@ -1,5 +1,7 @@
 (global-set-key (kbd "C-?") help-map)
 
+(global-set-key (kbd "<mouse-3>") 'newline)
+
 ;; Better Defaults
 (setq inhibit-x-resources t
       inhibit-splash-screen t
@@ -37,12 +39,13 @@
       mouse-yank-at-point t
       ;; This fix the cursor movement lag
       auto-window-vscroll nil
-      ;; Don't indent with tab
-      indent-tabs-mode nil
       ;; Window divider setup
       window-divider-default-right-width 1
       window-divider-default-bottom-width 1
       window-divider-default-places t)
+
+;; Don't indent with tab
+(setq-default indent-tabs-mode nil)
 
 (prefer-coding-system 'utf-8)
 

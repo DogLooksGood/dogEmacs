@@ -4,10 +4,12 @@
 	("C-c C-=" . 'clojure-align))
   :config
   (add-to-list 'clojure-font-lock-keywords
-             `(,(concat "\\(:\\{1,2\\}\\)\\(" clojure--sym-regexp "?\\)\\(/\\)\\(" clojure--sym-regexp "\\)")
-               (0 'clojure-keyword-face)))
-  :init
-  (setq clojure-indent-style 'always-indent))
+               `(,(concat "\\(:\\{1,2\\}\\)\\("
+                          clojure--sym-regexp
+                          "?\\)\\(/\\)\\("
+                          clojure--sym-regexp
+                          "\\)")
+               (0 'clojure-keyword-face))))
 
 (use-package clj-refactor
   :init
@@ -16,8 +18,16 @@
 
 (use-package cider
   :bind
-  (:map cider-mode-map
-	("C-." . 'cider-find-var))
+  (:map
+   cider-mode-map
+   ("C-." . 'cider-find-var)
+   :map
+   cider-repl-mode-map
+   ("(" . 'paredit-open-round)
+   (")" . 'paredit-close-round)
+   ("[" . 'paredit-open-square)
+   ("]" . 'paredit-close-square)
+   ("<backspace>" . 'paredit-backward-delete))
   :config
   (unbind-key "M-." cider-mode-map)
   :init
@@ -37,7 +47,6 @@
 ;;      ((equal 'clj repl-type)
 ;;       (--first (string-match-p "\*cider-repl.+(clj)\*" (buffer-name it))
 ;;             buf-lst))
-
 ;;      ((equal 'cljs cljs)
 ;;       (--first (string-match-p "\*cider-repl.+(cljs:.+)\*" (buffer-name it))
 ;;             buf-lst)))))
