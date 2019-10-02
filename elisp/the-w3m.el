@@ -2,8 +2,7 @@
   :bind
   (:map
    w3m-mode-map
-   ("p" . 'previous-line)
-   ("n" . 'forward-line)))
-
+   ("n" . 'forward-line)
+   ("p" . 'previous-line)))
 
 (provide 'the-w3m)

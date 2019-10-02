@@ -2,6 +2,8 @@
   :bind
   (:map clojure-mode-map
 	("C-c C-=" . 'clojure-align))
+  :init
+  (setq clojure-toplevel-inside-comment-form t)
   :config
   (add-to-list 'clojure-font-lock-keywords
                `(,(concat "\\(:\\{1,2\\}\\)\\("
