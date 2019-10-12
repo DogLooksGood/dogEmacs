@@ -3,7 +3,7 @@
 ;; Font Setup
 
 (progn
-  (setq my-font "Hack-14")
+  (setq my-font "Anonymous Pro-13")
   (set-default-font my-font)
   (add-to-list 'default-frame-alist `(font . ,my-font))
   (set-face-attribute 'default t :font my-font))
@@ -23,6 +23,9 @@
 (add-to-list 'default-frame-alist '(alpha . (95 . 95)))
 
 ;; Theme Setup
+
+(custom-set-faces
+ '(fringe ((t :background nil))))
 
 (use-package zenburn-theme
   :init

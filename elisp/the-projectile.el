@@ -12,4 +12,6 @@
   :init
   (projectile-mode 1))
 
+(use-package counsel-projectile)
+
 (provide 'the-projectile)

@@ -12,10 +12,9 @@
 	ivy-use-selectable-prompt t)
   (ivy-mode 1))
 
-;; (use-package ivy-posframe
-;;   :init
-;;   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display-at-frame-center)))
-;;   (ivy-posframe-mode 1))
+(use-package counsel
+  :bind
+  ("C-x C-m" . 'counsel-imenu))
 
 (use-package swiper
   :ensure t

@@ -14,6 +14,10 @@
                (0 'clojure-keyword-face))))
 
 (use-package clj-refactor
+  :bind
+  (:map
+   clojure-mode-map
+   ("/" . 'cljr-slash))
   :init
   (setq cljr-warn-on-eval t)
   (setq cljr-suppress-middleware-warnings t))
@@ -35,7 +39,8 @@
   :init
   (setq cider-font-lock-dynamically nil
 	cider-font-lock-reader-conditionals nil
-	cider-prompt-for-symbol nil))
+	cider-prompt-for-symbol nil
+        cider-enhanced-cljs-completion-p nil))
 
 (defun user/clojure-repl-type ()
   (cond

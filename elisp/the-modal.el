@@ -13,6 +13,11 @@
 
 (require 'conf-mode)
 
+(defun user/make-silent (func &rest args)
+  (cl-letf (((symbol-function 'message)
+             (lambda (&rest args) nil)))
+    (apply func args)))
+
 (use-package god-mode
   :ensure t
   :bind
@@ -23,7 +28,6 @@
    ("<escape>" . mode-line-other-buffer)
    ("C-@" . delete-indentation)
    ("C-r" . 'point-to-register)
-   ("C-z" . 'goto-line)
    ("C-;" . 'comment-dwim)
    ("C-x C-x" . 'save-buffer)
    ("C-=" . 'indent-region)
@@ -51,9 +55,12 @@
    ("t" . 'forward-word)
    ("j" . 'jump-to-register)
    ("&" . 'universal-argument)
+   ("[" . 'beginning-of-buffer)
+   ("]" . 'end-of-buffer)
    ("q" . 'delete-window)
    ("v" . 'kill-ring-save))
   :init
+  (advice-add 'god-local-mode :around #'user/make-silent)
   (add-hook 'text-mode-hook 'god-local-mode)
   (add-hook 'prog-mode-hook 'god-local-mode)
   (add-hook 'conf-mode-hook 'god-local-mode)
