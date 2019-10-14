@@ -1,9 +1,11 @@
 (use-package magit
   :bind
-  ("C-z" . 'magit-status))
+  ("C-S-G" . 'magit-status))
 
 (use-package diff-hl
   :init
   (global-diff-hl-mode t))
 
-(provide 'the-magit)
+(use-package gitignore-mode)
+
+(provide 'the-git)

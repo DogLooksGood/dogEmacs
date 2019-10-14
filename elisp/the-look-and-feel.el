@@ -3,7 +3,7 @@
 ;; Font Setup
 
 (progn
-  (setq my-font "Anonymous Pro-13")
+  (setq my-font "IBM Plex Mono-13")
   (set-default-font my-font)
   (add-to-list 'default-frame-alist `(font . ,my-font))
   (set-face-attribute 'default t :font my-font))
@@ -27,11 +27,16 @@
 (custom-set-faces
  '(fringe ((t :background nil))))
 
-(use-package zenburn-theme
+(use-package nimbus-theme
   :init
-  (load-theme 'zenburn t)
-  (custom-theme-set-faces
-   'zenburn
-   '(fringe ((t :background nil)))))
+  (load-theme 'nimbus t))
+
+;; (use-package zenburn-theme
+;;   :init
+;;   (load-theme 'zenburn t)
+;;   (setq zenburn-scale-org-headlines t)
+;;   (custom-theme-set-faces
+;;    'zenburn
+;;    '(fringe ((t :background nil)))))
 
 (provide 'the-look-and-feel)

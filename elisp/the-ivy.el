@@ -1,7 +1,7 @@
 (use-package ivy
   :ensure t
   :bind
-  (("C-'" . 'ivy-resume)
+  (("M-z" . 'ivy-resume)
    :map ivy-minibuffer-map
    ("<escape>" . keyboard-escape-quit)
    ("{" . ivy-previous-line)
@@ -14,7 +14,8 @@
 
 (use-package counsel
   :bind
-  ("C-x C-m" . 'counsel-imenu))
+  ("C-x C-h" . 'counsel-imenu)
+  ("C-x C-b" . 'counsel-ibuffer))
 
 (use-package swiper
   :ensure t

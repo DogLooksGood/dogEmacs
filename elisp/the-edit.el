@@ -1,3 +1,10 @@
+(use-package avy
+  :bind
+  ("C-z" . 'avy-goto-word-or-subword-1)
+  :init
+  (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))
+  (avy-setup-default))
+
 (use-package multiple-cursors
   :bind
   (("C->" . 'mc/mark-next-like-this)
@@ -13,13 +20,23 @@
   (setq mc/always-run-for-all nil)
   (multiple-cursors-mode 1))
 
-(use-package highlight-symbol
-  :custom-face
-  (highlight-symbol-face ((t (:underline "#666"))))
+(use-package expand-region
+  :ensure t
   :bind
-  (("M-n" . 'highlight-symbol-next)
-   ("M-p" . 'highlight-symbol-prev))
-  :init
-  (highlight-symbol-mode 1))
+  ("C-+" . 'er/expand-region))
 
-(provide 'the-multi-edit)
+(use-package anzu
+  :bind
+  ("C-%" . 'anzu-query-replace-regexp)
+  ("M-%" . 'anzu-query-replace)
+  ("C-&" . 'anzu-query-replace-at-cursor-thing)
+  :init
+  (global-anzu-mode))
+
+(use-package rg)
+
+(use-package ripgrep)
+
+(use-package wgrep)
+
+(provide 'the-edit)

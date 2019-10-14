@@ -37,8 +37,12 @@
   :config
   (unbind-key "M-." cider-mode-map)
   :init
+  (add-hook 'cider--debug-mode-hook 'user/insert-mode)
   (setq cider-font-lock-dynamically nil
 	cider-font-lock-reader-conditionals nil
+        cider-repl-use-clojure-font-lock nil
+        cider-repl-use-content-types nil
+        cider-repl-use-pretty-printing nil
 	cider-prompt-for-symbol nil
         cider-enhanced-cljs-completion-p nil))
 

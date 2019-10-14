@@ -1,7 +1,7 @@
-(defun my-update-cursor ()
-  (setq cursor-type (if (or god-local-mode buffer-read-only)
-                        'box
-                      '(bar . 4))))
+(defun user/update-cursor-shape ()
+  (if (or god-local-mode buffer-read-only)
+      (setq cursor-type 'box)
+    (setq cursor-type '(bar . 4))))
 
 (use-package selected
   :ensure t
@@ -11,25 +11,25 @@
   :init
   (selected-global-mode 1))
 
-(require 'conf-mode)
-
 (defun user/make-silent (func &rest args)
   (cl-letf (((symbol-function 'message)
              (lambda (&rest args) nil)))
     (apply func args)))
 
+(defun user/insert-after ()
+  (interactive)
+  (forward-char)
+  (god-local-mode -1))
+
 (use-package god-mode
   :ensure t
   :bind
-  (("C-$" . end-of-line)
-   ("C-x C-k" . 'kill-buffer)
-   ("C-}" . 'scroll-up-command)
-   ("C-{" . 'scroll-down-command)
+  (("C-x C-k" . 'kill-buffer)
+   ("C-x C-x" . 'save-buffer)
+   ("M-g" . 'goto-line)
    ("<escape>" . mode-line-other-buffer)
    ("C-@" . delete-indentation)
-   ("C-r" . 'point-to-register)
    ("C-;" . 'comment-dwim)
-   ("C-x C-x" . 'save-buffer)
    ("C-=" . 'indent-region)
    ("C-." . 'xref-find-definitions)
    ("C-," . 'xref-pop-marker-stack)
@@ -49,12 +49,14 @@
    god-local-mode-map
    ("<escape>" . mode-line-other-buffer)
    ("u" . 'god-local-mode)
-   ("e" . 'repeat)
-   ("m" . 'back-to-indentation)
+   ("i" . 'repeat)
    ("h" . 'backward-word)
    ("t" . 'forward-word)
+   ("}" . 'scroll-up-command)
+   ("{" . 'scroll-down-command)
+   ("r" . 'point-to-register)
    ("j" . 'jump-to-register)
-   ("&" . 'universal-argument)
+   ("$" . 'universal-argument)
    ("[" . 'beginning-of-buffer)
    ("]" . 'end-of-buffer)
    ("q" . 'delete-window)
@@ -64,13 +66,17 @@
   (add-hook 'text-mode-hook 'god-local-mode)
   (add-hook 'prog-mode-hook 'god-local-mode)
   (add-hook 'conf-mode-hook 'god-local-mode)
-  (add-hook 'god-mode-enabled-hook 'my-update-cursor)
-  (add-hook 'god-mode-disabled-hook 'my-update-cursor)
+  (add-hook 'god-mode-enabled-hook 'user/update-cursor-shape)
+  (add-hook 'god-mode-disabled-hook 'user/update-cursor-shape)
   (setq god-mod-alist
 	'((nil . "C-")
-	  ("i" . "M-")
+	  ("m" . "M-")
           ("o" . "C-M-")))
   (setq god-literal-key "SPC"))
 
+(defun user/insert-mode ()
+  (interactive)
+  (when god-local-mode
+    (god-local-mode -1)))
 
 (provide 'the-modal)
