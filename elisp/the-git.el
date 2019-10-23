@@ -1,4 +1,5 @@
 (use-package magit
+  :commands (magit-status)
   :bind
   ("C-S-G" . 'magit-status))
 

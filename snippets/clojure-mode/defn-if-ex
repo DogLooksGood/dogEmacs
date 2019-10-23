@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: defn-if-ex
+# key: die
+# --
+(defn ${1:func}
+  "${2:TODO docstring}"
+  [$3]
+  (let [$4]
+    (if ${5:true}
+      (throw (ex-info "${6:exception in $1}" {}))$0)))

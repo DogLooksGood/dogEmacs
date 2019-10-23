@@ -1,5 +1,16 @@
+(defun user/org-mode-setup ()
+  (setq line-spacing 0.2)
+  (org-bullets-mode t))
 
-(unbind-key "M-h" org-mode-map)
+(use-package org
+  :commands (org-mode)
+  :config
+  (unbind-key "M-h" org-mode-map)
+  (setq org-hide-emphasis-markers t))
 
+(use-package org-bullets
+  :init
+  (setq org-ellipsis "⤵")
+  (add-hook 'org-mode-hook 'user/org-mode-setup))
 
 (provide 'the-org)

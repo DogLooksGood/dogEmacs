@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: mount-state
+# key: ms
+# --
+(mount/defstate $1
+  :start
+  ($2)
+  :stop
+  ($3 $1))
+$0

@@ -4,7 +4,7 @@
   :bind
   (("M-h" . ace-window))
   :init
-  (setq aw-ignore-on t)
+  (setq aw-ignore-on nil)
   (setq aw-scope 'frame)
   (setq aw-ignored-buffers '())
   (setq aw-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n)))

@@ -2,6 +2,7 @@
 
 (global-set-key (kbd "<mouse-3>") 'newline)
 
+
 ;; Better Defaults
 (setq inhibit-x-resources t
       inhibit-splash-screen t
@@ -42,7 +43,10 @@
       ;; Window divider setup
       window-divider-default-right-width 1
       window-divider-default-bottom-width 1
-      window-divider-default-places t)
+      window-divider-default-places t
+      ;; Don't wait for keystrokes display
+      echo-keystrokes 0.1
+      show-paren-style 'parenthese)
 
 ;; Don't indent with tab
 (setq-default indent-tabs-mode nil)
@@ -50,11 +54,11 @@
 (prefer-coding-system 'utf-8)
 
 ;; Distraction Free.
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+;; (menu-bar-mode -1)
+;; (tool-bar-mode -1)
+;; (scroll-bar-mode -1)
 (show-paren-mode 1)
-(blink-cursor-mode -1)
+(blink-cursor-mode 1)
 
 ;; Add internal margin
 (add-to-list 'default-frame-alist '(internal-border-width . 30))
@@ -67,6 +71,7 @@
 
 ;; Auto delete when insert on region.
 (delete-selection-mode t)
+(transient-mark-mode t)
 
 ;; Delete trailing whitespace on save.
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -102,7 +107,6 @@ Otherwise will insert a singlequote."
 (setq-default frame-title-format '("[%m]%b%* %e" (vc-mode vc-mode)))
 (setq-default mode-line-format nil)
 
-;; Visual feedback for modalka
 (setq-default cursor-type 'box)
 
 (defun user/other-buffer ()

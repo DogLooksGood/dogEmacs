@@ -44,5 +44,7 @@
 (require 'the-conf)
 (require 'the-server)
 (require 'the-org)
-(require 'the-treemacs)
+(require 'the-snippet)
+;; (require 'the-treemacs)
 (require 'the-modal)
+;; (require 'the-vame)

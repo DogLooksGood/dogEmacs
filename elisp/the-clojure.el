@@ -1,7 +1,4 @@
 (use-package clojure-mode
-  :bind
-  (:map clojure-mode-map
-	("C-c C-=" . 'clojure-align))
   :init
   (setq clojure-toplevel-inside-comment-form t)
   :config
@@ -11,18 +8,26 @@
                           "?\\)\\(/\\)\\("
                           clojure--sym-regexp
                           "\\)")
-               (0 'clojure-keyword-face))))
+                 (0 'clojure-keyword-face))))
 
 (use-package clj-refactor
+  :config
+  (unbind-key "/" clj-refactor-map)
   :bind
   (:map
    clojure-mode-map
-   ("/" . 'cljr-slash))
+   ("/" . 'cljr-slash)
+   ("C-c C-r C-r" . 'cljr-add-require-to-ns)
+   ("C-c C-r C-i" . 'cljr-add-import-to-ns)
+   ("C-c C-r C-d" . 'cljr-extract-def)
+   ("C-c C-r C-s" . 'cljr-add-stubs))
   :init
+  (add-hook 'clojure-mode-hook 'clj-refactor-mode)
   (setq cljr-warn-on-eval t)
   (setq cljr-suppress-middleware-warnings t))
 
 (use-package cider
+  :commands (cider-jack-in cider-jack-in-cljs cider-jack-in-clj&cljs)
   :bind
   (:map
    cider-mode-map
@@ -50,17 +55,6 @@
   (cond
    ((equal major-mode 'clojure-mode) 'clj)
    ((equal major-mode 'clojurescript-mode) 'cljs)))
-
-;; (defun cider-current-repl (&optional _  _)
-;;   (let ((repl-type (user/clojure-repl-type))
-;;      (buf-lst (buffer-list)))
-;;     (cond
-;;      ((equal 'clj repl-type)
-;;       (--first (string-match-p "\*cider-repl.+(clj)\*" (buffer-name it))
-;;             buf-lst))
-;;      ((equal 'cljs cljs)
-;;       (--first (string-match-p "\*cider-repl.+(cljs:.+)\*" (buffer-name it))
-;;             buf-lst)))))
 
 (defun sesman-current-session (system &optional cxt-types)
   (let ((sessions (or (sesman--linked-sessions system 'sort cxt-types)

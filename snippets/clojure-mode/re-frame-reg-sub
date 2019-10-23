@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: re-frame-reg-sub
+# key: rs
+# --
+(re-frame/reg-sub ::${1:sub-name}
+  (fn $1
+    [db ${2:_}]
+    $0))

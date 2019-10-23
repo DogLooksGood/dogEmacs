@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: create-table
+# key: ct
+# expand-env: ((yas-indent-line 'fixed))
+# --
+CREATE TABLE "${1:table}" (
+  "${2:$1-id}" SERIAL,
+  "created-at" TIMESTAMP CURRENT_TIMESTAPM,
+  PRIMARY KEY("$2")
+);$0

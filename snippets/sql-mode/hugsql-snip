@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: hugsql-snip
+# key: hs
+# expand-env: ((yas-indent-line 'fixed))
+# --
+-- :snip ${1:$$(yas-auto-next (yas-choose-value '("select" "where")))}-$2 :? :1
+-- :doc $1 ${2:$(replace-regexp-in-string "-" " " yas-text)}.
+${1:$(upcase yas-text)} $0

@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hugsql-find
+# key: hf
+# expand-env: ((yas-indent-line 'fixed))
+# --
+-- :name find-${1:name} :? :*
+-- :doc Find $1.
+SELECT
+  ${2:*}$>
+FROM "$3"
+WHERE $4
+--~ (when (:offset params) "SKIP :offset")
+--~ (when (:size params) "LIMIT :size")
+$0

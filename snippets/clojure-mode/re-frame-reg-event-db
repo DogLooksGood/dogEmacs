@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: re-frame-reg-event-db
+# key: red
+# --
+(re-frame/reg-event-db ::${1:event-name}
+  (fn $1
+    [db ${2:[_ $3]}]
+    $0))

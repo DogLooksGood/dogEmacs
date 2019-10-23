@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: defn-let-cond
+# key: dlc
+# --
+(defn ${1:func}
+  "${2:TODO docstring}"
+  [$3]
+  (let [$4]
+    (cond
+      ($5) $0
+      :else
+      )))

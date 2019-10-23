@@ -1,4 +1,5 @@
 (use-package avy
+  :commands (avy-goto-word-or-subword-1)
   :bind
   ("C-z" . 'avy-goto-word-or-subword-1)
   :init
@@ -6,12 +7,14 @@
   (avy-setup-default))
 
 (use-package multiple-cursors
+  :commands (mc/mark-next-like-this)
   :bind
   (("C->" . 'mc/mark-next-like-this)
    ("C-<" . 'mc/skip-to-next-like-this))
   :config
   (add-to-list 'mc/cmds-to-run-once 'god-local-mode)
   (add-to-list 'mc/cmds-to-run-once 'repeat)
+  (add-to-list 'mc/cmds-to-run-for-all 'cljr-slash)
   (add-to-list 'mc/cmds-to-run-for-all 'user/singlequote)
   (add-to-list 'mc/cmds-to-run-for-all 'user/lisp-semicolon)
   (add-to-list 'mc/cmds-to-run-for-all 'user/rust-minus)
@@ -21,7 +24,7 @@
   (multiple-cursors-mode 1))
 
 (use-package expand-region
-  :ensure t
+  :commands (er/expand-region)
   :bind
   ("C-+" . 'er/expand-region))
 
@@ -33,9 +36,8 @@
   :init
   (global-anzu-mode))
 
-(use-package rg)
-
-(use-package ripgrep)
+(use-package rg
+  :commands (rg counsel-projectile-rg))
 
 (use-package wgrep)
 

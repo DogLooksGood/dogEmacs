@@ -3,6 +3,7 @@
 (use-package projectile
   :bind
   ("C-x f" . 'counsel-projectile-find-file)
+  ("C-x x" . 'counsel-projectile-find-file)
   ("C-x b" . 'counsel-projectile-switch-to-buffer)
   ("C-x k" . 'projectile-kill-buffers)
   ("C-x p" . 'counsel-projectile-switch-project)

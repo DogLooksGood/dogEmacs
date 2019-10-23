@@ -1,7 +1,7 @@
 (defun user/update-cursor-shape ()
   (if (or god-local-mode buffer-read-only)
       (setq cursor-type 'box)
-    (setq cursor-type '(bar . 4))))
+    (setq cursor-type '(bar . 2))))
 
 (use-package selected
   :ensure t
@@ -48,8 +48,8 @@
    :map
    god-local-mode-map
    ("<escape>" . mode-line-other-buffer)
-   ("u" . 'god-local-mode)
-   ("i" . 'repeat)
+   ("i" . 'god-local-mode)
+   ("u" . 'repeat)
    ("h" . 'backward-word)
    ("t" . 'forward-word)
    ("}" . 'scroll-up-command)

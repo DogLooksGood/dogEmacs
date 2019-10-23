@@ -14,10 +14,12 @@
 
 (use-package counsel
   :bind
+  ("C-<escape>" . 'counsel-ibuffer)
   ("C-x C-h" . 'counsel-imenu)
   ("C-x C-b" . 'counsel-ibuffer))
 
 (use-package swiper
+  :commands (swiper)
   :ensure t
   :bind
   ("C-s" . swiper))
