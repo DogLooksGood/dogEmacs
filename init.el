@@ -46,4 +46,5 @@
 (require 'the-conf)
 (require 'the-org)
 (require 'the-snippet)
+(require 'the-num)
 (require 'the-modal)

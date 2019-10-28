@@ -4,7 +4,7 @@
    ((region-active-p)
     (call-interactively 'indent-region))
    ((string-match-p "^[ \t]*$" (buffer-substring-no-properties (line-beginning-position)
-                                                             (point)))
+                                                               (point)))
     (call-interactively #'indent-for-tab-command))
    (t
     (company-complete-common-or-cycle))))

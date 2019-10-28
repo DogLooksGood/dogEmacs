@@ -2,6 +2,7 @@
   :init
   (setq clojure-toplevel-inside-comment-form t)
   :config
+  (unbind-key "}" clojure-mode-map)
   (define-clojure-indent
     (re-frame/reg-event-db :defn)
     (re-fraem/reg-event-fx :defn)

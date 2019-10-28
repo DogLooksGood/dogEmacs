@@ -7,6 +7,8 @@
        (bg+1 "#e4e4e4")
        (bg+2 "#dedede")
        (fg "#171717")
+       (fg-1 "#353535")
+       (fg-2 "#505050")
        (hl bg+1)
        (bdr "#999999")
        (sel "#c0d0d0"))
@@ -23,7 +25,7 @@
    `(diff-hl-change ((t :foreground "blue")))
 
    ;; Line Numbers
-   `(line-number ((t :background ,bg+1)))
+   `(line-number ((t :foreground ,fg-2 :background ,bg+1)))
    `(line-number-current-line ((t :inherit line-number :foreground "dark cyan" :bold t)))
 
    ;; Show Paren
@@ -32,10 +34,9 @@
 
    ;; Font lock
    `(font-lock-keyword-face ((t :foreground "Purple" :italic t)))
-   `(font-lock-function-name-face ((t :foreground "Blue1")))
 
    ;; Eshell
-   `(eshell-prompt-face ((t :foreground "Firebrick")))
+  `(eshell-prompt-face ((t :foreground "Firebrick")))
 
    ;; Highlight Symbols
    `(highlight-symbol-face ((t :background ,hl)))

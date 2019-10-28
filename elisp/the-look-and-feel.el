@@ -5,6 +5,7 @@
 ;; Try set it in ~/.Xresources
 (progn
   (setq my-font "consolas-14")
+  (setq my-font "等距更纱黑体 cl-14")
   (set-default-font my-font)
   (add-to-list 'default-frame-alist `(font . ,my-font))
   (set-face-attribute 'default t :font my-font))
@@ -18,12 +19,15 @@
 
 ;; Transparency Setup
 
-(set-frame-parameter (selected-frame) 'alpha '(88 . 80))
-(add-to-list 'default-frame-alist '(alpha . (88 . 80)))
+(defun user/set-alpha (alpha)
+  (set-frame-parameter (selected-frame) 'alpha (cons alpha alpha))
+  (add-to-list 'default-frame-alist (cons 'alpha (cons alpha alpha))))
+
+(user/set-alpha 84)
 
 ;;; themes
 
-(let ((pkgs '(leuven-theme zenburn-theme nimbus-theme eclipse-theme)))
+(let ((pkgs '(leuven-theme zenburn-theme nimbus-theme)))
   (mapcar (lambda (pkg)
             (unless (package-installed-p pkg)
               (package-install pkg)))
@@ -33,13 +37,13 @@
 
 (enable-theme 'vanilla)
 
-
 ;;; theme customize
 
 (defun user/zenburn-theme-setup ()
   (load-theme 'zenburn t)
   (custom-theme-set-faces
    'zenburn
+   '(leerzeichen ((t :foreground "#3f3f3f")))
    '(show-paren-mismatch ((t :background "#aa3333" :foreground "#ffffff")))
    '(highlight-symbol-face ((t :underline "#999999")))))
 

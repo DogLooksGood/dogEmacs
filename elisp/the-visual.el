@@ -41,7 +41,7 @@
 (use-package yascroll
   :init
   (require 'cl)
-  (setq yascroll:delay-to-hide 3)
+  (setq yascroll:delay-to-hide 5)
   (global-yascroll-bar-mode))
 
 (use-package focus

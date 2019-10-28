@@ -2,7 +2,6 @@
 
 (global-set-key (kbd "<mouse-3>") 'newline)
 
-
 ;; Better Defaults
 (setq inhibit-x-resources t
       inhibit-splash-screen t
@@ -54,10 +53,13 @@
 
 (prefer-coding-system 'utf-8)
 
-;; Distraction Free. Move these to Xresources for faster startup.
-;; (menu-bar-mode -1)
-;; (tool-bar-mode -1)
-;; (scroll-bar-mode -1)
+;; Distraction Free. Also move these to Xresources for faster startup.
+(defun user/setup-distraction-free (new-frame)
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1))
+
+(add-hook 'after-make-frame-functions #'user/setup-distraction-free)
 
 ;; Show matched parens
 (show-paren-mode 1)
