@@ -20,7 +20,6 @@ otherwise will insert a colon."
   (unbind-key "C-{" paredit-mode-map)
   (unbind-key "C-}" paredit-mode-map)
   (unbind-key "M-q" paredit-mode-map)
-  (unbind-key "}" paredit-mode-map)
   :init
   (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
   (add-hook 'clojure-mode-hook #'paredit-mode)

@@ -32,8 +32,13 @@
   ("!" dvp-number-8 "8")
   ("/" dvp-number-slash "/")
   ("-" dvp-number-minus "-")
-  (";" dvp-number-colon ":")
-  ("<return>" dvp-number-close-curly "}" :exit t)
-  ("<escape>" god-local-mode "Exit Insert Mode" :exit t))
+  (";" dvp-number-colon ":"))
+
+;;; This is a hack to unbind paredit-close-curly in clojure-mode.
+
+(defun user/unbind-close-curly-advice (&rest _args)
+  (unbind-key "}" clojure-mode-map))
+
+(advice-add 'clojure-paredit-setup :after #'user/unbind-close-curly-advice)
 
 (provide 'the-num)
