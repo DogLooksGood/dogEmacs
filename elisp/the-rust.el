@@ -28,6 +28,7 @@
    ("f" . 'forward-char)
    ("b" . 'backward-char))
   :init
-  (add-hook 'rust-mode-hook 'smartparens-mode))
+  (add-hook 'rust-mode-hook 'smartparens-mode)
+  (add-hook 'rust-mode-hook 'lsp))
 
 (provide 'the-rust)

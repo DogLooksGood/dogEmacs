@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: re-frame-reg-event-db
 # key: red
+# expand-env: ((yas-indent-line 'fixed))
 # --
 (re-frame/reg-event-db ::${1:event-name}
   (fn $1

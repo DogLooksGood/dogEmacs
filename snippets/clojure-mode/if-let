@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: if-let
+# key: il
+# --
+(if-let [$1]
+  ($0)
+  ())

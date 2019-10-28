@@ -19,9 +19,14 @@
   (add-to-list 'mc/cmds-to-run-for-all 'user/lisp-semicolon)
   (add-to-list 'mc/cmds-to-run-for-all 'user/rust-minus)
   (add-to-list 'mc/cmds-to-run-for-all 'user/rust-semicolon)
+  ;; We can use C-v, M-v to cycle cursors.
+  (require 'mc-cycle-cursors)
   :init
   (setq mc/always-run-for-all nil)
   (multiple-cursors-mode 1))
+
+(global-unset-key (kbd "M-<down-mouse-1>"))
+(global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
 
 (use-package expand-region
   :commands (er/expand-region)

@@ -16,13 +16,22 @@
     (yas-next-field-or-maybe-expand)))
 
 (defun user/yas-abort ()
+  "Abort completion or snippet."
   (interactive)
-  (yas-abort-snippet)
-  (god-local-mode))
+  (if company-candidates
+      (company-abort)
+    (progn
+      (yas-abort-snippet)
+      (god-local-mode))))
+
+(defun user/yas-start ()
+  (god-local-mode -1)
+  (setq-local cursor-type '(hbar . 4)))
 
 (use-package yasnippet
   :bind
-  (:map
+  (("C-*" . 'yas-insert-snippet)
+   :map
    yas-keymap
    ("<escape>" . 'user/yas-abort)
    ("<return>" . 'user/yas-next)
@@ -30,6 +39,8 @@
    ("S-<return>" . 'yas-prev-field))
   :config
   (yas-reload-all)
+  (add-hook 'yas/before-expand-snippet-hook 'user/yas-start)
+  (add-hook 'yas/after-exit-snippet-hook 'user/update-cursor-shape)
   (unbind-key "<tab>" yas-keymap)
   (unbind-key "S-<tab>" yas-keymap)
   :init

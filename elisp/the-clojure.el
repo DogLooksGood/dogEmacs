@@ -2,6 +2,11 @@
   :init
   (setq clojure-toplevel-inside-comment-form t)
   :config
+  (define-clojure-indent
+    (re-frame/reg-event-db :defn)
+    (re-fraem/reg-event-fx :defn)
+    (re-frame/reg-sub :defn)
+    (re-frame/test :defn))
   (add-to-list 'clojure-font-lock-keywords
                `(,(concat "\\(:\\{1,2\\}\\)\\("
                           clojure--sym-regexp
@@ -10,19 +15,18 @@
                           "\\)")
                  (0 'clojure-keyword-face))))
 
+(defun user/cljr-setup ()
+  (clj-refactor-mode 1)
+  (cljr-add-keybindings-with-prefix "C-c C-r")
+  (unbind-key "/" clj-refactor-map))
+
 (use-package clj-refactor
-  :config
-  (unbind-key "/" clj-refactor-map)
   :bind
   (:map
    clojure-mode-map
-   ("/" . 'cljr-slash)
-   ("C-c C-r C-r" . 'cljr-add-require-to-ns)
-   ("C-c C-r C-i" . 'cljr-add-import-to-ns)
-   ("C-c C-r C-d" . 'cljr-extract-def)
-   ("C-c C-r C-s" . 'cljr-add-stubs))
+   ("/" . 'cljr-slash))
   :init
-  (add-hook 'clojure-mode-hook 'clj-refactor-mode)
+  (add-hook 'clojure-mode-hook 'user/cljr-setup)
   (setq cljr-warn-on-eval t)
   (setq cljr-suppress-middleware-warnings t))
 
@@ -44,11 +48,11 @@
   :init
   (add-hook 'cider--debug-mode-hook 'user/insert-mode)
   (setq cider-font-lock-dynamically nil
-	cider-font-lock-reader-conditionals nil
+        cider-font-lock-reader-conditionals nil
         cider-repl-use-clojure-font-lock nil
         cider-repl-use-content-types nil
         cider-repl-use-pretty-printing nil
-	cider-prompt-for-symbol nil
+        cider-prompt-for-symbol nil
         cider-enhanced-cljs-completion-p nil))
 
 (defun user/clojure-repl-type ()

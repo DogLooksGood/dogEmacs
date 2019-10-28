@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: re-frame-subscribe
-# key: rs
+# key: rsub
 # --
 (re-frame/subscribe [::$0])

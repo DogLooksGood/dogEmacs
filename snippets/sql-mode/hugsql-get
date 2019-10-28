@@ -3,7 +3,7 @@
 # key: hg
 # expand-env: ((yas-indent-line 'fixed))
 # --
--- :name find-${1:name}-by-${2:field} :? :1
+-- :name get-${1:name}-by-${2:field} :? :1
 -- :doc get $1 by $2.
 SELECT
   ${3:*}

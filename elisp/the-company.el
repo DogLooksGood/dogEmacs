@@ -1,8 +1,6 @@
 ;;; Here we use tab to trigger the auto completion.
 ;;; Also we use tab to escape the string.
 
-(use-package yasnippet)
-
 (use-package company
   :ensure t
   :bind
@@ -12,6 +10,6 @@
 	("<escape>" . 'company-abort))
   :init
   (setq company-idle-delay nil)
-  (global-company-mode 1))
+  (add-hook 'prog-mode-hook 'company-mode))
 
 (provide 'the-completion)

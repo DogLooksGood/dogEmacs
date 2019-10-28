@@ -45,20 +45,22 @@
       window-divider-default-bottom-width 1
       window-divider-default-places t
       ;; Don't wait for keystrokes display
-      echo-keystrokes 0.1
+      echo-keystrokes 0
       show-paren-style 'parenthese)
 
 ;; Don't indent with tab
-(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil
+              tab-width 4)
 
 (prefer-coding-system 'utf-8)
 
-;; Distraction Free.
+;; Distraction Free. Move these to Xresources for faster startup.
 ;; (menu-bar-mode -1)
 ;; (tool-bar-mode -1)
 ;; (scroll-bar-mode -1)
+
+;; Show matched parens
 (show-paren-mode 1)
-(blink-cursor-mode 1)
 
 ;; Add internal margin
 (add-to-list 'default-frame-alist '(internal-border-width . 30))
@@ -81,33 +83,23 @@
 ;; accidentally, so we add this file to .gitignore and never load it.
 (setq custom-file "~/.emacs.d/custom.el")
 
-(defun user/singlequote ()
-  "If behind a singlequote, convert it to a pair of doublequote.
-Otherwise will insert a singlequote."
-  (interactive)
-  (if (equal (char-before) 39)
-      (progn
-        (save-mark-and-excursion
-          (backward-delete-char 1)
-          (insert "\""))
-        (insert "\""))
-    (insert "'")))
-
 ;; Only show window divider when there's more than one window.
 (defun user/toggle-window-divider-mode ()
   (if (> (count-windows) 1)
       (window-divider-mode 1)
     (window-divider-mode -1)))
 
-(fset 'yes-or-no-p 'y-or-n-p)
-
 (add-hook 'window-configuration-change-hook #'user/toggle-window-divider-mode)
+
+;; Replace all "yes or no" with "y or n".
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Remove mode line.
 (setq-default frame-title-format '("[%m]%b%* %e" (vc-mode vc-mode)))
 (setq-default mode-line-format nil)
 
 (setq-default cursor-type 'box)
+(blink-cursor-mode -1)
 
 (defun user/other-buffer ()
   (interactive)

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: defn-let-threading-first
-# key: dl>
+# key: dlf
 # --
 (defn ${1:func}
   "${2:TODO docstring}"

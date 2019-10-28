@@ -1,7 +1,11 @@
 (defun user/update-cursor-shape ()
   (if (or god-local-mode buffer-read-only)
       (setq cursor-type 'box)
-    (setq cursor-type '(bar . 2))))
+    (setq cursor-type '(bar . 4))))
+
+(defun user/ensure-insert-mode ()
+  (when god-local-mode
+    (god-local-mode -1)))
 
 (use-package selected
   :ensure t

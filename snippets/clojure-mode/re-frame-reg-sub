@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: re-frame-reg-sub
 # key: rs
+# expand-env: ((yas-indent-line 'fixed))
 # --
 (re-frame/reg-sub ::${1:sub-name}
   (fn $1
