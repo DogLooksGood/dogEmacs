@@ -6,3 +6,5 @@
   (add-hook 'html-mode-hook 'emmet-mode))
 
 (add-hook 'mhtml-mode-hook 'smartparens-mode)
+
+(provide 'the-html)
