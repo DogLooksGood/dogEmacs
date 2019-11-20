@@ -4,8 +4,8 @@
 
 ;; Better Defaults
 (setq inhibit-x-resources t
-      inhibit-splash-screen t
-      inhibit-startup-screen t
+      ;; inhibit-splash-screen t
+      ;; inhibit-startup-screen t
       initial-scratch-message ""
       ;; Don't highlight line when buffer is inactive
       hl-line-sticky-flag nil
@@ -65,13 +65,10 @@
 (show-paren-mode 1)
 
 ;; Add internal margin
-(add-to-list 'default-frame-alist '(internal-border-width . 30))
+;; (add-to-list 'default-frame-alist '(internal-border-width . 30))
 
 ;; Always use dir-locals.
 (defun safe-local-variable-p (sym val) t)
-
-;; Highlight current line.
-(add-hook 'prog-mode-hook 'hl-line-mode)
 
 ;; Auto delete when insert on region.
 (delete-selection-mode t)
@@ -108,5 +105,20 @@
   (if (region-active-p)
       (call-interactively #'keyboard-escape-quit)
     (mode-line-other-buffer)))
+
+(setq initial-major-mode 'org-mode)
+
+(defun user/new-buffer ()
+  (interactive)
+  (let (($buf (generate-new-buffer "untitled")))
+    (switch-to-buffer $buf)
+    (funcall initial-major-mode)
+    (setq buffer-offer-save t)
+    $buf))
+
+(bind-key "<XF86Copy>" 'kill-ring-save)
+(bind-key "<XF86Paste>" 'yank)
+(bind-key "C-x C-n" 'user/new-buffer)
+(bind-key "<escape>" 'mode-line-other-buffer)
 
 (provide 'the-global)

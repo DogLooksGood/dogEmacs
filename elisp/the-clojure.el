@@ -1,8 +1,12 @@
 (use-package clojure-mode
+  :bind
+  (:map clojure-mode-map
+        ("C-#" . 'user/clojure-comment-block)
+        ("C-c C-i" . 'cider-inspect-last-result))
   :init
   (setq clojure-toplevel-inside-comment-form t)
-  (add-hook 'clojure-mode-hook 'user/clojure-mode-setup)
   :config
+  (modify-syntax-entry ?: "w" clojure-mode-syntax-table)
   (define-clojure-indent
     (re-frame/reg-event-db :defn)
     (re-fraem/reg-event-fx :defn)
@@ -16,10 +20,21 @@
                           "\\)")
                  (0 'clojure-keyword-face))))
 
+(defun user/clojure-comment-block ()
+  (interactive)
+  (save-mark-and-excursion
+    (when (string-prefix-p "#_" (buffer-substring-no-properties (point) (line-end-position)))
+      (forward-char 2))
+    (unless (equal (char-after) 40)
+      (backward-up-list))
+    (if (string-suffix-p "#_" (buffer-substring-no-properties (line-beginning-position) (point)))
+        (backward-delete-char 2)
+      (insert "#_"))))
+
 (defun user/cljr-setup ()
-  (clj-refactor-mode 1)
   (cljr-add-keybindings-with-prefix "C-c C-r")
-  (unbind-key "/" clj-refactor-map))
+  (unbind-key "/" clj-refactor-map)
+  (clj-refactor-mode 1))
 
 (use-package clj-refactor
   :bind

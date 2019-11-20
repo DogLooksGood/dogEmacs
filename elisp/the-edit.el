@@ -6,19 +6,36 @@
   (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))
   (avy-setup-default))
 
+(defun user/set-mc-rules ()
+  (let ((rules '(god-local-mode repeat)))
+    (mapcar (lambda (r) (add-to-list 'mc/cmds-to-run-once r))
+            rules))
+  (let ((rules '(user/singlequote
+                 user/lisp-semicolon
+                 user/rust-minus
+                 user/rust-semicolon
+                 user/rust-lessthan
+                 user/rust-whitespace
+                 sp-kill-hybrid-sexp
+                 hydra-dvp-number/body
+                 paredit-raise-sexp
+                 paredit-forward-slurp-sexp
+                 paredit-forward-barf-sexp
+                 paredit-forward-up
+                 paredit-backward-up
+                 paredit-forward-down
+                 paredit-backward-down
+                 transpose-sexps)))
+    (mapcar (lambda (r) (add-to-list 'mc/cmds-to-run-for-all r))
+            rules)))
+
 (use-package multiple-cursors
   :commands (mc/mark-next-like-this)
   :bind
   (("C->" . 'mc/mark-next-like-this)
    ("C-<" . 'mc/skip-to-next-like-this))
   :config
-  (add-to-list 'mc/cmds-to-run-once 'god-local-mode)
-  (add-to-list 'mc/cmds-to-run-once 'repeat)
-  (add-to-list 'mc/cmds-to-run-for-all 'cljr-slash)
-  (add-to-list 'mc/cmds-to-run-for-all 'user/singlequote)
-  (add-to-list 'mc/cmds-to-run-for-all 'user/lisp-semicolon)
-  (add-to-list 'mc/cmds-to-run-for-all 'user/rust-minus)
-  (add-to-list 'mc/cmds-to-run-for-all 'user/rust-semicolon)
+  (user/set-mc-rules)
   ;; We can use C-v, M-v to cycle cursors.
   (require 'mc-cycle-cursors)
   :init

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: test-fn
+# key: tf
+# --
+#[test]
+fn test_${1:name}() {
+   $0
+}

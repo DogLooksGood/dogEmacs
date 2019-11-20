@@ -4,4 +4,6 @@
 
 (require 'conf-mode)
 
+(add-hook 'conf-mode 'smartparens-mode)
+
 (provide 'the-conf)

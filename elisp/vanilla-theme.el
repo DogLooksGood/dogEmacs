@@ -3,7 +3,7 @@
 (deftheme vanilla "The default emacs theme with some enhancement.")
 
 (let* ((class '((class color) (min-colors 89)))
-       (bg "#efefef")
+       (bg "#fafafa")
        (bg+1 "#e4e4e4")
        (bg+2 "#dedede")
        (fg "#171717")
@@ -33,7 +33,7 @@
    `(show-paren-match-expression ((t :background ,sel)))
 
    ;; Font lock
-   `(font-lock-keyword-face ((t :foreground "Purple" :italic t)))
+   `(font-lock-keyword-face ((t :foreground "Purple")))
 
    ;; Eshell
   `(eshell-prompt-face ((t :foreground "Firebrick")))

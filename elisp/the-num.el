@@ -32,7 +32,8 @@
   ("!" dvp-number-8 "8")
   ("/" dvp-number-slash "/")
   ("-" dvp-number-minus "-")
-  (";" dvp-number-colon ":"))
+  (";" dvp-number-colon ":")
+  ("<backspace>" backward-delete-char "<="))
 
 ;;; This is a hack to unbind paredit-close-curly in clojure-mode.
 

@@ -1,7 +1,13 @@
 (defun user/update-cursor-shape ()
-  (if (or god-local-mode buffer-read-only)
-      (setq cursor-type 'box)
-    (setq cursor-type '(bar . 4))))
+  (cond
+   (god-local-mode
+    (setq cursor-type 'box))
+
+   (buffer-read-only
+    (setq cursor-type 'hollow))
+
+   (t
+    (setq cursor-type '(bar . 3)))))
 
 (defun user/ensure-insert-mode ()
   (when god-local-mode
@@ -31,8 +37,6 @@
   (("C-x C-k" . 'kill-buffer)
    ("C-x C-x" . 'save-buffer)
    ("M-g" . 'goto-line)
-   ("<escape>" . mode-line-other-buffer)
-   ("C-@" . delete-indentation)
    ("C-;" . 'comment-dwim)
    ("C-=" . 'indent-region)
    ("C-." . 'xref-find-definitions)
@@ -53,18 +57,22 @@
    god-local-mode-map
    ("<escape>" . mode-line-other-buffer)
    ("i" . 'god-local-mode)
-   ("u" . 'repeat)
-   ("h" . 'backward-word)
-   ("t" . 'forward-word)
+   ("z" . 'undo)
+   ("/" . 'swiper)
+   ("s" . 'save-buffer)
+   ("r" . 'repeat)
+   ("j" . 'join-line)
+   ;; navigation
+   ("f" . 'forward-sexp)
+   ("b" . 'backward-sexp)
+   ("h" . 'backward-char)
+   ("t" . 'forward-char)
    ("}" . 'scroll-up-command)
    ("{" . 'scroll-down-command)
-   ("r" . 'point-to-register)
-   ("j" . 'jump-to-register)
-   ("$" . 'universal-argument)
+   ("v" . 'avy-goto-word-or-subword-1)
    ("[" . 'beginning-of-buffer)
    ("]" . 'end-of-buffer)
-   ("q" . 'delete-window)
-   ("v" . 'kill-ring-save))
+   ("o" . 'set-mark-command))
   :init
   (advice-add 'god-local-mode :around #'user/make-silent)
   (add-hook 'text-mode-hook 'god-local-mode)
@@ -75,7 +83,7 @@
   (setq god-mod-alist
 	'((nil . "C-")
 	  ("m" . "M-")
-          ("o" . "C-M-")))
+      ("SPC" . "C-M-")))
   (setq god-literal-key "SPC"))
 
 (defun user/insert-mode ()

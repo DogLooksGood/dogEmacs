@@ -22,7 +22,8 @@
       (company-abort)
     (progn
       (yas-abort-snippet)
-      (god-local-mode))))
+      (when (fboundp 'god-local-mode)
+        (god-local-mode)))))
 
 (defun user/yas-start ()
   (god-local-mode -1)

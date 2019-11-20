@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: vec
+# key: v
+# --
+Vec<$1>

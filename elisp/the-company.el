@@ -1,6 +1,3 @@
-;;; Here we use tab to trigger the auto completion.
-;;; Also we use tab to escape the string.
-
 (use-package company
   :ensure t
   :bind
