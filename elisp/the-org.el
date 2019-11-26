@@ -1,5 +1,4 @@
 (defun user/org-mode-setup ()
-  (setq line-spacing 0.2)
   (org-bullets-mode t))
 
 (use-package org

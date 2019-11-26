@@ -1,9 +1,11 @@
+(require 'mhtml-mode)
+
 (use-package emmet-mode
   :bind
-  (:map html-mode-map
+  (:map mhtml-mode-map
         ("M-RET" . 'emmet-expand-line))
   :init
-  (add-hook 'html-mode-hook 'emmet-mode))
+  (add-hook 'mhtml-mode-hook 'emmet-mode))
 
 (add-hook 'mhtml-mode-hook 'smartparens-mode)
 

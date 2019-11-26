@@ -2,7 +2,8 @@
 
 (setq package-archives
       '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-        ("melpa" . "http://elpa.emacs-china.org/melpa/")))
+        ("melpa" . "http://elpa.emacs-china.org/melpa/")
+        ("melpa-stable" . "http://elpa.emacs-china.org/melpa-stable/")))
 
 (setq package-selected-packages
       '(use-package))
@@ -21,6 +22,11 @@
 (require 'use-package)
 
 (setq use-package-always-ensure t)
+
+;; Common elisp packages
+(use-package dash)
+(use-package string-inflection)
+(use-package seq)
 
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 
@@ -48,4 +54,5 @@
 (require 'the-org)
 (require 'the-snippet)
 (require 'the-modal)
+(require 'the-ebook)
 (require 'the-server)

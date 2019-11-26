@@ -1,3 +1,5 @@
+(require 'the-clojure-indent)
+
 (use-package clojure-mode
   :bind
   (:map clojure-mode-map
@@ -7,11 +9,7 @@
   (setq clojure-toplevel-inside-comment-form t)
   :config
   (modify-syntax-entry ?: "w" clojure-mode-syntax-table)
-  (define-clojure-indent
-    (re-frame/reg-event-db :defn)
-    (re-fraem/reg-event-fx :defn)
-    (re-frame/reg-sub :defn)
-    (re-frame/test :defn))
+  (user/clojure-indent-setup)
   (add-to-list 'clojure-font-lock-keywords
                `(,(concat "\\(:\\{1,2\\}\\)\\("
                           clojure--sym-regexp
@@ -47,6 +45,7 @@
   (setq cljr-suppress-middleware-warnings t))
 
 (use-package cider
+  :pin melpa-stable
   :commands (cider-jack-in cider-jack-in-cljs cider-jack-in-clj&cljs)
   :bind
   (:map
@@ -65,9 +64,6 @@
   (add-hook 'cider--debug-mode-hook 'user/insert-mode)
   (setq cider-font-lock-dynamically nil
         cider-font-lock-reader-conditionals nil
-        cider-repl-use-clojure-font-lock nil
-        cider-repl-use-content-types nil
-        cider-repl-use-pretty-printing nil
         cider-prompt-for-symbol nil
         cider-enhanced-cljs-completion-p nil))
 
@@ -82,5 +78,18 @@
     (if-let ((repl-type (user/clojure-repl-type)))
         (car (--filter (equal repl-type (cider-repl-type (cadr it))) sessions))
       (car sessions))))
+
+
+(defun user/fulcro-destructing-to-keys (text)
+  "text is like {:keys [] :as props}"
+  (save-match-data
+    (if (string-match "{:\\(.+\\)/keys \\[\\(.+\\)] :as props}" text)
+        (let ((ns (match-string 1 text))
+              (ks (match-string 2 text)))
+          (string-join
+           (mapcar (lambda (k) (concat ":" ns "/" k))
+                   (split-string ks " "))
+           " "))
+      "")))
 
 (provide 'the-clojure)

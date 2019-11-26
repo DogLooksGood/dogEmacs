@@ -15,6 +15,8 @@ otherwise will insert a colon."
   (:map
    paredit-mode-map
    ("C-(" . 'paredit-forward-barf-sexp)
+   ("M-[" . 'paredit-wrap-square)
+   ("M-{" . 'paredit-wrap-curly)
    (";" . 'user/lisp-semicolon))
   :config
   (unbind-key "C-{" paredit-mode-map)

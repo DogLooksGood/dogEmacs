@@ -62,13 +62,17 @@
 (add-hook 'after-make-frame-functions #'user/setup-distraction-free)
 
 ;; Show matched parens
+(setq show-paren-delay 0.01)
 (show-paren-mode 1)
 
 ;; Add internal margin
-;; (add-to-list 'default-frame-alist '(internal-border-width . 30))
+(add-to-list 'default-frame-alist '(internal-border-width . 30))
 
 ;; Always use dir-locals.
 (defun safe-local-variable-p (sym val) t)
+
+;; Auto revert when file change.
+(global-auto-revert-mode 1)
 
 ;; Auto delete when insert on region.
 (delete-selection-mode t)

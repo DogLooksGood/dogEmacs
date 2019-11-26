@@ -1,3 +1,6 @@
+(defun user/yas-first (text)
+  (car (split-string text " ")))
+
 (defun user/yas-sql-mode-fields-to-values (text)
   (string-join
    (mapcar (lambda (s)

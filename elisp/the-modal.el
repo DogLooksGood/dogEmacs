@@ -7,7 +7,7 @@
     (setq cursor-type 'hollow))
 
    (t
-    (setq cursor-type '(bar . 3)))))
+    (setq cursor-type '(bar . 5)))))
 
 (defun user/ensure-insert-mode ()
   (when god-local-mode
@@ -67,6 +67,8 @@
    ("b" . 'backward-sexp)
    ("h" . 'backward-char)
    ("t" . 'forward-char)
+   ("P" . 'backward-page)
+   ("N" . 'forward-page)
    ("}" . 'scroll-up-command)
    ("{" . 'scroll-down-command)
    ("v" . 'avy-goto-word-or-subword-1)

@@ -10,6 +10,10 @@
 
 (setq dired-listing-switches "-aBhl --group-directories-first")
 
+(use-package dired-hide-dotfiles
+  :init
+  (bind-key "M-d" 'dired-hide-dotfiles-mode dired-mode-map))
+
 (use-package dired-sidebar
   :bind
   (("C-S-T" . 'dired-sidebar-toggle-sidebar)

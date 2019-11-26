@@ -2,9 +2,6 @@
 
 (bind-key "C-S-L" 'display-line-numbers-mode)
 
-;; (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-;; (add-hook 'conf-mode-hook 'display-line-numbers-mode)
-
 (defun user/update-line-number-relative ()
   (when display-line-numbers
     (setq-local display-line-numbers
@@ -35,7 +32,12 @@
   :init
   (add-hook 'prog-mode-hook #'hs-minor-mode))
 
+(use-package form-feed
+  :init
+  (add-hook 'prog-mode-hook 'form-feed-mode))
+
 ;;; Bug of yascroll
+;;; In emacs 27, yascroll doesn't work.
 (require 'cl)
 (use-package yascroll
   :init
