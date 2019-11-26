@@ -12,7 +12,7 @@
 ;; | For mixed monospace font |
 
 (when (display-graphic-p)
-  (set-frame-font "meslo lg l-9")
+  (set-frame-font "fira code-9")
   (dolist (charset '(kana han symbol cjk-misc bopomofo))
     (set-fontset-font (frame-parameter nil 'font)
                       charset
