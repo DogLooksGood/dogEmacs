@@ -48,6 +48,7 @@
   (unbind-key "<tab>" yas-keymap)
   (unbind-key "S-<tab>" yas-keymap)
   :init
+  (add-hook 'snippet-mode-hook 'smartparens-mode)
   (add-hook 'prog-mode-hook #'yas-minor-mode))
 
 (provide 'the-snippet)

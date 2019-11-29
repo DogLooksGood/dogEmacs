@@ -2,22 +2,31 @@
 
 ;; Transparency Setup
 
-(defun user/set-alpha (alpha)
-  (set-frame-parameter (selected-frame) 'alpha (cons alpha alpha))
-  (add-to-list 'default-frame-alist (cons 'alpha (cons alpha alpha))))
+(defun user/set-alpha (&rest args)
+  (let ((alpha 90))
+    (set-frame-parameter (selected-frame) 'alpha (cons alpha alpha))
+    (add-to-list 'default-frame-alist (cons 'alpha (cons alpha alpha)))))
 
 ;; Font Setup
 
 ;; | 为了中英文等宽的字体     |
 ;; | For mixed monospace font |
 
-(when (display-graphic-p)
-  (set-frame-font "fira emacs retina-10")
-  (dolist (charset '(kana han symbol cjk-misc bopomofo))
-    (set-fontset-font (frame-parameter nil 'font)
-                      charset
-                      (font-spec :family "wenquanyi zen hei" :size 36)))
-  (user/set-alpha 100))
+(defun user/set-font (&rest args)
+  (when (display-graphic-p)
+    (set-frame-font "fira emacs retina-8" t t)
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      (set-fontset-font (frame-parameter nil 'font)
+                        charset
+                        (font-spec :family "wenquanyi zen hei" :size 28)))))
+
+
+(defun user/new-frame-setup (frame)
+  (select-frame frame)
+  (user/set-alpha)
+  (user/set-font))
+
+(add-hook 'after-make-frame-functions 'user/new-frame-setup)
 
 (setq overline-margin 0)
 

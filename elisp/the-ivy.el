@@ -3,10 +3,11 @@
   :bind
   (("M-z" . 'ivy-resume)
    :map ivy-minibuffer-map
-   ("<escape>" . keyboard-escape-quit)
-   ("{" . ivy-previous-line)
-   ("}" . ivy-next-line)
-   ("<tab>" . ivy-alt-done))
+   ("<escape>" . 'keyboard-escape-quit)
+   ("{" . 'ivy-previous-line)
+   ("}" . 'ivy-next-line)
+   ("<mouse-3>". 'ivy-done)
+   ("<tab>" . 'ivy-alt-done))
   :init
   (setq ivy-use-virtual-buffers nil
 	ivy-use-selectable-prompt t)
