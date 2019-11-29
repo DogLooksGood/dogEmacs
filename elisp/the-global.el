@@ -98,7 +98,16 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Remove mode line.
-(setq-default frame-title-format '("[%m]%b%* %e" (vc-mode vc-mode)))
+
+(defun user/project-name ()
+  (let ((proj-name (projectile-project-name)))
+    (if (equal proj-name "-")
+        ""
+      proj-name)))
+
+(setq-default frame-title-format '((:eval (user/project-name))
+                                   (:eval (replace-regexp-in-string "^ Git" " " vc-mode))
+                                   " %b%* %e [%m]"))
 (setq-default mode-line-format nil)
 
 (setq-default cursor-type 'box)

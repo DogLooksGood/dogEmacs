@@ -12,11 +12,11 @@
 ;; | For mixed monospace font |
 
 (when (display-graphic-p)
-  (set-frame-font "fira code-9")
+  (set-frame-font "fira emacs retina-10")
   (dolist (charset '(kana han symbol cjk-misc bopomofo))
     (set-fontset-font (frame-parameter nil 'font)
                       charset
-                      (font-spec :family "wenquanyi zen hei" :size 32)))
+                      (font-spec :family "wenquanyi zen hei" :size 36)))
   (user/set-alpha 100))
 
 (setq overline-margin 0)

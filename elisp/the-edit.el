@@ -16,6 +16,7 @@
                  user/rust-semicolon
                  user/rust-lessthan
                  user/rust-whitespace
+                 cljr-slash
                  sp-kill-hybrid-sexp
                  hydra-dvp-number/body
                  paredit-raise-sexp

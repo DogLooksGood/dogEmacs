@@ -48,4 +48,12 @@
   :bind
   (("C-S-F" . 'focus-mode)))
 
+(require 'fira-code)
+
+(defun user/fira-setup ()
+  (setq prettify-symbols-alist ())
+  (fira-code-mode t))
+
+(add-hook 'prog-mode-hook 'user/fira-setup)
+
 (provide 'the-visual)

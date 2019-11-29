@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: fulcro-require
+# key: fulcro-require
+# --
+[com.fulcrologic.fulcro.application :as app]
+[com.fulcrologic.fulcro.routing.dynamic-routing
+:as dr :refer [defrouter]]
+[com.fulcrologic.fulcro.components :as comp
+:refer [defsc]]
+[com.fulcrologic.fulcro.mutations :as m
+:refer [defmutation]]
+[com.fulcrologic.fulcro.algorithms.merge :as merge]
+[com.fulcrologic.fulcro.dom :as dom
+:refer [a table thead tbody td tr th div span button]]

@@ -29,6 +29,7 @@
 (use-package seq)
 
 (add-to-list 'load-path "~/.emacs.d/elisp/")
+(add-to-list 'load-path "~/.emacs.d/elisp2/")
 
 (require 'the-look-and-feel)
 (require 'the-global)

@@ -35,8 +35,8 @@
   :ensure t
   :bind
   (("C-x C-k" . 'kill-buffer)
-   ("C-x C-x" . 'save-buffer)
    ("M-g" . 'goto-line)
+   ("M-k" . 'kill-buffer-and-window)
    ("C-;" . 'comment-dwim)
    ("C-=" . 'indent-region)
    ("C-." . 'xref-find-definitions)
@@ -92,5 +92,7 @@
   (interactive)
   (when god-local-mode
     (god-local-mode -1)))
+
+(unbind-key "C-x C-g")
 
 (provide 'the-modal)

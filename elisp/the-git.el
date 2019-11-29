@@ -7,6 +7,8 @@
   :init
   (global-diff-hl-mode t))
 
-(use-package gitignore-mode)
+(use-package gitignore-mode
+  :init
+  (add-hook 'gitignore-mode-hook 'yas-minor-mode))
 
 (provide 'the-git)

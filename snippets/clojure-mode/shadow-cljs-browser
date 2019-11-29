@@ -7,8 +7,7 @@
  :builds {:app {:target        :browser
                 :output-dir    "resources/public/js"
                 :modules
-                {:main   {:entries    [${3:entry-namespace}]
-                          :init-fn    $3/init}}
+                {:main   {:init-fn    $3/init}}
                 :devtools
                 {:after-load  $3/after-load
                  :preloads [com.fulcrologic.fulcro.inspect.preload]}}}}

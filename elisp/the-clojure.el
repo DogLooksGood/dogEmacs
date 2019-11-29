@@ -1,5 +1,3 @@
-(require 'the-clojure-indent)
-
 (use-package clojure-mode
   :bind
   (:map clojure-mode-map
@@ -9,7 +7,7 @@
   (setq clojure-toplevel-inside-comment-form t)
   :config
   (modify-syntax-entry ?: "w" clojure-mode-syntax-table)
-  (user/clojure-indent-setup)
+  (setq clojure-indent-style 'always-indent)
   (add-to-list 'clojure-font-lock-keywords
                `(,(concat "\\(:\\{1,2\\}\\)\\("
                           clojure--sym-regexp
