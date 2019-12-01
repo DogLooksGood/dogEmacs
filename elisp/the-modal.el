@@ -2,10 +2,8 @@
   (cond
    (god-local-mode
     (setq cursor-type 'box))
-
    (buffer-read-only
     (setq cursor-type 'hollow))
-
    (t
     (setq cursor-type '(bar . 5)))))
 
@@ -26,15 +24,30 @@
              (lambda (&rest args) nil)))
     (apply func args)))
 
+(defun user/describe-key ()
+  (interactive)
+  (let ((enabled god-local-mode))
+    (when enabled
+      (god-local-mode -1))
+    (call-interactively 'describe-key)
+    (when enabled
+      (god-local-mode))))
+
 (defun user/insert-after ()
   (interactive)
   (forward-char)
   (god-local-mode -1))
 
+(defun user/insert-mode ()
+  (interactive)
+  (when god-local-mode
+    (god-local-mode -1)))
+
 (use-package god-mode
   :ensure t
   :bind
   (("C-x C-k" . 'kill-buffer)
+   ("C-? C-k" . 'user/describe-key)
    ("M-g" . 'goto-line)
    ("M-k" . 'kill-buffer-and-window)
    ("C-;" . 'comment-dwim)
@@ -56,12 +69,13 @@
    :map
    god-local-mode-map
    ("<escape>" . mode-line-other-buffer)
-   ("i" . 'god-local-mode)
-   ("z" . 'undo)
+   ("i" . 'user/insert-mode)
+   ("u" . 'undo)
    ("/" . 'swiper)
    ("s" . 'save-buffer)
    ("r" . 'repeat)
    ("j" . 'join-line)
+   ("z" . 'universal-argument)
    ;; navigation
    ("f" . 'forward-sexp)
    ("b" . 'backward-sexp)
@@ -87,11 +101,6 @@
 	  ("m" . "M-")
       ("SPC" . "C-M-")))
   (setq god-literal-key "SPC"))
-
-(defun user/insert-mode ()
-  (interactive)
-  (when god-local-mode
-    (god-local-mode -1)))
 
 (unbind-key "C-x C-g")
 

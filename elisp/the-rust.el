@@ -38,8 +38,6 @@
 
    (t (call-interactively #'self-insert-command))))
 
-
-
 (defun user/rust-minus ()
   "Will insert a minus if we are after whitespace and not at the indentation,otherwise will insert a underscore."
   (interactive)

@@ -14,17 +14,19 @@
 
 (defun user/set-font (&rest args)
   (when (display-graphic-p)
-    (set-frame-font "fira emacs retina-8" t t)
+    (set-frame-font "fira emacs retina 9" t t)
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font (frame-parameter nil 'font)
                         charset
-                        (font-spec :family "wenquanyi zen hei" :size 28)))))
-
+                        (font-spec :family "wenquanyi zen hei" :size 32)))))
 
 (defun user/new-frame-setup (frame)
   (select-frame frame)
   (user/set-alpha)
   (user/set-font))
+
+(user/set-font)
+(user/set-alpha)
 
 (add-hook 'after-make-frame-functions 'user/new-frame-setup)
 
@@ -38,7 +40,8 @@
 (setq user/selected-themes
       '(github-theme
         zenburn-theme
-        nimbus-theme))
+        nimbus-theme
+        solarized-theme))
 
 (seq-doseq (p user/selected-themes)
   (unless (package-installed-p p)
@@ -53,7 +56,10 @@
   (setq user/current-theme theme))
 
 (setq user/themes
-      '((zenburn
+      '((solarized-dark
+         ((font-lock-keyword-face ((t :foreground "#cb4b16")))
+          (clojure-keyword-face ((t :foreground "#268bd2")))))
+        (zenburn
          ())
         (github
          ((cider-fringe-good-face ((t :foreground "#009966")))
@@ -81,7 +87,8 @@
 
 (bind-key "C-S-D" 'user/toggle-theme)
 
-(user/toggle-theme 'github)
+(when window-system
+  (user/toggle-theme 'github))
 
 (custom-set-faces
  '(fringe ((t :background nil)))

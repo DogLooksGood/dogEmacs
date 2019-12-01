@@ -16,6 +16,7 @@
 (use-package counsel
   :bind
   ("C-<escape>" . 'counsel-ibuffer)
+  ("C-? C-f" . 'counsel-describe-function)
   ("C-x C-h" . 'counsel-imenu)
   ("C-x C-b" . 'counsel-ibuffer))
 

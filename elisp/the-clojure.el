@@ -21,7 +21,10 @@
   (save-mark-and-excursion
     (when (string-prefix-p "#_" (buffer-substring-no-properties (point) (line-end-position)))
       (forward-char 2))
-    (unless (equal (char-after) 40)
+    (unless
+        (or (equal (char-after) 40)
+            (equal (char-after) 91)
+            (equal (char-after) 123))
       (backward-up-list))
     (if (string-suffix-p "#_" (buffer-substring-no-properties (line-beginning-position) (point)))
         (backward-delete-char 2)
@@ -49,6 +52,7 @@
   (:map
    cider-mode-map
    ("C-." . 'cider-find-var)
+   ("C-c C-n" . 'cider-ns-map)
    :map
    cider-repl-mode-map
    ("(" . 'paredit-open-round)
@@ -76,7 +80,6 @@
     (if-let ((repl-type (user/clojure-repl-type)))
         (car (--filter (equal repl-type (cider-repl-type (cadr it))) sessions))
       (car sessions))))
-
 
 (defun user/fulcro-destructing-to-keys (text)
   "text is like {:keys [] :as props}"

@@ -39,6 +39,8 @@
       mouse-yank-at-point t
       ;; This fix the cursor movement lag
       auto-window-vscroll nil
+      ;; Only display cursor in current window.
+      cursor-in-non-selected-windows nil
       ;; Window divider setup
       window-divider-default-right-width 1
       window-divider-default-bottom-width 1
