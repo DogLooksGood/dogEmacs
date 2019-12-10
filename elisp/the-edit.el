@@ -18,7 +18,8 @@
                  user/rust-whitespace
                  cljr-slash
                  sp-kill-hybrid-sexp
-                 hydra-dvp-number/body
+                 forward-sexp
+                 backward-sexp
                  paredit-raise-sexp
                  paredit-forward-slurp-sexp
                  paredit-forward-barf-sexp

@@ -21,6 +21,10 @@
 ;; Requires
 (require 'use-package)
 
+(use-package quelpa-use-package
+  :init (setq quelpa-update-melpa-p nil)
+  :config (quelpa-use-package-activate-advice))
+
 (setq use-package-always-ensure t)
 
 ;; Common elisp packages
@@ -56,4 +60,5 @@
 (require 'the-snippet)
 (require 'the-modal)
 (require 'the-ebook)
+(require 'the-tab)
 (require 'the-server)

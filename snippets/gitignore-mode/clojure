@@ -8,3 +8,4 @@ cljs-runtime
 node_modules
 target
 .nrepl-port
+resources/public/js

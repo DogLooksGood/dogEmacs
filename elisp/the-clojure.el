@@ -1,8 +1,49 @@
+(defun user/clojure-comment ()
+  (interactive)
+  (cond
+   ((not current-prefix-arg)
+    (save-mark-and-excursion
+      (if (equal "#_" (buffer-substring-no-properties (point) (+ 2 (point))))
+          (while (equal "#_" (buffer-substring-no-properties (point) (+ 2 (point))))
+            (delete-char 2))
+        (progn
+          (unless (or (equal (char-after) 40)
+                      (equal (char-after) 91)
+                      (equal (char-after) 123))
+            (backward-up-list))
+          (if (string-suffix-p "#_" (buffer-substring-no-properties (line-beginning-position) (point)))
+              (while (string-suffix-p "#_" (buffer-substring-no-properties (line-beginning-position) (point)))
+                (delete-char -2))
+            (insert "#_"))))))
+
+   ((numberp current-prefix-arg)
+    (let* ((curr-sym (symbol-at-point))
+           (curr-sym-name (symbol-name curr-sym))
+           (line (buffer-substring-no-properties (point) (line-end-position)))
+           (i 0))
+      (save-mark-and-excursion
+        (when curr-sym
+          (unless (string-prefix-p curr-sym-name line)
+            (backward-sexp))
+          (while (< i current-prefix-arg)
+            (insert "#_")
+            (setq i (1+ i)))))))
+
+   ((equal '(4) current-prefix-arg)
+    (save-mark-and-excursion
+      (unless (and (equal (char-after) 40)
+                   (equal (point) (line-beginning-position)))
+        (beginning-of-defun)
+        (if (equal "#_" (buffer-substring-no-properties (point) (+ 2 (point))))
+            (delete-char 2)
+          (insert "#_")))))))
+
+
 (use-package clojure-mode
   :bind
   (:map clojure-mode-map
-        ("C-#" . 'user/clojure-comment-block)
-        ("C-c C-i" . 'cider-inspect-last-result))
+        ("C-c C-i" . 'cider-inspect-last-result)
+        ("C-'" . 'user/clojure-comment))
   :init
   (setq clojure-toplevel-inside-comment-form t)
   :config
@@ -15,20 +56,6 @@
                           clojure--sym-regexp
                           "\\)")
                  (0 'clojure-keyword-face))))
-
-(defun user/clojure-comment-block ()
-  (interactive)
-  (save-mark-and-excursion
-    (when (string-prefix-p "#_" (buffer-substring-no-properties (point) (line-end-position)))
-      (forward-char 2))
-    (unless
-        (or (equal (char-after) 40)
-            (equal (char-after) 91)
-            (equal (char-after) 123))
-      (backward-up-list))
-    (if (string-suffix-p "#_" (buffer-substring-no-properties (line-beginning-position) (point)))
-        (backward-delete-char 2)
-      (insert "#_"))))
 
 (defun user/cljr-setup ()
   (cljr-add-keybindings-with-prefix "C-c C-r")
@@ -64,22 +91,10 @@
   (unbind-key "M-." cider-mode-map)
   :init
   (add-hook 'cider--debug-mode-hook 'user/insert-mode)
-  (setq cider-font-lock-dynamically nil
-        cider-font-lock-reader-conditionals nil
+  (setq cider-font-lock-dynamically t
+        cider-font-lock-reader-conditionals t
         cider-prompt-for-symbol nil
         cider-enhanced-cljs-completion-p nil))
-
-(defun user/clojure-repl-type ()
-  (cond
-   ((equal major-mode 'clojure-mode) 'clj)
-   ((equal major-mode 'clojurescript-mode) 'cljs)))
-
-(defun sesman-current-session (system &optional cxt-types)
-  (let ((sessions (or (sesman--linked-sessions system 'sort cxt-types)
-                      (sesman--friendly-sessions system 'sort))))
-    (if-let ((repl-type (user/clojure-repl-type)))
-        (car (--filter (equal repl-type (cider-repl-type (cadr it))) sessions))
-      (car sessions))))
 
 (defun user/fulcro-destructing-to-keys (text)
   "text is like {:keys [] :as props}"

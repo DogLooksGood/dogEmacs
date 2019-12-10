@@ -16,7 +16,7 @@
     ["numbersign_question.liga" "#?" "\xe10d"]  ;   
     ["numbersign_bracketleft.liga" "#[" "\xe10e"]  ;   
     ["numbersign_underscore.liga" "#_" "\xe10f"]  ;   
-    ["numbersign_underscore_parenleft.liga" "#_(" "\xe110"]  ;   
+    ;; ["numbersign_underscore_parenleft.liga" "#_(" "\xe110"]  ;   
     ["numbersign_braceleft.liga" "#{" "\xe111"]  ;   
     ["dollar.ss05" "$" "\xe112"]  ;   
     ["dollar_greater.liga" "$>" "\xe113"]  ;   
@@ -165,8 +165,8 @@
     ["question_equal.liga" "?=" "\xe1a2"]  ;   
     ["question_question.liga" "??" "\xe1a3"]  ;   
     ["at.ss06" "@" "\xe1a4"]  ;   
-    ["F_l.liga" "Fl" "\xe1a5"]  ;   
-    ["T_l.liga" "Tl" "\xe1a6"]  ;   
+    ;; ["F_l.liga" "Fl" "\xe1a5"]  ;   
+    ;; ["T_l.liga" "Tl" "\xe1a6"]  ;   
     ["bracketleft.case" "[" "\xe1a7"]  ;   
     ["bracketleft_bar.liga" "[|" "\xe1a8"]  ;   
     ["backslash.ss08" "\\" "\xe1a9"]  ;   

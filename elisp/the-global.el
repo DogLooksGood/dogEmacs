@@ -47,7 +47,9 @@
       window-divider-default-places t
       ;; Don't wait for keystrokes display
       echo-keystrokes 0
-      show-paren-style 'parenthese)
+      show-paren-style 'parenthese
+      ;; Overline no margin
+      overline-margin 0)
 
 ;; Don't indent with tab
 (setq-default indent-tabs-mode nil
@@ -56,12 +58,14 @@
 (prefer-coding-system 'utf-8)
 
 ;; Distraction Free. Also move these to Xresources for faster startup.
-(defun user/setup-distraction-free (new-frame)
+(defun user/setup-distraction-free (&optional new-frame)
   (menu-bar-mode -1)
   (tool-bar-mode -1)
   (scroll-bar-mode -1))
 
 (add-hook 'after-make-frame-functions #'user/setup-distraction-free)
+
+(user/setup-distraction-free)
 
 ;; Show matched parens
 (setq show-paren-delay 0.01)
@@ -108,7 +112,10 @@
       proj-name)))
 
 (setq-default frame-title-format '((:eval (user/project-name))
-                                   (:eval (replace-regexp-in-string "^ Git" " " vc-mode))
+                                   (:eval
+                                    (when vc-mode
+                                      (replace-regexp-in-string "^ Git" " " vc-mode)))
+
                                    " %b%* %e [%m]"))
 (setq-default mode-line-format nil)
 
@@ -131,6 +138,7 @@
     (setq buffer-offer-save t)
     $buf))
 
+(bind-key "C-S-U" 'browse-url-at-point)
 (bind-key "<XF86Copy>" 'kill-ring-save)
 (bind-key "<XF86Paste>" 'yank)
 (bind-key "C-x C-n" 'user/new-buffer)

@@ -45,8 +45,15 @@
 
 (use-package god-mode
   :ensure t
+  :quelpa (god-mode
+           :fetcher github
+           :repo "DogLooksGood/god-mode")
   :bind
-  (("C-x C-k" . 'kill-buffer)
+  (("M-}" . 'scroll-up-command)
+   ("M-{" . 'scroll-down-command)
+   ("M-[" . 'beginning-of-buffer)
+   ("M-]" . 'end-of-buffer)
+   ("C-x C-k" . 'kill-buffer)
    ("C-? C-k" . 'user/describe-key)
    ("M-g" . 'goto-line)
    ("M-k" . 'kill-buffer-and-window)
@@ -69,6 +76,7 @@
    :map
    god-local-mode-map
    ("<escape>" . mode-line-other-buffer)
+   ("<tab>" . 'user/normal-tab)
    ("i" . 'user/insert-mode)
    ("u" . 'undo)
    ("/" . 'swiper)
@@ -85,9 +93,9 @@
    ("N" . 'forward-page)
    ("}" . 'scroll-up-command)
    ("{" . 'scroll-down-command)
-   ("v" . 'avy-goto-word-or-subword-1)
    ("[" . 'beginning-of-buffer)
    ("]" . 'end-of-buffer)
+   ("v" . 'avy-goto-char-2)
    ("o" . 'set-mark-command))
   :init
   (advice-add 'god-local-mode :around #'user/make-silent)
@@ -96,6 +104,7 @@
   (add-hook 'conf-mode-hook 'god-local-mode)
   (add-hook 'god-mode-enabled-hook 'user/update-cursor-shape)
   (add-hook 'god-mode-disabled-hook 'user/update-cursor-shape)
+  (setq god-mode-can-omit-literal-key t)
   (setq god-mod-alist
 	'((nil . "C-")
 	  ("m" . "M-")

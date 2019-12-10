@@ -3,11 +3,18 @@
 # key: shadow-cljs-browser
 # --
 {:deps   ${1:{:aliases [${2::cljs}]}}
- :dev-http {4000 "classpath:public"}
  :builds {:app {:target        :browser
                 :output-dir    "resources/public/js"
                 :modules
                 {:main   {:init-fn    $3/init}}
                 :devtools
-                {:after-load  $3/after-load
-                 :preloads [com.fulcrologic.fulcro.inspect.preload]}}}}
+                {:http-port  8000
+                 :http-root  "resources/public"
+                 :after-load  $3/after-load
+                 :preloads [com.fulcrologic.fulcro.inspect.preload
+                            shadow.remote.runtime.cljs.browser]}}
+          :test {:target :browser-test
+                 :test-dir "resources/public/js/test"
+                 :devtools
+                 {:http-port 8021
+                  :http-root "resources/public/js/test"}}}}

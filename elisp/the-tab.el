@@ -24,6 +24,5 @@
         (hs-toggle-hiding))))))
 
 (bind-key "<tab>" 'user/insert-tab prog-mode-map)
-(bind-key "<tab>" 'user/normal-tab god-local-mode-map)
 
 (provide 'the-tab)
