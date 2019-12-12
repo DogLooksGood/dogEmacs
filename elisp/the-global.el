@@ -117,7 +117,6 @@
                                       (replace-regexp-in-string "^ Git" " " vc-mode)))
 
                                    " %b%* %e [%m]"))
-(setq-default mode-line-format nil)
 
 (setq-default cursor-type 'box)
 (blink-cursor-mode -1)

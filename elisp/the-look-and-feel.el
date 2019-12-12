@@ -4,7 +4,7 @@
 ;; Transparency Setup
 (progn
   (defun user/set-alpha (&rest args)
-    (let ((alpha 98))
+    (let ((alpha 90))
       (set-frame-parameter (selected-frame) 'alpha (cons alpha alpha))))
 
   (user/set-alpha))
@@ -40,6 +40,10 @@
 (use-package zenburn-theme
   :init
   (load-theme 'zenburn t))
+
+;;; Mode Line Setup
+
+(setq-default mode-line-format nil)
 
 ;;; Run setup for future frames.
 

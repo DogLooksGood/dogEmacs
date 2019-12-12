@@ -24,15 +24,6 @@
              (lambda (&rest args) nil)))
     (apply func args)))
 
-(defun user/describe-key ()
-  (interactive)
-  (let ((enabled god-local-mode))
-    (when enabled
-      (god-local-mode -1))
-    (call-interactively 'describe-key)
-    (when enabled
-      (god-local-mode))))
-
 (defun user/insert-after ()
   (interactive)
   (forward-char)
@@ -54,7 +45,6 @@
    ("M-[" . 'beginning-of-buffer)
    ("M-]" . 'end-of-buffer)
    ("C-x C-k" . 'kill-buffer)
-   ("C-? C-k" . 'user/describe-key)
    ("M-g" . 'goto-line)
    ("M-k" . 'kill-buffer-and-window)
    ("C-;" . 'comment-dwim)

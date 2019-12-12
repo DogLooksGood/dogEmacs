@@ -27,14 +27,10 @@
 
 (setq use-package-always-ensure t)
 
-;; Common elisp packages
-(use-package dash)
-(use-package string-inflection)
-(use-package seq)
-
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 (add-to-list 'load-path "~/.emacs.d/elisp2/")
 
+(require 'the-elisp)
 (require 'the-look-and-feel)
 (require 'the-global)
 (require 'the-git)
@@ -61,4 +57,5 @@
 (require 'the-modal)
 (require 'the-ebook)
 (require 'the-tab)
+(require 'the-docker)
 (require 'the-server)
