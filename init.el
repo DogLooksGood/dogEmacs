@@ -39,6 +39,7 @@
 (require 'the-completion)
 (require 'the-lisp)
 (require 'the-clojure)
+(require 'the-java)
 (require 'the-haskell)
 (require 'the-elixir)
 (require 'the-rust)

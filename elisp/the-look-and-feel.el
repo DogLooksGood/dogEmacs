@@ -4,7 +4,7 @@
 ;; Transparency Setup
 (progn
   (defun user/set-alpha (&rest args)
-    (let ((alpha 90))
+    (let ((alpha 100))
       (set-frame-parameter (selected-frame) 'alpha (cons alpha alpha))))
 
   (user/set-alpha))
@@ -17,7 +17,7 @@
 (progn
   (defun user/set-font (&rest args)
     (when (display-graphic-p)
-      (set-frame-font "dejavu sans mono 10" t t)
+      (set-frame-font "cascadia mono 10" t t)
       (dolist (charset '(kana han symbol cjk-misc bopomofo))
         (set-fontset-font (frame-parameter nil 'font)
                           charset
@@ -29,6 +29,8 @@
 
 ;; Face tweaks
 (custom-set-faces
+ '(yascroll:thumb-fringe ((t :background "#000000"
+                             :foreground "#000000")))
  '(fringe ((t :background nil)))
  '(yas-field-highlight-face ((t :box "#777")))
  '(form-feed-line ((t :strike-through "#666"))))
@@ -37,9 +39,13 @@
 ;;   :init
 ;;   (load-theme 'nord t))
 
-(use-package zenburn-theme
+(use-package atom-one-dark-theme
   :init
-  (load-theme 'zenburn t))
+  (load-theme 'atom-one-dark t))
+
+;; (use-package zenburn-theme
+;;   :init
+;;   (load-theme 'zenburn t))
 
 ;;; Mode Line Setup
 

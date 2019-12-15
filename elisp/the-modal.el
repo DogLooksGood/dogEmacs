@@ -11,11 +11,18 @@
   (when god-local-mode
     (god-local-mode -1)))
 
+(defun user/yank-on-region ()
+  (interactive)
+  (delete-active-region)
+  (call-interactively 'yank)
+  (deactivate-mark t))
+
 (use-package selected
   :ensure t
   :bind
   (:map selected-keymap
-	("<backspace>" . 'delete-region))
+        ("<backspace>" . 'delete-region)
+        ("C-y" . 'user/yank-on-region))
   :init
   (selected-global-mode 1))
 

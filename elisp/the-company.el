@@ -9,4 +9,9 @@
   (setq company-idle-delay nil)
   (add-hook 'prog-mode-hook 'company-mode))
 
+(use-package company-quickhelp
+  :after company
+  :init
+  (add-hook 'company-mode-hook 'company-quickhelp-mode))
+
 (provide 'the-completion)

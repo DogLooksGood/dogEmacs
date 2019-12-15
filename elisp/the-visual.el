@@ -32,10 +32,6 @@
   :init
   (add-hook 'prog-mode-hook #'hs-minor-mode))
 
-(use-package form-feed
-  :init
-  (add-hook 'prog-mode-hook 'form-feed-mode))
-
 ;;; Bug of yascroll
 ;;; In emacs 27, yascroll doesn't work.
 (require 'cl)
