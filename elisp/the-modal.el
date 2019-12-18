@@ -77,11 +77,11 @@
    ("i" . 'user/insert-mode)
    ("u" . 'undo)
    ("/" . 'swiper)
-   ("s" . 'save-buffer)
-   ("r" . 'repeat)
    ("j" . 'join-line)
    ("z" . 'universal-argument)
    ;; navigation
+   ("s" . 'save-buffer)
+   ("r" . 'up-list)
    ("f" . 'forward-sexp)
    ("b" . 'backward-sexp)
    ("h" . 'backward-char)

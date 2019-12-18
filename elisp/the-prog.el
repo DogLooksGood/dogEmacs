@@ -27,14 +27,13 @@ Otherwise will insert a singlequote."
   :init
   (setq lsp-prefer-flymake nil))
 
-(use-package dap-mode)
-
 (use-package lsp-ui
+  :after (lsp-mode)
+  :hook (lsp-mode . lsp-ui-mode)
   :init
   (setq lsp-ui-flycheck-enable nil)
   (setq lsp-ui-sideline-enable nil)
-  (setq lsp-ui-doc-delay 10)
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+  (setq lsp-ui-doc-delay 10))
 
 (use-package company-lsp :commands company-lsp)
 

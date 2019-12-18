@@ -6,7 +6,7 @@
         ("melpa-stable" . "http://elpa.emacs-china.org/melpa-stable/")))
 
 (setq package-selected-packages
-      '(use-package))
+      '(use-package quelpa-use-package))
 
 (package-initialize)
 
@@ -20,12 +20,11 @@
 
 ;; Requires
 (require 'use-package)
-
-(use-package quelpa-use-package
-  :init (setq quelpa-update-melpa-p nil)
-  :config (quelpa-use-package-activate-advice))
+(require 'quelpa-use-package)
 
 (setq use-package-always-ensure t)
+(setq quelpa-update-melpa-p nil)
+(quelpa-use-package-activate-advice)
 
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 (add-to-list 'load-path "~/.emacs.d/elisp2/")
@@ -39,11 +38,11 @@
 (require 'the-completion)
 (require 'the-lisp)
 (require 'the-clojure)
-(require 'the-java)
-(require 'the-haskell)
-(require 'the-elixir)
+;; (require 'the-java)
+;; (require 'the-haskell)
+;; (require 'the-elixir)
 (require 'the-rust)
-(require 'the-golang)
+;; (require 'the-golang)
 (require 'the-sql)
 (require 'the-html)
 (require 'the-window)
@@ -56,7 +55,7 @@
 (require 'the-org)
 (require 'the-snippet)
 (require 'the-modal)
-(require 'the-ebook)
+;; (require 'the-ebook)
 (require 'the-tab)
 (require 'the-docker)
 (require 'the-server)

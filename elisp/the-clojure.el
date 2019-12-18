@@ -57,12 +57,8 @@
                           "\\)")
                  (0 'clojure-keyword-face))))
 
-(defun user/cljr-setup ()
-  (cljr-add-keybindings-with-prefix "C-c C-r")
-  (unbind-key "/" clj-refactor-map)
-  (clj-refactor-mode 1))
-
 (use-package clj-refactor
+  :hook clojure-mode
   :bind
   (:map
    clojure-mode-map
@@ -70,7 +66,10 @@
   :init
   (add-hook 'clojure-mode-hook 'user/cljr-setup)
   (setq cljr-warn-on-eval t)
-  (setq cljr-suppress-middleware-warnings t))
+  (setq cljr-suppress-middleware-warnings t)
+  :config
+  (unbind-key "/" clj-refactor-map)
+  (cljr-add-keybindings-with-prefix "C-c C-r"))
 
 (use-package cider
   :pin melpa-stable

@@ -1,6 +1,7 @@
-(require 'mhtml-mode)
+;; (require 'mhtml-mode)
 
 (use-package emmet-mode
+  :hook (mhtml-mode)
   :bind
   (:map mhtml-mode-map
         ("M-RET" . 'emmet-expand-line))
