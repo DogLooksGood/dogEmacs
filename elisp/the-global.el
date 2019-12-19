@@ -59,9 +59,10 @@
 
 ;; Distraction Free. Also move these to Xresources for faster startup.
 (defun user/setup-distraction-free (&optional new-frame)
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1))
+  ;; (menu-bar-mode -1)
+  ;; (tool-bar-mode -1)
+  ;; (scroll-bar-mode -1)
+  )
 
 (add-hook 'after-make-frame-functions #'user/setup-distraction-free)
 
@@ -115,7 +116,6 @@
                                    (:eval
                                     (when vc-mode
                                       (replace-regexp-in-string "^ Git" " " vc-mode)))
-
                                    " %b%* %e [%m]"))
 
 (setq-default cursor-type 'box)
@@ -137,7 +137,9 @@
     (setq buffer-offer-save t)
     $buf))
 
+(bind-key "C-M-SPC" 'save-buffer)
 (bind-key "C-S-U" 'browse-url-at-point)
+(bind-key "C-S-P" 'proced)
 (bind-key "<XF86Copy>" 'kill-ring-save)
 (bind-key "<XF86Paste>" 'yank)
 (bind-key "C-x C-n" 'user/new-buffer)

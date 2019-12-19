@@ -1,7 +1,6 @@
 (use-package avy
-  :commands (avy-goto-word-or-subword-1)
   :bind
-  ("C-z" . 'avy-goto-word-or-subword-1)
+  ("C-v" . 'avy-goto-char-2)
   :init
   (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))
   (avy-setup-default))
@@ -52,11 +51,28 @@
   :bind
   ("C-+" . 'er/expand-region))
 
+(use-package easy-kill
+  :bind
+  (("C-o" . 'easy-kill)
+   :map
+   easy-kill-base-map
+   ("SPC" . 'easy-kill-region)
+   ("<backspace>" . 'easy-kill-delete-region))
+  :init
+  (setq easy-kill-alist
+        '((?w word           " ")
+          (?s sexp           "\n")
+          (?l list           "\n")
+          (?f filename       "\n")
+          (?d defun          "\n\n")
+          (?u defun-name     " ")
+          (?L line           "\n")
+          (?b buffer-file-name))))
+
 (use-package anzu
   :bind
   ("C-%" . 'anzu-query-replace-regexp)
   ("M-%" . 'anzu-query-replace)
-  ("C-&" . 'anzu-query-replace-at-cursor-thing)
   :init
   (global-anzu-mode))
 

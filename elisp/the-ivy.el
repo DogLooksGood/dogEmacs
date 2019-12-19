@@ -24,6 +24,6 @@
   :commands (swiper)
   :ensure t
   :bind
-  ("C-s" . swiper))
+  ("C-/" . swiper))
 
 (provide 'the-ivy)

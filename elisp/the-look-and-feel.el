@@ -53,9 +53,10 @@
 ;;; Run setup for future frames.
 
 (defun user/new-frame-setup (frame)
-  (select-frame frame)
-  (user/set-alpha)
-  (user/set-font))
+  ;; (select-frame frame)
+  ;; (user/set-alpha)
+  ;; (user/set-font)
+  )
 
 (add-hook 'after-make-frame-functions 'user/new-frame-setup)
 

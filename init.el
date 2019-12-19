@@ -18,12 +18,13 @@
              (not (package-installed-p package)))
     (package-install package t)))
 
+(setq quelpa-checkout-melpa-p nil)
+(setq use-package-always-ensure t)
+(setq quelpa-update-melpa-p nil)
+
 ;; Requires
 (require 'use-package)
 (require 'quelpa-use-package)
-
-(setq use-package-always-ensure t)
-(setq quelpa-update-melpa-p nil)
 (quelpa-use-package-activate-advice)
 
 (add-to-list 'load-path "~/.emacs.d/elisp/")

@@ -2,6 +2,8 @@
 
 (use-package projectile
   :bind
+  ("C-&" . 'projectile-run-async-shell-command-in-root)
+  ("C-!" . 'projectile-run-shell-command-in-root)
   ("C-x C-p" . 'counsel-projectile-switch-project)
   ("C-x C-o" . 'counsel-projectile-find-file)
   ("C-x C-x" . 'counsel-projectile-switch-to-buffer)

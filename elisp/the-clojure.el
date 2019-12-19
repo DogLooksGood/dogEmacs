@@ -1,4 +1,4 @@
-(defun user/clojure-comment ()
+(defun user/clojure-hash-comment ()
   (interactive)
   (cond
    ((not current-prefix-arg)
@@ -38,12 +38,11 @@
             (delete-char 2)
           (insert "#_")))))))
 
-
 (use-package clojure-mode
   :bind
   (:map clojure-mode-map
         ("C-c C-i" . 'cider-inspect-last-result)
-        ("C-'" . 'user/clojure-comment))
+        ("C-#" . 'user/clojure-hash-comment))
   :init
   (setq clojure-toplevel-inside-comment-form t)
   :config
@@ -58,13 +57,12 @@
                  (0 'clojure-keyword-face))))
 
 (use-package clj-refactor
-  :hook clojure-mode
+  :hook (clojure-mode . clj-refactor-mode)
   :bind
   (:map
    clojure-mode-map
    ("/" . 'cljr-slash))
   :init
-  (add-hook 'clojure-mode-hook 'user/cljr-setup)
   (setq cljr-warn-on-eval t)
   (setq cljr-suppress-middleware-warnings t)
   :config
@@ -72,11 +70,12 @@
   (cljr-add-keybindings-with-prefix "C-c C-r"))
 
 (use-package cider
-  :pin melpa-stable
+  :pin "melpa-stable"
   :commands (cider-jack-in cider-jack-in-cljs cider-jack-in-clj&cljs)
   :bind
   (:map
    cider-mode-map
+   ("C-!" . 'cider-read-and-eval)
    ("C-." . 'cider-find-var)
    ("C-c C-n" . 'cider-ns-map)
    :map

@@ -34,8 +34,7 @@
 
 (use-package yasnippet
   :bind
-  (("C-*" . 'yas-insert-snippet)
-   :map
+  (:map
    yas-keymap
    ("<escape>" . 'user/yas-abort)
    ("<return>" . 'user/yas-next)

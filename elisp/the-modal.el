@@ -21,6 +21,7 @@
   :ensure t
   :bind
   (:map selected-keymap
+        ("<escape>" . 'keyboard-escape-quit)
         ("<backspace>" . 'delete-region)
         ("C-y" . 'user/yank-on-region))
   :init
@@ -41,22 +42,45 @@
   (when god-local-mode
     (god-local-mode -1)))
 
+(defun user/seek-sexp ()
+  (interactive)
+  (unless (equal (point) (point-max))
+    (forward-char)
+    (while (not (or (looking-at "\\s(")
+                    (equal (point) (point-max))))
+      (forward-char))))
+
+(defun user/replace-point (ch)
+  (interactive "cREPLACE WITH:")
+  (delete-char 1)
+  (insert-char ch)
+  (backward-char))
+
+(defun user/active-region-or-kill-region ()
+  (interactive)
+  (if (region-active-p)
+      (call-interactively #'kill-region)
+    (call-interactively #'set-mark-command)))
+
+(defun user/deactivate-region-or-other-buffer ()
+  (interactive)
+  (if (region-active-p)
+      (call-interactively #'keyboard-escape-quit)
+    (mode-line-other-buffer)))
+
 (use-package god-mode
   :ensure t
   :quelpa (god-mode
            :fetcher github
            :repo "DogLooksGood/god-mode")
   :bind
-  (("M-}" . 'scroll-up-command)
-   ("M-{" . 'scroll-down-command)
-   ("M-[" . 'beginning-of-buffer)
-   ("M-]" . 'end-of-buffer)
-   ("C-x C-k" . 'kill-buffer)
-   ("M-g" . 'goto-line)
+  (("M-g" . 'goto-line)
    ("M-k" . 'kill-buffer-and-window)
+   ("C-$" . 'shell-command)
    ("C-;" . 'comment-dwim)
-   ("C-=" . 'indent-region)
+   ("C-=" . 'align-regexp)
    ("C-." . 'xref-find-definitions)
+   ("C-!" . 'eval-expression)
    ("C-," . 'xref-pop-marker-stack)
    :map
    minibuffer-local-map
@@ -72,28 +96,26 @@
    ("<escape>" . 'god-local-mode)
    :map
    god-local-mode-map
-   ("<escape>" . mode-line-other-buffer)
+   ("<escape>" . 'user/deactivate-region-or-other-buffer)
    ("<tab>" . 'user/normal-tab)
    ("i" . 'user/insert-mode)
    ("u" . 'undo)
-   ("/" . 'swiper)
    ("j" . 'join-line)
    ("z" . 'universal-argument)
+   ("w" . 'user/active-region-or-kill-region)
+   ("*" . 'point-to-register)
+   ("@" . 'register-to-point)
    ;; navigation
-   ("s" . 'save-buffer)
    ("r" . 'up-list)
    ("f" . 'forward-sexp)
    ("b" . 'backward-sexp)
-   ("h" . 'backward-char)
-   ("t" . 'forward-char)
-   ("P" . 'backward-page)
-   ("N" . 'forward-page)
+   ("h" . 'left-char)
+   ("t" . 'right-char)
    ("}" . 'scroll-up-command)
    ("{" . 'scroll-down-command)
    ("[" . 'beginning-of-buffer)
-   ("]" . 'end-of-buffer)
-   ("v" . 'avy-goto-char-2)
-   ("o" . 'set-mark-command))
+   ("]" . 'end-of-buffer))
+  ("s" . 'user/seek-sexp)
   :init
   (advice-add 'god-local-mode :around #'user/make-silent)
   (add-hook 'text-mode-hook 'god-local-mode)

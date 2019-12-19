@@ -4,6 +4,6 @@
 
 (use-package docker
   :bind
-  ("C-S-d" . docker))
+  (("C-S-d" . docker)))
 
 (provide 'the-docker)
