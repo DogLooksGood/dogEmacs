@@ -5,6 +5,7 @@
   :commands (org-mode)
   :config
   (unbind-key "M-h" org-mode-map)
+  (unbind-key "M-a" org-mode-map)
   (setq org-hide-emphasis-markers t))
 
 (use-package org-bullets

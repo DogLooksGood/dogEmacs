@@ -4,7 +4,7 @@
 ;; Transparency Setup
 (progn
   (defun user/set-alpha (&rest args)
-    (let ((alpha 95))
+    (let ((alpha 100))
       (set-frame-parameter (selected-frame) 'alpha (cons alpha alpha))))
 
   (user/set-alpha))
@@ -17,11 +17,11 @@
 (progn
   (defun user/set-font (&rest args)
     (when (display-graphic-p)
-      (set-frame-font "cascadia mono 10" t t)
+      (set-frame-font "meslo lg l 9" t t)
       (dolist (charset '(kana han symbol cjk-misc bopomofo))
         (set-fontset-font (frame-parameter nil 'font)
                           charset
-                          (font-spec :family "wenquanyi zen hei" :size 34)))))
+                          (font-spec :family "wenquanyi zen hei" :size 32)))))
 
   (user/set-font))
 
@@ -34,14 +34,9 @@
  '(yas-field-highlight-face ((t :box "#777")))
  '(form-feed-line ((t :strike-through "#666"))))
 
-;; (use-package atom-one-dark-theme
-;;   :init
-;;   (load-theme 'atom-one-dark t))
-
-;; (use-package nimbus-theme
-;;   :init
-;;   (load-theme 'nimbus t))
-
+(use-package atom-one-dark-theme)
+(use-package nimbus-theme)
+(use-package leuven-theme)
 (use-package zenburn-theme
   :init
   (load-theme 'zenburn t))
@@ -53,10 +48,9 @@
 ;;; Run setup for future frames.
 
 (defun user/new-frame-setup (frame)
-  ;; (select-frame frame)
-  ;; (user/set-alpha)
-  ;; (user/set-font)
-  )
+  (select-frame frame)
+  (user/set-alpha)
+  (user/set-font))
 
 (add-hook 'after-make-frame-functions 'user/new-frame-setup)
 

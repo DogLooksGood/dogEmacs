@@ -6,7 +6,7 @@
   (avy-setup-default))
 
 (defun user/set-mc-rules ()
-  (let ((rules '(god-local-mode repeat)))
+  (let ((rules '(god-local-mode repeat keyboard-escape-quit)))
     (mapcar (lambda (r) (add-to-list 'mc/cmds-to-run-once r))
             rules))
   (let ((rules '(user/singlequote
@@ -63,11 +63,11 @@
         '((?w word           " ")
           (?s sexp           "\n")
           (?l list           "\n")
-          (?f filename       "\n")
+          (?F filename       "\n")
           (?d defun          "\n\n")
           (?u defun-name     " ")
           (?L line           "\n")
-          (?b buffer-file-name))))
+          (?B buffer-file-name))))
 
 (use-package anzu
   :bind

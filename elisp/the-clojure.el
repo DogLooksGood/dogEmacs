@@ -57,6 +57,7 @@
                  (0 'clojure-keyword-face))))
 
 (use-package clj-refactor
+  :pin "melpa-stable"
   :hook (clojure-mode . clj-refactor-mode)
   :bind
   (:map

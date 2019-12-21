@@ -59,10 +59,9 @@
 
 ;; Distraction Free. Also move these to Xresources for faster startup.
 (defun user/setup-distraction-free (&optional new-frame)
-  ;; (menu-bar-mode -1)
-  ;; (tool-bar-mode -1)
-  ;; (scroll-bar-mode -1)
-  )
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1))
 
 (add-hook 'after-make-frame-functions #'user/setup-distraction-free)
 

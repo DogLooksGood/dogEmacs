@@ -62,11 +62,31 @@
       (call-interactively #'kill-region)
     (call-interactively #'set-mark-command)))
 
-(defun user/deactivate-region-or-other-buffer ()
+(defun user/should-use-god-mode-p ()
+  (or (equal major-mode 'fundamental-mode)
+      (derived-mode-p 'conf-mode)
+      (derived-mode-p 'text-mode)
+      (derived-mode-p 'prog-mode)))
+
+(defun user/escape ()
   (interactive)
-  (if (region-active-p)
-      (call-interactively #'keyboard-escape-quit)
-    (mode-line-other-buffer)))
+  (cond
+   ((not (user/should-use-god-mode-p))
+    (mode-line-other-buffer))
+   ((not (equal 1 (mc/num-cursors)))
+    (call-interactively #'mc/keyboard-quit))
+   ((region-active-p)
+    (call-interactively #'keyboard-escape-quit))
+   (god-local-mode
+    (mode-line-other-buffer))
+   (t
+    (god-local-mode 1))))
+
+(defun user/maybe-god-mode (&rest args)
+  "We want to enable god-mode for every text editting mode.
+Use this function on `after-change-major-mode-hook'. "
+  (when (user/should-use-god-mode-p)
+    (god-local-mode 1)))
 
 (use-package god-mode
   :ensure t
@@ -74,7 +94,8 @@
            :fetcher github
            :repo "DogLooksGood/god-mode")
   :bind
-  (("M-g" . 'goto-line)
+  (("<escape>" . 'user/escape)
+   ("M-g" . 'goto-line)
    ("M-k" . 'kill-buffer-and-window)
    ("C-$" . 'shell-command)
    ("C-;" . 'comment-dwim)
@@ -86,17 +107,8 @@
    minibuffer-local-map
    ("<escape>" . 'keyboard-escape-quit)
    :map
-   text-mode-map
-   ("<escape>" . 'god-local-mode)
-   :map
-   conf-mode-map
-   ("<escape>" . 'god-local-mode)
-   :map
-   prog-mode-map
-   ("<escape>" . 'god-local-mode)
-   :map
    god-local-mode-map
-   ("<escape>" . 'user/deactivate-region-or-other-buffer)
+   ("<escape>" . 'user/escape)
    ("<tab>" . 'user/normal-tab)
    ("i" . 'user/insert-mode)
    ("u" . 'undo)
@@ -118,9 +130,7 @@
   ("s" . 'user/seek-sexp)
   :init
   (advice-add 'god-local-mode :around #'user/make-silent)
-  (add-hook 'text-mode-hook 'god-local-mode)
-  (add-hook 'prog-mode-hook 'god-local-mode)
-  (add-hook 'conf-mode-hook 'god-local-mode)
+  (add-hook 'after-change-major-mode-hook 'user/maybe-god-mode)
   (add-hook 'god-mode-enabled-hook 'user/update-cursor-shape)
   (add-hook 'god-mode-disabled-hook 'user/update-cursor-shape)
   (setq god-mode-can-omit-literal-key t)

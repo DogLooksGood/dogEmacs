@@ -2,16 +2,16 @@
   :ensure t
   :commands (ace-window)
   :bind
-  (("M-h" . ace-window))
+  (("M-a" . ace-window))
   :init
   (setq aw-ignore-on nil)
   (setq aw-scope 'frame)
   (setq aw-ignored-buffers '())
   (setq aw-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n)))
 
-(bind-key "M-t" 'aw-flip-window)
-(bind-key "M-\\" 'split-window-right)
-(bind-key "M--" 'split-window-below)
+(bind-key "M-e" 'aw-flip-window)
+(bind-key "M-h" 'split-window-right)
+(bind-key "M-v" 'split-window-below)
 (bind-key "M-o" 'delete-other-windows)
 (bind-key "M-q" 'delete-window)
 
