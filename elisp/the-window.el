@@ -9,11 +9,10 @@
   (setq aw-ignored-buffers '())
   (setq aw-keys '(?d ?h ?t ?n ?s)))
 
-;;; rarely used
-;;; (bind-key "<M-tab>" 'aw-flip-window)
-(bind-key "M-\\" 'split-window-right)
-(bind-key "M--" 'split-window-below)
-(bind-key "M-o" 'delete-other-windows)
-(bind-key "M-q" 'delete-window)
+(progn
+  (bind-key "\\" 'split-window-right special-mode-map)
+  (bind-key "'" 'delete-other-windows special-mode-map)
+  (bind-key "q" 'delete-window special-mode-map)
+  (bind-key "-" 'split-window-below special-mode-map))
 
 (provide 'the-window)

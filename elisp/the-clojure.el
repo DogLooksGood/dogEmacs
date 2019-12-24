@@ -42,7 +42,7 @@
   :bind
   (:map clojure-mode-map
         ("C-c C-i" . 'cider-inspect-last-result)
-        ("C-'" . 'user/clojure-hash-comment))
+        ("C-#" . 'user/clojure-hash-comment))
   :init
   (setq clojure-toplevel-inside-comment-form t)
   :config

@@ -16,6 +16,7 @@
                  sp-kill-hybrid-sexp
                  forward-sexp
                  backward-sexp
+                 paredit-kill
                  paredit-raise-sexp
                  paredit-forward-slurp-sexp
                  paredit-forward-barf-sexp
@@ -24,7 +25,8 @@
                  paredit-forward-down
                  paredit-backward-down
                  transpose-sexps
-                 user/escape)))
+                 user/escape
+                 delete-backward-char)))
     (mapcar (lambda (r) (add-to-list 'mc/cmds-to-run-for-all r))
             rules)))
 

@@ -6,7 +6,8 @@
   :config
   (unbind-key "M-h" org-mode-map)
   (unbind-key "M-a" org-mode-map)
-  (setq org-hide-emphasis-markers t))
+  (setq org-hide-emphasis-markers t)
+  (setq org-export-html-postamble nil))
 
 (use-package org-bullets
   :init

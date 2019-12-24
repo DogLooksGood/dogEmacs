@@ -17,11 +17,11 @@
 (progn
   (defun user/set-font (&rest args)
     (when (display-graphic-p)
-      (set-frame-font "meslo lg m 9" t t)
+      (set-frame-font "dejavu sans mono 10" t t)
       (dolist (charset '(kana han symbol cjk-misc bopomofo))
         (set-fontset-font (frame-parameter nil 'font)
                           charset
-                          (font-spec :family "wenquanyi zen hei" :size 32)))))
+                          (font-spec :family "wenquanyi zen hei" :size 34)))))
 
   (user/set-font))
 
@@ -33,6 +33,10 @@
  '(fringe ((t :background nil)))
  '(yas-field-highlight-face ((t :box "#777")))
  '(form-feed-line ((t :strike-through "#666"))))
+
+(use-package atom-one-dark-theme
+  :init
+  (load-theme 'atom-one-dark t))
 
 ;; (use-package doom-themes
 ;;   :init
@@ -46,9 +50,9 @@
 ;;   :init
 ;;   (load-theme 'leuven t))
 
-(use-package zenburn-theme
-  :init
-  (load-theme 'zenburn t))
+;; (use-package zenburn-theme
+;;   :init
+;;   (load-theme 'zenburn t))
 
 ;;; Mode Line Setup
 

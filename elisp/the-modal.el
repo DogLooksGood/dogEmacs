@@ -76,12 +76,12 @@
 (defun user/escape ()
   (interactive)
   (cond
-   ((not (user/should-use-god-mode-p))
-    (mode-line-other-buffer))
    ((not (equal 1 (mc/num-cursors)))
     (god-local-mode 1))
    ((region-active-p)
     (call-interactively #'keyboard-escape-quit))
+   ((not (user/should-use-god-mode-p))
+    (mode-line-other-buffer))
    (god-local-mode
     (mode-line-other-buffer))
    (t
@@ -93,6 +93,11 @@ Use this function on `after-change-major-mode-hook'. "
   (when (user/should-use-god-mode-p)
     (god-local-mode 1)))
 
+(use-package key-chord
+  :init
+  (key-chord-mode 1)
+  (key-chord-define-global ",." 'user/escape))
+
 (use-package god-mode
   :ensure t
   :quelpa (god-mode
@@ -101,7 +106,7 @@ Use this function on `after-change-major-mode-hook'. "
   :bind
   (("<escape>" . 'user/escape)
    ("M-g" . 'goto-line)
-   ("M-k" . 'kill-buffer-and-window)
+   ("<M-escape>" . 'kill-buffer-and-window)
    ("C-$" . 'shell-command)
    ("C-;" . 'comment-dwim)
    ("C-=" . 'align-regexp)
@@ -113,6 +118,7 @@ Use this function on `after-change-major-mode-hook'. "
    ("<escape>" . 'keyboard-escape-quit)
    :map
    god-local-mode-map
+   ("<escape>" . 'user/escape)
    ("<tab>" . 'user/normal-tab)
    ("i" . 'user/insert-mode)
    ("u" . 'undo)
@@ -122,6 +128,10 @@ Use this function on `after-change-major-mode-hook'. "
    ("*" . 'point-to-register)
    ("@" . 'register-to-point)
    ("s" . 'save-buffer)
+   ("q" . 'delete-window)
+   ("\\" . 'split-window-right)
+   ("-" . 'split-window-below)
+   ("'" . 'delete-other-windows)
    ;; navigation
    ("r" . 'up-list)
    ("f" . 'forward-sexp)

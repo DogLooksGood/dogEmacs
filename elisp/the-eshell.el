@@ -1,4 +1,5 @@
-(bind-key "C-\\" #'eshell)
+;;; Prefer URxvt
+;; (bind-key "C-\\" #'eshell)
 
 (defun eshell/f (&rest args)
   (apply #'find-file args))

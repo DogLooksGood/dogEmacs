@@ -57,6 +57,7 @@
 (require 'the-org)
 (require 'the-snippet)
 (require 'the-modal)
+(require 'the-latex)
 ;; (require 'the-ebook)
 (require 'the-tab)
 (require 'the-docker)
