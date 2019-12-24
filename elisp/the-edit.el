@@ -1,12 +1,9 @@
-(use-package avy
-  :bind
-  ("C-v" . 'avy-goto-char-2)
-  :init
-  (setq avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s))
-  (avy-setup-default))
+;;; packages for EDIT
 
 (defun user/set-mc-rules ()
-  (let ((rules '(god-local-mode repeat keyboard-escape-quit)))
+  (let ((rules '(god-local-mode
+                 repeat
+                 keyboard-escape-quit)))
     (mapcar (lambda (r) (add-to-list 'mc/cmds-to-run-once r))
             rules))
   (let ((rules '(user/singlequote
@@ -26,7 +23,8 @@
                  paredit-backward-up
                  paredit-forward-down
                  paredit-backward-down
-                 transpose-sexps)))
+                 transpose-sexps
+                 user/escape)))
     (mapcar (lambda (r) (add-to-list 'mc/cmds-to-run-for-all r))
             rules)))
 
@@ -37,14 +35,11 @@
    ("C-<" . 'mc/skip-to-next-like-this))
   :config
   (user/set-mc-rules)
-  ;; We can use C-v, M-v to cycle cursors.
-  (require 'mc-cycle-cursors)
   :init
   (setq mc/always-run-for-all nil)
-  (multiple-cursors-mode 1))
-
-(global-unset-key (kbd "M-<down-mouse-1>"))
-(global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
+  (multiple-cursors-mode 1)
+  (global-unset-key (kbd "M-<down-mouse-1>"))
+  (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click))
 
 (use-package expand-region
   :commands (er/expand-region)

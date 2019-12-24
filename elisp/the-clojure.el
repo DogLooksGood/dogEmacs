@@ -42,7 +42,7 @@
   :bind
   (:map clojure-mode-map
         ("C-c C-i" . 'cider-inspect-last-result)
-        ("C-#" . 'user/clojure-hash-comment))
+        ("C-'" . 'user/clojure-hash-comment))
   :init
   (setq clojure-toplevel-inside-comment-form t)
   :config
@@ -93,7 +93,8 @@
   (setq cider-font-lock-dynamically t
         cider-font-lock-reader-conditionals t
         cider-prompt-for-symbol nil
-        cider-enhanced-cljs-completion-p nil))
+        cider-enhanced-cljs-completion-p nil)
+  (setq-default cider-cljs-repl-type 'shadow))
 
 (defun user/fulcro-destructing-to-keys (text)
   "text is like {:keys [] :as props}"

@@ -20,10 +20,4 @@
   ("C-x C-h" . 'counsel-imenu)
   ("C-x C-b" . 'counsel-ibuffer))
 
-(use-package swiper
-  :commands (swiper)
-  :ensure t
-  :bind
-  ("C-/" . swiper))
-
 (provide 'the-ivy)

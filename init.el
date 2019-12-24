@@ -48,6 +48,7 @@
 (require 'the-html)
 (require 'the-window)
 (require 'the-edit)
+(require 'the-nav)
 (require 'the-project)
 (require 'the-visual)
 (require 'the-eshell)

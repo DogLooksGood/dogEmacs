@@ -39,6 +39,8 @@
 
 (defun user/insert-mode ()
   (interactive)
+  (when (region-active-p)
+    (call-interactively #'delete-region))
   (when god-local-mode
     (god-local-mode -1)))
 
@@ -64,9 +66,12 @@
 
 (defun user/should-use-god-mode-p ()
   (or (equal major-mode 'fundamental-mode)
-      (derived-mode-p 'conf-mode)
-      (derived-mode-p 'text-mode)
-      (derived-mode-p 'prog-mode)))
+      (derived-mode-p 'conf-mode 'text-mode 'prog-mode)))
+
+(defun user/god-mode ()
+  (interactive)
+  (unless god-local-mode
+    (god-local-mode 1)))
 
 (defun user/escape ()
   (interactive)
@@ -74,7 +79,7 @@
    ((not (user/should-use-god-mode-p))
     (mode-line-other-buffer))
    ((not (equal 1 (mc/num-cursors)))
-    (call-interactively #'mc/keyboard-quit))
+    (god-local-mode 1))
    ((region-active-p)
     (call-interactively #'keyboard-escape-quit))
    (god-local-mode
@@ -108,7 +113,6 @@ Use this function on `after-change-major-mode-hook'. "
    ("<escape>" . 'keyboard-escape-quit)
    :map
    god-local-mode-map
-   ("<escape>" . 'user/escape)
    ("<tab>" . 'user/normal-tab)
    ("i" . 'user/insert-mode)
    ("u" . 'undo)
@@ -117,6 +121,7 @@ Use this function on `after-change-major-mode-hook'. "
    ("w" . 'user/active-region-or-kill-region)
    ("*" . 'point-to-register)
    ("@" . 'register-to-point)
+   ("s" . 'save-buffer)
    ;; navigation
    ("r" . 'up-list)
    ("f" . 'forward-sexp)
@@ -127,7 +132,6 @@ Use this function on `after-change-major-mode-hook'. "
    ("{" . 'scroll-down-command)
    ("[" . 'beginning-of-buffer)
    ("]" . 'end-of-buffer))
-  ("s" . 'user/seek-sexp)
   :init
   (advice-add 'god-local-mode :around #'user/make-silent)
   (add-hook 'after-change-major-mode-hook 'user/maybe-god-mode)

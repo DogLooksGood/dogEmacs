@@ -22,6 +22,8 @@ Otherwise will insert a singlequote."
       '(rust-mode go-mode java-mode)
     (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET")))))
 
+(use-package flycheck)
+
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :init

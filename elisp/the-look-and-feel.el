@@ -17,7 +17,7 @@
 (progn
   (defun user/set-font (&rest args)
     (when (display-graphic-p)
-      (set-frame-font "meslo lg l 9" t t)
+      (set-frame-font "meslo lg m 9" t t)
       (dolist (charset '(kana han symbol cjk-misc bopomofo))
         (set-fontset-font (frame-parameter nil 'font)
                           charset
@@ -34,9 +34,18 @@
  '(yas-field-highlight-face ((t :box "#777")))
  '(form-feed-line ((t :strike-through "#666"))))
 
-(use-package atom-one-dark-theme)
-(use-package nimbus-theme)
-(use-package leuven-theme)
+;; (use-package doom-themes
+;;   :init
+;;   (load-theme 'doom-gruvbox t))
+
+;; (use-package kaolin-themes
+;;   :init
+;;   (load-theme 'kaolin-ocean t))
+
+;; (use-package leuven-theme
+;;   :init
+;;   (load-theme 'leuven t))
+
 (use-package zenburn-theme
   :init
   (load-theme 'zenburn t))

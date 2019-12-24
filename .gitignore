@@ -7,3 +7,6 @@ snippets
 transient
 auto-save-list
 tramp
+.lsp-session*
+eshell/history
+eshell/lastdir

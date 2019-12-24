@@ -111,11 +111,13 @@
         ""
       proj-name)))
 
-(setq-default frame-title-format '((:eval (user/project-name))
+(setq-default frame-title-format '("["
+                                   (:eval (user/project-name))
                                    (:eval
                                     (when vc-mode
                                       (replace-regexp-in-string "^ Git" " " vc-mode)))
-                                   " %b%* %e [%m]"))
+                                   "]"
+                                   " %b%* %e <%m>"))
 
 (setq-default cursor-type 'box)
 (blink-cursor-mode -1)
@@ -136,12 +138,10 @@
     (setq buffer-offer-save t)
     $buf))
 
-(bind-key "C-M-SPC" 'save-buffer)
 (bind-key "C-S-U" 'browse-url-at-point)
 (bind-key "C-S-P" 'proced)
 (bind-key "<XF86Copy>" 'kill-ring-save)
 (bind-key "<XF86Paste>" 'yank)
 (bind-key "C-x C-n" 'user/new-buffer)
-(bind-key "<escape>" 'mode-line-other-buffer)
 
 (provide 'the-global)
