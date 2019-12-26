@@ -1,28 +1,17 @@
-(defun user/tab ()
-  (interactive)
-  (cond
-   ((region-active-p)
-    (call-interactively 'indent-region))
-   ((string-match-p "^[ \t]*$"
-                    (buffer-substring-no-properties
-                     (line-beginning-position)
-                     (point)))
-    (call-interactively #'indent-for-tab-command))
-   ((nth 3 (syntax-ppss))
-    (paredit-forward-up))
-   (t
-    (company-complete-common-or-cycle))))
-
 (use-package company
   :ensure t
   :bind
-  (("<tab>" . 'user/tab)
+  (:map company-mode-map
+   ("<tab>" . 'user/insert-tab)
    :map company-active-map
    ("}" . 'company-select-next)
    ("{" . 'company-select-previous)
    ("<escape>" . 'company-abort))
   :init
-  (setq company-idle-delay nil)
+  (setq company-idle-delay 1
+        company-dabbrev-downcase nil
+        company-abort-manual-when-too-short t
+        company-require-match nil)
   (global-company-mode 1))
 
 (provide 'the-completion)

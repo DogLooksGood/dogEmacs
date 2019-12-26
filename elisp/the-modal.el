@@ -127,7 +127,7 @@ Use this function on `after-change-major-mode-hook'. "
    ("*" . 'point-to-register)
    ("@" . 'register-to-point)
    ("s" . 'save-buffer)
-   ("q" . 'user/delete-window-or-change-buffer)
+   ("q" . 'user/delete-window-or-switch-buffer)
    ("\\" . 'split-window-right)
    ("-" . 'split-window-below)
    ("'" . 'delete-other-windows)
@@ -142,6 +142,7 @@ Use this function on `after-change-major-mode-hook'. "
    ("[" . 'beginning-of-buffer)
    ("]" . 'end-of-buffer))
   :init
+  ;; don't display the mode enable/disable message.
   (advice-add 'god-local-mode :around #'user/make-silent)
   (add-hook 'after-change-major-mode-hook 'user/maybe-god-mode)
   (add-hook 'god-mode-enabled-hook 'user/update-cursor-shape)

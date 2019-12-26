@@ -122,7 +122,7 @@
 (setq-default cursor-type 'box)
 (blink-cursor-mode -1)
 
-(defun user/delete-window-or-change-buffer ()
+(defun user/delete-window-or-switch-buffer ()
   "delete window, if failed, try switch to buffer."
   (interactive)
   (let ((buf (current-buffer)))
