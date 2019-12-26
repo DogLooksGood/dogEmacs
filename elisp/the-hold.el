@@ -48,14 +48,3 @@
 (add-hook 'post-self-insert-hook 'user/after-self-insert)
 
 (provide 'the-hold)
-
-
-
-
-
-
-
-
-
-
-(provide 'the-hold)
