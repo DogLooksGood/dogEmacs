@@ -60,5 +60,6 @@
 (require 'the-latex)
 ;; (require 'the-ebook)
 (require 'the-tab)
+(require 'the-hold)
 (require 'the-docker)
 (require 'the-server)

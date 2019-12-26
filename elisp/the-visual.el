@@ -16,6 +16,7 @@
 ;; Highlight current line.
 (add-hook 'prog-mode-hook 'hl-line-mode)
 (add-hook 'conf-mode-hook 'hl-line-mode)
+(add-hook 'text-mode-hook 'hl-line-mode)
 
 (use-package highlight-symbol
   :bind

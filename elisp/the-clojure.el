@@ -81,15 +81,13 @@
    ("C-c C-n" . 'cider-ns-map)
    :map
    cider-repl-mode-map
-   ("(" . 'paredit-open-round)
-   (")" . 'paredit-close-round)
-   ("[" . 'paredit-open-square)
-   ("]" . 'paredit-close-square)
+   (";" . 'ace-window)
    ("<backspace>" . 'paredit-backward-delete))
   :config
   (unbind-key "M-." cider-mode-map)
   :init
   (add-hook 'cider--debug-mode-hook 'user/insert-mode)
+  (add-hook 'cider-repl-mode-hook 'smartparens-mode)
   (setq cider-font-lock-dynamically t
         cider-font-lock-reader-conditionals t
         cider-prompt-for-symbol nil

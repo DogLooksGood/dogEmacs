@@ -24,7 +24,6 @@ otherwise will insert a colon."
   (unbind-key "M-q" paredit-mode-map)
   :init
   (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
-  (add-hook 'clojure-mode-hook #'paredit-mode)
-  (add-hook 'cider-repl-mode-hook #'paredit-mode))
+  (add-hook 'clojure-mode-hook #'paredit-mode))
 
 (provide 'the-lisp)

@@ -26,6 +26,7 @@
                  paredit-backward-down
                  transpose-sexps
                  user/escape
+                 user/yank-on-region
                  delete-backward-char)))
     (mapcar (lambda (r) (add-to-list 'mc/cmds-to-run-for-all r))
             rules)))

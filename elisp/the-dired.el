@@ -16,7 +16,7 @@
 
 (use-package dired-sidebar
   :bind
-  (("C-S-T" . 'dired-sidebar-toggle-sidebar)
+  (("C-M-S" . 'dired-sidebar-toggle-sidebar)
    :map
    dired-sidebar-mode-map
    ("{" . 'scroll-down-command)

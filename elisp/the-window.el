@@ -2,7 +2,7 @@
   :ensure t
   :commands (ace-window)
   :bind
-  (("<M-tab>" . ace-window))
+  (("C-;" . ace-window))
   :init
   (setq aw-ignore-on nil)
   (setq aw-scope 'frame)
@@ -10,6 +10,7 @@
   (setq aw-keys '(?d ?h ?t ?n ?s)))
 
 (progn
+  (bind-key ";" 'ace-window special-mode-map)
   (bind-key "\\" 'split-window-right special-mode-map)
   (bind-key "'" 'delete-other-windows special-mode-map)
   (bind-key "q" 'delete-window special-mode-map)

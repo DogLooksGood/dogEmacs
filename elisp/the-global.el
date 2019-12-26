@@ -3,57 +3,57 @@
 (global-set-key (kbd "<mouse-3>") 'newline)
 
 ;; Better Defaults
-(setq inhibit-x-resources t
-      ;; inhibit-splash-screen t
-      ;; inhibit-startup-screen t
-      initial-scratch-message ""
-      ;; Don't highlight line when buffer is inactive
-      hl-line-sticky-flag nil
-      ;; Prefer horizental split
-      split-height-threshold nil
-      split-width-threshold 120
-      ;; Don't create lockfiles
-      create-lockfiles nil
-      ;; UTF-8
-      buffer-file-coding-system 'utf-8-unix
-      default-file-name-coding-system 'utf-8-unix
-      default-keyboard-coding-system 'utf-8-unix
-      default-process-coding-system '(utf-8-unix . utf-8-unix)
-      default-sendmail-coding-system 'utf-8-unix
-      default-terminal-coding-system 'utf-8-unix
-      ;; Add final newline
-      require-final-newline t
-      ;; Larger GC threshold
-      gc-cons-threshold (* 100 1024 1024)
-      ;; Backup setups
-      backup-directory-alist `((".*" . ,temporary-file-directory))
-      auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
-      backup-by-copying t
-      delete-old-versions t
-      kept-new-versions 6
-      kept-old-versions 2
-      version-control t
-      ;; Xref no prompt
-      xref-prompt-for-identifier nil
-      ;; Mouse yank at point instead of click position.
-      mouse-yank-at-point t
-      ;; This fix the cursor movement lag
-      auto-window-vscroll nil
-      ;; Only display cursor in current window.
-      cursor-in-non-selected-windows nil
-      ;; Window divider setup
-      window-divider-default-right-width 1
-      window-divider-default-bottom-width 1
-      window-divider-default-places t
-      ;; Don't wait for keystrokes display
-      echo-keystrokes 0
-      show-paren-style 'parenthese
-      ;; Overline no margin
-      overline-margin 0)
-
-;; Don't indent with tab
-(setq-default indent-tabs-mode nil
-              tab-width 4)
+(setq-default
+ inhibit-x-resources t
+ ;; inhibit-splash-screen t
+ ;; inhibit-startup-screen t
+ initial-scratch-message ""
+ ;; Don't highlight line when buffer is inactive
+ hl-line-sticky-flag nil
+ ;; Prefer horizental split
+ split-height-threshold nil
+ split-width-threshold 120
+ ;; Don't create lockfiles
+ create-lockfiles nil
+ ;; UTF-8
+ buffer-file-coding-system 'utf-8-unix
+ default-file-name-coding-system 'utf-8-unix
+ default-keyboard-coding-system 'utf-8-unix
+ default-process-coding-system '(utf-8-unix . utf-8-unix)
+ default-sendmail-coding-system 'utf-8-unix
+ default-terminal-coding-system 'utf-8-unix
+ ;; Add final newline
+ require-final-newline t
+ ;; Larger GC threshold
+ gc-cons-threshold (* 100 1024 1024)
+ ;; Backup setups
+ backup-directory-alist `((".*" . ,temporary-file-directory))
+ auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
+ backup-by-copying t
+ delete-old-versions t
+ kept-new-versions 6
+ kept-old-versions 2
+ version-control t
+ ;; Xref no prompt
+ xref-prompt-for-identifier nil
+ ;; Mouse yank at point instead of click position.
+ mouse-yank-at-point t
+ ;; This fix the cursor movement lag
+ auto-window-vscroll nil
+ ;; Window divider setup
+ window-divider-default-right-width 1
+ window-divider-default-bottom-width 1
+ window-divider-default-places t
+ ;; Don't wait for keystrokes display
+ echo-keystrokes 0
+ show-paren-style 'parenthese
+ ;; Overline no margin
+ overline-margin 0
+ ;; Default use tab for indentation.
+ indent-tabs-mode nil
+ tab-width 4
+ ;; Don't show cursor in non selected window.
+ cursor-in-non-selected-windows nil)
 
 (prefer-coding-system 'utf-8)
 

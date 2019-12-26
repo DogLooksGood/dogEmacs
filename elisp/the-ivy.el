@@ -6,6 +6,8 @@
    ("<escape>" . 'keyboard-escape-quit)
    ("{" . 'ivy-previous-line)
    ("}" . 'ivy-next-line)
+   ("[" . 'ivy-previous-history-element)
+   ("]" . 'ivy-next-history-element)
    ("<mouse-3>". 'ivy-done)
    ("<tab>" . 'ivy-alt-done))
   :init

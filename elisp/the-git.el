@@ -1,7 +1,7 @@
 (use-package magit
   :commands (magit-status)
   :bind
-  ("C-S-G" . 'magit-status))
+  ("C-M-G" . 'magit-status))
 
 (use-package diff-hl
   :init

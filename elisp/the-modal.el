@@ -108,7 +108,6 @@ Use this function on `after-change-major-mode-hook'. "
    ("M-g" . 'goto-line)
    ("<M-escape>" . 'kill-buffer-and-window)
    ("C-$" . 'shell-command)
-   ("C-;" . 'comment-dwim)
    ("C-=" . 'align-regexp)
    ("C-." . 'xref-find-definitions)
    ("C-!" . 'eval-expression)
@@ -155,5 +154,7 @@ Use this function on `after-change-major-mode-hook'. "
   (setq god-literal-key "SPC"))
 
 (unbind-key "C-x C-g")
+
+
 
 (provide 'the-modal)

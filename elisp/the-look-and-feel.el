@@ -4,10 +4,10 @@
 ;; Transparency Setup
 (progn
   (defun user/set-alpha (&rest args)
-    (let ((alpha 100))
+    (let ((alpha (or (car args) 100)))
       (set-frame-parameter (selected-frame) 'alpha (cons alpha alpha))))
 
-  (user/set-alpha))
+  (user/set-alpha 100))
 
 ;;; Font Setup
 
@@ -34,9 +34,9 @@
  '(yas-field-highlight-face ((t :box "#777")))
  '(form-feed-line ((t :strike-through "#666"))))
 
-(use-package atom-one-dark-theme
-  :init
-  (load-theme 'atom-one-dark t))
+;; (use-package atom-one-dark-theme
+;;   :init
+;;   (load-theme 'atom-one-dark t))
 
 ;; (use-package doom-themes
 ;;   :init
@@ -50,9 +50,9 @@
 ;;   :init
 ;;   (load-theme 'leuven t))
 
-;; (use-package zenburn-theme
-;;   :init
-;;   (load-theme 'zenburn t))
+(use-package zenburn-theme
+  :init
+  (load-theme 'zenburn t))
 
 ;;; Mode Line Setup
 
