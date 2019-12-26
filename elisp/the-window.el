@@ -14,7 +14,7 @@
   (bind-key ";" 'ace-window special-mode-map)
   (bind-key "\\" 'split-window-right special-mode-map)
   (bind-key "'" 'delete-other-windows special-mode-map)
-  (bind-key "q" 'delete-window special-mode-map)
+  (bind-key "q" 'user/delete-window-or-change-buffer special-mode-map)
   (bind-key "-" 'split-window-below special-mode-map))
 
 (provide 'the-window)

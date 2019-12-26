@@ -127,7 +127,7 @@ Use this function on `after-change-major-mode-hook'. "
    ("*" . 'point-to-register)
    ("@" . 'register-to-point)
    ("s" . 'save-buffer)
-   ("q" . 'delete-window)
+   ("q" . 'user/delete-window-or-change-buffer)
    ("\\" . 'split-window-right)
    ("-" . 'split-window-below)
    ("'" . 'delete-other-windows)
