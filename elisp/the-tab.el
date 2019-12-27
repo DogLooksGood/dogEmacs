@@ -16,11 +16,14 @@
     (company-complete-common-or-cycle))))
 
 (defun user/normal-tab ()
-  "Indent the current line or region, or toggle hideshow."
+  "Indent the current line or region, or toggle hideshow.
+org-cycle in org-mode"
   (interactive)
   (cond
    ((use-region-p)
     (indent-region (region-beginning) (region-end)))
+   ((derived-mode-p 'org-mode)
+    (org-cycle))
    ((memq indent-line-function
           '(indent-relative indent-relative-maybe))
     (hs-toggle-hiding))

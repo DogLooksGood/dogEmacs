@@ -1,6 +1,6 @@
 ;; Relative line number
 
-(bind-key "C-S-L" 'display-line-numbers-mode)
+(bind-key "C-M-L" 'display-line-numbers-mode)
 
 (defun user/update-line-number-relative ()
   (when display-line-numbers
@@ -17,15 +17,6 @@
 (add-hook 'prog-mode-hook 'hl-line-mode)
 (add-hook 'conf-mode-hook 'hl-line-mode)
 (add-hook 'text-mode-hook 'hl-line-mode)
-
-(use-package highlight-symbol
-  :bind
-  (("M-n" . 'highlight-symbol-next)
-   ("M-p" . 'highlight-symbol-prev))
-  :init
-  (setq highlight-symbol-idle-delay 0.2)
-  (setq highlight-symbol-highlight-single-occurrence nil)
-  (add-hook 'prog-mode-hook 'highlight-symbol-mode))
 
 (use-package hideshow
   :bind

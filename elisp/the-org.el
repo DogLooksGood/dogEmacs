@@ -3,6 +3,8 @@
 
 (use-package org
   :commands (org-mode)
+  :bind
+  ("C-<tab>" . org-cycle)
   :config
   (unbind-key "M-h" org-mode-map)
   (unbind-key "M-a" org-mode-map)

@@ -73,6 +73,33 @@
   (unless god-local-mode
     (god-local-mode 1)))
 
+(defvar user/last-scroll-behavior nil
+  "Last behavior when we do scroll.")
+
+(defun user/scroll-page ()
+  (interactive)
+  (unless
+      (or (equal last-command 'user/scroll-page)
+          (equal last-command 'user/reverse-scroll-page))
+    (setq user/last-scroll-behavior nil))
+  (case user/last-scroll-behavior
+    ('up (scroll-up))
+    ('down (scroll-down))
+    (t (scroll-up)
+       (setq user/last-scroll-behavior 'up))))
+
+(defun user/reverse-scroll-page ()
+  (interactive)
+  (unless (equal last-command 'user/scroll-page)
+    (setq user/last-scroll-behavior nil))
+  (if (equal user/last-scroll-behavior 'down)
+      (progn
+        (scroll-up)
+        (setq user/last-scroll-behavior 'up))
+    (progn
+      (scroll-down)
+      (setq user/last-scroll-behavior 'down))))
+
 (defun user/escape ()
   (interactive)
   (cond
@@ -112,13 +139,15 @@ Use this function on `after-change-major-mode-hook'. "
    ("C-." . 'xref-find-definitions)
    ("C-!" . 'eval-expression)
    ("C-," . 'xref-pop-marker-stack)
+   ("C-v" . 'user/scroll-page)
+   ("M-v" . 'user/reverse-scroll-page)
    :map
    minibuffer-local-map
    ("<escape>" . 'keyboard-escape-quit)
    :map
    god-local-mode-map
-   ("<escape>" . 'user/escape)
    ("<tab>" . 'user/normal-tab)
+   ("<escape>" . 'user/escape)
    ("i" . 'user/insert-mode)
    ("u" . 'undo)
    ("j" . 'join-line)
@@ -131,14 +160,12 @@ Use this function on `after-change-major-mode-hook'. "
    ("\\" . 'split-window-right)
    ("-" . 'split-window-below)
    ("'" . 'delete-other-windows)
+   ("r" . 'repeat)
    ;; navigation
-   ("r" . 'up-list)
    ("f" . 'forward-sexp)
    ("b" . 'backward-sexp)
    ("h" . 'left-char)
    ("t" . 'right-char)
-   ("}" . 'scroll-up-command)
-   ("{" . 'scroll-down-command)
    ("[" . 'beginning-of-buffer)
    ("]" . 'end-of-buffer))
   :init
@@ -155,7 +182,5 @@ Use this function on `after-change-major-mode-hook'. "
   (setq god-literal-key "SPC"))
 
 (unbind-key "C-x C-g")
-
-
 
 (provide 'the-modal)

@@ -34,25 +34,9 @@
  '(yas-field-highlight-face ((t :box "#777")))
  '(form-feed-line ((t :strike-through "#666"))))
 
-;; (use-package atom-one-dark-theme
-;;   :init
-;;   (load-theme 'atom-one-dark t))
-
-;; (use-package doom-themes
-;;   :init
-;;   (load-theme 'doom-gruvbox t))
-
-;; (use-package kaolin-themes
-;;   :init
-;;   (load-theme 'kaolin-ocean t))
-
-;; (use-package leuven-theme
-;;   :init
-;;   (load-theme 'leuven t))
-
-(use-package zenburn-theme
+(use-package doom-themes
   :init
-  (load-theme 'zenburn t))
+  (load-theme 'doom-gruvbox t))
 
 ;;; Mode Line Setup
 

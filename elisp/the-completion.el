@@ -8,7 +8,7 @@
    ("{" . 'company-select-previous)
    ("<escape>" . 'company-abort))
   :init
-  (setq company-idle-delay 1
+  (setq company-idle-delay nil
         company-dabbrev-downcase nil
         company-abort-manual-when-too-short t
         company-require-match nil)

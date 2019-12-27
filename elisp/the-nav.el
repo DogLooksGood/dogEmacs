@@ -1,5 +1,14 @@
 ;;; packages for NAV
 
+(use-package highlight-symbol
+  :bind
+  (("C-}" . 'highlight-symbol-next)
+   ("C-{" . 'highlight-symbol-prev))
+  :init
+  (setq highlight-symbol-idle-delay 0.2)
+  (setq highlight-symbol-highlight-single-occurrence nil)
+  (add-hook 'prog-mode-hook 'highlight-symbol-mode))
+
 (use-package avy
   :bind
   ("C-M-SPC" . 'avy-goto-word-or-subword-1)

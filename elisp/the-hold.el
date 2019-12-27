@@ -3,6 +3,7 @@
 (defvar user/count-same-key 0)
 (defvar user/upcase-trigger-count 3)
 (defvar user/upcase-max-interval 0.16)
+(defvar user/upcase-mc-count 0)
 
 (defun user/upcase-previous-char ()
   (let ((ch (char-before)))
@@ -32,16 +33,24 @@
            (time-less-p (current-time)
                         (time-add user/last-self-insert-time
                                   user/upcase-max-interval)))
-      (progn
+      (let* ((mc-count (progn
+                         (when (< user/upcase-mc-count (mc/num-cursors))
+                           (setq user/upcase-mc-count (mc/num-cursors)))
+                         user/upcase-mc-count))
+             (cnt-max (* mc-count user/upcase-trigger-count))
+             (cnt-min (- cnt-max mc-count)))
         (setq user/count-same-key (1+ user/count-same-key))
         (cond
-         ((> user/count-same-key user/upcase-trigger-count)
+         ((> user/count-same-key cnt-max)
           (delete-char -1))
 
-         ((= user/count-same-key user/upcase-trigger-count)
+         ((and
+           (> user/count-same-key cnt-min)
+           (<= user/count-same-key cnt-max))
           (backward-delete-char (1- user/upcase-trigger-count))
           (user/upcase-previous-char))))
-    (setq user/count-same-key 1))
+    (setq user/count-same-key 1
+          user/upcase-mc-count 0))
   (setq user/last-self-insert-char last-input-event
         user/last-self-insert-time (current-time)))
 
