@@ -1,8 +1,11 @@
+;;; We can INSERT UPPERCASE without SHIFT
+
 (defvar user/last-self-insert-char nil)
 (defvar user/last-self-insert-time nil)
 (defvar user/count-same-key 0)
 (defvar user/upcase-trigger-count 3)
-(defvar user/upcase-max-interval 0.16)
+(defvar user/upcase-delay-interval 0.16)
+(defvar user/upcase-repeat-interval 0.03)
 (defvar user/upcase-mc-count 0)
 
 (defun user/upcase-previous-char ()
@@ -32,7 +35,9 @@
            ;; in a short duration
            (time-less-p (current-time)
                         (time-add user/last-self-insert-time
-                                  user/upcase-max-interval)))
+                                  (if (> user/count-same-key 1)
+                                      user/upcase-repeat-interval
+                                    user/upcase-delay-interval))))
       (let* ((mc-count (progn
                          (when (< user/upcase-mc-count (mc/num-cursors))
                            (setq user/upcase-mc-count (mc/num-cursors)))
