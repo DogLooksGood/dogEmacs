@@ -88,6 +88,7 @@
   :init
   (add-hook 'cider--debug-mode-hook 'user/insert-mode)
   (add-hook 'cider-repl-mode-hook 'smartparens-mode)
+  (add-to-list 'user/god-mode-enable-mode-list 'cider-repl-mode)
   (setq cider-font-lock-dynamically t
         cider-font-lock-reader-conditionals t
         cider-prompt-for-symbol nil

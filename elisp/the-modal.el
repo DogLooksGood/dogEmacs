@@ -1,3 +1,9 @@
+(defvar user/god-mode-enable-mode-list nil
+  "A list of mode besides prog, conf, text, fundamental, those we should enable god-mode. ")
+
+(defvar user/last-scroll-behavior nil
+  "Last behavior when we do scroll.")
+
 (defun user/update-cursor-shape ()
   (cond
    (god-local-mode
@@ -65,16 +71,14 @@
     (call-interactively #'set-mark-command)))
 
 (defun user/should-use-god-mode-p ()
-  (or (equal major-mode 'fundamental-mode)
+  (or (member major-mode user/god-mode-enable-mode-list)
+      (equal major-mode 'fundamental-mode)
       (derived-mode-p 'conf-mode 'text-mode 'prog-mode)))
 
 (defun user/god-mode ()
   (interactive)
   (unless god-local-mode
     (god-local-mode 1)))
-
-(defvar user/last-scroll-behavior nil
-  "Last behavior when we do scroll.")
 
 (defun user/scroll-page ()
   (interactive)
