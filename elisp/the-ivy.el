@@ -20,6 +20,7 @@
   ("C-x C-f" . 'counsel-find-file)
   ("<C-escape>" . 'counsel-switch-buffer)
   ("C-? C-f" . 'counsel-describe-function)
+  ("C-x C-r" . 'counsel-register)
   ("C-x C-h" . 'counsel-imenu)
   ("C-x C-b" . 'counsel-ibuffer))
 

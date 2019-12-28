@@ -32,6 +32,13 @@
   (god-local-mode -1)
   (setq-local cursor-type '(hbar . 4)))
 
+(defun user/yas-init ()
+  (yas-reload-all)
+  (add-hook 'yas/before-expand-snippet-hook 'user/yas-start)
+  (add-hook 'yas/after-exit-snippet-hook 'user/update-cursor-shape))
+
+(advice-add 'user/yas-init :around #'user/make-silent)
+
 (use-package yasnippet
   :bind
   (:map
@@ -41,9 +48,7 @@
    ("M-<return>" . 'newline-and-indent)
    ("S-<return>" . 'yas-prev-field))
   :config
-  (yas-reload-all)
-  (add-hook 'yas/before-expand-snippet-hook 'user/yas-start)
-  (add-hook 'yas/after-exit-snippet-hook 'user/update-cursor-shape)
+  (user/yas-init)
   (unbind-key "<tab>" yas-keymap)
   (unbind-key "S-<tab>" yas-keymap)
   :init

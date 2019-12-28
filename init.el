@@ -35,6 +35,7 @@
 (require 'the-global)
 (require 'the-git)
 (require 'the-ivy)
+(require 'the-register)
 (require 'the-prog)
 (require 'the-completion)
 (require 'the-lisp)

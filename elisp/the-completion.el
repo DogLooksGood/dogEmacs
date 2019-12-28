@@ -11,7 +11,8 @@
   (setq company-idle-delay nil
         company-dabbrev-downcase nil
         company-abort-manual-when-too-short t
-        company-require-match nil)
+        company-require-match nil
+        company-global-modes '(not dired-mode dired-sidebar-mode))
   (global-company-mode 1))
 
 (provide 'the-completion)

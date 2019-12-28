@@ -81,7 +81,6 @@
    ("C-c C-n" . 'cider-ns-map)
    :map
    cider-repl-mode-map
-   (";" . 'ace-window)
    ("<backspace>" . 'paredit-backward-delete))
   :config
   (unbind-key "M-." cider-mode-map)

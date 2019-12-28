@@ -72,7 +72,7 @@
 (show-paren-mode 1)
 
 ;; Add internal margin
-(add-to-list 'default-frame-alist '(internal-border-width . 30))
+(add-to-list 'default-frame-alist '(internal-border-width . 50))
 
 ;; Always use dir-locals.
 (defun safe-local-variable-p (sym val) t)
@@ -148,10 +148,18 @@
     (setq buffer-offer-save t)
     $buf))
 
+(defvar user/god-mode-enable-mode-list nil
+  "A list of mode besides prog, conf, text, fundamental, those we should enable god-mode. ")
+
+(defun user/make-silent (func &rest args)
+  (cl-letf (((symbol-function 'message)
+             (lambda (&rest args) nil)))
+    (apply func args)))
+
 (bind-key "C-S-U" 'browse-url-at-point)
 (bind-key "C-S-P" 'proced)
+(bind-key "C-x C-n" 'user/new-buffer)
 (bind-key "<XF86Copy>" 'kill-ring-save)
 (bind-key "<XF86Paste>" 'yank)
-(bind-key "C-x C-n" 'user/new-buffer)
 
 (provide 'the-global)

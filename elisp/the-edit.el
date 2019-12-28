@@ -5,41 +5,19 @@
                  repeat
                  keyboard-escape-quit)))
     (mapcar (lambda (r) (add-to-list 'mc/cmds-to-run-once r))
-            rules))
-  (let ((rules '(user/singlequote
-                 user/lisp-semicolon
-                 user/rust-minus
-                 user/rust-semicolon
-                 user/rust-lessthan
-                 user/rust-whitespace
-                 cljr-slash
-                 sp-kill-hybrid-sexp
-                 forward-sexp
-                 backward-sexp
-                 paredit-kill
-                 paredit-raise-sexp
-                 paredit-forward-slurp-sexp
-                 paredit-forward-barf-sexp
-                 paredit-forward-up
-                 paredit-backward-up
-                 paredit-forward-down
-                 paredit-backward-down
-                 transpose-sexps
-                 user/escape
-                 user/yank-on-region
-                 delete-backward-char)))
-    (mapcar (lambda (r) (add-to-list 'mc/cmds-to-run-for-all r))
             rules)))
 
 (use-package multiple-cursors
   :commands (mc/mark-next-like-this)
   :bind
-  (("C->" . 'mc/mark-next-like-this)
-   ("C-<" . 'mc/skip-to-next-like-this))
+  (("C-v" . 'mc/mark-next-like-this)
+   ("M-v" . 'mc/skip-to-next-like-this)
+   :map selected-keymap
+   ("C-v" . 'mc/mark-all-in-region-regexp))
   :config
   (user/set-mc-rules)
   :init
-  (setq mc/always-run-for-all nil)
+  (setq mc/always-run-for-all t)
   (multiple-cursors-mode 1)
   (global-unset-key (kbd "M-<down-mouse-1>"))
   (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click))
@@ -64,7 +42,7 @@
           (?F filename       "\n")
           (?d defun          "\n\n")
           (?u defun-name     " ")
-          (?L line           "\n")
+          (?m line           "\n")
           (?B buffer-file-name))))
 
 (use-package anzu

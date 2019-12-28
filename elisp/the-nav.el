@@ -2,8 +2,8 @@
 
 (use-package highlight-symbol
   :bind
-  (("C-}" . 'highlight-symbol-next)
-   ("C-{" . 'highlight-symbol-prev))
+  (("M-n" . 'highlight-symbol-next)
+   ("M-p" . 'highlight-symbol-prev))
   :init
   (setq highlight-symbol-idle-delay 0.2)
   (setq highlight-symbol-highlight-single-occurrence nil)

@@ -1,6 +1,3 @@
-(defvar user/god-mode-enable-mode-list nil
-  "A list of mode besides prog, conf, text, fundamental, those we should enable god-mode. ")
-
 (defvar user/last-scroll-behavior nil
   "Last behavior when we do scroll.")
 
@@ -32,11 +29,6 @@
         ("C-y" . 'user/yank-on-region))
   :init
   (selected-global-mode 1))
-
-(defun user/make-silent (func &rest args)
-  (cl-letf (((symbol-function 'message)
-             (lambda (&rest args) nil)))
-    (apply func args)))
 
 (defun user/insert-after ()
   (interactive)
@@ -80,30 +72,6 @@
   (unless god-local-mode
     (god-local-mode 1)))
 
-(defun user/scroll-page ()
-  (interactive)
-  (unless
-      (or (equal last-command 'user/scroll-page)
-          (equal last-command 'user/reverse-scroll-page))
-    (setq user/last-scroll-behavior nil))
-  (case user/last-scroll-behavior
-    ('up (scroll-up))
-    ('down (scroll-down))
-    (t (scroll-up)
-       (setq user/last-scroll-behavior 'up))))
-
-(defun user/reverse-scroll-page ()
-  (interactive)
-  (unless (equal last-command 'user/scroll-page)
-    (setq user/last-scroll-behavior nil))
-  (if (equal user/last-scroll-behavior 'down)
-      (progn
-        (scroll-up)
-        (setq user/last-scroll-behavior 'up))
-    (progn
-      (scroll-down)
-      (setq user/last-scroll-behavior 'down))))
-
 (defun user/escape ()
   (interactive)
   (cond
@@ -126,6 +94,7 @@ Use this function on `after-change-major-mode-hook'. "
 
 (use-package key-chord
   :init
+  (advice-add 'key-chord-mode :around #'user/make-silent)
   (key-chord-mode 1)
   (key-chord-define-global ",." 'user/escape))
 
@@ -137,14 +106,12 @@ Use this function on `after-change-major-mode-hook'. "
   :bind
   (("<escape>" . 'user/escape)
    ("M-g" . 'goto-line)
+   ("C-x C-k" . 'kill-buffer)
    ("<M-escape>" . 'kill-buffer-and-window)
    ("C-$" . 'shell-command)
-   ("C-=" . 'align-regexp)
    ("C-." . 'xref-find-definitions)
    ("C-!" . 'eval-expression)
    ("C-," . 'xref-pop-marker-stack)
-   ("C-v" . 'user/scroll-page)
-   ("M-v" . 'user/reverse-scroll-page)
    :map
    minibuffer-local-map
    ("<escape>" . 'keyboard-escape-quit)
@@ -157,10 +124,11 @@ Use this function on `after-change-major-mode-hook'. "
    ("j" . 'join-line)
    ("z" . 'universal-argument)
    ("w" . 'user/active-region-or-kill-region)
-   ("*" . 'point-to-register)
+   ("=" . 'align-regexp)
    ("@" . 'register-to-point)
    ("s" . 'save-buffer)
    ("q" . 'user/delete-window-or-switch-buffer)
+   ("Q" . 'kill-buffer-and-window)
    ("\\" . 'split-window-right)
    ("-" . 'split-window-below)
    ("'" . 'delete-other-windows)
@@ -170,6 +138,8 @@ Use this function on `after-change-major-mode-hook'. "
    ("b" . 'backward-sexp)
    ("h" . 'left-char)
    ("t" . 'right-char)
+   ("{" . 'scroll-down)
+   ("}" . 'scroll-up)
    ("[" . 'beginning-of-buffer)
    ("]" . 'end-of-buffer))
   :init
@@ -184,6 +154,9 @@ Use this function on `after-change-major-mode-hook'. "
 	  ("m" . "M-")
       ("SPC" . "C-M-")))
   (setq god-literal-key "SPC"))
+
+(bind-key "{" 'scroll-down special-mode-map)
+(bind-key "}" 'scroll-up special-mode-map)
 
 (unbind-key "C-x C-g")
 
