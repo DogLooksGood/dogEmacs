@@ -20,16 +20,6 @@
   (call-interactively 'yank)
   (deactivate-mark t))
 
-(use-package selected
-  :ensure t
-  :bind
-  (:map selected-keymap
-        ("<escape>" . 'keyboard-escape-quit)
-        ("<backspace>" . 'delete-region)
-        ("C-y" . 'user/yank-on-region))
-  :init
-  (selected-global-mode 1))
-
 (defun user/insert-after ()
   (interactive)
   (forward-char)
@@ -41,6 +31,11 @@
     (call-interactively #'delete-region))
   (when god-local-mode
     (god-local-mode -1)))
+
+(defun user/normal-mode ()
+  (interactive)
+  (unless god-local-mode
+    (god-local-mode 1)))
 
 (defun user/seek-sexp ()
   (interactive)
@@ -75,8 +70,8 @@
 (defun user/escape ()
   (interactive)
   (cond
-   ((not (equal 1 (mc/num-cursors)))
-    (god-local-mode 1))
+   (multiple-cursors-mode
+    (user/normal-mode))
    ((region-active-p)
     (call-interactively #'keyboard-escape-quit))
    ((not (user/should-use-god-mode-p))
@@ -84,7 +79,7 @@
    (god-local-mode
     (mode-line-other-buffer))
    (t
-    (god-local-mode 1))))
+    (user/normal-mode))))
 
 (defun user/maybe-god-mode (&rest args)
   "We want to enable god-mode for every text editting mode.
@@ -159,5 +154,16 @@ Use this function on `after-change-major-mode-hook'. "
 (bind-key "}" 'scroll-up special-mode-map)
 
 (unbind-key "C-x C-g")
+
+(use-package selected
+  :ensure t
+  :bind
+  (:map selected-keymap
+        ("<escape>" . 'keyboard-escape-quit)
+        ("<backspace>" . 'delete-region)
+        (";" . 'comment-region)
+        ("C-y" . 'user/yank-on-region))
+  :init
+  (selected-global-mode 1))
 
 (provide 'the-modal)

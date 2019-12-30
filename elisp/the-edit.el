@@ -1,12 +1,5 @@
 ;;; packages for EDIT
 
-(defun user/set-mc-rules ()
-  (let ((rules '(god-local-mode
-                 repeat
-                 keyboard-escape-quit)))
-    (mapcar (lambda (r) (add-to-list 'mc/cmds-to-run-once r))
-            rules)))
-
 (use-package multiple-cursors
   :commands (mc/mark-next-like-this)
   :bind
@@ -15,7 +8,6 @@
    :map selected-keymap
    ("C-v" . 'mc/mark-all-in-region-regexp))
   :config
-  (user/set-mc-rules)
   :init
   (setq mc/always-run-for-all t)
   (multiple-cursors-mode 1)

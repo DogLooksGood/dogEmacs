@@ -72,7 +72,8 @@
 (show-paren-mode 1)
 
 ;; Add internal margin
-(add-to-list 'default-frame-alist '(internal-border-width . 50))
+(set-frame-parameter (selected-frame) 'internal-border-width 16)
+(add-to-list 'default-frame-alist '(internal-border-width . 16))
 
 ;; Always use dir-locals.
 (defun safe-local-variable-p (sym val) t)
@@ -93,12 +94,14 @@
 (setq custom-file "~/.emacs.d/custom.el")
 
 ;; Only show window divider when there's more than one window.
-(defun user/toggle-window-divider-mode ()
+(defun user/toggle-window-divider-and-border ()
   (if (> (count-windows) 1)
-      (window-divider-mode 1)
-    (window-divider-mode -1)))
+      (progn
+        (window-divider-mode 1))
+    (progn
+      (window-divider-mode -1))))
 
-(add-hook 'window-configuration-change-hook #'user/toggle-window-divider-mode)
+(add-hook 'window-configuration-change-hook #'user/toggle-window-divider-and-border)
 
 ;; Replace all "yes or no" with "y or n".
 (fset 'yes-or-no-p 'y-or-n-p)
