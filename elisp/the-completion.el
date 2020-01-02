@@ -13,6 +13,9 @@
         company-abort-manual-when-too-short t
         company-require-match nil
         company-global-modes '(not dired-mode dired-sidebar-mode))
-  (global-company-mode 1))
+  (add-hook 'prog-mode-hook 'company-mode)
+  (add-hook 'text-mode-hook 'company-mode)
+  (add-hook 'conf-mode-hook 'company-mode)
+  (add-hook 'eshell-mode-hook 'company-mode))
 
 (provide 'the-completion)

@@ -72,6 +72,8 @@
   (cond
    (multiple-cursors-mode
     (user/normal-mode))
+   (iedit-mode
+    (user/normal-mode))
    ((region-active-p)
     (call-interactively #'keyboard-escape-quit))
    ((not (user/should-use-god-mode-p))
@@ -99,11 +101,12 @@ Use this function on `after-change-major-mode-hook'. "
            :fetcher github
            :repo "DogLooksGood/god-mode")
   :bind
-  (("<escape>" . 'user/escape)
+  (("C-M-SPC" . 'set-mark-command)
+   ("<escape>" . 'user/escape)
    ("M-g" . 'goto-line)
    ("C-x C-k" . 'kill-buffer)
+   ("M-i" . 'backward-kill-word)
    ("<M-escape>" . 'kill-buffer-and-window)
-   ("C-$" . 'shell-command)
    ("C-." . 'xref-find-definitions)
    ("C-!" . 'eval-expression)
    ("C-," . 'xref-pop-marker-stack)
@@ -115,19 +118,19 @@ Use this function on `after-change-major-mode-hook'. "
    ("<tab>" . 'user/normal-tab)
    ("<escape>" . 'user/escape)
    ("i" . 'user/insert-mode)
-   ("u" . 'undo)
    ("j" . 'join-line)
-   ("z" . 'universal-argument)
+   ("u" . 'undo)
+   ("r" . 'repeat)
+   ("s" . 'save-buffer)
    ("w" . 'user/active-region-or-kill-region)
    ("=" . 'align-regexp)
-   ("@" . 'register-to-point)
-   ("s" . 'save-buffer)
    ("q" . 'user/delete-window-or-switch-buffer)
    ("Q" . 'kill-buffer-and-window)
    ("\\" . 'split-window-right)
    ("-" . 'split-window-below)
    ("'" . 'delete-other-windows)
-   ("r" . 'repeat)
+   ("A" . 'universal-argument)
+   ("B" . 'negative-argument)
    ;; navigation
    ("f" . 'forward-sexp)
    ("b" . 'backward-sexp)
@@ -161,7 +164,7 @@ Use this function on `after-change-major-mode-hook'. "
   (:map selected-keymap
         ("<escape>" . 'keyboard-escape-quit)
         ("<backspace>" . 'delete-region)
-        (";" . 'comment-region)
+        (";" . 'comment-dwim)
         ("C-y" . 'user/yank-on-region))
   :init
   (selected-global-mode 1))

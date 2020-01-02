@@ -1,4 +1,5 @@
 ;;; Provide a way to continuously insert numbers without hold shift in programmer dvorak layout.
+;;; give up because couldn't find a way to insert numeric prefix.
 
 (use-package hydra
   :init)

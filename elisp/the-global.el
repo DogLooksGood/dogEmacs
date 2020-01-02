@@ -53,7 +53,8 @@
  indent-tabs-mode nil
  tab-width 4
  ;; Don't show cursor in non selected window.
- cursor-in-non-selected-windows nil)
+ cursor-in-non-selected-windows nil
+ comment-empty-lines t)
 
 (prefer-coding-system 'utf-8)
 
@@ -141,7 +142,7 @@
       (call-interactively #'keyboard-escape-quit)
     (mode-line-other-buffer)))
 
-(setq initial-major-mode 'org-mode)
+(setq initial-major-mode 'fundamental-mode)
 
 (defun user/new-buffer ()
   (interactive)

@@ -81,6 +81,7 @@
    ("C-c C-n" . 'cider-ns-map)
    :map
    cider-repl-mode-map
+   ("C-," . 'cider-repl-handle-shortcut)
    ("<backspace>" . 'paredit-backward-delete))
   :config
   (unbind-key "M-." cider-mode-map)
@@ -92,7 +93,7 @@
         cider-font-lock-reader-conditionals t
         cider-prompt-for-symbol nil
         cider-enhanced-cljs-completion-p nil)
-  (setq-default cider-cljs-repl-type 'shadow))
+  (setq-default cider-default-cljs-repl 'shadow))
 
 (defun user/fulcro-destructing-to-keys (text)
   "text is like {:keys [] :as props}"

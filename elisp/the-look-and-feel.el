@@ -2,7 +2,7 @@
 ;;  setup for font, frame alpha and themes.
 
 ;; Transparency Setup
-(progn
+(when (display-graphic-p)
   (defun user/set-alpha (&rest args)
     (let ((alpha (or (car args) 100)))
       (set-frame-parameter (selected-frame) 'alpha (cons alpha alpha))))
@@ -15,16 +15,15 @@
 ;;   | 中英文等宽的字体 |
 ;;   | Mixed mono font  |
 ;; get this script from cnfont
-(progn
-  (defun user/set-font (&rest args)
-    (set-frame-font "roboto mono-9" t t)
-    (when (display-graphic-p)
-      (dolist (charset '(kana han symbol cjk-misc bopomofo))
-        (set-fontset-font
-         (frame-parameter nil 'font)
-         charset
-         (font-spec :family "sarasa term sc" :size 36)))))
 
+(when (display-graphic-p)
+  (defun user/set-font (&rest args)
+    (set-frame-font "monospace-9" t t)
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+      (set-fontset-font
+       (frame-parameter nil 'font)
+       charset
+       (font-spec :family "sarasa term sc" :size 32))))
   (user/set-font))
 
 ;;; Theme Setup
@@ -36,9 +35,10 @@
  '(yas-field-highlight-face ((t :box "#777")))
  '(form-feed-line ((t :strike-through "#666"))))
 
-(use-package nimbus-theme
-  :init
-  (load-theme 'nimbus t))
+(when (display-graphic-p)
+  (use-package zenburn-theme
+    :init
+    (load-theme 'zenburn t)))
 
 ;;; Mode Line Setup
 

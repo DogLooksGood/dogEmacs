@@ -24,7 +24,7 @@
   (("C-o" . 'easy-kill)
    :map
    easy-kill-base-map
-   ("SPC" . 'easy-kill-region)
+   ("k" . 'easy-kill-region)
    ("<backspace>" . 'easy-kill-delete-region))
   :init
   (setq easy-kill-alist
@@ -37,12 +37,11 @@
           (?m line           "\n")
           (?B buffer-file-name))))
 
-(use-package anzu
+(use-package iedit
   :bind
-  ("C-%" . 'anzu-query-replace-regexp)
-  ("M-%" . 'anzu-query-replace)
+  ("C-z" . 'iedit-mode)
   :init
-  (global-anzu-mode))
+  (unbind-key "C-;" global-map))
 
 (use-package rg
   :commands (rg counsel-projectile-rg))
