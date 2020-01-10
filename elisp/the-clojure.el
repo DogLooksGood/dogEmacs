@@ -59,10 +59,6 @@
 (use-package clj-refactor
   :pin "melpa-stable"
   :hook (clojure-mode . clj-refactor-mode)
-  :bind
-  (:map
-   clojure-mode-map
-   ("/" . 'cljr-slash))
   :init
   (setq cljr-warn-on-eval t)
   (setq cljr-suppress-middleware-warnings t)
@@ -78,7 +74,6 @@
    cider-mode-map
    ("C-!" . 'cider-read-and-eval)
    ("C-." . 'cider-find-var)
-   ("C-c C-n" . 'cider-ns-map)
    :map
    cider-repl-mode-map
    ("C-," . 'cider-repl-handle-shortcut)
@@ -89,8 +84,9 @@
   (add-hook 'cider--debug-mode-hook 'user/insert-mode)
   (add-hook 'cider-repl-mode-hook 'smartparens-mode)
   (add-to-list 'user/god-mode-enable-mode-list 'cider-repl-mode)
-  (setq cider-font-lock-dynamically t
-        cider-font-lock-reader-conditionals t
+  (setq cider-font-lock-dynamically nil
+        cider-font-lock-reader-conditionals nil
+        cider-use-fringe-indicators nil
         cider-prompt-for-symbol nil
         cider-enhanced-cljs-completion-p nil)
   (setq-default cider-default-cljs-repl 'shadow))

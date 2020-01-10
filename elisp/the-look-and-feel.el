@@ -1,5 +1,6 @@
+;;; -*- lexical-binding: t -*-
 ;;; Look And Feels
-;;  setup for font, frame alpha and themes.
+;;  setup for font, frame alpha, mode line and themes.
 
 ;; Transparency Setup
 (when (display-graphic-p)
@@ -10,7 +11,6 @@
   (user/set-alpha 100))
 
 ;;; Font Setup
-
 ;; sample text:
 ;;   | 中英文等宽的字体 |
 ;;   | Mixed mono font  |
@@ -23,22 +23,25 @@
       (set-fontset-font
        (frame-parameter nil 'font)
        charset
-       (font-spec :family "sarasa term sc" :size 32))))
+       (font-spec :family "wenquanyi micro hei mono" :size 32))))
   (user/set-font))
 
 ;;; Theme Setup
 ;; Face tweaks
 (custom-set-faces
- '(yascroll:thumb-fringe ((t :background "#999999"
-                             :foreground "#999999")))
+ '(highlight-symbol-face ((t :underline "#668899")))
  '(fringe ((t :background nil)))
  '(yas-field-highlight-face ((t :box "#777")))
  '(form-feed-line ((t :strike-through "#666"))))
 
-(when (display-graphic-p)
-  (use-package zenburn-theme
-    :init
-    (load-theme 'zenburn t)))
+;; (use-package zenburn-theme
+;;   :init
+;;   (load-theme 'zenburn t))
+
+;;; A beautiful and clean white theme.
+(use-package berrys-theme
+  :init
+  (load-theme 'berrys t))
 
 ;;; Mode Line Setup
 
@@ -51,6 +54,7 @@
   (user/set-alpha)
   (user/set-font))
 
-(add-hook 'after-make-frame-functions 'user/new-frame-setup)
+(when (display-grayscale-p)
+  (add-hook 'after-make-frame-functions 'user/new-frame-setup))
 
 (provide 'the-look-and-feel)

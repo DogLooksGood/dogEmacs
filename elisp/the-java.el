@@ -1,5 +1,7 @@
 ;;; Currently, enable meghanada will break the company for other major mode.
 
+(make-variable-buffer-local 'company-backends)
+
 (defun user/java-setup ()
   (meghanada-mode t)
   (flycheck-mode 1)

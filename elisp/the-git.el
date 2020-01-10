@@ -4,8 +4,8 @@
   ("C-M-G" . 'magit-status))
 
 (use-package diff-hl
-  :init
-  (global-diff-hl-mode t))
+  :bind
+  ("C-S-G" . 'diff-hl-mode))
 
 (use-package gitignore-mode
   :init

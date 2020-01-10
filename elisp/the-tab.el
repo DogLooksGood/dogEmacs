@@ -1,5 +1,6 @@
+;;; -*- lexical-binding: t -*-
 ;;; A customized tab keybinding.
-
+;;; but currently, we need company to trigger on anytime.
 (defun user/insert-tab ()
   (interactive)
   (cond
@@ -13,7 +14,7 @@
    ((nth 3 (syntax-ppss))
     (paredit-forward-up))
    (t
-    (company-complete-common-or-cycle))))
+    (company-complete-common))))
 
 (defun user/normal-tab ()
   "Indent the current line or region, or toggle hideshow.
@@ -24,17 +25,13 @@ org-cycle in org-mode"
     (indent-region (region-beginning) (region-end)))
    ((derived-mode-p 'org-mode)
     (org-cycle))
-   ((memq indent-line-function
-          '(indent-relative indent-relative-maybe))
-    (hs-toggle-hiding))
-   ((let ((old-point (point))
-          (old-tick (buffer-chars-modified-tick))
-          (tab-always-indent t))
-      (call-interactively #'indent-for-tab-command)
-      (when (and (eq old-point (point))
-                 (eq old-tick (buffer-chars-modified-tick)))
-        (hs-toggle-hiding))))))
+   ;; Format the top-level with a single command.
+   (paredit-mode
+    (call-interactively #'paredit-reindent-defun))
+   (t
+    (call-interactively #'indent-for-tab-command))))
 
 (bind-key "<tab>" 'user/insert-tab prog-mode-map)
+(bind-key "TAB" 'user/insert-tab prog-mode-map)
 
 (provide 'the-tab)

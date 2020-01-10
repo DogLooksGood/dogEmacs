@@ -1,13 +1,11 @@
 ;;; packages for EDIT
 
 (use-package multiple-cursors
-  :commands (mc/mark-next-like-this)
   :bind
   (("C-v" . 'mc/mark-next-like-this)
    ("M-v" . 'mc/skip-to-next-like-this)
-   :map selected-keymap
-   ("C-v" . 'mc/mark-all-in-region-regexp))
-  :config
+   :map mc/keymap
+   ("RET" . 'mc/keyboard-quit))
   :init
   (setq mc/always-run-for-all t)
   (multiple-cursors-mode 1)
@@ -15,27 +13,24 @@
   (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click))
 
 (use-package expand-region
-  :commands (er/expand-region)
   :bind
   ("C-+" . 'er/expand-region))
 
 (use-package easy-kill
   :bind
-  (("C-o" . 'easy-kill)
+  (("C-o" . 'easy-mark)
    :map
    easy-kill-base-map
-   ("k" . 'easy-kill-region)
-   ("<backspace>" . 'easy-kill-delete-region))
+   ("<backspace>" . 'easy-kill-delete-region)
+   ("<escape>" . 'easy-kill-abort)
+   ("SPC" . 'easy-kill-mark-region))
   :init
   (setq easy-kill-alist
         '((?w word           " ")
           (?s sexp           "\n")
           (?l list           "\n")
-          (?F filename       "\n")
           (?d defun          "\n\n")
-          (?u defun-name     " ")
-          (?m line           "\n")
-          (?B buffer-file-name))))
+          (?m line           "\n"))))
 
 (use-package iedit
   :bind
@@ -43,9 +38,10 @@
   :init
   (unbind-key "C-;" global-map))
 
-(use-package rg
-  :commands (rg counsel-projectile-rg))
-
-(use-package wgrep)
+(use-package wgrep
+  :bind
+  (:map
+   wgrep-mode-map
+   ("<escape>" . 'user/normal-mode)))
 
 (provide 'the-edit)

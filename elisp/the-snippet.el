@@ -35,7 +35,8 @@
 (defun user/yas-init ()
   (yas-reload-all)
   (add-hook 'yas/before-expand-snippet-hook 'user/yas-start)
-  (add-hook 'yas/after-exit-snippet-hook 'user/update-cursor-shape))
+  ;; (add-hook 'yas/after-exit-snippet-hook 'user/update-cursor-shape)
+  )
 
 (advice-add 'user/yas-init :around #'user/make-silent)
 
@@ -44,13 +45,15 @@
   (:map
    yas-keymap
    ("<escape>" . 'user/yas-abort)
-   ("<return>" . 'user/yas-next)
+   ("<tab>" . 'user/yas-next)
    ("M-<return>" . 'newline-and-indent)
-   ("S-<return>" . 'yas-prev-field))
+   ("S-<tab>" . 'yas-prev-field))
   :config
   (user/yas-init)
-  (unbind-key "<tab>" yas-keymap)
-  (unbind-key "S-<tab>" yas-keymap)
+  (unbind-key "<return>" yas-keymap)
+  (unbind-key "S-<return>" yas-keymap)
+  (unbind-key "TAB" yas-keymap)
+  (unbind-key "S-TAB" yas-keymap)
   :init
   (add-hook 'snippet-mode-hook 'smartparens-mode)
   (add-hook 'prog-mode-hook #'yas-minor-mode))

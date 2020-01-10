@@ -12,6 +12,6 @@
     (call-interactively #'point-to-register))))
 
 (bind-key "C-*" 'user/to-register)
-(bind-key "C-@" 'register-to-point)
+(bind-key "C-&" 'register-to-point)
 
 (provide 'the-register)

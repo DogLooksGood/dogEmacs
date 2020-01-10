@@ -19,8 +19,8 @@
     (package-install package t)))
 
 (setq quelpa-checkout-melpa-p nil)
-(setq use-package-always-ensure t)
 (setq quelpa-update-melpa-p nil)
+(setq use-package-always-ensure t)
 
 ;; Requires
 (require 'use-package)
@@ -28,7 +28,6 @@
 (quelpa-use-package-activate-advice)
 
 (add-to-list 'load-path "~/.emacs.d/elisp/")
-(add-to-list 'load-path "~/.emacs.d/elisp2/")
 
 (require 'the-elisp)
 (require 'the-look-and-feel)
@@ -40,7 +39,7 @@
 (require 'the-completion)
 (require 'the-lisp)
 (require 'the-clojure)
-;; (require 'the-java)
+(require 'the-java)
 ;; (require 'the-haskell)
 ;; (require 'the-elixir)
 (require 'the-rust)
@@ -57,7 +56,8 @@
 (require 'the-conf)
 (require 'the-org)
 (require 'the-snippet)
-(require 'the-modal)
+;; (require 'the-modal)
+(require 'the-m4d)
 (require 'the-latex)
 ;; (require 'the-ebook)
 (require 'the-tab)

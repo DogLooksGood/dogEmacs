@@ -9,7 +9,8 @@
    ("[" . 'ivy-previous-history-element)
    ("]" . 'ivy-next-history-element)
    ("<mouse-3>". 'ivy-done)
-   ("<tab>" . 'ivy-alt-done))
+   ("<tab>" . 'ivy-alt-done)
+   ("TAB" . 'ivy-alt-done))
   :init
   (setq ivy-use-virtual-buffers nil
 	ivy-use-selectable-prompt t)
@@ -20,8 +21,9 @@
   ("C-x C-f" . 'counsel-find-file)
   ("<C-escape>" . 'counsel-switch-buffer)
   ("C-? C-f" . 'counsel-describe-function)
-  ("C-x C-r" . 'counsel-register)
+  ("C-x C-@" . 'counsel-register)
   ("C-x C-h" . 'counsel-imenu)
-  ("C-x C-b" . 'counsel-ibuffer))
+  ("C-x C-b" . 'counsel-ibuffer)
+  ("M-y" . 'counsel-yank-pop))
 
 (provide 'the-ivy)

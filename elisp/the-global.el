@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (global-set-key (kbd "C-?") help-map)
 
 (global-set-key (kbd "<mouse-3>") 'newline)
@@ -82,12 +84,9 @@
 ;; Auto revert when file change.
 (global-auto-revert-mode 1)
 
-;; Auto delete when insert on region.
-(delete-selection-mode t)
-(transient-mark-mode t)
-
 ;; Delete trailing whitespace on save.
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 
 ;; Custom file path
 ;; Actually we don't need custom file, this file can be generated
@@ -126,7 +125,7 @@
 (setq-default cursor-type 'box)
 (blink-cursor-mode -1)
 
-(defun user/delete-window-or-switch-buffer ()
+(defun user/delete-window-or-previous-buffer ()
   "delete window, if failed, try switch to buffer."
   (interactive)
   (let ((buf (current-buffer)))
@@ -134,7 +133,7 @@
         e
         (delete-window)
       (error
-       (counsel-switch-buffer)))))
+       (previous-buffer)))))
 
 (defun user/other-buffer ()
   (interactive)
@@ -143,6 +142,27 @@
     (mode-line-other-buffer)))
 
 (setq initial-major-mode 'fundamental-mode)
+
+(defun user/move-beginning-of-line-dwim (arg)
+  "Move point back to indentation of beginning of line.
+
+Move point to the first non-whitespace character on this line.
+If point is already there, move to the beginning of the line.
+Effectively toggle between the first non-whitespace character and
+the beginning of the line.
+
+If ARG is not nil or 1, move forward ARG - 1 lines first.  If
+point reaches the beginning or end of the buffer, stop there."
+  (interactive "^p")
+  (setq arg (or arg 1))
+  ;; Move lines first
+  (when (/= arg 1)
+    (let ((line-move-visual nil))
+      (forward-line (1- arg))))
+  (let ((orig-point (point)))
+    (back-to-indentation)
+    (when (= orig-point (point))
+      (move-beginning-of-line 1))))
 
 (defun user/new-buffer ()
   (interactive)

@@ -1,6 +1,6 @@
 ;; Relative line number
 
-(bind-key "C-M-L" 'display-line-numbers-mode)
+(bind-key "C-S-L" 'display-line-numbers-mode)
 
 (defun user/update-line-number-relative ()
   (when display-line-numbers
@@ -14,9 +14,10 @@
   (add-hook 'display-line-numbers-mode-hook #'user/update-line-number-relative))
 
 ;; Highlight current line.
-(add-hook 'prog-mode-hook 'hl-line-mode)
-(add-hook 'conf-mode-hook 'hl-line-mode)
-(add-hook 'text-mode-hook 'hl-line-mode)
+(when (display-graphic-p)
+  (add-hook 'prog-mode-hook 'hl-line-mode)
+  (add-hook 'conf-mode-hook 'hl-line-mode)
+  (add-hook 'text-mode-hook 'hl-line-mode))
 
 (use-package hideshow
   :bind
@@ -26,11 +27,11 @@
 
 ;;; Bug of yascroll
 ;;; In emacs 27, yascroll doesn't work.
-(require 'cl)
-(use-package yascroll
-  :init
-  (setq yascroll:delay-to-hide 5)
-  (global-yascroll-bar-mode))
+;; (require 'cl)
+;; (use-package yascroll
+;;   :init
+;;   (setq yascroll:delay-to-hide 5)
+;;   (global-yascroll-bar-mode))
 
 (use-package focus
   :bind

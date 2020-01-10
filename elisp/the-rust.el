@@ -75,7 +75,6 @@
   (add-hook 'rust-mode-hook 'lsp)
   (add-hook 'rust-mode-hook 'flycheck-mode)
   :config
-  (sp-local-pair 'rust-mode "<" ">")
-  (sp-local-pair 'rust-mode "|" "|"))
+  (sp-local-pair 'rust-mode "<" ">"))
 
 (provide 'the-rust)
