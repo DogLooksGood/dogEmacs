@@ -25,18 +25,15 @@
       (company-abort)
     (progn
       (yas-abort-snippet)
-      (when (fboundp 'god-local-mode)
-        (god-local-mode)))))
+      (m4d-normal-mode))))
 
 (defun user/yas-start ()
-  (god-local-mode -1)
   (setq-local cursor-type '(hbar . 4)))
 
 (defun user/yas-init ()
   (yas-reload-all)
   (add-hook 'yas/before-expand-snippet-hook 'user/yas-start)
-  ;; (add-hook 'yas/after-exit-snippet-hook 'user/update-cursor-shape)
-  )
+  (add-hook 'yas/after-exit-snippet-hook 'm4d--update-cursor-shape))
 
 (advice-add 'user/yas-init :around #'user/make-silent)
 
@@ -45,13 +42,14 @@
   (:map
    yas-keymap
    ("<escape>" . 'user/yas-abort)
-   ("<tab>" . 'user/yas-next)
+   ("<return>" . 'user/yas-next)
    ("M-<return>" . 'newline-and-indent)
-   ("S-<tab>" . 'yas-prev-field))
+   ("S-<return>" . 'yas-prev-field))
   :config
   (user/yas-init)
   (unbind-key "<return>" yas-keymap)
   (unbind-key "S-<return>" yas-keymap)
+  (unbind-key "<tab>" yas-keymap)
   (unbind-key "TAB" yas-keymap)
   (unbind-key "S-TAB" yas-keymap)
   :init

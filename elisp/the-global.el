@@ -56,7 +56,10 @@
  tab-width 4
  ;; Don't show cursor in non selected window.
  cursor-in-non-selected-windows nil
- comment-empty-lines t)
+ comment-empty-lines t
+ ;; Always use frames instead of window.
+ ;; Manage window with i3 wm.
+ pop-up-frames t)
 
 (prefer-coding-system 'utf-8)
 
@@ -101,7 +104,7 @@
     (progn
       (window-divider-mode -1))))
 
-(add-hook 'window-configuration-change-hook #'user/toggle-window-divider-and-border)
+;; (add-hook 'window-configuration-change-hook #'user/toggle-window-divider-and-border)
 
 ;; Replace all "yes or no" with "y or n".
 (fset 'yes-or-no-p 'y-or-n-p)

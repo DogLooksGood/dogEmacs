@@ -10,17 +10,17 @@
   :init
   (bind-key "M-d" 'dired-hide-dotfiles-mode dired-mode-map))
 
-(use-package dired-sidebar
-  :bind
-  (("C-M-S" . 'dired-sidebar-toggle-sidebar)
-   :map
-   dired-sidebar-mode-map
-   ("q" . 'kill-buffer-and-window))
-  :init
-  (add-hook 'dired-sidebar-mode-hook 'hl-line-mode)
-  (setq dired-sidebar-subtree-line-prefix "  ")
-  (setq dired-sidebar-theme 'ascii)
-  (setq dired-sidebar-use-term-integration t)
-  (setq dired-sidebar-use-custom-font t))
+;; (use-package dired-sidebar
+;;   :bind
+;;   (("C-M-S" . 'dired-sidebar-toggle-sidebar)
+;;    :map
+;;    dired-sidebar-mode-map
+;;    ("q" . 'kill-buffer-and-window))
+;;   :init
+;;   (add-hook 'dired-sidebar-mode-hook 'hl-line-mode)
+;;   (setq dired-sidebar-subtree-line-prefix "  ")
+;;   (setq dired-sidebar-theme 'ascii)
+;;   (setq dired-sidebar-use-term-integration t)
+;;   (setq dired-sidebar-use-custom-font t))
 
 (provide 'the-dired)

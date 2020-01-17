@@ -3,45 +3,46 @@
 ;;  setup for font, frame alpha, mode line and themes.
 
 ;; Transparency Setup
-(when (display-graphic-p)
-  (defun user/set-alpha (&rest args)
-    (let ((alpha (or (car args) 100)))
-      (set-frame-parameter (selected-frame) 'alpha (cons alpha alpha))))
+(defvar user/alpha nil)
+(setq user/alpha 100)
 
-  (user/set-alpha 100))
+(when (display-graphic-p)
+  (defun user/set-alpha ()
+    (set-frame-parameter (selected-frame) 'alpha (cons user/alpha user/alpha)))
+
+  (user/set-alpha))
 
 ;;; Font Setup
 ;; sample text:
 ;;   | 中英文等宽的字体 |
-;;   | Mixed mono font  |
+;;   | Mixed monospace  |
 ;; get this script from cnfont
 
 (when (display-graphic-p)
   (defun user/set-font (&rest args)
-    (set-frame-font "monospace-9" t t)
+    (set-frame-font "meslo lg m 9" t t)
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font
        (frame-parameter nil 'font)
        charset
-       (font-spec :family "wenquanyi micro hei mono" :size 32))))
+       (font-spec :family "Sarasa Mono SC" :size 32))))
   (user/set-font))
 
+(setq underline-minimum-offset 0)
+
 ;;; Theme Setup
+(setq x-underline-at-descent-line t)
+
 ;; Face tweaks
 (custom-set-faces
  '(highlight-symbol-face ((t :underline "#668899")))
+ '(hl-line ((t :underline "#5A5A5A" :overline "#5A5A5A")))
  '(fringe ((t :background nil)))
- '(yas-field-highlight-face ((t :box "#777")))
- '(form-feed-line ((t :strike-through "#666"))))
+ '(yas-field-highlight-face ((t :box "#777"))))
 
-;; (use-package zenburn-theme
-;;   :init
-;;   (load-theme 'zenburn t))
-
-;;; A beautiful and clean white theme.
-(use-package berrys-theme
+(use-package zenburn-theme
   :init
-  (load-theme 'berrys t))
+  (load-theme 'zenburn t))
 
 ;;; Mode Line Setup
 
@@ -51,8 +52,7 @@
 
 (defun user/new-frame-setup (frame)
   (select-frame frame)
-  (user/set-alpha)
-  (user/set-font))
+  (user/set-alpha))
 
 (when (display-grayscale-p)
   (add-hook 'after-make-frame-functions 'user/new-frame-setup))

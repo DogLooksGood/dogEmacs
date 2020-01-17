@@ -86,7 +86,7 @@
   (add-to-list 'user/god-mode-enable-mode-list 'cider-repl-mode)
   (setq cider-font-lock-dynamically nil
         cider-font-lock-reader-conditionals nil
-        cider-use-fringe-indicators nil
+        cider-use-fringe-indicators t
         cider-prompt-for-symbol nil
         cider-enhanced-cljs-completion-p nil)
   (setq-default cider-default-cljs-repl 'shadow))

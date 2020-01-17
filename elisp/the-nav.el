@@ -9,6 +9,11 @@
         highlight-symbol-highlight-single-occurrence nil)
   (add-hook 'prog-mode-hook 'highlight-symbol-mode))
 
+(use-package phi-search
+  :bind
+  (("C-s" . 'phi-search)
+   ("C-S-s" . 'phi-search-backward)))
+
 (use-package swiper
   :commands (swiper)
   :ensure t

@@ -13,6 +13,9 @@ Otherwise will insert a singlequote."
 (bind-key "'" #'user/singlequote)
 
 (use-package smartparens
+  :bind
+  (:map smartparens-mode-map
+   ("C-k" . 'sp-kill-hybrid-sexp))
   :config
   (sp-with-modes
       '(rust-mode go-mode java-mode)

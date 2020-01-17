@@ -5,13 +5,13 @@
 (defun user/update-line-number-relative ()
   (when display-line-numbers
     (setq-local display-line-numbers
-                (if (or god-local-mode buffer-read-only)
+                (if (or m4d-normal-mode buffer-read-only)
                     'relative
                   t))))
 
-(when (fboundp 'god-local-mode)
-  (add-hook 'god-local-mode-hook #'user/update-line-number-relative)
-  (add-hook 'display-line-numbers-mode-hook #'user/update-line-number-relative))
+(add-hook 'm4d-insert-modal-hook 'user/update-line-number-relative)
+(add-hook 'm4d-normal-modal-hook 'user/update-line-number-relative)
+(add-hook 'display-line-numbers-mode-hook #'user/update-line-number-relative)
 
 ;; Highlight current line.
 (when (display-graphic-p)

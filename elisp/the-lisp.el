@@ -14,14 +14,10 @@ otherwise will insert a colon."
   :bind
   (:map
    paredit-mode-map
-   ("C-(" . 'paredit-forward-barf-sexp)
    ("M-[" . 'paredit-wrap-square)
    ("M-{" . 'paredit-wrap-curly)
    (";" . 'user/lisp-semicolon))
   :config
-  (unbind-key "C-{" paredit-mode-map)
-  (unbind-key "C-}" paredit-mode-map)
-  (unbind-key "M-q" paredit-mode-map)
   :init
   (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
   (add-hook 'clojure-mode-hook #'paredit-mode))

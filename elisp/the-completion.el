@@ -12,6 +12,7 @@
    ("[" . 'company-show-doc-buffer))
   :config
   (unbind-key "RET" company-active-map)
+  (unbind-key "<return>" company-active-map)
   (unbind-key "TAB" company-active-map)
   (unbind-key "SPC" company-active-map)
   :init
@@ -25,7 +26,7 @@
         m4d-insert-after
         m4d-open-line
         m4d-open-line-up
-        m4d-replace
+        m4d-change
         kill-line
         paredit-backward-delete
         backward-delete-char

@@ -31,11 +31,6 @@
 
 (use-package eshell
   :bind
-  ("C-$" . 'eshell)
-  :config
-  (bind-key "M-h" #'user/eshell-ls-lh eshell-mode-map)
-  (bind-key "M-d" #'user/eshell-ls-lha eshell-mode-map))
-
-(add-to-list 'user/god-mode-enable-mode-list 'eshell-mode)
+  (("C-$" . 'eshell)))
 
 (provide 'the-eshell)
