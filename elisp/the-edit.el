@@ -16,6 +16,7 @@
   :bind
   (:map
    wgrep-mode-map
-   ("<escape>" . 'user/normal-mode)))
+   ("<escape>" . 'm4d-normal-mode)
+   ("C-u" . 'm4d-normal-mode)))
 
 (provide 'the-edit)

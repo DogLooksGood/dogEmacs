@@ -612,7 +612,7 @@ If ensure is t, create new if not found."
 (setq m4d-keymap
   (let ((keymap (make-sparse-keymap)))
     (define-key keymap [escape] 'm4d-esc)
-    (define-key keymap (kbd "C-a") 'm4d-esc)
+    (define-key keymap (kbd "C-u") 'm4d-esc)
     keymap))
 
 (defvar m4d-leader-base-keymap
@@ -695,7 +695,8 @@ If ensure is t, create new if not found."
   (add-to-list 'mc/cmds-to-run-once 'm4d-mark))
 
 (defun m4d--minibuffer-setup ()
-  (define-key minibuffer-local-map (kbd "<escape>") 'keyboard-escape-quit))
+  (define-key minibuffer-local-map (kbd "<escape>") 'keyboard-escape-quit)
+  (define-key minibuffer-local-map (kbd "C-u") 'keyboard-escape-quit))
 
 (defun m4d--isearch-setup ()
   (define-key phi-search-default-map (kbd "}") 'phi-search-again-or-next)

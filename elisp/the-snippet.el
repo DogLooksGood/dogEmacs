@@ -42,6 +42,7 @@
   (:map
    yas-keymap
    ("<escape>" . 'user/yas-abort)
+   ("C-u" . 'user/yas-abort)
    ("<return>" . 'user/yas-next)
    ("M-<return>" . 'newline-and-indent)
    ("S-<return>" . 'yas-prev-field))
