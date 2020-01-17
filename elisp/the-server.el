@@ -1,7 +1,9 @@
 (require 'server)
 
-(unless (server-running-p)
-  (server-start))
+;; Ignore the error when server start.
+(ignore-errors
+  (unless (server-running-p)
+    (server-start)))
 
 (bind-key "C-#" 'server-edit)
 

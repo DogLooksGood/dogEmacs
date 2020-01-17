@@ -50,14 +50,12 @@
     (load-theme 'zenburn t)))
 
 ;;; Mode Line Setup
-(setq-default mode-line-format
-              '(" %l:%c ["
-                (:eval (user/project-name))
-                (:eval
-                 (when vc-mode
-                   (replace-regexp-in-string "^ Git" " " vc-mode)))
-                "]"
-                " %b%* %e <%m>"))
+(unless (display-graphic-p)
+  (setq-default mode-line-format
+                '(" "
+                  (:eval (m4d-indicator))
+                  " %l:%c "
+                  " %b%* %e <%m>")))
 
 ;;; Run setup for future frames.
 

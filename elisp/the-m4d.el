@@ -27,6 +27,7 @@
  '("(" . paredit-wrap-round)
  '("[" . paredit-wrap-square)
  '("{" . paredit-wrap-curly)
+ '("o" . delete-other-windows)
  '("d" . dired))
 
 (m4d-leader-define-mode-key
