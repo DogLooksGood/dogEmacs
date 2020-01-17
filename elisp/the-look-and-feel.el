@@ -4,12 +4,11 @@
 
 ;; Transparency Setup
 (defvar user/alpha nil)
-(setq user/alpha 100)
+(setq user/alpha 98)
 
 (when (display-graphic-p)
   (defun user/set-alpha ()
     (set-frame-parameter (selected-frame) 'alpha (cons user/alpha user/alpha)))
-
   (user/set-alpha))
 
 ;;; Font Setup
@@ -39,6 +38,10 @@
  '(hl-line ((t :underline "#5A5A5A" :overline "#5A5A5A")))
  '(fringe ((t :background nil)))
  '(yas-field-highlight-face ((t :box "#777"))))
+
+;; (use-package berrys-theme
+;;   :init
+;;   (load-theme 'berrys t))
 
 (use-package zenburn-theme
   :init

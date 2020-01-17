@@ -18,7 +18,7 @@ Otherwise will insert a singlequote."
    ("C-k" . 'sp-kill-hybrid-sexp))
   :config
   (sp-with-modes
-      '(rust-mode go-mode java-mode)
+      '(rust-mode go-mode java-mode rjsx-mode)
     (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET")))))
 
 (use-package flycheck

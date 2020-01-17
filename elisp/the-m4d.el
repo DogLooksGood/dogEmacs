@@ -14,6 +14,7 @@
  '("x" . eval-buffer)
  '("f" . find-file)
  '("p" . counsel-projectile-find-file)
+ '("k" . kill-buffer)
  '("s" . counsel-projectile-rg)
  '("v" . find-alternate-file)
  '("r" . projectile-ripgrep)
