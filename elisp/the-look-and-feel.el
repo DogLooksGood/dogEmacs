@@ -39,17 +39,25 @@
  '(fringe ((t :background nil)))
  '(yas-field-highlight-face ((t :box "#777"))))
 
+
+
+(when (display-graphic-p)
 ;; (use-package berrys-theme
 ;;   :init
 ;;   (load-theme 'berrys t))
-
-(use-package zenburn-theme
-  :init
-  (load-theme 'zenburn t))
+  (use-package zenburn-theme
+    :init
+    (load-theme 'zenburn t)))
 
 ;;; Mode Line Setup
-
-(setq-default mode-line-format nil)
+(setq-default mode-line-format
+              '(" %l:%c ["
+                (:eval (user/project-name))
+                (:eval
+                 (when vc-mode
+                   (replace-regexp-in-string "^ Git" " " vc-mode)))
+                "]"
+                " %b%* %e <%m>"))
 
 ;;; Run setup for future frames.
 
@@ -57,7 +65,7 @@
   (select-frame frame)
   (user/set-alpha))
 
-(when (display-grayscale-p)
+(when (display-graphic-p)
   (add-hook 'after-make-frame-functions 'user/new-frame-setup))
 
 (provide 'the-look-and-feel)
