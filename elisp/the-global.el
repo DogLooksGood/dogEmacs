@@ -56,10 +56,10 @@
  tab-width 4
  ;; Don't show cursor in non selected window.
  cursor-in-non-selected-windows nil
- comment-empty-lines t
- ;; Always use frames instead of window.
- ;; Manage window with i3 wm.
- pop-up-frames t)
+ comment-empty-lines t)
+
+(when (display-graphic-p)
+  (setq pop-up-frames t))
 
 (prefer-coding-system 'utf-8)
 
