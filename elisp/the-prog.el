@@ -42,7 +42,7 @@ Otherwise will insert a singlequote."
 
 (use-package dumb-jump
   :bind
-  ("C-." . 'dumb-jump-go)
+  ("M-." . 'dumb-jump-go)
   :init
   (setq dumb-jump-selector 'ivy))
 

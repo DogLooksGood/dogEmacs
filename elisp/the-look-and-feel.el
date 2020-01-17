@@ -39,23 +39,41 @@
  '(fringe ((t :background nil)))
  '(yas-field-highlight-face ((t :box "#777"))))
 
-
-
-(when (display-graphic-p)
-;; (use-package berrys-theme
-;;   :init
-;;   (load-theme 'berrys t))
+(if (display-graphic-p)
   (use-package zenburn-theme
     :init
-    (load-theme 'zenburn t)))
+    (load-theme 'zenburn t))
+  (use-package nimbus-theme
+    :init
+    (load-theme 'nimbus t)))
 
 ;;; Mode Line Setup
-(unless (display-graphic-p)
+(defun user/simple-mode-line-render (left right)
+  "Return a string of `window-width' length containing LEFT, and RIGHT
+ aligned respectively."
+  (let* ((available-width (- (window-width) (length left) 1)))
+    (format (format "%%s %%%ds " available-width) left right)))
+
+(if (display-graphic-p)
+    (setq-default mode-line-format nil)
   (setq-default mode-line-format
-                '(" "
-                  (:eval (m4d-indicator))
-                  " %l:%c "
-                  " %b%* %e <%m>")))
+                '((:eval (user/simple-mode-line-render
+                          (format-mode-line
+                           '(" "
+                             (:eval (m4d-indicator))))
+                          (format-mode-line
+                           '("%l:%c "
+                             " %b%* %e %m ")))))))
+
+;;; title line setup
+(setq-default frame-title-format
+              '("["
+                (:eval (user/project-name))
+                (:eval
+                 (when vc-mode
+                   (replace-regexp-in-string "^ Git" " " vc-mode)))
+                "]"
+                " %b%* %e <%m>"))
 
 ;;; Run setup for future frames.
 

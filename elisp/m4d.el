@@ -134,6 +134,8 @@
   (or (equal major-mode 'dired-mode)
       (equal major-mode 'help-mode)
       (equal major-mode 'compilation-mode)
+      (and (equal major-mode 'fundamental-mode)
+           (string-prefix-p "*" (buffer-name)))
       (derived-mode-p 'special-mode)))
 
 (defun m4d--should-enable ()
@@ -419,7 +421,9 @@
   (if (region-active-p)
       (progn
         (m4d--execute-kbd-macro m4d-kill-region-kbd-macro)
-        (m4d-insert))
+        (m4d-insert)
+        (when (eq (line-end-position) (line-beginning-position))
+          (lisp-indent-line)))
     (message "No selection!")))
 
 (defun m4d-backward-delete ()
@@ -707,8 +711,10 @@ If ensure is t, create new if not found."
   (interactive)
   (if (m4d--should-enable)
       (if m4d-normal-mode
-          "VISUAL"
-        "INSERT")
+          (propertize "VISUAL"
+                      'face 'font-lock-keyword-face)
+        (propertize "INSERT"
+                    'face 'font-lock-variable-name-face))
     ""))
 
 ;;;###autoload

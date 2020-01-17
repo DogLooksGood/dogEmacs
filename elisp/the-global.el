@@ -117,14 +117,6 @@
         ""
       proj-name)))
 
-(setq-default frame-title-format '("["
-                                   (:eval (user/project-name))
-                                   (:eval
-                                    (when vc-mode
-                                      (replace-regexp-in-string "^ Git" " " vc-mode)))
-                                   "]"
-                                   " %b%* %e <%m>"))
-
 (setq-default cursor-type 'box)
 (blink-cursor-mode -1)
 
@@ -143,8 +135,6 @@
   (if (region-active-p)
       (call-interactively #'keyboard-escape-quit)
     (mode-line-other-buffer)))
-
-(setq initial-major-mode 'fundamental-mode)
 
 (defun user/move-beginning-of-line-dwim (arg)
   "Move point back to indentation of beginning of line.
