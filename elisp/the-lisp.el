@@ -9,6 +9,9 @@ otherwise will insert a colon."
       (insert ";")
     (insert ":")))
 
+(defun user/paredit-setup-for-terminal ()
+  (define-key paredit-mode-map (kbd "M-[") nil))
+
 (use-package paredit
   :ensure t
   :bind
@@ -17,8 +20,8 @@ otherwise will insert a colon."
    ("M-[" . 'paredit-wrap-square)
    ("M-{" . 'paredit-wrap-curly)
    (";" . 'user/lisp-semicolon))
-  :config
   :init
+  (add-hook 'paredit-mode-hook 'user/paredit-setup-for-terminal)
   (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
   (add-hook 'clojure-mode-hook #'paredit-mode))
 

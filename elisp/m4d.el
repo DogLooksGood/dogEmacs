@@ -1,5 +1,23 @@
 ;;; -*- lexical-binding: t -*-
 
+;;; Faces
+
+(defface m4d-visual-indicator
+  '((((class color) (background dark))
+      (:foreground "blue"))
+     (((class color) (background light))
+      (:foreground "blue")))
+  "Visual indicator"
+  :group 'm4d)
+
+(defface m4d-insert-indicator
+  '((((class color) (background dark))
+      (:foreground "red"))
+     (((class color) (background light))
+      (:foreground "red")))
+  "Insert indicator"
+  :group 'm4d)
+
 ;;; Custom Variables
 
 (defvar m4d-insert-modal-hook nil
@@ -145,9 +163,10 @@
       (derived-mode-p 'text-mode 'conf-mode 'prog-mode)))
 
 (defun m4d--update-cursor-shape ()
-  (if (and (m4d--should-enable) (not m4d-normal-mode))
-      (setq cursor-type '(bar . 5))
-    (setq cursor-type 'box)))
+  (when (display-graphic-p)
+    (if (and (m4d--should-enable) (not m4d-normal-mode))
+        (setq cursor-type '(bar . 5))
+      (setq cursor-type 'box))))
 
 (defun m4d--direction-right-p ()
   (or (not (region-active-p))
@@ -436,6 +455,14 @@
       (m4d--execute-kbd-macro m4d-kill-region-kbd-macro)
     (m4d--execute-kbd-macro m4d-delete-char-kbd-macro)))
 
+(defun m4d-duplicate-line ()
+  (interactive)
+  (save-mark-and-excursion
+    (kill-ring-save (line-beginning-position) (line-end-position))
+    (goto-char (line-end-position))
+    (newline)
+    (yank)))
+
 (defun m4d-copy ()
   (interactive)
   (if (region-active-p)
@@ -448,6 +475,12 @@
   (if arg
       (m4d--execute-kbd-macro m4d-yank-pop-kbd-macro)
     (yank)))
+
+(defun m4d-change-with-yank (beg end)
+  (interactive "r")
+  (when (region-active-p)
+    (delete-region beg end))
+  (yank))
 
 (defun m4d-query-replace ()
   (interactive)
@@ -641,7 +674,9 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "a") 'm4d-insert-after)
         (define-key keymap (kbd "b") 'm4d-copy)
         (define-key keymap (kbd "c") 'm4d-change)
+        (define-key keymap (kbd "C") 'm4d-change-with-yank)
         (define-key keymap (kbd "d") 'm4d-delete)
+        (define-key keymap (kbd "D") 'm4d-duplicate-line)
         (define-key keymap (kbd "e") 'm4d-exp)
         (define-key keymap (kbd "f") 'm4d-flip)
         (define-key keymap (kbd "g") 'm4d-quit)
@@ -686,7 +721,7 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd ";") 'm4d-comment)
         (define-key keymap (kbd "$") 'eshell)
         (define-key keymap (kbd "?") 'm4d-reverse-search)
-        (define-key keymap (kbd "=") 'm4d-indent)
+        (define-key keymap (kbd "=") 'mc/vertical-align-with-space)
         (define-key keymap (kbd "!") 'm4d-query-replace)
         (define-key keymap (kbd "@") 'other-frame)
         (define-key keymap (kbd "SPC") 'm4d-leader)
@@ -712,9 +747,9 @@ If ensure is t, create new if not found."
   (if (m4d--should-enable)
       (if m4d-normal-mode
           (propertize "VISUAL"
-                      'face 'font-lock-keyword-face)
+                      'face 'm4d-visual-indicator)
         (propertize "INSERT"
-                    'face 'font-lock-variable-name-face))
+                    'face 'm4d-insert-indicator))
     ""))
 
 ;;;###autoload
@@ -728,7 +763,7 @@ If ensure is t, create new if not found."
 (define-minor-mode m4d-normal-mode
   "m4d normal modal state."
   nil
-  " <N>"
+  ""
   m4d-normal-keymap)
 
 ;;;###autoload

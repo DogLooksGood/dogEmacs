@@ -43,9 +43,10 @@
   (use-package zenburn-theme
     :init
     (load-theme 'zenburn t))
-  (use-package nimbus-theme
-    :init
-    (load-theme 'nimbus t)))
+  (progn
+    (require 'vanilla-theme)
+    (setq visible-cursor nil)
+    (load-theme 'vanilla t)))
 
 ;;; Mode Line Setup
 (defun user/simple-mode-line-render (left right)
@@ -74,6 +75,15 @@
                    (replace-regexp-in-string "^ Git" " " vc-mode)))
                 "]"
                 " %b%* %e <%m>"))
+
+(unless (display-graphic-p)
+  (use-package mini-modeline
+    :quelpa (mini-modeline :repo "kiennq/emacs-mini-modeline" :fetcher github)
+    :config
+    (setq mini-modeline-r-format '(" %l:%c  %b%* %e %m "
+                                   (:eval (m4d-indicator))))
+    (setq mini-modeline-l-format '((:eval (mini-modeline-msg))))
+    (mini-modeline-mode t)))
 
 ;;; Run setup for future frames.
 
