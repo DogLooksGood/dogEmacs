@@ -6,6 +6,12 @@
 
 (add-to-list 'm4d-enable-mode-list 'cider-repl-mode)
 
+(use-package key-chord
+  :init
+  (key-chord-define global-map ".," 'm4d-esc)
+  (advice-add #'key-chord-mode :around #'user/make-silent)
+  (key-chord-mode 1))
+
 (m4d-normal-define-key
  '("<tab>" . user/normal-tab))
 

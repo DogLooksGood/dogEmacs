@@ -44,9 +44,9 @@
     :init
     (load-theme 'zenburn t))
   (progn
-    (require 'vanilla-theme)
+    (require 'joker-theme)
     (setq visible-cursor nil)
-    (load-theme 'vanilla t)))
+    (load-theme 'joker t)))
 
 ;;; Mode Line Setup
 (defun user/simple-mode-line-render (left right)
@@ -80,7 +80,7 @@
   (use-package mini-modeline
     :quelpa (mini-modeline :repo "kiennq/emacs-mini-modeline" :fetcher github)
     :config
-    (setq mini-modeline-r-format '(" %l:%c  %b%* %e %m "
+    (setq mini-modeline-r-format '("%l:%c  %b%* %e %m "
                                    (:eval (m4d-indicator))))
     (setq mini-modeline-l-format '((:eval (mini-modeline-msg))))
     (mini-modeline-mode t)))

@@ -51,12 +51,12 @@
  show-paren-style 'parenthese
  ;; Overline no margin
  overline-margin 0
- ;; Default use tab for indentation.
- indent-tabs-mode nil
  tab-width 4
  ;; Don't show cursor in non selected window.
  cursor-in-non-selected-windows nil
  comment-empty-lines t)
+
+(setq-default indent-tabs-mode nil)
 
 (when (display-graphic-p)
   (setq pop-up-frames t))
@@ -104,6 +104,7 @@
     (progn
       (window-divider-mode -1))))
 
+(window-divider-mode -1)
 ;; (add-hook 'window-configuration-change-hook #'user/toggle-window-divider-and-border)
 
 ;; Replace all "yes or no" with "y or n".

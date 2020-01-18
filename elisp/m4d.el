@@ -4,17 +4,17 @@
 
 (defface m4d-visual-indicator
   '((((class color) (background dark))
-      (:foreground "blue"))
+      (:inherit font-lock-string-face))
      (((class color) (background light))
-      (:foreground "blue")))
+      (:inherit font-lock-string-face)))
   "Visual indicator"
   :group 'm4d)
-
+;;;
 (defface m4d-insert-indicator
   '((((class color) (background dark))
-      (:foreground "red"))
+      (:inherit font-lock-function-name-face))
      (((class color) (background light))
-      (:foreground "red")))
+      (:inherit font-lock-function-name-face)))
   "Insert indicator"
   :group 'm4d)
 
@@ -452,7 +452,10 @@
 (defun m4d-delete ()
   (interactive)
   (if (region-active-p)
-      (m4d--execute-kbd-macro m4d-kill-region-kbd-macro)
+      (progn (when (and (equal last-command 'm4d-line)
+                  (m4d--direction-right-p))
+               (forward-char))
+             (m4d--execute-kbd-macro m4d-kill-region-kbd-macro))
     (m4d--execute-kbd-macro m4d-delete-char-kbd-macro)))
 
 (defun m4d-duplicate-line ()
@@ -580,6 +583,10 @@
 (defun m4d-esc ()
   (interactive)
   (cond
+   ((m4d--should-enable-special-mode)
+    (mode-line-other-buffer))
+   ((minibufferp)
+    (call-interactively #'keyboard-escape-quit))
    (phi-search--active
     (call-interactively #'phi-search-abort))
    (multiple-cursors-mode
@@ -640,9 +647,10 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "'") 'm4d-switch-buffer)
         (define-key keymap (kbd "\\") 'split-window-right)
         (define-key keymap (kbd "|") 'split-window-below)
-        (define-key keymap (kbd "M-<tab>") 'other-window)
-        (define-key keymap (kbd "M-TAB") 'other-window)
         (define-key keymap (kbd "q") 'kill-buffer-and-window)
+        (global-set-key (kbd "M-<tab>") 'other-window)
+        (global-set-key (kbd "M-TAB") 'other-window)
+        (global-set-key (kbd "C-M-i") 'other-window)
         keymap))
 
 (defvar m4d-keymap nil)
@@ -742,19 +750,28 @@ If ensure is t, create new if not found."
   (define-key phi-search-default-map (kbd "{") 'phi-search-again-or-previous)
   (define-key phi-search-default-map (kbd "<escape>") 'phi-search-abort))
 
+(defun m4d--global-setup ()
+  ;; These global key bindings are used for fundamental mode.
+  (global-set-key (kbd "<escape>") 'm4d-esc)
+  (global-set-key (kbd "C-u") 'm4d-esc)
+  (global-set-key (kbd "M-<tab>") 'other-window)
+  (global-set-key (kbd "M-TAB") 'other-window)
+  (global-set-key (kbd "C-M-i") 'other-window))
+
 (defun m4d-indicator ()
   (interactive)
-  (if (m4d--should-enable)
-      (if m4d-normal-mode
+  (if (m4d--should-enable-special-mode)
+      ""
+    (if m4d-normal-mode
           (propertize "VISUAL"
                       'face 'm4d-visual-indicator)
         (propertize "INSERT"
-                    'face 'm4d-insert-indicator))
-    ""))
+                    'face 'm4d-insert-indicator))))
 
 ;;;###autoload
 (defun m4d-setup ()
   (setq delete-active-region nil)
+  (m4d--global-setup)
   (m4d--mc-setup)
   (m4d--isearch-setup)
   (m4d--minibuffer-setup))
@@ -783,8 +800,7 @@ If ensure is t, create new if not found."
 ;;;###autoload
 (define-global-minor-mode m4d-global-mode m4d-mode
   (lambda ()
-    (unless (minibufferp)
-      (m4d-mode 1))
+    (m4d-mode 1)
     (when (m4d--should-enable)
       (m4d-normal-mode 1))
     (when (m4d--should-enable-special-mode)

@@ -25,6 +25,15 @@
   :init
   (add-hook 'prog-mode-hook #'hs-minor-mode))
 
+(use-package highlight-numbers
+  :init
+  (add-hook 'prog-mode-hook 'highlight-numbers-mode))
+
+(use-package paren-face
+  :init
+  (setq paren-face-regexp "[][(){}]")
+  (global-paren-face-mode 1))
+
 ;;; Bug of yascroll
 ;;; In emacs 27, yascroll doesn't work.
 ;; (require 'cl)
