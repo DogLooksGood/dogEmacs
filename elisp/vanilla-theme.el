@@ -4,6 +4,7 @@
 
 (custom-theme-set-faces
  'vanilla
+ '(default                        ((t (:foreground "color-248"))))
  '(region                         ((t (:background "color-42" :foreground "black"))))
  '(show-paren-match               ((t (:background "color-50" :foreground "black"))))
  '(font-lock-comment-face         ((t (:foreground "color-37"))))

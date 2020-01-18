@@ -708,7 +708,7 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "W") 'm4d-word-select)
         (define-key keymap (kbd "x") 'm4d-line)
         (define-key keymap (kbd "y") 'm4d-yank)
-        (define-key keymap (kbd "z") 'repeat)
+        (define-key keymap (kbd "z") 'repeat-complex-command)
         (define-key keymap (kbd ".") 'm4d-find-ref)
         (define-key keymap (kbd ",") 'm4d-pop-ref)
         (define-key keymap (kbd "+") 'universal-argument)
