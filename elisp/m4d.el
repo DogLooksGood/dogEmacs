@@ -26,6 +26,12 @@
 (defvar m4d-normal-modal-hook nil
   "A hook runs when we enter the normal modal.")
 
+(defvar m4d-special-mode-list
+  '(dired-mode
+    help-mode
+    compilation-mode)
+  "A list of modes should be treated as special mode .")
+
 (defvar m4d-enable-mode-list
   '(json-mode)
   "A list of major-modes where we should enable modal edit.")
@@ -131,14 +137,14 @@
   (push (cons begin end) m4d--selections)
   (m4d--update-selection-display))
 
-(ignore
- (m4d--add-cursor-below)
-
- (m4d--flip-direction)
-
- (m4d--remove-all-selections)
-
- (m4d--create-selection (point) (+ 5 (point))))
+;; (ignore
+;;  (m4d--add-cursor-below)
+;;
+;;  (m4d--flip-direction)
+;;
+;;  (m4d--remove-all-selections)
+;;
+;;  (m4d--create-selection (point) (+ 5 (point))))
 
 (defun m4d--mc-prompt-once-advice (fn &rest args)
   (setq mc--this-command (lambda () (interactive) (apply fn args)))
@@ -149,11 +155,7 @@
     (advice-add fn :around #'m4d--mc-prompt-once-advice)))
 
 (defun m4d--should-enable-special-mode ()
-  (or (equal major-mode 'dired-mode)
-      (equal major-mode 'help-mode)
-      (equal major-mode 'compilation-mode)
-      (and (equal major-mode 'fundamental-mode)
-           (string-prefix-p "*" (buffer-name)))
+  (or (member major-mode m4d-special-mode-list)
       (derived-mode-p 'special-mode)))
 
 (defun m4d--should-enable ()
@@ -163,10 +165,13 @@
       (derived-mode-p 'text-mode 'conf-mode 'prog-mode)))
 
 (defun m4d--update-cursor-shape ()
-  (when (display-graphic-p)
+  (if (display-graphic-p)
     (if (and (m4d--should-enable) (not m4d-normal-mode))
         (setq cursor-type '(bar . 5))
-      (setq cursor-type 'box))))
+      (setq cursor-type 'box))
+    (if (and (m4d--should-enable) (not m4d-normal-mode))
+        (hl-line-mode 1)
+      (hl-line-mode -1))))
 
 (defun m4d--direction-right-p ()
   (or (not (region-active-p))
@@ -526,11 +531,15 @@
   (when-let ((cmd (key-binding (read-kbd-macro "C-c C-c"))))
     (call-interactively cmd)))
 
-(defun m4d-leader ()
-  (interactive)
+(defun m4d-leader (arg)
+  "Don't support digit argument yet, can't figure out the reason."
+  (interactive "P")
   (let ((keymap (or (m4d--get-mode-leader-keymap major-mode)
                     m4d-leader-base-keymap)))
-    (set-transient-map keymap)))
+    (set-transient-map keymap)
+    (cond
+     ((equal '(4) arg)
+      (universal-argument)))))
 
 (defun m4d-pop-ref ()
   (interactive)
@@ -648,9 +657,7 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "\\") 'split-window-right)
         (define-key keymap (kbd "|") 'split-window-below)
         (define-key keymap (kbd "q") 'kill-buffer-and-window)
-        (global-set-key (kbd "M-<tab>") 'other-window)
-        (global-set-key (kbd "M-TAB") 'other-window)
-        (global-set-key (kbd "C-M-i") 'other-window)
+        (define-key keymap (kbd "@") 'other-window)
         keymap))
 
 (defvar m4d-keymap nil)
@@ -731,7 +738,7 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "?") 'm4d-reverse-search)
         (define-key keymap (kbd "=") 'mc/vertical-align-with-space)
         (define-key keymap (kbd "!") 'm4d-query-replace)
-        (define-key keymap (kbd "@") 'other-frame)
+        (define-key keymap (kbd "@") 'other-window)
         (define-key keymap (kbd "SPC") 'm4d-leader)
         keymap))
 
@@ -753,10 +760,7 @@ If ensure is t, create new if not found."
 (defun m4d--global-setup ()
   ;; These global key bindings are used for fundamental mode.
   (global-set-key (kbd "<escape>") 'm4d-esc)
-  (global-set-key (kbd "C-u") 'm4d-esc)
-  (global-set-key (kbd "M-<tab>") 'other-window)
-  (global-set-key (kbd "M-TAB") 'other-window)
-  (global-set-key (kbd "C-M-i") 'other-window))
+  (global-set-key (kbd "C-u") 'm4d-esc))
 
 (defun m4d-indicator ()
   (interactive)

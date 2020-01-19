@@ -12,6 +12,13 @@
   (advice-add #'key-chord-mode :around #'user/make-silent)
   (key-chord-mode 1))
 
+(defun user/kill-window-or-quit ()
+  (interactive)
+  (condition-case e
+   (delete-window)
+   (error
+    (save-buffers-kill-terminal))))
+
 (m4d-normal-define-key
  '("<tab>" . user/normal-tab))
 
@@ -30,7 +37,7 @@
  '("b" . counsel-ibuffer)
  '("m" . magit-status)
  '("w" . save-buffer)
- '("q" . save-buffers-kill-terminal)
+ '("q" . user/kill-window-or-quit)
  '("i" . back-to-indentation)
  '("(" . paredit-wrap-round)
  '("[" . paredit-wrap-square)
@@ -42,12 +49,12 @@
  'clojure-mode
  '("e" . cider-eval-last-sexp)
  '("x" . cider-load-file)
- '(";" . user/clojure-hash-comment)
  '("cc" . cider-eval-defun-at-point)
  '("n" . cider-eval-ns-form)
  '("cj" . cider-jack-in)
  '("cs" . cider-jack-in-clojurescript)
- '("ck" . cider-eval-buffer))
+ '("ck" . cider-eval-buffer)
+ '(";" . user/clojure-hash-comment))
 
 (m4d-leader-define-mode-key
  'rust-mode

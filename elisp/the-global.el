@@ -1,9 +1,5 @@
 ;;; -*- lexical-binding: t -*-
 
-(global-set-key (kbd "C-?") help-map)
-
-(global-set-key (kbd "<mouse-3>") 'newline)
-
 ;; Better Defaults
 (setq-default
  inhibit-x-resources t

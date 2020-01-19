@@ -1,7 +1,7 @@
-(defun user/clojure-hash-comment ()
-  (interactive)
+(defun user/clojure-hash-comment (arg)
+  (interactive "P")
   (cond
-   ((not current-prefix-arg)
+   ((not arg)
     (save-mark-and-excursion
       (if (equal "#_" (buffer-substring-no-properties (point) (+ 2 (point))))
           (while (equal "#_" (buffer-substring-no-properties (point) (+ 2 (point))))
@@ -16,7 +16,7 @@
                 (delete-char -2))
             (insert "#_"))))))
 
-   ((numberp current-prefix-arg)
+   ((numberp arg)
     (let* ((curr-sym (symbol-at-point))
            (curr-sym-name (symbol-name curr-sym))
            (line (buffer-substring-no-properties (point) (line-end-position)))
@@ -29,7 +29,7 @@
             (insert "#_")
             (setq i (1+ i)))))))
 
-   ((equal '(4) current-prefix-arg)
+   ((equal '(4) arg)
     (save-mark-and-excursion
       (unless (and (equal (char-after) 40)
                    (equal (point) (line-beginning-position)))
@@ -73,7 +73,7 @@
   (:map
    cider-mode-map
    ("C-!" . 'cider-read-and-eval)
-   ("C-." . 'cider-find-var)
+   ("M-." . 'cider-find-var)
    :map
    cider-repl-mode-map
    ("C-," . 'cider-repl-handle-shortcut)

@@ -7,6 +7,7 @@
  '(default                        ((t (:foreground "color-248"))))
  '(mc/cursor-face                 ((t (:background "color-246" :foreground "black"))))
  '(region                         ((t (:background "color-42" :foreground "black"))))
+ '(hl-line                        ((t (:background "black"))))
  '(show-paren-match               ((t (:background "color-42" :foreground "black"))))
  '(font-lock-comment-face         ((t (:foreground "color-37"))))
  '(font-lock-string-face          ((t (:foreground "color-161"))))

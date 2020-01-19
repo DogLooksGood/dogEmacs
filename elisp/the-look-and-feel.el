@@ -35,7 +35,7 @@
 ;; Face tweaks
 (custom-set-faces
  '(highlight-symbol-face ((t :underline "#668899")))
- '(hl-line ((t :underline "#5A5A5A" :overline "#5A5A5A")))
+ ;; '(hl-line ((t :underline "#5A5A5A" :overline "#5A5A5A")))
  '(fringe ((t :background nil)))
  '(yas-field-highlight-face ((t :box "#777"))))
 
@@ -56,15 +56,7 @@
     (format (format "%%s %%%ds " available-width) left right)))
 
 (if (display-graphic-p)
-    (setq-default mode-line-format nil)
-  (setq-default mode-line-format
-                '((:eval (user/simple-mode-line-render
-                          (format-mode-line
-                           '(" "
-                             (:eval (m4d-indicator))))
-                          (format-mode-line
-                           '("%l:%c "
-                             " %b%* %e %m ")))))))
+    (setq-default mode-line-format nil))
 
 ;;; title line setup
 (setq-default frame-title-format
