@@ -75,6 +75,8 @@
     (setq mini-modeline-r-format '("%l:%c  %b%* %e %m "
                                    (:eval (m4d-indicator))))
     (setq mini-modeline-l-format '((:eval (mini-modeline-msg))))
+    (setq mini-modeline-enhance-visual nil
+          mini-modeline-echo-duration 2)
     (mini-modeline-mode t)))
 
 ;;; Run setup for future frames.

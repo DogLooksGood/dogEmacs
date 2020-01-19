@@ -2,6 +2,11 @@
 
 (deftheme joker "Minimal colortheme for terminal.")
 
+;; (defun load-this-theme ()
+;;   (interactive)
+;;   (load-theme 'joker t))
+;; (bind-key "C-h" 'load-this-theme)
+
 (custom-theme-set-faces
  'joker
  '(default                        ((t (:foreground "color-248"))))
@@ -9,6 +14,12 @@
  '(region                         ((t (:background "color-35" :foreground "black"))))
  '(hl-line                        ((t (:background "black"))))
  '(show-paren-match               ((t (:background "color-42" :foreground "black"))))
+ '(company-tooltip-common         ((t (:foreground "color-161"))))
+ '(company-tooltip-common-selection ((t (:foreground "black"))))
+ '(company-tooltip                ((t (:background "black"))))
+ '(company-tooltip-selection      ((t (:background "color-178" :foreground "black"))))
+ '(company-scrollbar-bg           ((t (:background "color-236"))))
+ '(company-scrollbar-fg           ((t (:background "color-239"))))
  '(font-lock-comment-face         ((t (:foreground "color-37"))))
  '(font-lock-string-face          ((t (:foreground "color-161"))))
  '(font-lock-doc-face             ((t (:foreground "color-37"))))
@@ -22,6 +33,7 @@
  '(m4d-visual-indicator           ((t (:foreground "color-42"))))
  '(cider-result-overlay-face      ((t (:background "color-18"))))
  '(mode-line                      ((t ())))
+ '(clojure-character-face         ((t (:inherit font-lock-constant-face))))
  '(highlight                      ((t (:background "color-37" :foreground "black"))))
  '(isearch                        ((t (:background "color-41" :foreground "black"))))
  '(isearch-fail                   ((t (:backgronud "color-171" :foreground "black"))))
@@ -29,6 +41,7 @@
  '(ivy-highlight-face             ((t (:backgronud "color-39" :foreground "black"))))
  '(ivy-yanked-word                ((t (:background "yellow" :foreground "black"))))
  '(ivy-remote                     ((t ())))
+ '(vertical-border                ((t (:background nil :foreground "black"))))
  '(counsel-outline-default        ((t ())))
  '(completions-common-part        ((t ())))
  '(minibuffer-prompt              ((t ())))
@@ -39,6 +52,7 @@
  '(swiper-background-match-face-2 ((t (:background "color-41" :foreground "black"))))
  '(swiper-background-match-face-3 ((t (:background "color-41" :foreground "black"))))
  '(swiper-background-match-face-4 ((t (:background "color-41" :foreground "black"))))
+ '(solaire-default-face           ((t (:background "color-235"))))
  '(swiper-match-face-1            ((t (:foreground "white"))))
  '(swiper-match-face-2            ((t (:foreground "white"))))
  '(swiper-match-face-3            ((t (:foreground "white"))))
