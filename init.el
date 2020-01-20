@@ -27,11 +27,7 @@
 (require 'quelpa-use-package)
 (quelpa-use-package-activate-advice)
 
-(defun user/emacs-dir ()
-  (or (getenv "EMACS_DIRECTORY") "~"))
-
-(add-to-list 'load-path
-             (concat (user/emacs-dir) "/.emacs.d/elisp/"))
+(add-to-list 'load-path "~/.emacs.d/elisp/")
 
 (require 'the-elisp)
 (require 'the-look-and-feel)

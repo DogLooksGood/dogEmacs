@@ -90,8 +90,7 @@
 ;; Custom file path
 ;; Actually we don't need custom file, this file can be generated
 ;; accidentally, so we add this file to .gitignore and never load it.
-(setq custom-file
-      (concat (user/emacs-dir) "/.emacs.d/custom.el"))
+(setq custom-file "~/.emacs.d/custom.el")
 
 ;; Only show window divider when there's more than one window.
 (defun user/toggle-window-divider-and-border ()
