@@ -84,6 +84,7 @@
    ("M-." . 'cider-find-var)
    :map
    cider-repl-mode-map
+   ("M-," . 'cider-repl-handle-shortcut)
    ("C-," . 'cider-repl-handle-shortcut)
    ("<backspace>" . 'paredit-backward-delete))
   :config

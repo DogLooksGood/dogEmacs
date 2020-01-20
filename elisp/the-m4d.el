@@ -25,6 +25,7 @@
 (m4d-leader-define-key
  '("s" . paredit-split-sexp)
  '("r" . paredit-raise-sexp)
+ '("t" . transpose-sexps)
  '("e" . eval-last-sexp)
  '("x" . eval-buffer)
  '("f" . find-file)
@@ -54,6 +55,7 @@
  '("cj" . cider-jack-in)
  '("cs" . cider-jack-in-clojurescript)
  '("ck" . cider-eval-buffer)
+ '("cq" . cider-quit)
  '(";" . user/clojure-hash-comment))
 
 (m4d-leader-define-mode-key

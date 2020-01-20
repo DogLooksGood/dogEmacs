@@ -680,6 +680,7 @@ If ensure is t, create new if not found."
 (defvar m4d-leader-base-keymap
   (let ((keymap (make-sparse-keymap)))
     (define-key keymap (kbd "SPC") 'm4d-execute-command)
+    (define-key keymap (kbd "cc") 'm4d-cc)
     keymap))
 
 (defvar m4d-normal-keymap nil)
@@ -750,15 +751,13 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "!") 'm4d-query-replace)
         (define-key keymap (kbd "@") 'other-window)
         (define-key keymap (kbd "SPC") 'm4d-leader)
-        (define-key keymap (kbd "DEL") 'm4d-backward-delete)
-        (define-key keymap (kbd "RET") 'm4d-newline)
         keymap))
 
 (defun m4d--mc-setup ()
   ;; this make it to prompt only once
-  (m4d--mc-prompt-once #'mc/mark-all-in-region-regexp)
+  ;; (m4d--mc-prompt-once #'mc/mark-all-in-region-regexp)
   (add-to-list 'mc/cmds-to-run-for-all 'm4d-esc)
-  (add-to-list 'mc/cmds-to-run-once 'm4d-mark))
+  (add-to-list 'mc/cmds-to-run-once 'm4d-mark 'mc/mark-all-in-region))
 
 (defun m4d--minibuffer-setup ()
   (define-key minibuffer-local-map (kbd "<escape>") 'keyboard-escape-quit)
