@@ -57,6 +57,7 @@
  '(swiper-match-face-2            ((t (:foreground "white"))))
  '(swiper-match-face-3            ((t (:foreground "white"))))
  '(swiper-match-face-4            ((t (:foreground "white"))))
+ ;; '(ivy-current-match              ((t (:background "color-232"))))
  '(ivy-minibuffer-match-highlight ((t (:foreground "color-44"))))
  '(ivy-minibuffer-match-face-1    ((t (:foreground "color-247"))))
  '(ivy-minibuffer-match-face-2    ((t (:foreground "color-161"))))

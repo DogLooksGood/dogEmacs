@@ -89,6 +89,9 @@
 (defvar m4d-switch-buffer-kbd-macro "C-x b"
   "The kbd macro used in `m4d-switch-buffer'.")
 
+(defvar m4d-newline-kbd-macro "RET"
+  "The kbd macro used in `m4d-newline'.")
+
 ;;; Internal Variables
 
 (defvar m4d--last-select nil
@@ -450,8 +453,14 @@
           (lisp-indent-line)))
     (message "No selection!")))
 
+(defun m4d-newline ()
+  (interactive)
+  (m4d--clear-select)
+  (m4d--execute-kbd-macro m4d-newline-kbd-macro))
+
 (defun m4d-backward-delete ()
   (interactive)
+  (m4d--clear-select)
   (m4d--execute-kbd-macro m4d-backward-delete-char-kbd-macro))
 
 (defun m4d-delete ()
@@ -741,6 +750,8 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "!") 'm4d-query-replace)
         (define-key keymap (kbd "@") 'other-window)
         (define-key keymap (kbd "SPC") 'm4d-leader)
+        (define-key keymap (kbd "DEL") 'm4d-backward-delete)
+        (define-key keymap (kbd "RET") 'm4d-newline)
         keymap))
 
 (defun m4d--mc-setup ()
