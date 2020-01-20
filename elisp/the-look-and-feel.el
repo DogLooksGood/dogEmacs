@@ -55,7 +55,7 @@
   (let* ((available-width (- (window-width) (length left) 1)))
     (format (format "%%s %%%ds " available-width) left right)))
 
-(if (display-graphic-p)
+(when (display-graphic-p)
     (setq-default mode-line-format nil))
 
 ;;; title line setup

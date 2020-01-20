@@ -48,14 +48,6 @@
   :config
   (modify-syntax-entry ?: "w" clojure-mode-syntax-table)
   (setq clojure-indent-style 'always-indent)
-  ;; If don't highlight the namespace prefix.
-  ;; (add-to-list 'clojure-font-lock-keywords
-  ;;              `(,(concat "\\("
-  ;;                         clojure--sym-regexp
-  ;;                         "?\\)\\(/\\)\\("
-  ;;                         clojure--sym-regexp
-  ;;                         "\\)")
-  ;;                (0 'default)))
   (add-to-list 'clojure-font-lock-keywords
                `(,(concat "\\(:\\{1,2\\}\\)\\("
                           clojure--sym-regexp
