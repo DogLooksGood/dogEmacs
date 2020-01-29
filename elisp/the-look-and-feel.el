@@ -19,12 +19,12 @@
 
 (when (display-graphic-p)
   (defun user/set-font (&rest args)
-    (set-frame-font "meslo lg l 9" t t)
+    (set-frame-font "cascadia mono-9" t t)
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font
        (frame-parameter nil 'font)
        charset
-       (font-spec :family "Sarasa Mono SC" :size 32))))
+       (font-spec :family "Sarasa Mono SC" :size 30))))
   (user/set-font))
 
 (setq underline-minimum-offset 0)
@@ -35,7 +35,7 @@
 ;; Face tweaks
 (custom-set-faces
  '(highlight-symbol-face ((t :underline "#668899")))
- ;; '(hl-line ((t :underline "#353535" :overline "#353535")))
+ '(hl-line ((t :underline "#353535" :overline "#353535")))
  '(fringe ((t :background nil)))
  '(yas-field-highlight-face ((t :box "#777")))
  '(window-divider ((t :foreground "#3F3F3F"))))

@@ -186,6 +186,10 @@
         (push-mark (if direction-right beg end) t t)
         (goto-char (if direction-right end beg))))))
 
+(defun m4d--in-string-p ()
+  "Return if we are in string."
+  (nth 3 (syntax-ppss)))
+
 ;;; navigation command
 
 (defun m4d-head-1 (arg)
@@ -274,35 +278,72 @@ Do nothing if always at the end."
 
 ;;; selection
 
+(defun m4d--flip-right ()
+  (push-mark (point) t t)
+  (goto-char (save-mark-and-excursion
+               (ignore-errors
+                 (while (< (point) (point-max)) (forward-sexp)))
+               (point)))
+  (while (not (or (= (point) (point-max))
+                  (looking-at "\\s)")))
+    (forward-char)))
+
+(defun m4d--flip-left ()
+  (push-mark (point) t t)
+  (goto-char (save-mark-and-excursion
+               (ignore-errors
+                 (while (> (point) (point-min)) (backward-sexp)))
+               (point)))
+  (while (not (or (= (point) (point-min))
+                  (looking-back "\\s(" 1)))
+    (backward-char)))
+
+(defun m4d--flip-string-right ()
+  (push-mark (point) t t)
+  (while (and (< (point) (point-max))
+             (save-mark-and-excursion (forward-char) (m4d--in-string-p)))
+    (forward-char)))
+
+(defun m4d--flip-string-left ()
+  (push-mark (point) t t)
+  (while (and (> (point) (point-min))
+              (save-mark-and-excursion (backward-char) (m4d--in-string-p)))
+    (backward-char)))
+
+"uHUhntehuanshunteosahuntesoa"
+
 (defun m4d-flip ()
   (interactive)
   (unless (equal 'flip m4d--last-select)
     (m4d--clear-select))
   (cond
+   ((m4d--in-string-p)
+    (cond
+     ((not (region-active-p))
+      (m4d--flip-string-right))
+
+     ((not (m4d--direction-right-p))
+      (exchange-point-and-mark)
+      (m4d--clear-select)
+      (m4d--flip-string-right))
+
+     (t
+      (exchange-point-and-mark)
+      (m4d--clear-select)
+      (m4d--flip-string-left))))
+
    ((not (region-active-p))
-    (push-mark (point) t t)
-    (goto-char (save-mark-and-excursion
-                 (ignore-errors
-                   (while (< (point) (point-max)) (forward-sexp)))
-                 (point))))
+    (m4d--flip-right))
 
    ((not (m4d--direction-right-p))
     (exchange-point-and-mark)
     (m4d--clear-select)
-    (push-mark (point) t t)
-    (goto-char (save-mark-and-excursion
-                 (ignore-errors
-                   (while (< (point) (point-max)) (forward-sexp)))
-                 (point))))
+    (m4d--flip-right))
 
    (t
     (exchange-point-and-mark)
     (m4d--clear-select)
-    (push-mark (point) t t)
-    (goto-char (save-mark-and-excursion
-                 (ignore-errors
-                   (while (> (point) (point-min)) (backward-sexp)))
-                 (point)))))
+    (m4d--flip-left)))
   (setq m4d--last-select 'flip))
 
 (defun m4d-exp-select (arg)

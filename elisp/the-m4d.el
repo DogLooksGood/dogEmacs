@@ -41,6 +41,7 @@
  '("ee" . eval-last-sexp)
  '("ed" . eval-defun)
  '("eq" . save-buffers-kill-terminal)
+ '("i" . ivy-resume)
  '("w" . save-buffer)
  '("t" . transpose-sexps)
  '("r" . paredit-raise-sexp)

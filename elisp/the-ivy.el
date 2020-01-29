@@ -2,6 +2,8 @@
   :ensure t
   :bind
   (("M-z" . 'ivy-resume)
+   :map ivy-switch-buffer-map
+   ("!" . 'ivy-switch-buffer-kill)
    :map ivy-minibuffer-map
    ("<escape>" . 'keyboard-escape-quit)
    ("C-u" . 'keyboard-escape-quit)
