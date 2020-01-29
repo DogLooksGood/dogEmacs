@@ -2,16 +2,16 @@
 
 (bind-key "C-S-L" 'display-line-numbers-mode)
 
-(defun user/update-line-number-relative ()
-  (when display-line-numbers
-    (setq-local display-line-numbers
-                (if (or m4d-normal-mode buffer-read-only)
-                    'relative
-                  t))))
+;; (defun user/update-line-number-relative ()
+;;   (when display-line-numbers
+;;     (setq-local display-line-numbers
+;;                 (if (or m4d-normal-mode buffer-read-only)
+;;                     'relative
+;;                   t))))
 
-(add-hook 'm4d-insert-modal-hook 'user/update-line-number-relative)
-(add-hook 'm4d-normal-modal-hook 'user/update-line-number-relative)
-(add-hook 'display-line-numbers-mode-hook #'user/update-line-number-relative)
+;; (add-hook 'm4d-insert-modal-hook 'user/update-line-number-relative)
+;; (add-hook 'm4d-normal-modal-hook 'user/update-line-number-relative)
+;; (add-hook 'display-line-numbers-mode-hook #'user/update-line-number-relative)
 
 ;; Highlight current line.
 (when (display-graphic-p)
@@ -31,16 +31,8 @@
 
 (use-package paren-face
   :init
-  (setq paren-face-regexp "[][(){}]")
+  (setq paren-face-regexp "[()]")
   (global-paren-face-mode 1))
-
-;;; Bug of yascroll
-;;; In emacs 27, yascroll doesn't work.
-;; (require 'cl)
-;; (use-package yascroll
-;;   :init
-;;   (setq yascroll:delay-to-hide 5)
-;;   (global-yascroll-bar-mode))
 
 (use-package focus
   :bind
@@ -52,6 +44,5 @@
 (set-display-table-slot standard-display-table
                         'vertical-border
                         (make-glyph-code ?┃))
-
 
 (provide 'the-visual)

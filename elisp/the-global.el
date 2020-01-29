@@ -54,24 +54,24 @@
 
 (setq-default indent-tabs-mode nil)
 
-(when (display-graphic-p)
-  (setq pop-up-frames t))
-
 (prefer-coding-system 'utf-8)
 
 ;; Distraction Free. Also move these to Xresources for faster startup.
 (defun user/setup-distraction-free (&optional new-frame)
   (menu-bar-mode -1)
   (tool-bar-mode -1)
-  (scroll-bar-mode -1))
+  ;; For emacs-nox
+  (when (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode -1)))
 
-(add-hook 'after-make-frame-functions #'user/setup-distraction-free)
+(when (display-graphic-p)
+  (add-hook 'after-make-frame-functions #'user/setup-distraction-free))
 
 (user/setup-distraction-free)
 
 ;; Show matched parens
 (setq show-paren-delay 0.01)
-(show-paren-mode 1)
+(show-paren-mode -1)
 
 ;; Add internal margin
 (set-frame-parameter (selected-frame) 'internal-border-width 16)
@@ -101,7 +101,7 @@
       (window-divider-mode -1))))
 
 (window-divider-mode -1)
-;; (add-hook 'window-configuration-change-hook #'user/toggle-window-divider-and-border)
+(add-hook 'window-configuration-change-hook #'user/toggle-window-divider-and-border)
 
 ;; Replace all "yes or no" with "y or n".
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -161,9 +161,6 @@ point reaches the beginning or end of the buffer, stop there."
     (funcall initial-major-mode)
     (setq buffer-offer-save t)
     $buf))
-
-(defvar user/god-mode-enable-mode-list nil
-  "A list of mode besides prog, conf, text, fundamental, those we should enable god-mode. ")
 
 (defun user/make-silent (func &rest args)
   (cl-letf (((symbol-function 'message)

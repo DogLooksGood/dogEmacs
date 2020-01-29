@@ -38,7 +38,17 @@
 
 ;;; Internal command translation.
 
-(defvar m4d-kill-line-kbd-macro "C-k"
+(defvar m4d--eldoc-commands nil)
+(setq m4d--eldoc-commands
+      '(m4d-head
+        m4d-tail
+        m4d-prev
+        m4d-next
+        m4d-exp
+        m4d-word
+        m4d-backward-word))
+
+(defvar m4d-zap-kbd-macro "C-k"
   "The kbd macro used in `m4d-zap'.")
 
 (defvar m4d-delete-char-kbd-macro "C-d"
@@ -92,10 +102,15 @@
 (defvar m4d-newline-kbd-macro "RET"
   "The kbd macro used in `m4d-newline'.")
 
+(defvar m4d-other-window-kbd-macro "C-x o"
+  "The kbd macro used in `m4d-other-window'.")
+
 ;;; Internal Variables
 
 (defvar m4d--last-select nil
   "The last select behavior.")
+
+(defvar m4d--specific-vars nil)
 
 (defvar m4d--selections nil
   "All selections")
@@ -103,51 +118,15 @@
 (defvar m4d--leader-mode-keymaps nil
   "Leader keymaps used for major modes.")
 
-(defvar m4d--direction 'right
-  "Current direction, can be 'left or 'right.")
+(setq m4d--specific-vars
+      '(m4d--last-select))
+
+(eval-after-load 'multiple-cursors
+  (dolist (it m4d--specific-vars)
+    (add-to-list 'mc/cursor-specific-vars it)))
 
 (defun m4d-no-op ()
   (interactive))
-
-;;; Selections
-
-(defun m4d--flip-direction ()
-  (setq m4d--direction
-        (if (eq 'left m4d--direction)
-            'right
-          'left)))
-
-(defun m4d--update-selection-display ()
-  (remove-overlays (point-min) (point-max) 'name 'm4d-selection)
-  (mapcar (lambda (s)
-            (let* ((selection-overlay (make-overlay (car s) (cdr s))))
-              (overlay-put selection-overlay 'face 'region)
-              (overlay-put selection-overlay 'name 'm4d-selection)))
-          m4d--selections))
-
-(defun m4d--add-cursor-below ()
-  (interactive)
-  (save-mark-and-excursion
-    (when (zerop (forward-line 1))
-      (m4d--create-selection (point) (1+ (point))))))
-
-(defun m4d--remove-all-selections ()
-  (setq m4d--selections nil)
-  (m4d--update-selection-display))
-
-(defun m4d--create-selection (begin end)
-  "Create a selection from begin to end."
-  (push (cons begin end) m4d--selections)
-  (m4d--update-selection-display))
-
-;; (ignore
-;;  (m4d--add-cursor-below)
-;;
-;;  (m4d--flip-direction)
-;;
-;;  (m4d--remove-all-selections)
-;;
-;;  (m4d--create-selection (point) (+ 5 (point))))
 
 (defun m4d--mc-prompt-once-advice (fn &rest args)
   (setq mc--this-command (lambda () (interactive) (apply fn args)))
@@ -177,14 +156,16 @@
       (hl-line-mode -1))))
 
 (defun m4d--direction-right-p ()
-  (or (not (region-active-p))
-      (<= (mark) (point))))
+  (if (region-active-p)
+      (>= (point) (mark))
+    t))
 
 (defun m4d--start-select ()
   (push-mark (point) t t))
 
 (defun m4d--clear-select ()
-  (setq m4d--last-select nil)
+  (when m4d--last-select
+    (setq m4d--last-select nil))
   (when (region-active-p)
     (deactivate-mark)))
 
@@ -214,10 +195,6 @@
         (left-char))
       (setq i (1+ i)))))
 
-(defun m4d-mark-cursors (beg end)
-  (interactive "r")
-  (message "%s %s" beg end))
-
 (defun m4d-tail-1 (arg)
   (let ((i 0))
     (while (< i (prefix-numeric-value arg))
@@ -226,75 +203,149 @@
       (setq i (1+ i)))))
 
 (defun m4d-head (arg)
+  "Move cursor towards to head of current line.
+Do nothing if always at the beginning."
   (interactive "P")
-  (m4d--clear-select)
-  (m4d-head-1 arg))
+  (unless (equal 'char m4d--last-select)
+    (m4d--clear-select))
+  (m4d-head-1 arg)
+  (setq m4d--last-select 'char))
 
 (defun m4d-head-select (arg)
+  "Same to `m4d-head' but activate the selection."
   (interactive "P")
   (m4d--keep-select)
-  (m4d-head-1 arg))
+  (m4d-head-1 arg)
+  (setq m4d--last-select 'char))
 
 (defun m4d-kill ()
+  "Semantic kill, will call the kbdmacro C-k.
+ It is supposed to bind C-k with commands like `paredit-kill' or `sp-kill-hybrid-sexp'."
   (interactive)
-  (m4d--execute-kbd-macro m4d-kill-line-kbd-macro))
+  (if (not (region-active-p))
+      (message "No selection!")
+    (when (and (equal 'line m4d--last-select)
+               (m4d--direction-right-p)
+               (< (point) (point-max)))
+      (forward-char 1))
+    (m4d--execute-kbd-macro m4d-kill-region-kbd-macro)))
 
 (defun m4d-tail (arg)
+  "Move cursor towards to tail of current line.
+Do nothing if always at the end."
   (interactive "P")
-  (m4d--clear-select)
-  (m4d-tail-1 arg))
+  (unless (equal 'char m4d--last-select)
+    (m4d--clear-select))
+  (m4d-tail-1 arg)
+  (setq m4d--last-select 'char))
 
 (defun m4d-tail-select (arg)
+  "Same to `m4d-tail' but activate the selection."
   (interactive "P")
   (m4d--keep-select)
-  (m4d-tail-1 arg))
+  (m4d-tail-1 arg)
+  (setq m4d--last-select 'char))
 
 (defun m4d-prev (arg)
   (interactive "P")
-  (m4d--clear-select)
-  (previous-line (prefix-numeric-value arg)))
+  (unless (equal 'char m4d--last-select)
+    (m4d--clear-select))
+  (previous-line (prefix-numeric-value arg))
+  (setq m4d--last-select 'char))
 
 (defun m4d-prev-select (arg)
   (interactive "P")
   (m4d--keep-select)
-  (previous-line (prefix-numeric-value arg)))
+  (previous-line (prefix-numeric-value arg))
+  (setq m4d--last-select 'char))
 
 (defun m4d-next (arg)
   (interactive "P")
-  (m4d--clear-select)
-  (next-line (prefix-numeric-value arg)))
+  (unless (equal 'char m4d--last-select)
+    (m4d--clear-select))
+  (next-line (prefix-numeric-value arg))
+  (setq m4d--last-select 'char))
 
 (defun m4d-next-select (arg)
   (interactive "P")
   (m4d--keep-select)
-  (next-line (prefix-numeric-value arg)))
+  (next-line (prefix-numeric-value arg))
+  (setq m4d--last-select 'char))
 
 ;;; selection
 
+(defun m4d-flip ()
+  (interactive)
+  (unless (equal 'flip m4d--last-select)
+    (m4d--clear-select))
+  (cond
+   ((not (region-active-p))
+    (push-mark (point) t t)
+    (goto-char (save-mark-and-excursion
+                 (ignore-errors
+                   (while (< (point) (point-max)) (forward-sexp)))
+                 (point))))
+
+   ((not (m4d--direction-right-p))
+    (exchange-point-and-mark)
+    (m4d--clear-select)
+    (push-mark (point) t t)
+    (goto-char (save-mark-and-excursion
+                 (ignore-errors
+                   (while (< (point) (point-max)) (forward-sexp)))
+                 (point))))
+
+   (t
+    (exchange-point-and-mark)
+    (m4d--clear-select)
+    (push-mark (point) t t)
+    (goto-char (save-mark-and-excursion
+                 (ignore-errors
+                   (while (> (point) (point-min)) (backward-sexp)))
+                 (point)))))
+  (setq m4d--last-select 'flip))
+
+(defun m4d-exp-select (arg)
+  (interactive "P")
+  (m4d--keep-select)
+  (ignore-errors
+   (if (m4d--direction-right-p)
+       (forward-sexp arg)
+     (backward-sexp arg))))
+
 (defun m4d-exp (arg)
   (interactive "P")
-  (when (and (m4d--line-select-p)
-             (not (member last-command '(m4d-exp m4d-flip))))
+  (unless (or (equal 'exp m4d--last-select)
+              (equal 'list m4d--last-select))
     (m4d--clear-select))
-  (if (region-active-p)
-      (ignore-errors
-        (if (m4d--direction-right-p)
-            (forward-sexp arg)
-          (backward-sexp arg)))
-    (let ((should-flip))
-      ;; this allow us to select the expression when cursor at position like:
-      ;; )|).
-      (when (looking-at "\\s)")
-        (backward-sexp)
-        (setq should-flip t))
-      (when (let ((pos (point)))
-              (save-mark-and-excursion
-                (back-to-indentation)
-                (< pos (point))))
-        (back-to-indentation))
+  (cond
+   ((let ((pos (point)))
+      (save-mark-and-excursion
+        (back-to-indentation)
+        (< pos (point))))
+    (back-to-indentation)
+    (push-mark (point) t t)
+    (forward-sexp))
+
+   ((not (region-active-p))
+    (unless (m4d--select-thing 'sexp t)
+      (looking-at "\\s)")
+      (backward-sexp)
       (m4d--select-thing 'sexp t)
-      (when (and should-flip (looking-at "\\s)"))
-        (m4d-flip)))))
+      (m4d-exchange)))
+
+   ((not (m4d--direction-right-p))
+    (push-mark (point) t t)
+    (condition-case err
+        (backward-sexp)
+      (error (forward-sexp))))
+
+   (t
+    (push-mark (point) t t)
+    (condition-case err
+        (forward-sexp)
+      (error (backward-sexp)))))
+  (setq m4d--last-select 'exp))
 
 (defun m4d--line-select-p ()
   (when (region-active-p)
@@ -303,9 +354,11 @@
       (and (eq beg (save-mark-and-excursion (goto-char beg) (line-beginning-position)))
            (eq end (save-mark-and-excursion (goto-char end) (line-end-position)))))))
 
-(defun m4d-line (arg)
+(defun m4d-forward-line (arg)
   (interactive "P")
-  (if (m4d--line-select-p)
+  (unless (equal 'line m4d--last-select)
+    (m4d--clear-select))
+  (if (equal 'line m4d--last-select)
       (if (m4d--direction-right-p)
           (progn
             (forward-line arg)
@@ -313,17 +366,16 @@
         (progn
           (previous-line arg)
           (goto-char (line-beginning-position))))
-     (progn
-      (push-mark (line-beginning-position) t t)
-      (goto-char (line-end-position)))))
-
-(defun m4d-exp-reverse (arg)
-  (interactive "P")
-  (when (region-active-p)
-    (ignore-errors
-      (if (m4d--direction-right-p)
-          (backward-sexp arg)
-        (forward-sexp arg)))))
+    (let ((n (prefix-numeric-value arg)))
+      (if (> n 0)
+          (progn
+            (push-mark (line-beginning-position) t t)
+            (forward-line (1- n))
+            (goto-char (line-end-position)))
+        (push-mark (line-end-position) t t)
+        (forward-line (1+ n))
+        (goto-char (line-beginning-position)))))
+  (setq m4d--last-select 'line))
 
 (defun m4d-kmacro ()
   (interactive)
@@ -334,40 +386,61 @@
   (interactive "P")
   (kmacro-call-macro arg t))
 
-(defun m4d-expand ()
+(defun m4d-block-expand ()
   (interactive)
-  (m4d--select-thing 'list (m4d--direction-right-p)))
+  (unless (equal m4d--last-select 'list)
+    (m4d--clear-select))
+  (m4d--select-thing 'list (m4d--direction-right-p))
+  (setq m4d--last-select 'list))
 
 (defun m4d-word (arg)
   (interactive "P")
+  (unless (equal m4d--last-select 'word)
+    (when (let ((bound (bounds-of-thing-at-point 'word)))
+            (and bound
+                 (<= (car bound) (point))
+                 (< (point) (cdr bound))))
+      (forward-word)))
   (forward-word (prefix-numeric-value arg))
-  (m4d--select-thing 'word t))
+  (m4d--select-thing 'word t)
+  (setq m4d--last-select 'word))
 
 (defun m4d-word-select (arg)
   (interactive "P")
   (unless (m4d--direction-right-p)
-    (m4d-flip))
+    (m4d-exchange))
   (m4d--keep-select)
-  (forward-word (prefix-numeric-value arg)))
+  (forward-word (prefix-numeric-value arg))
+  (setq m4d--last-select 'word))
 
 (defun m4d-backward-word (arg)
   (interactive "P")
   (backward-word (prefix-numeric-value arg))
-  (m4d--select-thing 'word nil))
+  (m4d--select-thing 'word nil)
+  (setq m4d--last-select 'word))
 
 (defun m4d-backward-word-select (arg)
   (interactive "P")
   (when (m4d--direction-right-p)
-    (m4d-flip))
+    (m4d-exchange))
   (m4d--keep-select)
-  (backward-word (prefix-numeric-value arg)))
+  (backward-word (prefix-numeric-value arg))
+  (setq m4d--last-select 'word))
 
-(defun m4d-flip ()
+(defun m4d-exchange ()
   (interactive)
   (when (region-active-p)
     (exchange-point-and-mark)))
 
 ;;; pagination
+
+(defun m4d-select ()
+  (interactive)
+  (unless multiple-cursors-mode
+    (if (region-active-p)
+        (call-interactively #'mc/mark-all-in-region-regexp)
+      (call-interactively #'isearch-forward-regexp)))
+  (setq m4d--last-select nil))
 
 (defun m4d-page-up (arg)
   (interactive "P")
@@ -389,12 +462,20 @@
   (m4d--clear-select)
   (goto-char (point-max)))
 
+(defun m4d-mark-whole-buffer ()
+  (interactive)
+  (if (equal m4d--last-select 'buffer)
+      (m4d-exchange)
+    (mark-whole-buffer)
+    (setq m4d--last-select 'buffer)))
+
 ;;; modification
 
 (defun m4d-open-line ()
   (interactive)
+  (unless (region-active-p)
+    (goto-char (line-end-position)))
   (m4d--clear-select)
-  (goto-char (line-end-position))
   (newline-and-indent)
   (m4d-insert))
 
@@ -412,8 +493,7 @@
   (when (and (mark) (region-active-p))
     (goto-char (max (mark) (point)))
     (m4d--clear-select))
-  (m4d-normal-mode -1)
-  (m4d--update-cursor-shape))
+  (m4d-normal-mode -1))
 
 (defun m4d-insert ()
   (interactive)
@@ -421,7 +501,6 @@
     (goto-char (min (mark) (point)))
     (m4d--clear-select))
   (m4d-normal-mode -1)
-  (m4d--update-cursor-shape)
   (run-hooks 'm4d-insert-modal-hook))
 
 (defun m4d-slurp ()
@@ -437,7 +516,7 @@
 (defun m4d-zap (arg)
   (interactive "P")
   (m4d--clear-select)
-  (m4d--execute-kbd-macro m4d-kill-line-kbd-macro))
+  (m4d--execute-kbd-macro m4d-zap-kbd-macro))
 
 (defun m4d-join ()
   (interactive)
@@ -456,7 +535,8 @@
 (defun m4d-newline ()
   (interactive)
   (m4d--clear-select)
-  (m4d--execute-kbd-macro m4d-newline-kbd-macro))
+  (newline-and-indent)
+  (m4d-insert))
 
 (defun m4d-backward-delete ()
   (interactive)
@@ -465,13 +545,7 @@
 
 (defun m4d-delete ()
   (interactive)
-  (if (region-active-p)
-      (progn (when (and (equal last-command 'm4d-line)
-                        (m4d--direction-right-p)
-                        (< (point) (point-max)))
-               (forward-char))
-             (m4d--execute-kbd-macro m4d-kill-region-kbd-macro))
-    (m4d--execute-kbd-macro m4d-delete-char-kbd-macro)))
+  (m4d--execute-kbd-macro m4d-delete-char-kbd-macro))
 
 (defun m4d-duplicate-line ()
   (interactive)
@@ -578,10 +652,19 @@
       (call-interactively 'mc/mark-all-in-region-regexp)
     (call-interactively 'mc/mark-next-like-this)))
 
+(defun m4d-other-window ()
+  (interactive)
+  (m4d--execute-kbd-macro m4d-other-window-kbd-macro))
+
 (defun m4d-quit ()
   (interactive)
-  (setq m4d--last-select nil)
-  (setq m4d--is-selecting nil)
+  (if (> (seq-length (window-list (selected-frame))) 1)
+      (delete-window)
+    (save-buffers-kill-terminal)))
+
+(defun m4d-c-g ()
+  (interactive)
+  (m4d--clear-select)
   (m4d--execute-kbd-macro m4d-keyboard-quit-kbd-macro))
 
 (defun m4d-switch-buffer ()
@@ -596,7 +679,6 @@
              (company--active-p))
     (company-abort))
   (m4d-normal-mode 1)
-  (m4d--update-cursor-shape)
   (run-hooks 'm4d-insert-modal-hook))
 
 (defun m4d-esc ()
@@ -606,8 +688,6 @@
     (mode-line-other-buffer))
    ((minibufferp)
     (call-interactively #'keyboard-escape-quit))
-   (phi-search--active
-    (call-interactively #'phi-search-abort))
    (multiple-cursors-mode
     (m4d-insert-exit))
    (m4d-normal-mode
@@ -615,8 +695,7 @@
    ((m4d--should-enable)
     (m4d-insert-exit))
    (t
-    (mode-line-other-buffer)))
-  (m4d--update-cursor-shape))
+    (mode-line-other-buffer))))
 
 ;;; Define key helpers
 
@@ -667,7 +746,7 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "\\") 'split-window-right)
         (define-key keymap (kbd "|") 'split-window-below)
         (define-key keymap (kbd "q") 'kill-buffer-and-window)
-        (define-key keymap (kbd "@") 'other-window)
+        (define-key keymap (kbd "@") 'm4d-other-window)
         keymap))
 
 (defvar m4d-keymap nil)
@@ -698,33 +777,33 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "9") 'digit-argument)
         (define-key keymap (kbd "0") 'digit-argument)
         (define-key keymap (kbd "a") 'm4d-insert-after)
-        (define-key keymap (kbd "b") 'm4d-copy)
+        (define-key keymap (kbd "b") 'm4d-block-expand)
+        (define-key keymap (kbd "B") 'm4d-mark-whole-buffer)
         (define-key keymap (kbd "c") 'm4d-change)
         (define-key keymap (kbd "C") 'm4d-change-with-yank)
         (define-key keymap (kbd "d") 'm4d-delete)
         (define-key keymap (kbd "D") 'm4d-duplicate-line)
         (define-key keymap (kbd "e") 'm4d-exp)
+        (define-key keymap (kbd "E") 'm4d-exp-select)
         (define-key keymap (kbd "f") 'm4d-flip)
-        (define-key keymap (kbd "g") 'm4d-quit)
+        (define-key keymap (kbd "g") 'm4d-c-g)
         (define-key keymap (kbd "h") 'm4d-head)
         (define-key keymap (kbd "H") 'm4d-head-select)
         (define-key keymap (kbd "i") 'm4d-insert)
         (define-key keymap (kbd "j") 'm4d-join)
         (define-key keymap (kbd "k") 'm4d-kill)
-        (define-key keymap (kbd "l") 'recenter-top-bottom)
-        (define-key keymap (kbd "L") 'reposition-window)
+        (define-key keymap (kbd "l") 'm4d-forward-line)
         (define-key keymap (kbd "m") 'm4d-backward-word)
         (define-key keymap (kbd "M") 'm4d-backward-word-select)
         (define-key keymap (kbd "n") 'm4d-next)
         (define-key keymap (kbd "N") 'm4d-next-select)
         (define-key keymap (kbd "o") 'm4d-open-line)
-        (define-key keymap (kbd "o") 'm4d-open-line)
         (define-key keymap (kbd "O") 'm4d-open-line-up)
         (define-key keymap (kbd "p") 'm4d-prev)
         (define-key keymap (kbd "P") 'm4d-prev-select)
-        (define-key keymap (kbd "q") 'quoted-insert)
-        (define-key keymap (kbd "r") 'm4d-expand)
-        (define-key keymap (kbd "s") 'mc/mark-all-in-region-regexp)
+        (define-key keymap (kbd "q") 'm4d-quit)
+        (define-key keymap (kbd "r") 'm4d-copy)
+        (define-key keymap (kbd "s") 'save-buffer)
         (define-key keymap (kbd "t") 'm4d-tail)
         (define-key keymap (kbd "T") 'm4d-tail-select)
         (define-key keymap (kbd "u") 'undo)
@@ -732,9 +811,10 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "V") 'mc/skip-to-next-like-this)
         (define-key keymap (kbd "w") 'm4d-word)
         (define-key keymap (kbd "W") 'm4d-word-select)
-        (define-key keymap (kbd "x") 'm4d-line)
+        (define-key keymap (kbd "x") 'm4d-exchange)
         (define-key keymap (kbd "y") 'm4d-yank)
-        (define-key keymap (kbd "z") 'repeat-complex-command)
+        (define-key keymap (kbd "z") 'recenter-top-bottom)
+        (define-key keymap (kbd "Z") 'reposition-window)
         (define-key keymap (kbd ".") 'm4d-find-ref)
         (define-key keymap (kbd ",") 'm4d-pop-ref)
         (define-key keymap (kbd "+") 'universal-argument)
@@ -743,30 +823,34 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "&") 'register-to-point)
         (define-key keymap (kbd ")") 'm4d-slurp)
         (define-key keymap (kbd "(") 'm4d-barf)
-        (define-key keymap (kbd "/") 'swiper)
+        (define-key keymap (kbd "/") 'm4d-search)
         (define-key keymap (kbd ";") 'm4d-comment)
         (define-key keymap (kbd "$") 'eshell)
-        (define-key keymap (kbd "?") 'm4d-reverse-search)
-        (define-key keymap (kbd "=") 'mc/vertical-align-with-space)
+        (define-key keymap (kbd "?") 'mc/mark-all-in-region-regexp)
+        (define-key keymap (kbd "=") 'm4d-indent)
         (define-key keymap (kbd "!") 'm4d-query-replace)
-        (define-key keymap (kbd "@") 'other-window)
+        (define-key keymap (kbd "@") 'm4d-other-window)
         (define-key keymap (kbd "SPC") 'm4d-leader)
         keymap))
 
 (defun m4d--mc-setup ()
   ;; this make it to prompt only once
-  ;; (m4d--mc-prompt-once #'mc/mark-all-in-region-regexp)
+  (m4d--mc-prompt-once #'m4d-select)
   (add-to-list 'mc/cmds-to-run-for-all 'm4d-esc)
-  (add-to-list 'mc/cmds-to-run-once 'm4d-mark 'mc/mark-all-in-region))
+  (add-to-list 'mc/cmds-to-run-once 'm4d-mark)
+  (add-to-list 'mc/cmds-to-run-once 'mc/mark-all-in-region)
+  (add-to-list 'mc/cmds-to-run-once 'm4d-select)
+  (add-to-list 'mc/cmds-to-run-once 'm4d-select-string))
 
 (defun m4d--minibuffer-setup ()
   (define-key minibuffer-local-map (kbd "<escape>") 'keyboard-escape-quit)
   (define-key minibuffer-local-map (kbd "C-u") 'keyboard-escape-quit))
 
 (defun m4d--isearch-setup ()
-  (define-key phi-search-default-map (kbd "}") 'phi-search-again-or-next)
-  (define-key phi-search-default-map (kbd "{") 'phi-search-again-or-previous)
-  (define-key phi-search-default-map (kbd "<escape>") 'phi-search-abort))
+  (define-key isearch-mode-map (kbd "}") 'isearch-repeat-forward)
+  (define-key isearch-mode-map (kbd "{") 'isearch-repeat-backward)
+  (define-key isearch-mode-map (kbd "<escape>") 'isearch-abort)
+  (define-key isearch-mode-map (kbd "C-u") 'isearch-abort))
 
 (defun m4d--global-setup ()
   ;; These global key bindings are used for fundamental mode.
@@ -783,20 +867,28 @@ If ensure is t, create new if not found."
         (propertize "INSERT"
                     'face 'm4d-insert-indicator))))
 
+(defun m4d--eldoc-setup ()
+  (apply #'eldoc-add-command m4d--eldoc-commands))
+
 ;;;###autoload
 (defun m4d-setup ()
   (setq delete-active-region nil)
   (m4d--global-setup)
   (m4d--mc-setup)
   (m4d--isearch-setup)
-  (m4d--minibuffer-setup))
+  (m4d--minibuffer-setup)
+  (m4d--eldoc-setup))
+
+(defun m4d--normal-init ())
 
 ;;;###autoload
 (define-minor-mode m4d-normal-mode
   "m4d normal modal state."
   nil
   ""
-  m4d-normal-keymap)
+  m4d-normal-keymap
+  (when m4d-normal-mode
+    (m4d--normal-init)))
 
 ;;;###autoload
 (define-minor-mode m4d-special-mode
@@ -809,7 +901,7 @@ If ensure is t, create new if not found."
 (define-minor-mode m4d-mode
   "Modal for Dvorak."
   nil
-  " m4d"
+  " M4D"
   m4d-keymap)
 
 ;;;###autoload
@@ -817,6 +909,7 @@ If ensure is t, create new if not found."
   (lambda ()
     (m4d-mode 1)
     (when (m4d--should-enable)
+      (add-hook 'post-command-hook #'m4d--update-cursor-shape t t)
       (m4d-normal-mode 1))
     (when (m4d--should-enable-special-mode)
       (m4d-special-mode 1))))

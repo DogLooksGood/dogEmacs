@@ -21,6 +21,7 @@
 (setq quelpa-checkout-melpa-p nil)
 (setq quelpa-update-melpa-p nil)
 (setq use-package-always-ensure t)
+(setq use-package-always-demand t)
 
 ;; Requires
 (require 'use-package)

@@ -4,7 +4,7 @@
 
 ;; Transparency Setup
 (defvar user/alpha nil)
-(setq user/alpha 98)
+(setq user/alpha 100)
 
 (when (display-graphic-p)
   (defun user/set-alpha ()
@@ -19,7 +19,7 @@
 
 (when (display-graphic-p)
   (defun user/set-font (&rest args)
-    (set-frame-font "meslo lg m 9" t t)
+    (set-frame-font "meslo lg l 9" t t)
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font
        (frame-parameter nil 'font)
@@ -35,18 +35,15 @@
 ;; Face tweaks
 (custom-set-faces
  '(highlight-symbol-face ((t :underline "#668899")))
- ;; '(hl-line ((t :underline "#5A5A5A" :overline "#5A5A5A")))
+ ;; '(hl-line ((t :underline "#353535" :overline "#353535")))
  '(fringe ((t :background nil)))
- '(yas-field-highlight-face ((t :box "#777"))))
+ '(yas-field-highlight-face ((t :box "#777")))
+ '(window-divider ((t :foreground "#3F3F3F"))))
 
-(if (display-graphic-p)
-  (use-package zenburn-theme
-    :init
-    (load-theme 'zenburn t))
-  (progn
-    (require 'joker-theme)
-    (setq visible-cursor nil)
-    (load-theme 'joker t)))
+(progn
+  (require 'joker-theme)
+  (setq visible-cursor nil)
+  (load-theme 'joker t))
 
 ;;; Mode Line Setup
 (defun user/simple-mode-line-render (left right)
@@ -61,28 +58,27 @@
 ;;; title line setup
 (setq-default frame-title-format
               '("["
-                (:eval (user/project-name))
                 (:eval
                  (when vc-mode
                    (replace-regexp-in-string "^ Git" " " vc-mode)))
                 "]"
                 " %b%* %e <%m>"))
 
-(unless (display-graphic-p)
-  (use-package mini-modeline
-    :quelpa (mini-modeline :repo "kiennq/emacs-mini-modeline" :fetcher github)
-    :config
-    (setq mini-modeline-r-format '("%l:%c  %b%* %e %m "
-                                   (:eval (m4d-indicator))))
-    (setq mini-modeline-l-format '((:eval (mini-modeline-msg))))
-    (setq mini-modeline-enhance-visual nil
-          mini-modeline-echo-duration 2)
-    (mini-modeline-mode t)))
+(use-package mini-modeline
+  :quelpa (mini-modeline :repo "kiennq/emacs-mini-modeline" :fetcher github)
+  :config
+  (setq mini-modeline-r-format '("%l:%c  %b%* %e %m "
+                                 (:eval (m4d-indicator))))
+  (setq mini-modeline-l-format '((:eval (mini-modeline-msg))))
+  (setq mini-modeline-enhance-visual nil
+        mini-modeline-echo-duration 2)
+  (mini-modeline-mode t))
 
 ;;; Run setup for future frames.
 
 (defun user/new-frame-setup (frame)
   (select-frame frame)
+  (user/set-font)
   (user/set-alpha))
 
 (when (display-graphic-p)

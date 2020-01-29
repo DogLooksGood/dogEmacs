@@ -3,7 +3,7 @@
 (use-package emmet-mode
   :hook (mhtml-mode)
   :bind
-  (:map mhtml-mode-map
+  (:map emmet-mode-keymap
         ("M-RET" . 'emmet-expand-line))
   :init
   (add-hook 'mhtml-mode-hook 'emmet-mode))

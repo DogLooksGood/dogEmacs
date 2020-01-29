@@ -11,9 +11,10 @@
   (setq org-hide-emphasis-markers t)
   (setq org-export-html-postamble nil))
 
-(use-package org-bullets
-  :init
-  (setq org-ellipsis "⤵")
-  (add-hook 'org-mode-hook 'user/org-mode-setup))
+(when (display-graphic-p)
+  (use-package org-bullets
+    :init
+    (setq org-ellipsis "⤵")
+    (add-hook 'org-mode-hook 'user/org-mode-setup)))
 
 (provide 'the-org)

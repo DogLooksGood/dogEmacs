@@ -4,15 +4,14 @@
    ripgrep-search-mode-map
    ("w" . 'wgrep-change-to-wgrep-mode)))
 
-(require 'project)
+(use-package projectile
+  :init
+  (projectile-global-mode 1))
 
-;; (use-package projectile)
+(use-package counsel-projectile)
+
+;; (require 'project)
 ;;
-;; (use-package counsel-projectile
-;;   :bind
-;;   ("C-x C-o" . 'counsel-projectile-find-file)
-;;   ("C-x C-r" . 'projectile-ripgrep)
-;;   ("C-x C-p" . 'counsel-projectile-switch-project)
-;;   ("C-x C-q" . 'projectile-kill-buffers))
+;; (setq project-vc-ignores '(".gitignore"))
 
 (provide 'the-project)
