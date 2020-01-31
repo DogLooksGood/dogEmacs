@@ -9,13 +9,21 @@
       (:inherit font-lock-string-face)))
   "Visual indicator"
   :group 'm4d)
-;;;
+
 (defface m4d-insert-indicator
   '((((class color) (background dark))
       (:inherit font-lock-function-name-face))
      (((class color) (background light))
       (:inherit font-lock-function-name-face)))
   "Insert indicator"
+  :group 'm4d)
+
+(defface m4d-motion-indicator
+  '((((class color) (background dark))
+      (:inherit font-lock-string-face))
+     (((class color) (background light))
+      (:inherit font-lock-string-face)))
+  "Motion indicator"
   :group 'm4d)
 
 ;;; Custom Variables
@@ -26,11 +34,20 @@
 (defvar m4d-normal-modal-hook nil
   "A hook runs when we enter the normal modal.")
 
-(defvar m4d-special-mode-list
-  '(dired-mode
-    help-mode
-    compilation-mode)
+(defvar m4d-motion-escape-mode-list nil
+  "A list of major modes which allow escape to visual mode by press ESC.")
+(setq m4d-motion-escape-mode-list
+      '(eshell-mode
+        cider-repl-mode))
+
+(defvar m4d-motion-mode-list nil
   "A list of modes should be treated as special mode .")
+(setq m4d-motion-mode-list
+      '(dired-mode
+        ripgrep-search-mode
+        help-mode
+        compilation-mode
+        eshell-mode))
 
 (defvar m4d-enable-mode-list
   '(json-mode)
@@ -48,8 +65,8 @@
         m4d-word
         m4d-backward-word))
 
-(defvar m4d-zap-kbd-macro "C-k"
-  "The kbd macro used in `m4d-zap'.")
+(defvar m4d-kill-line-kbd-macro "C-k"
+  "The kbd macro used in `m4d-kill'.")
 
 (defvar m4d-delete-char-kbd-macro "C-d"
   "The kbd macro used in `m4d-delete'.")
@@ -105,6 +122,23 @@
 (defvar m4d-other-window-kbd-macro "C-x o"
   "The kbd macro used in `m4d-other-window'.")
 
+(defvar m4d-eval-last-sexp-kbd-macro "C-x C-e"
+  "The kbd macro used in `m4d-eval-last-sexp'.")
+
+(defvar m4d-eval-defun-kbd-macro "C-M-x"
+  "The kbd macro used in `m4d-eval-defun'.")
+
+(defvar m4d-digit-1-kbd-macro "C-1")
+(defvar m4d-digit-2-kbd-macro "C-2")
+(defvar m4d-digit-3-kbd-macro "C-3")
+(defvar m4d-digit-4-kbd-macro "C-4")
+(defvar m4d-digit-5-kbd-macro "C-5")
+(defvar m4d-digit-6-kbd-macro "C-6")
+(defvar m4d-digit-7-kbd-macro "C-7")
+(defvar m4d-digit-8-kbd-macro "C-8")
+(defvar m4d-digit-9-kbd-macro "C-9")
+(defvar m4d-digit-0-kbd-macro "C-0")
+
 ;;; Internal Variables
 
 (defvar m4d--last-select nil
@@ -136,24 +170,21 @@
   (dolist (fn fns)
     (advice-add fn :around #'m4d--mc-prompt-once-advice)))
 
-(defun m4d--should-enable-special-mode ()
-  (or (member major-mode m4d-special-mode-list)
+(defun m4d--should-enable-motion-p ()
+  (or (member major-mode m4d-motion-mode-list)
       (derived-mode-p 'special-mode)))
 
 (defun m4d--should-enable ()
-  (or (equal major-mode 'fundamental-mode)
-      view-mode
-      (member major-mode m4d-enable-mode-list)
-      (derived-mode-p 'text-mode 'conf-mode 'prog-mode)))
+  (and (not (member major-mode m4d-motion-escape-mode-list))
+       (or (equal major-mode 'fundamental-mode)
+           view-mode
+           (member major-mode m4d-enable-mode-list)
+           (derived-mode-p 'text-mode 'conf-mode 'prog-mode))))
 
 (defun m4d--update-cursor-shape ()
-  (if (display-graphic-p)
-    (if (and (m4d--should-enable) (not m4d-normal-mode))
-        (setq cursor-type '(bar . 5))
-      (setq cursor-type 'box))
-    (if (and (m4d--should-enable) (not m4d-normal-mode))
-        (hl-line-mode 1)
-      (hl-line-mode -1))))
+  (if (and (m4d--should-enable) (not m4d-normal-mode))
+      (setq cursor-type '(bar . 3))
+    (setq cursor-type 'box)))
 
 (defun m4d--direction-right-p ()
   (if (region-active-p)
@@ -189,6 +220,29 @@
 (defun m4d--in-string-p ()
   "Return if we are in string."
   (nth 3 (syntax-ppss)))
+
+;;; digit argument
+
+(defun m4d-digit-0 ()
+  (m4d--execute-kbd-macro m4d-digit-0-kbd-macro))
+(defun m4d-digit-1 ()
+  (m4d--execute-kbd-macro m4d-digit-1-kbd-macro))
+(defun m4d-digit-2 ()
+  (m4d--execute-kbd-macro m4d-digit-2-kbd-macro))
+(defun m4d-digit-3 ()
+  (m4d--execute-kbd-macro m4d-digit-3-kbd-macro))
+(defun m4d-digit-4 ()
+  (m4d--execute-kbd-macro m4d-digit-4-kbd-macro))
+(defun m4d-digit-5 ()
+  (m4d--execute-kbd-macro m4d-digit-5-kbd-macro))
+(defun m4d-digit-6 ()
+  (m4d--execute-kbd-macro m4d-digit-6-kbd-macro))
+(defun m4d-digit-7 ()
+  (m4d--execute-kbd-macro m4d-digit-7-kbd-macro))
+(defun m4d-digit-8 ()
+  (m4d--execute-kbd-macro m4d-digit-8-kbd-macro))
+(defun m4d-digit-9 ()
+  (m4d--execute-kbd-macro m4d-digit-9-kbd-macro))
 
 ;;; navigation command
 
@@ -227,7 +281,7 @@ Do nothing if always at the beginning."
  It is supposed to bind C-k with commands like `paredit-kill' or `sp-kill-hybrid-sexp'."
   (interactive)
   (if (not (region-active-p))
-      (message "No selection!")
+      (m4d--execute-kbd-macro m4d-kill-line-kbd-macro)
     (when (and (equal 'line m4d--last-select)
                (m4d--direction-right-p)
                (< (point) (point-max)))
@@ -278,15 +332,24 @@ Do nothing if always at the end."
 
 ;;; selection
 
+(defun m4d-end-of-line ()
+  (interactive)
+  (m4d--clear-select)
+  (push-mark (line-end-position) t t))
+
 (defun m4d--flip-right ()
   (push-mark (point) t t)
   (goto-char (save-mark-and-excursion
                (ignore-errors
                  (while (< (point) (point-max)) (forward-sexp)))
                (point)))
-  (while (not (or (= (point) (point-max))
-                  (looking-at "\\s)")))
-    (forward-char)))
+  (if (and (fboundp 'paredit-mode) paredit-mode)
+    (while (not (or (= (point) (point-max))
+                    (looking-at "\\s)")))
+      (forward-char))
+    (while (not (or (= (point) (point-max))
+                    (looking-at "\n\\|\\s)")))
+      (forward-char))))
 
 (defun m4d--flip-left ()
   (push-mark (point) t t)
@@ -309,8 +372,6 @@ Do nothing if always at the end."
   (while (and (> (point) (point-min))
               (save-mark-and-excursion (backward-char) (m4d--in-string-p)))
     (backward-char)))
-
-"uHUhntehuanshunteosahuntesoa"
 
 (defun m4d-flip ()
   (interactive)
@@ -386,6 +447,11 @@ Do nothing if always at the end."
     (condition-case err
         (forward-sexp)
       (error (backward-sexp)))))
+  (when-let ((num (prefix-numeric-value arg)))
+    (when (> num 0)
+      (if (m4d--direction-right-p)
+          (forward-sexp (1- num))
+        (backward-sexp (1- num)))))
   (setq m4d--last-select 'exp))
 
 (defun m4d--line-select-p ()
@@ -431,7 +497,12 @@ Do nothing if always at the end."
   (interactive)
   (unless (equal m4d--last-select 'list)
     (m4d--clear-select))
-  (m4d--select-thing 'list (m4d--direction-right-p))
+  (if (m4d--in-string-p)
+      (progn (while (and (m4d--in-string-p)
+                         (not (equal (point) (point-max))))
+               (forward-char))
+             (push-mark (scan-sexps (point) -1) t t))
+    (m4d--select-thing 'list (m4d--direction-right-p)))
   (setq m4d--last-select 'list))
 
 (defun m4d-word (arg)
@@ -554,11 +625,6 @@ Do nothing if always at the end."
   (interactive)
   (m4d--execute-kbd-macro m4d-barf-kbd-macro))
 
-(defun m4d-zap (arg)
-  (interactive "P")
-  (m4d--clear-select)
-  (m4d--execute-kbd-macro m4d-zap-kbd-macro))
-
 (defun m4d-join ()
   (interactive)
   (call-interactively #'join-line))
@@ -633,6 +699,14 @@ Do nothing if always at the end."
   (m4d--execute-kbd-macro m4d-comment-kbd-macro))
 
 ;;; other command
+
+(defun m4d-eval-last-sexp ()
+  (interactive)
+  (m4d--execute-kbd-macro m4d-eval-last-sexp-kbd-macro))
+
+(defun m4d-eval-defun ()
+  (interactive)
+  (m4d--execute-kbd-macro m4d-eval-defun-kbd-macro))
 
 (defun m4d-execute-command ()
   (interactive)
@@ -720,13 +794,19 @@ Do nothing if always at the end."
              (company--active-p))
     (company-abort))
   (m4d-normal-mode 1)
-  (run-hooks 'm4d-insert-modal-hook))
+  (run-hooks 'm4d-normal-modal-hook))
 
 (defun m4d-esc ()
   (interactive)
   (cond
-   ((m4d--should-enable-special-mode)
-    (mode-line-other-buffer))
+   ((m4d--should-enable-motion-p)
+    (cond
+     (m4d-normal-mode
+      (mode-line-other-buffer))
+     ((member major-mode m4d-motion-escape-mode-list)
+      (m4d-insert-exit))
+     (t
+      (mode-line-other-buffer))))
    ((minibufferp)
     (call-interactively #'keyboard-escape-quit))
    (multiple-cursors-mode
@@ -776,37 +856,39 @@ If ensure is t, create new if not found."
           args))
 
 ;;; Keymaps
-(defvar m4d-special-keymap nil)
-(setq m4d-special-keymap
+(defvar m4d-motion-keymap nil)
+(setq m4d-motion-keymap
       (let ((keymap (make-sparse-keymap)))
         (define-key keymap (kbd "}") 'm4d-page-down)
         (define-key keymap (kbd "{") 'm4d-page-up)
         (define-key keymap (kbd "[") 'm4d-buffer-begin)
         (define-key keymap (kbd "]") 'm4d-buffer-end)
-        (define-key keymap (kbd "'") 'm4d-switch-buffer)
-        (define-key keymap (kbd "\\") 'split-window-right)
-        (define-key keymap (kbd "|") 'split-window-below)
         (define-key keymap (kbd "q") 'kill-buffer-and-window)
-        (define-key keymap (kbd "@") 'm4d-other-window)
         keymap))
 
-(defvar m4d-keymap nil)
-(setq m4d-keymap
+(defvar m4d-keymap
   (let ((keymap (make-sparse-keymap)))
     (define-key keymap [escape] 'm4d-esc)
     (define-key keymap (kbd "C-u") 'm4d-esc)
+    (define-key keymap (kbd "M-<Tab>") 'other-window)
+    (define-key keymap (kbd "C-M-i") 'other-window)
+    (define-key keymap (kbd "M-SPC") 'm4d-switch-buffer)
     keymap))
 
-(defvar m4d-leader-base-keymap
-  (let ((keymap (make-sparse-keymap)))
-    (define-key keymap (kbd "SPC") 'm4d-execute-command)
-    (define-key keymap (kbd "cc") 'm4d-cc)
-    keymap))
+(defvar m4d-leader-base-keymap nil)
+(setq m4d-leader-base-keymap
+      (let ((keymap (make-sparse-keymap)))
+        (define-key keymap (kbd "SPC") 'm4d-execute-command)
+        (define-key keymap (kbd "cc") 'm4d-cc)
+        (define-key keymap (kbd "o") 'delete-other-windows)
+        (define-key keymap (kbd "h") 'split-window-below)
+        (define-key keymap (kbd "v") 'split-window-right)
+        keymap))
 
 (defvar m4d-normal-keymap nil)
 (setq m4d-normal-keymap
       (let ((keymap (make-sparse-keymap)))
-        (set-keymap-parent keymap m4d-special-keymap)
+        (set-keymap-parent keymap m4d-motion-keymap)
         (define-key keymap (kbd "1") 'digit-argument)
         (define-key keymap (kbd "2") 'digit-argument)
         (define-key keymap (kbd "3") 'digit-argument)
@@ -866,11 +948,10 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "(") 'm4d-barf)
         (define-key keymap (kbd "/") 'm4d-search)
         (define-key keymap (kbd ";") 'm4d-comment)
-        (define-key keymap (kbd "$") 'eshell)
+        (define-key keymap (kbd "$") 'm4d-end-of-line)
         (define-key keymap (kbd "?") 'mc/mark-all-in-region-regexp)
         (define-key keymap (kbd "=") 'm4d-indent)
         (define-key keymap (kbd "!") 'm4d-query-replace)
-        (define-key keymap (kbd "@") 'm4d-other-window)
         (define-key keymap (kbd "SPC") 'm4d-leader)
         keymap))
 
@@ -900,16 +981,23 @@ If ensure is t, create new if not found."
 
 (defun m4d-indicator ()
   (interactive)
-  (if (m4d--should-enable-special-mode)
-      ""
-    (if m4d-normal-mode
-          (propertize "VISUAL"
-                      'face 'm4d-visual-indicator)
-        (propertize "INSERT"
-                    'face 'm4d-insert-indicator))))
+  (cond
+   (m4d-normal-mode
+    (propertize "NORMAL" 'face 'm4d-visual-indicator))
+   ((m4d--should-enable-motion-p)
+    (propertize "MOTION" 'face 'm4d-motion-indicator))
+   (t
+    (propertize "INSERT" 'face 'm4d-insert-indicator))))
 
 (defun m4d--eldoc-setup ()
   (apply #'eldoc-add-command m4d--eldoc-commands))
+
+(defun m4d--select-window-advice (&rest args)
+  (when (m4d--should-enable-motion-p)
+    (m4d-normal-mode -1)))
+
+(defun m4d--advice-setup ()
+  (advice-add 'select-window :after 'm4d--select-window-advice))
 
 ;;;###autoload
 (defun m4d-setup ()
@@ -918,7 +1006,8 @@ If ensure is t, create new if not found."
   (m4d--mc-setup)
   (m4d--isearch-setup)
   (m4d--minibuffer-setup)
-  (m4d--eldoc-setup))
+  (m4d--eldoc-setup)
+  (m4d--advice-setup))
 
 (defun m4d--normal-init ())
 
@@ -932,11 +1021,11 @@ If ensure is t, create new if not found."
     (m4d--normal-init)))
 
 ;;;###autoload
-(define-minor-mode m4d-special-mode
+(define-minor-mode m4d-motion-mode
   "m4d special mode"
   nil
   nil
-  m4d-special-keymap)
+  m4d-motion-keymap)
 
 ;;;###autoload
 (define-minor-mode m4d-mode
@@ -948,11 +1037,11 @@ If ensure is t, create new if not found."
 ;;;###autoload
 (define-global-minor-mode m4d-global-mode m4d-mode
   (lambda ()
+    (add-hook 'post-command-hook #'m4d--update-cursor-shape t t)
     (m4d-mode 1)
     (when (m4d--should-enable)
-      (add-hook 'post-command-hook #'m4d--update-cursor-shape t t)
       (m4d-normal-mode 1))
-    (when (m4d--should-enable-special-mode)
-      (m4d-special-mode 1))))
+    (when (m4d--should-enable-motion-p)
+      (m4d-motion-mode 1))))
 
 (provide 'm4d)

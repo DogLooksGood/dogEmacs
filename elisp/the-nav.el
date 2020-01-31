@@ -9,13 +9,13 @@
         highlight-symbol-highlight-single-occurrence nil)
   (add-hook 'prog-mode-hook 'highlight-symbol-mode))
 
-(use-package swiper
-  :commands (swiper)
-  :ensure t
-  :bind
-  (("C-/" . swiper)
-   :map
-   special-mode-map
-   ("/" . swiper)))
+;; (use-package swiper
+;;   :commands (swiper)
+;;   :ensure t
+;;   :bind
+;;   (("C-/" . swiper)
+;;    :map
+;;    special-mode-map
+;;    ("/" . swiper)))
 
 (provide 'the-nav)

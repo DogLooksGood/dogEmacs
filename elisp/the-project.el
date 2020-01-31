@@ -8,8 +8,6 @@
   :init
   (projectile-global-mode 1))
 
-(use-package counsel-projectile)
-
 ;; (require 'project)
 ;;
 ;; (setq project-vc-ignores '(".gitignore"))

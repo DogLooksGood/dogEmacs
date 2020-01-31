@@ -12,10 +12,11 @@
    ("[" . 'ivy-previous-history-element)
    ("]" . 'ivy-next-history-element)
    ("<mouse-3>". 'ivy-done)
-   ("<tab>" . 'ivy-alt-done)
-   ("TAB" . 'ivy-alt-done))
+   ;; ("<tab>" . 'ivy-alt-done)
+   ;; ("TAB" . 'ivy-alt-done)
+   )
   :init
-  (setq ivy-use-virtual-buffers nil
+  (setq ivy-use-virtual-buffers t
 	    ivy-use-selectable-prompt t)
   (ivy-mode 1))
 
@@ -28,5 +29,9 @@
   ("C-x C-h" . 'counsel-imenu)
   ("C-x C-b" . 'counsel-ibuffer)
   ("M-y" . 'counsel-yank-pop))
+
+(use-package counsel-projectile
+  :init
+  (counsel-projectile-mode 1))
 
 (provide 'the-ivy)

@@ -19,26 +19,18 @@
 
 (when (display-graphic-p)
   (defun user/set-font (&rest args)
-    (set-frame-font "cascadia mono-9" t t)
+    (set-frame-font "dejavu sans mono 9" t t)
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font
        (frame-parameter nil 'font)
        charset
-       (font-spec :family "Sarasa Mono SC" :size 30))))
+       (font-spec :family "wenquanyi micro hei" :size 32))))
   (user/set-font))
 
 (setq underline-minimum-offset 0)
 
 ;;; Theme Setup
 (setq x-underline-at-descent-line t)
-
-;; Face tweaks
-(custom-set-faces
- '(highlight-symbol-face ((t :underline "#668899")))
- '(hl-line ((t :underline "#353535" :overline "#353535")))
- '(fringe ((t :background nil)))
- '(yas-field-highlight-face ((t :box "#777")))
- '(window-divider ((t :foreground "#3F3F3F"))))
 
 (progn
   (require 'joker-theme)
@@ -52,15 +44,12 @@
   (let* ((available-width (- (window-width) (length left) 1)))
     (format (format "%%s %%%ds " available-width) left right)))
 
-(when (display-graphic-p)
-    (setq-default mode-line-format nil))
-
 ;;; title line setup
 (setq-default frame-title-format
               '("["
                 (:eval
                  (when vc-mode
-                   (replace-regexp-in-string "^ Git" " " vc-mode)))
+                   (replace-regexp-in-string "^ Git:" "" vc-mode)))
                 "]"
                 " %b%* %e <%m>"))
 
