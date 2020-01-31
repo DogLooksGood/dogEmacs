@@ -5,14 +5,14 @@
 (defvar joker--bg nil)
 
 (if (display-graphic-p)
-    (setq joker--bg "#171717")
+    (setq joker--bg "#252525")
   (setq joker--bg nil))
 
 (custom-theme-set-faces
  'joker
  `(default                        ((t (:foreground "#a8a8a8" :background ,joker--bg))))
  '(mc/cursor-face                 ((t (:background "#949494" :foreground "black"))))
- '(region                         ((t (:background "#002D1A"))))
+ '(region                         ((t (:background "#113F2B" :overline nil :underline nil))))
  '(highlight-symbol-face          ((t ())))
  '(hl-line                        ((t (:underline "#353535" :overline "#353535"))))
  '(fringe                         ((t (:background nil))))
@@ -66,7 +66,7 @@
  '(swiper-match-face-2            ((t (:foreground "white"))))
  '(swiper-match-face-3            ((t (:foreground "white"))))
  '(swiper-match-face-4            ((t (:foreground "white"))))
- '(ivy-current-match              ((t (:inherit region))))
+ '(ivy-current-match              ((t (:background "#303030"))))
  '(ivy-minibuffer-match-highlight ((t (:foreground "#00D7D7"))))
  '(ivy-minibuffer-match-face-1    ((t (:foreground "#9E9E9E"))))
  '(ivy-minibuffer-match-face-2    ((t (:foreground "#D7005F"))))

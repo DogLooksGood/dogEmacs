@@ -438,6 +438,7 @@ Do nothing if always at the end."
 
    ((not (m4d--direction-right-p))
     (push-mark (point) t t)
+
     (condition-case err
         (backward-sexp)
       (error (forward-sexp))))
@@ -527,7 +528,10 @@ Do nothing if always at the end."
 
 (defun m4d-backward-word (arg)
   (interactive "P")
-  (backward-word (prefix-numeric-value arg))
+  (if (region-active-p)
+      (backward-word (prefix-numeric-value arg))
+    (unless (equal (point) (car (bounds-of-thing-at-point 'word)))
+      (backward-word)))
   (m4d--select-thing 'word nil)
   (setq m4d--last-select 'word))
 
@@ -863,7 +867,7 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "{") 'm4d-page-up)
         (define-key keymap (kbd "[") 'm4d-buffer-begin)
         (define-key keymap (kbd "]") 'm4d-buffer-end)
-        (define-key keymap (kbd "q") 'kill-buffer-and-window)
+        (define-key keymap (kbd "q") 'm4d-quit)
         keymap))
 
 (defvar m4d-keymap
