@@ -1,3 +1,8 @@
+(defun user/clojure-hide-comment (&rest args)
+  (save-mark-and-excursion
+    (while (search-forward "(comment" nil t)
+      (hs-hide-block))))
+
 (defun user/clojure-hash-comment (arg)
   (interactive "P")
   (cond
@@ -54,7 +59,8 @@
                           "?\\)\\(/\\)\\("
                           clojure--sym-regexp
                           "\\)")
-                 (0 'clojure-keyword-face))))
+                 (0 'clojure-keyword-face)))
+  (add-hook 'clojure-mode-hook 'user/clojure-hide-comment))
 
 (use-package clj-refactor
   :pin "melpa-stable"
