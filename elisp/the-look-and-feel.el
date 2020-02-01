@@ -19,12 +19,12 @@
 
 (when (display-graphic-p)
   (defun user/set-font (&rest args)
-    (set-frame-font "dejavu sans mono 9" t t)
+    (set-frame-font "meslo lg l 8" t t)
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font
        (frame-parameter nil 'font)
        charset
-       (font-spec :family "wenquanyi micro hei" :size 32))))
+       (font-spec :family "wenquanyi micro hei" :size 28))))
   (user/set-font))
 
 (setq underline-minimum-offset 0)
@@ -56,9 +56,10 @@
 (use-package mini-modeline
   :quelpa (mini-modeline :repo "kiennq/emacs-mini-modeline" :fetcher github)
   :config
-  (setq mini-modeline-r-format '("%l:%c  %b%* %e %m "
-                                 (:eval (m4d-indicator))))
-  (setq mini-modeline-l-format '((:eval (mini-modeline-msg))))
+  (setq mini-modeline-r-format '("%l:%c  %b%* %e %m "))
+  (setq mini-modeline-l-format '((:eval (m4d-indicator))
+                                 " "
+                                 (:eval (mini-modeline-msg))))
   (setq mini-modeline-enhance-visual nil
         mini-modeline-echo-duration 2)
   (mini-modeline-mode t))

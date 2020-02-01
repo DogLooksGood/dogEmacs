@@ -45,7 +45,7 @@
  '("[" . sp-wrap-square)
  '("{" . sp-wrap-curly)
  '("'" . paredit-meta-doublequote)
- '("q" . user/kill-window-or-quit)
+ '("q" . projectile-kill-buffers)
  '("o" . delete-other-windows)
  '("m" . magit-status))
 
@@ -57,7 +57,7 @@
    '("cl" . cider-load-file)
    '("cn" . cider-eval-ns-form)
    '("cj" . cider-jack-in)
-   '("cs" . cider-jack-in-clojurescript)
+   '("cs" . cider-jack-in-cljs)
    '("ck" . cider-eval-buffer)
    '("cq" . cider-quit)
    '("cz" . cider-switch-to-repl-buffer)

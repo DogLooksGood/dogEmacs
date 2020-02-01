@@ -106,6 +106,8 @@
 ;; Replace all "yes or no" with "y or n".
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(windmove-default-keybindings)
+
 ;; Remove mode line.
 
 (defun user/project-name ()

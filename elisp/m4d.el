@@ -589,10 +589,12 @@ Do nothing if always at the end."
 
 (defun m4d-open-line ()
   (interactive)
-  (unless (region-active-p)
-    (goto-char (line-end-position)))
-  (m4d--clear-select)
-  (newline-and-indent)
+  (if (m4d--should-enable-motion-p)
+      (goto-char (point-max))
+    (unless (region-active-p)
+      (goto-char (line-end-position)))
+    (m4d--clear-select)
+    (newline-and-indent))
   (m4d-insert))
 
 (defun m4d-open-line-up ()
@@ -645,9 +647,13 @@ Do nothing if always at the end."
 
 (defun m4d-newline ()
   (interactive)
-  (m4d--clear-select)
-  (newline-and-indent)
-  (m4d-insert))
+  (if (m4d--should-enable-motion-p)
+      (progn
+        (goto-char (point-max))
+        (m4d-insert-after))
+    (m4d--clear-select)
+    (newline-and-indent)
+    (m4d-insert)))
 
 (defun m4d-backward-delete ()
   (interactive)

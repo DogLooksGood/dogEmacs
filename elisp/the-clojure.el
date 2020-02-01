@@ -94,7 +94,8 @@
         cider-font-lock-reader-conditionals nil
         cider-use-fringe-indicators t
         cider-prompt-for-symbol nil
-        cider-enhanced-cljs-completion-p nil)
+        cider-enhanced-cljs-completion-p nil
+        cider-offer-to-open-cljs-app-in-browser nil)
   (setq-default cider-default-cljs-repl 'shadow))
 
 (defun user/fulcro-destructing-to-keys (text)
