@@ -6,7 +6,7 @@
   (meghanada-mode t)
   (flycheck-mode 1)
   (smartparens-mode)
-  (sp-local-pair 'rust-mode "<" ">")
+  (sp-local-pair 'java-mode "<" ">")
   (setq c-basic-offset 4))
 
 (use-package meghanada

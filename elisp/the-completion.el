@@ -43,4 +43,8 @@
   (add-hook 'conf-mode-hook 'company-mode)
   (add-hook 'eshell-mode-hook 'company-mode))
 
+(use-package company-posframe
+  :init
+  (company-posframe-mode -1))
+
 (provide 'the-completion)

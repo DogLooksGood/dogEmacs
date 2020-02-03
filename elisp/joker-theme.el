@@ -45,7 +45,7 @@
  '(isearch                        ((t (:background "#00D75F" :foreground "black"))))
  '(isearch-fail                   ((t (:backgronud "#D75FFF" :foreground "#606060"))))
  '(popup-isearch-match            ((t (:background "#D7AF00" :foreground "black"))))
- '(ivy-highlight-face             ((t (:backgronud "#00AFFF" :foreground "black"))))
+ '(ivy-highlight-face             ((t (:inherit default))))
  '(ivy-yanked-word                ((t (:background "yellow" :foreground "black"))))
  '(ivy-remote                     ((t ())))
  '(vertical-border                ((t (:background nil :foreground "black"))))

@@ -635,7 +635,7 @@ Do nothing if always at the end."
   (interactive)
   (call-interactively #'join-line))
 
-(defun m4d-change ()
+(defun m4d-replace ()
   (interactive)
   (if (region-active-p)
       (progn
@@ -685,7 +685,7 @@ Do nothing if always at the end."
       (m4d--execute-kbd-macro m4d-yank-pop-kbd-macro)
     (yank)))
 
-(defun m4d-change-with-yank (beg end)
+(defun m4d-replace-with-yank (beg end)
   (interactive "r")
   (when (region-active-p)
     (delete-region beg end))
@@ -882,7 +882,7 @@ If ensure is t, create new if not found."
     (define-key keymap (kbd "C-u") 'm4d-esc)
     (define-key keymap (kbd "M-<Tab>") 'other-window)
     (define-key keymap (kbd "C-M-i") 'other-window)
-    (define-key keymap (kbd "M-SPC") 'm4d-switch-buffer)
+    (define-key keymap (kbd "M-SPC") 'm4d-leader)
     keymap))
 
 (defvar m4d-leader-base-keymap nil)
@@ -890,9 +890,6 @@ If ensure is t, create new if not found."
       (let ((keymap (make-sparse-keymap)))
         (define-key keymap (kbd "SPC") 'm4d-execute-command)
         (define-key keymap (kbd "cc") 'm4d-cc)
-        (define-key keymap (kbd "o") 'delete-other-windows)
-        (define-key keymap (kbd "h") 'split-window-below)
-        (define-key keymap (kbd "v") 'split-window-right)
         keymap))
 
 (defvar m4d-normal-keymap nil)
@@ -912,8 +909,7 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "a") 'm4d-insert-after)
         (define-key keymap (kbd "b") 'm4d-block-expand)
         (define-key keymap (kbd "B") 'm4d-mark-whole-buffer)
-        (define-key keymap (kbd "c") 'm4d-change)
-        (define-key keymap (kbd "C") 'm4d-change-with-yank)
+        (define-key keymap (kbd "c") 'm4d-copy)
         (define-key keymap (kbd "d") 'm4d-delete)
         (define-key keymap (kbd "D") 'm4d-duplicate-line)
         (define-key keymap (kbd "e") 'm4d-exp)
@@ -935,7 +931,8 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "p") 'm4d-prev)
         (define-key keymap (kbd "P") 'm4d-prev-select)
         (define-key keymap (kbd "q") 'm4d-quit)
-        (define-key keymap (kbd "r") 'm4d-copy)
+        (define-key keymap (kbd "r") 'm4d-replace)
+        (define-key keymap (kbd "R") 'm4d-replace-with-yank)
         (define-key keymap (kbd "s") 'save-buffer)
         (define-key keymap (kbd "t") 'm4d-tail)
         (define-key keymap (kbd "T") 'm4d-tail-select)

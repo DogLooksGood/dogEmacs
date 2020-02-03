@@ -62,15 +62,15 @@
                  (0 'clojure-keyword-face)))
   (add-hook 'clojure-mode-hook 'user/clojure-hide-comment))
 
-(use-package clj-refactor
-  :pin "melpa-stable"
-  :hook (clojure-mode . clj-refactor-mode)
-  :init
-  (setq cljr-warn-on-eval t)
-  (setq cljr-suppress-middleware-warnings t)
-  :config
-  (unbind-key "/" clj-refactor-map)
-  (cljr-add-keybindings-with-prefix "C-c C-r"))
+;; (use-package clj-refactor
+;;   :pin "melpa-stable"
+;;   :hook (clojure-mode . clj-refactor-mode)
+;;   :init
+;;   (setq cljr-warn-on-eval t)
+;;   (setq cljr-suppress-middleware-warnings t)
+;;   :config
+;;   (unbind-key "/" clj-refactor-map)
+;;   (cljr-add-keybindings-with-prefix "C-c C-r"))
 
 (use-package cider
   :pin "melpa-stable"
@@ -94,7 +94,7 @@
         cider-font-lock-reader-conditionals nil
         cider-use-fringe-indicators t
         cider-prompt-for-symbol nil
-        cider-enhanced-cljs-completion-p nil
+        cider-enhanced-cljs-completion-p t
         cider-offer-to-open-cljs-app-in-browser nil)
   (setq-default cider-default-cljs-repl 'shadow))
 

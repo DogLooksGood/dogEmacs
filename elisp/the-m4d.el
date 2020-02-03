@@ -24,13 +24,15 @@
  '("<tab>" . user/normal-tab)
  '("TAB" . user/normal-tab)
  '(">" . highlight-symbol-next)
- '("<" . highlight-symbol-prev))
+ '("<" . highlight-symbol-prev)
+ '("@" . hs-toggle-hiding))
 
 (m4d-leader-define-key
  '("p" . projectile-find-file)
  '("g" . projectile-ripgrep)
  '("f" . find-file)
  '("P" . projectile-switch-project)
+ '("Q" . projectile-kill-buffers)
  '("d" . dired)
  '("k" .  kill-buffer)
  '("." . goto-line)
@@ -44,9 +46,14 @@
  '("(" . sp-wrap-round)
  '("[" . sp-wrap-square)
  '("{" . sp-wrap-curly)
+ '("v" . find-alternate-file)
+ '("1" . delete-other-windows)
+ '("2" . split-window-below)
+ '("3" . split-window-right)
+ '("0" . delete-window)
+ '("b" . switch-to-buffer)
  '("'" . paredit-meta-doublequote)
  '("q" . projectile-kill-buffers)
- '("o" . delete-other-windows)
  '("m" . magit-status))
 
 (dolist (m '(clojure-mode clojurescript-mode clojurec-mode))
@@ -58,6 +65,7 @@
    '("cn" . cider-eval-ns-form)
    '("cj" . cider-jack-in)
    '("cs" . cider-jack-in-cljs)
+   '("cb" . cider-connect-sib)
    '("ck" . cider-eval-buffer)
    '("cq" . cider-quit)
    '("cz" . cider-switch-to-repl-buffer)
@@ -72,5 +80,9 @@
 (m4d-leader-define-mode-key
  'org-mode
  '("ct" . org-todo))
+
+(m4d-leader-define-mode-key
+ 'markdown-mode
+ '("ck" . markdown-insert-kbd))
 
 (provide 'the-m4d)
