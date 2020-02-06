@@ -1,22 +1,23 @@
 ;;; -*- lexical-binding: t -*-
 
-(deftheme joker "Minimal colortheme for terminal.")
+(deftheme joker "A simple medium contrast dark theme.")
 
 (defvar joker--bg nil)
 
 (if (display-graphic-p)
-    (setq joker--bg "#252525")
+    (setq joker--bg "#171717")
   (setq joker--bg nil))
 
 (custom-theme-set-faces
  'joker
- `(default                        ((t (:foreground "#a8a8a8" :background ,joker--bg))))
+ `(default                        ((t (:foreground "#A0A0A0" :background ,joker--bg))))
  '(mc/cursor-face                 ((t (:background "#949494" :foreground "black"))))
  '(region                         ((t (:background "#113F2B" :overline nil :underline nil))))
  '(highlight-symbol-face          ((t ())))
- '(hl-line                        ((t (:underline "#353535" :overline "#353535"))))
+ '(hl-line                        ((t (:underline "#353535" :overline "#353535" :background "#1F1F1F"))))
+ '(yascroll:thumb-fringe          ((t (:background "#3F3F3F" :foreground "#3F3F3F"))))
+ '(yascroll:thumb-text-area       ((t (:background "#3F3F3F" :foreground "#3F3F3F"))))
  '(fringe                         ((t (:background nil))))
- '(yas-field-highlight-face       ((t (:box "#777"))))
  '(window-divider                 ((t (:foreground "#3F3F3F"))))
  '(show-paren-match               ((t (:underline "#00AF5F"))))
  '(company-tooltip-common         ((t (:foreground "#D7005F"))))
@@ -38,7 +39,7 @@
  '(m4d-insert-indicator           ((t (:foreground "#D7AF00"))))
  '(m4d-visual-indicator           ((t (:foreground "#00D787"))))
  '(m4d-motion-indicator           ((t (:foreground "#00AFD7"))))
- '(cider-result-overlay-face      ((t (:box "#1717E0" :background "black"))))
+ '(cider-result-overlay-face      ((t (:background "black"))))
  '(mode-line                      ((t ())))
  '(clojure-character-face         ((t (:inherit font-lock-constant-face))))
  '(highlight                      ((t (:background "#00AFAF" :foreground "black"))))
@@ -78,10 +79,11 @@
  '(ivy-minibuffer-match-face-2    ((t (:foreground "#D7005F"))))
  '(ivy-minibuffer-match-face-3    ((t (:foreground "#D7AF00"))))
  '(ivy-minibuffer-match-face-4    ((t (:foreground "#00FFD7"))))
- '(yas-field-highlight-face       ((t (:background "#00D787" :foreground "black"))))
+ '(yas-field-highlight-face       ((t (:background "#350035"))))
  '(org-document-title             ((t (:inherit font-lock-string-face))))
  '(line-number-current-line       ((t (:foreground "#D7AF00"))))
- '(parenthesis                    ((t (:foreground "#808080")))))
+ '(parenthesis                    ((t (:foreground "#606060"))))
+ '(term-color-blue                ((t (:foreground "#3366FF" :background "#3366FF")))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

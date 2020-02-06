@@ -4,8 +4,9 @@
 
 (m4d-setup)
 
-(add-to-list 'm4d-motion-escape-mode-list 'ripgrep-search-mode)
+(add-to-list 'm4d-motion-mode-list 'ripgrep-search-mode)
 (add-to-list 'm4d-motion-mode-list 'cider-repl-mode)
+(add-to-list 'm4d-motion-mode-list 'vterm-mode)
 
 (use-package key-chord
   :init
@@ -25,16 +26,17 @@
  '("TAB" . user/normal-tab)
  '(">" . highlight-symbol-next)
  '("<" . highlight-symbol-prev)
- '("@" . hs-toggle-hiding))
+ '("@" . hs-toggle-hiding)
+ '("=" . mc/vertical-align-with-space))
 
 (m4d-leader-define-key
  '("p" . projectile-find-file)
  '("g" . projectile-ripgrep)
  '("f" . find-file)
- '("P" . projectile-switch-project)
+ '("o" . projectile-switch-project)
  '("Q" . projectile-kill-buffers)
  '("d" . dired)
- '("k" .  kill-buffer)
+ '("k" . kill-buffer)
  '("." . goto-line)
  '("e" . m4d-eval-last-sexp)
  '("x" . m4d-eval-defun)

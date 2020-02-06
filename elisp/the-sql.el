@@ -14,8 +14,6 @@
         (let ((bounds (bounds-of-thing-at-point 'sexp)))
           (upcase-region (car bounds) (cdr bounds)))))))
 
-
-
 (defun user/enable-sql-auto-uppercase-keyword ()
   (interactive)
   (add-hook 'post-self-insert-hook #'user/uppercase-sql-keyword t t)
@@ -23,6 +21,8 @@
   (modify-syntax-entry ?- "w"))
 
 (add-hook 'sql-mode-hook #'user/enable-sql-auto-uppercase-keyword)
+
+(add-hook 'sql-mode-hook 'smartparens-mode)
 
 ;;; Add keywords for sql fontlock
 (font-lock-add-keywords

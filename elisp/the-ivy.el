@@ -16,7 +16,7 @@
    ;; ("TAB" . 'ivy-alt-done)
    )
   :init
-  (setq ivy-use-virtual-buffers t
+  (setq ivy-use-virtual-buffers nil
 	    ivy-use-selectable-prompt t)
   (ivy-mode 1))
 

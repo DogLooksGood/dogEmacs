@@ -2,16 +2,17 @@
 
 (bind-key "C-S-L" 'display-line-numbers-mode)
 
-;; (defun user/update-line-number-relative ()
-;;   (when display-line-numbers
-;;     (setq-local display-line-numbers
-;;                 (if (or m4d-normal-mode buffer-read-only)
-;;                     'relative
-;;                   t))))
+(setq display-line-numbers-width 3)
+(defun user/update-line-number-relative ()
+  (when display-line-numbers
+    (setq-local display-line-numbers
+                (if (or m4d-normal-mode buffer-read-only)
+                    'visual
+                  t))))
 
-;; (add-hook 'm4d-insert-modal-hook 'user/update-line-number-relative)
-;; (add-hook 'm4d-normal-modal-hook 'user/update-line-number-relative)
-;; (add-hook 'display-line-numbers-mode-hook #'user/update-line-number-relative)
+(add-hook 'm4d-insert-modal-hook 'user/update-line-number-relative)
+(add-hook 'm4d-normal-modal-hook 'user/update-line-number-relative)
+(add-hook 'display-line-numbers-mode-hook #'user/update-line-number-relative)
 
 ;; Highlight current line.
 (when (display-graphic-p)
@@ -33,6 +34,10 @@
   :init
   (setq paren-face-regexp "[()]")
   (global-paren-face-mode 1))
+
+(use-package yascroll
+  :init
+  (global-yascroll-bar-mode))
 
 (use-package focus
   :bind

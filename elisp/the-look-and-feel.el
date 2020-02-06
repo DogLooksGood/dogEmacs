@@ -3,13 +3,13 @@
 ;;  setup for font, frame alpha, mode line and themes.
 
 ;; Transparency Setup
-(defvar user/alpha nil)
-(setq user/alpha 100)
-
-(when (display-graphic-p)
-  (defun user/set-alpha ()
-    (set-frame-parameter (selected-frame) 'alpha (cons user/alpha user/alpha)))
-  (user/set-alpha))
+;; (defvar user/alpha nil)
+;; (setq user/alpha 100)
+;;
+;; (when (display-graphic-p)
+;;   (defun user/set-alpha ()
+;;     (set-frame-parameter (selected-frame) 'alpha (cons user/alpha user/alpha)))
+;;   (user/set-alpha))
 
 ;;; Font Setup
 ;; sample text:
@@ -19,12 +19,12 @@
 
 (when (display-graphic-p)
   (defun user/set-font (&rest args)
-    (set-frame-font "meslo lg m 8" t t)
+    (set-frame-font "pt mono 10" t t)
     (dolist (charset '(kana han symbol cjk-misc bopomofo))
       (set-fontset-font
        (frame-parameter nil 'font)
        charset
-       (font-spec :family "wenquanyi micro hei" :size 28))))
+       (font-spec :family "wenquanyi micro hei" :size 34))))
   (user/set-font))
 
 (setq underline-minimum-offset 0)
@@ -69,7 +69,8 @@
 (defun user/new-frame-setup (frame)
   (select-frame frame)
   (user/set-font)
-  (user/set-alpha))
+  ;; (user/set-alpha)
+  )
 
 (when (display-graphic-p)
   (add-hook 'after-make-frame-functions 'user/new-frame-setup))

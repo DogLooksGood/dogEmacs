@@ -10,12 +10,4 @@
   (setq aw-ignored-buffers '())
   (setq aw-keys '(?d ?h ?t ?n ?s)))
 
-(progn
-  (bind-key ";" 'ace-window special-mode-map)
-  (bind-key "\\" 'split-window-right special-mode-map)
-  (bind-key "'" 'delete-other-windows special-mode-map)
-  (bind-key "q" 'user/delete-window-or-previous-buffer special-mode-map)
-  (bind-key "Q" 'kill-buffer-and-window special-mode-map)
-  (bind-key "-" 'split-window-below special-mode-map))
-
 (provide 'the-window)
