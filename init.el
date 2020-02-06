@@ -28,7 +28,10 @@
 (require 'quelpa-use-package)
 (quelpa-use-package-activate-advice)
 
-(add-to-list 'load-path "~/.emacs.d/elisp/")
+(setq user/init-file (or load-file-name (buffer-file-name)))
+(setq user/emacs-dir (file-name-directory user/init-file))
+
+(add-to-list 'load-path (concat user/emacs-dir "elisp/"))
 
 (require 'the-elisp)
 (require 'the-look-and-feel)
