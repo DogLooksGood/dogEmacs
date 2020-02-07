@@ -829,6 +829,11 @@ Do nothing if always at the end."
   (when-let ((cmd (key-binding (read-kbd-macro "C-c C-c"))))
     (call-interactively cmd)))
 
+(defun m4d-ck ()
+  (interactive)
+  (when-let ((cmd (key-binding (read-kbd-macro "C-c C-k"))))
+    (call-interactively cmd)))
+
 (defun m4d-leader (arg)
   "Don't support digit argument yet, can't figure out the reason."
   (interactive "P")
@@ -999,6 +1004,7 @@ If ensure is t, create new if not found."
       (let ((keymap (make-sparse-keymap)))
         (define-key keymap (kbd "SPC") 'm4d-execute-command)
         (define-key keymap (kbd "cc") 'm4d-cc)
+        (define-key keymap (kbd "ck") 'm4d-ck)
         keymap))
 
 (defvar m4d-normal-keymap nil)
@@ -1103,11 +1109,11 @@ If ensure is t, create new if not found."
   (interactive)
   (cond
    (m4d-normal-mode
-    (propertize "NORMAL" 'face 'm4d-visual-indicator))
+    (propertize " NORMAL " 'face 'm4d-visual-indicator))
    ((m4d--should-enable-motion-p)
-    (propertize "MOTION" 'face 'm4d-motion-indicator))
+    (propertize " MOTION " 'face 'm4d-motion-indicator))
    (t
-    (propertize "INSERT" 'face 'm4d-insert-indicator))))
+    (propertize " INSERT " 'face 'm4d-insert-indicator))))
 
 (defun m4d--eldoc-setup ()
   (apply #'eldoc-add-command m4d--eldoc-commands))
@@ -1124,7 +1130,6 @@ If ensure is t, create new if not found."
 ;;;###autoload
 (defun m4d-setup ()
   (key-chord-define global-map ".," 'm4d-leader)
-  (key-chord-define m4d-leader-base-keymap ".," 'm4d-other-window)
   (setq delete-active-region nil)
   (m4d--global-setup)
   (m4d--isearch-setup)

@@ -38,6 +38,7 @@
  '("d" . dired)
  '("k" . kill-buffer)
  '("." . goto-line)
+ '("," . m4d-other-window)
  '("e" . m4d-eval-last-sexp)
  '("x" . m4d-eval-defun)
  '("w" . save-buffer)
