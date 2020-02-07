@@ -10,7 +10,6 @@
 
 (use-package key-chord
   :init
-  (key-chord-define global-map ".," 'm4d-esc)
   (advice-add #'key-chord-mode :around #'user/make-silent)
   (key-chord-mode 1))
 

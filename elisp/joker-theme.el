@@ -15,7 +15,7 @@
 
 (custom-theme-set-faces
  'joker
- `(default                        ((t (:foreground "#A0A0A0" :background ,joker--bg))))
+ `(default                        ((t (:foreground "#A8A8A8" :background ,joker--bg))))
  '(mc/cursor-face                 ((t (:background "#949494" :foreground "black"))))
  '(region                         ((t (:background "#113F2B" :overline nil :underline nil))))
  '(highlight-symbol-face          ((t ())))
@@ -32,7 +32,7 @@
  '(company-scrollbar-bg           ((t (:background "#303030"))))
  '(company-scrollbar-fg           ((t (:background "#4E4E4E"))))
  '(font-lock-comment-face         ((t (:foreground "#00AFAF"))))
- '(font-lock-string-face          ((t (:foreground "#E01717"))))
+ '(font-lock-string-face          ((t (:foreground "#B01717"))))
  '(font-lock-doc-face             ((t (:foreground "#00AFAF"))))
  '(font-lock-builtin-face         ((t ())))
  '(font-lock-type-face            ((t ())))

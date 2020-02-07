@@ -1,4 +1,6 @@
 ;;; -*- lexical-binding: t -*-
+(require 'key-chord)
+(require 'multiple-cursors)
 
 ;;; Faces
 
@@ -37,7 +39,8 @@
     m4d-leader))
 
 (defconst m4d--mc-cmd-run-for-all
-  '(m4d-search
+  '(m4d-space
+    m4d-search
     m4d-reverse-search
     m4d-insert-after
     m4d-esc
@@ -87,6 +90,11 @@
 (defvar m4d-normal-modal-hook nil
   "A hook runs when we enter the normal modal.")
 
+(defvar m4d-disable-normal-mode-list nil
+  "A list of modes should not enable normal mode.")
+(setq m4d-disable-normal-mode-list
+      '(magit-status-mode))
+
 (defvar m4d-motion-mode-list nil
   "A list of modes should be treated as special mode .")
 (setq m4d-motion-mode-list
@@ -100,7 +108,6 @@
   '(json-mode)
   "A list of major-modes where we should enable modal edit.")
 
-;;; Internal command translation.
 
 (defvar m4d--eldoc-commands nil)
 (setq m4d--eldoc-commands
@@ -111,6 +118,13 @@
         m4d-exp
         m4d-word
         m4d-backward-word))
+
+(defvar m4d--recent-buffer nil)
+
+;;; Internal command translation.
+
+(defvar m4d-space-kbd-macro "M-SPC"
+  "The kbd macro used in `m4d-space'.")
 
 (defvar m4d-kill-line-kbd-macro "C-k"
   "The kbd macro used in `m4d-kill'.")
@@ -715,6 +729,11 @@ Do nothing if always at the end."
           (lisp-indent-line)))
     (message "No selection!")))
 
+(defun m4d-space ()
+  (interactive)
+  (m4d--clear-select)
+  (m4d--execute-kbd-macro m4d-space-kbd-macro))
+
 (defun m4d-newline ()
   (interactive)
   (if (m4d--should-enable-motion-p)
@@ -890,22 +909,35 @@ Do nothing if always at the end."
 (defun m4d-esc ()
   (interactive)
   (cond
-   ((m4d--should-enable-motion-p)
-    (cond
-     (m4d-normal-mode
-      (mode-line-other-buffer))
-     (t
-      (m4d-insert-exit))))
    ((minibufferp)
     (call-interactively #'keyboard-escape-quit))
    (multiple-cursors-mode
     (m4d-insert-exit))
-   (m4d-normal-mode
-    (mode-line-other-buffer))
-   ((m4d--should-enable)
+   ((and (not m4d-normal-mode)
+         (not (member major-mode m4d-disable-normal-mode-list)))
     (m4d-insert-exit))
-   (t
+   (m4d-normal-mode
     (mode-line-other-buffer))))
+
+;; (defun m4d-esc ()
+;;   (interactive)
+;;   (cond
+;;    ((m4d--should-enable-motion-p)
+;;     (cond
+;;      (m4d-normal-mode
+;;       (mode-line-other-buffer))
+;;      (t
+;;       (m4d-insert-exit))))
+;;    ((minibufferp)
+;;     (call-interactively #'keyboard-escape-quit))
+;;    (multiple-cursors-mode
+;;     (m4d-insert-exit))
+;;    (m4d-normal-mode
+;;     (mode-line-other-buffer))
+;;    ((m4d--should-enable)
+;;     (m4d-insert-exit))
+;;    (t
+;;     (mode-line-other-buffer))))
 
 ;;; Define key helpers
 
@@ -960,7 +992,6 @@ If ensure is t, create new if not found."
     (define-key keymap (kbd "C-u") 'm4d-esc)
     (define-key keymap (kbd "M-<Tab>") 'm4d-other-window)
     (define-key keymap (kbd "C-M-i") 'm4d-other-window)
-    (define-key keymap (kbd "M-SPC") 'm4d-leader)
     keymap))
 
 (defvar m4d-leader-base-keymap nil)
@@ -1038,7 +1069,7 @@ If ensure is t, create new if not found."
         (define-key keymap (kbd "?") 'm4d-reverse-search)
         (define-key keymap (kbd "=") 'm4d-indent)
         (define-key keymap (kbd "!") 'm4d-query-replace)
-        (define-key keymap (kbd "SPC") 'm4d-leader)
+        (define-key keymap (kbd "SPC") 'm4d-space)
         keymap))
 
 (defun m4d--mc-hook ()
@@ -1082,14 +1113,18 @@ If ensure is t, create new if not found."
   (apply #'eldoc-add-command m4d--eldoc-commands))
 
 (defun m4d--select-window-advice (&rest args)
-  (when (m4d--should-enable-motion-p)
-    (m4d-normal-mode -1)))
+  (when (and (not (equal m4d--recent-buffer (buffer-name (current-buffer))))
+             (m4d--should-enable-motion-p))
+    (m4d-normal-mode -1))
+  (setq m4d--recent-buffer (buffer-name (current-buffer))))
 
 (defun m4d--advice-setup ()
   (advice-add 'select-window :after 'm4d--select-window-advice))
 
 ;;;###autoload
 (defun m4d-setup ()
+  (key-chord-define global-map ".," 'm4d-leader)
+  (key-chord-define m4d-leader-base-keymap ".," 'm4d-other-window)
   (setq delete-active-region nil)
   (m4d--global-setup)
   (m4d--isearch-setup)
