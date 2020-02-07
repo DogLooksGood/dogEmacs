@@ -537,7 +537,7 @@ Do nothing if always at the end."
   (interactive "P")
   (unless (equal 'line m4d--last-select)
     (m4d--clear-select))
-  (if (equal 'line m4d--last-select)
+  (if (and (region-active-p) (equal 'line m4d--last-select))
       (if (m4d--direction-right-p)
           (progn
             (forward-line arg)
