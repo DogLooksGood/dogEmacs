@@ -15,10 +15,9 @@
 (add-hook 'display-line-numbers-mode-hook #'user/update-line-number-relative)
 
 ;; Highlight current line.
-(when (display-graphic-p)
-  (add-hook 'prog-mode-hook 'hl-line-mode)
-  (add-hook 'conf-mode-hook 'hl-line-mode)
-  (add-hook 'text-mode-hook 'hl-line-mode))
+(add-hook 'prog-mode-hook 'hl-line-mode)
+(add-hook 'conf-mode-hook 'hl-line-mode)
+(add-hook 'text-mode-hook 'hl-line-mode)
 
 (use-package hideshow
   :bind

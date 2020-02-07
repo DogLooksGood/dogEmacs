@@ -30,11 +30,12 @@
  '("=" . mc/vertical-align-with-space))
 
 (m4d-leader-define-key
- '("p" . projectile-find-file)
+ '("p" . counsel-projectile-find-file)
+ '("G" . counsel-projectile-rg)
  '("g" . projectile-ripgrep)
  '("f" . find-file)
- '("o" . projectile-switch-project)
- '("Q" . projectile-kill-buffers)
+ '("o" . counsel-projectile-switch-project)
+ '("Q" . pojectile-kill-buffers)
  '("d" . dired)
  '("k" . kill-buffer)
  '("." . goto-line)

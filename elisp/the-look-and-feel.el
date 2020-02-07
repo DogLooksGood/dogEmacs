@@ -16,15 +16,17 @@
 ;;   | 中英文等宽的字体 |
 ;;   | Mixed monospace  |
 ;; get this script from cnfont
+(face-attribute 'default :font)
 
 (when (display-graphic-p)
   (defun user/set-font (&rest args)
-    (set-frame-font "pt mono 10" t t)
-    (dolist (charset '(kana han symbol cjk-misc bopomofo))
-      (set-fontset-font
-       (frame-parameter nil 'font)
-       charset
-       (font-spec :family "wenquanyi micro hei" :size 34))))
+    (set-frame-font "unifont 11" t t)
+    ;; (dolist (charset '(kana han symbol cjk-misc bopomofo))
+    ;;   (set-fontset-font
+    ;;    (frame-parameter nil 'font)
+    ;;    charset
+    ;;    (font-spec :family "wenquanyi micro hei" :size 32)))
+    )
   (user/set-font))
 
 (setq underline-minimum-offset 0)
@@ -53,16 +55,21 @@
                 "]"
                 " %b%* %e <%m>"))
 
-(use-package mini-modeline
-  :quelpa (mini-modeline :repo "kiennq/emacs-mini-modeline" :fetcher github)
-  :config
-  (setq mini-modeline-r-format '("%l:%c  %b%* %e %m "))
-  (setq mini-modeline-l-format '((:eval (m4d-indicator))
-                                 " "
-                                 (:eval (mini-modeline-msg))))
-  (setq mini-modeline-enhance-visual nil
-        mini-modeline-echo-duration 2)
-  (mini-modeline-mode t))
+(if (display-graphic-p)
+ (use-package mini-modeline
+   :quelpa (mini-modeline :repo "kiennq/emacs-mini-modeline" :fetcher github)
+   :config
+   (setq mini-modeline-r-format '("%l:%c  %b%* %e %m "))
+   (setq mini-modeline-l-format '((:eval (m4d-indicator))
+                                  " "
+                                  (:eval (mini-modeline-msg))))
+   (setq mini-modeline-enhance-visual nil
+         mini-modeline-echo-duration 2)
+   (mini-modeline-mode t))
+ (setq-default mode-line-format
+               '((:eval (user/simple-mode-line-render
+                         (format-mode-line '((:eval (m4d-indicator))))
+                         (format-mode-line '("%l:%c  %b%* %e %m ")))))))
 
 ;;; Run setup for future frames.
 
