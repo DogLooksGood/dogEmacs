@@ -8,13 +8,18 @@
     (setq joker--bg "#171717")
   (setq joker--bg nil))
 
+(setq joker--hl-line
+      (if (display-graphic-p)
+          '((t (:underline "#353535" :overline "#353535" :background "#1F1F1F")))
+        '((t (:background "brightblack")))))
+
 (custom-theme-set-faces
  'joker
  `(default                        ((t (:foreground "#A0A0A0" :background ,joker--bg))))
  '(mc/cursor-face                 ((t (:background "#949494" :foreground "black"))))
  '(region                         ((t (:background "#113F2B" :overline nil :underline nil))))
  '(highlight-symbol-face          ((t ())))
- '(hl-line                        ((t (:underline "#353535" :overline "#353535" :background "#1F1F1F"))))
+ `(hl-line                        ,joker--hl-line)
  '(yascroll:thumb-fringe          ((t (:background "#3F3F3F" :foreground "#3F3F3F"))))
  '(yascroll:thumb-text-area       ((t (:background "#3F3F3F" :foreground "#3F3F3F"))))
  '(fringe                         ((t (:background nil))))
