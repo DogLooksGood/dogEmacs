@@ -46,7 +46,7 @@
  '(m4d-motion-indicator           ((t (:foreground "#00AFD7"))))
  '(cider-result-overlay-face      ((t (:background "black"))))
  '(mode-line                      ((t (:inverse-video t))))
- '(mode-line-inactive             ((t ())))
+ '(mode-line-inactive             ((t (:background "#303030"))))
  '(clojure-character-face         ((t (:inherit font-lock-constant-face))))
  '(highlight                      ((t (:background "#00AFAF" :foreground "black"))))
  '(isearch                        ((t (:background "#00D75F" :foreground "black"))))
