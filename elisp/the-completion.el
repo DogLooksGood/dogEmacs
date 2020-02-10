@@ -29,7 +29,7 @@
         m4d-change
         kill-line
         paredit-backward-delete
-        backward-delete-char
+        backward -delete-char
         backward-kill-word
         backward-kill-sexp))
   (setq company-idle-delay 0.4
