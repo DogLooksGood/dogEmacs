@@ -4,7 +4,6 @@
 (defvar m4d-motion-keymap nil)
 (setq m4d-motion-keymap
       (let ((keymap (make-sparse-keymap)))
-        (define-key keymap (kbd "M-SPC") 'm4d-insert-exit)
         keymap))
 
 (defvar m4d-keymap
@@ -16,13 +15,15 @@
 (defvar m4d-leader-base-keymap nil)
 (setq m4d-leader-base-keymap
       (let ((keymap (make-sparse-keymap)))
-        (define-key keymap (kbd "SPC") 'm4d-execute-command)
+        (define-key keymap (kbd "SPC") 'm4d-space)
+        (define-key keymap (kbd "c") 'm4d-god)
+        (define-key keymap (kbd "x") 'm4d-god)
         keymap))
 
 (defvar m4d-normal-keymap nil)
-(setq m4d-normal-keymap
+(make-variable-buffer-local 'm4d-normal-keymap)
+(setq-default m4d-normal-keymap
       (let ((keymap (make-sparse-keymap)))
-        (set-keymap-parent keymap m4d-motion-keymap)
         ;; Programmer Dvorak Digit Argument
         (define-key keymap (kbd "(") 'm4d-digit-1)
         (define-key keymap (kbd ")") 'm4d-digit-2)
@@ -95,7 +96,8 @@
         (define-key keymap (kbd "^") 'm4d-back-to-indentation)
         (define-key keymap (kbd "/") 'm4d-search)
         (define-key keymap (kbd "?") 'm4d-reverse-search)
-        (define-key keymap (kbd "SPC") 'm4d-leader)
+        (define-key keymap (kbd "TAB") 'm4d-indent)
+        (define-key keymap (kbd "<tab>") 'm4d-indent)
         (define-key keymap (kbd "&") 'universal-argument)
         (define-key keymap (kbd ">") 'm4d-slurp)
         (define-key keymap (kbd "<") 'm4d-barf)

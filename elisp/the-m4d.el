@@ -20,8 +20,6 @@
      (save-buffers-kill-terminal))))
 
 (m4d-normal-define-key
- '("<tab>" . user/normal-tab)
- '("TAB" . user/normal-tab)
  '("@" . hs-toggle-hiding))
 
 (m4d-leader-define-key
@@ -37,6 +35,7 @@
  '("l" . goto-line)
  '("h" . m4d-other-window)
  '("e" . m4d-eval-last-sexp)
+ '("z" . m4d-eval-defun)
  '("w" . save-buffer)
  '("t" . transpose-sexps)
  '("i" . counsel-imenu)

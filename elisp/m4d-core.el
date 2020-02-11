@@ -62,6 +62,9 @@
 (defvar m4d-backward-delete-char-kbd-macro "DEL"
   "The kbd macro used in `m4d-backward-delete'.")
 
+(defvar m4d-meta-space-kbd-macro "M-SPC"
+  "The kbd macro used in `m4d-space'")
+
 (defvar m4d-comment-kbd-macro "M-;"
   "The kbd macro used in `m4d-comment'.")
 
@@ -235,9 +238,9 @@ Do nothing if always at the end."
                  (while (< (point) (point-max)) (forward-sexp)))
                (point)))
   (if (and (fboundp 'paredit-mode) paredit-mode)
-    (while (not (or (= (point) (point-max))
-                    (looking-at "\\s)")))
-      (forward-char))
+      (while (not (or (= (point) (point-max))
+                      (looking-at "\\s)")))
+        (forward-char))
     (while (not (or (= (point) (point-max))
                     (looking-at "\n\\|\\s)")))
       (forward-char))))
@@ -255,7 +258,7 @@ Do nothing if always at the end."
 (defun m4d--flip-string-right ()
   (push-mark (point) t t)
   (while (and (< (point) (point-max))
-             (save-mark-and-excursion (forward-char) (m4d--in-string-p)))
+              (save-mark-and-excursion (forward-char) (m4d--in-string-p)))
     (forward-char)))
 
 (defun m4d--flip-string-left ()
@@ -302,9 +305,9 @@ Do nothing if always at the end."
   (interactive "P")
   (m4d--keep-select)
   (ignore-errors
-   (if (m4d--direction-right-p)
-       (forward-sexp arg)
-     (backward-sexp arg))))
+    (if (m4d--direction-right-p)
+        (forward-sexp arg)
+      (backward-sexp arg))))
 
 (defun m4d-exp (arg)
   (interactive "P")
@@ -645,15 +648,15 @@ Do nothing if always at the end."
       (message "No selection!")))
   (setq m4d--last-select nil))
 
-(defun m4d-leader (arg)
-  "Don't support digit argument yet, can't figure out the reason."
-  (interactive "P")
-  (let ((keymap (or (m4d--get-mode-leader-keymap major-mode)
-                    m4d-leader-base-keymap)))
-    (set-transient-map keymap)
-    (cond
-     ((equal '(4) arg)
-      (universal-argument)))))
+;; (defun m4d-leader (arg)
+;;   "Don't support digit argument yet, can't figure out the reason."
+;;   (interactive "P")
+;;   (let ((keymap (or (m4d--get-mode-leader-keymap major-mode)
+;;                     m4d-leader-base-keymap)))
+;;     (set-transient-map keymap)
+;;     (cond
+;;      ((equal '(4) arg)
+;;       (universal-argument)))))
 
 (defun m4d-pop-ref ()
   (interactive)
@@ -735,6 +738,12 @@ Do nothing if always at the end."
   (god-local-mode 1)
   (call-interactively #'god-mode-self-insert))
 
+(defun m4d-space ()
+  (interactive)
+  (if m4d--space-command
+      (call-interactively m4d--space-command)
+    (m4d--execute-kbd-macro m4d-execute-extended-command-kbd-macro)))
+
 (defun m4d-esc ()
   (interactive)
   (cond
@@ -746,8 +755,7 @@ Do nothing if always at the end."
     (m4d-insert-exit))
    (m4d-motion-mode
     (mode-line-other-buffer))
-   ((and (not m4d-normal-mode)
-         (not (member major-mode m4d-disable-normal-mode-list)))
+   ((not m4d-normal-mode)
     (m4d-insert-exit))
    (m4d-normal-mode
     (mode-line-other-buffer))))

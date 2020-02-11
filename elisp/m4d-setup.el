@@ -121,7 +121,7 @@ The default mode is set with priority: MOTION > NORMAL > INSERT."
              (not (minibufferp (last-buffer))))
     (when (m4d--should-enable-motion-p)
       (m4d-normal-mode -1))
-    (when (m4d--should-enable)
+    (when (m4d--should-enable-normal-p)
       (m4d-insert-exit))))
 
 (defun m4d--toggle-modes-setup ()
@@ -132,9 +132,7 @@ The default mode is set with priority: MOTION > NORMAL > INSERT."
 (defun m4d--global-setup ()
   ;; These global key bindings are used for fundamental mode.
   (global-set-key (kbd "<escape>") 'm4d-esc)
-  (global-set-key (kbd "C-u") 'm4d-esc)
-  (global-set-key (kbd "M-SPC") 'm4d-leader)
-  (define-key special-mode-map (kbd "q") 'delete-window))
+  (global-set-key (kbd "C-u") 'm4d-esc))
 
 (defun m4d-setup ()
   ;; This is important, otherwise we have to deactivate region before delete char.

@@ -17,28 +17,22 @@
       (member major-mode m4d-motion-mode-list)
       (derived-mode-p 'special-mode)))
 
-(defun m4d--should-enable ()
+(defun m4d--should-enable-normal-p ()
   (and (or (equal major-mode 'fundamental-mode)
            view-mode
-           (member major-mode m4d-enable-mode-list)
+           (member major-mode m4d-normal-mode-list)
            (derived-mode-p 'text-mode 'conf-mode 'prog-mode))))
 
 (defun m4d--update-cursor-shape ()
   (cond
    (god-local-mode
     (setq cursor-type 'hollow))
-   ((and (m4d--should-enable) (not m4d-normal-mode))
-    (setq cursor-type '(bar . 5))
-    (unless (display-graphic-p)
-      (send-string-to-terminal "\e[6 q")))
+   ((and (m4d--should-enable-normal-p) (not m4d-normal-mode))
+    (setq cursor-type '(bar . 5)))
    (m4d-normal-mode
-    (setq cursor-type 'box)
-    (unless (display-graphic-p)
-      (send-string-to-terminal "\e[2 q")))
+    (setq cursor-type 'box))
    (m4d-motion-mode
-    (setq cursor-type 'box)
-    (unless (display-graphic-p)
-      (send-string-to-terminal "\e[2 q")))))
+    (setq cursor-type 'box))))
 
 (defun m4d--direction-right-p ()
   (if (region-active-p)
@@ -85,6 +79,5 @@ If ensure is t, create new if not found."
         (setq m4d--leader-mode-keymaps (plist-put m4d--leader-mode-keymaps mode keymap))
         keymap)
       m4d-leader-base-keymap)))
-
 
 (provide 'm4d-util)
