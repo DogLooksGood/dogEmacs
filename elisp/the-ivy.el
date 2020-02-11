@@ -30,7 +30,8 @@
   ("C-x C-b" . 'counsel-ibuffer)
   ("M-y" . 'counsel-yank-pop))
 
-;;; Don't enable for we still want projectile-ripgrep.
-(use-package counsel-projectile)
+(use-package counsel-projectile
+  :init
+  (counsel-projectile-mode 1))
 
 (provide 'the-ivy)

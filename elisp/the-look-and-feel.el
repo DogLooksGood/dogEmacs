@@ -48,10 +48,12 @@
                 "]"
                 " %b%* %e <%m>"))
 
+(setq user/mini-mode-line t)
+
 (use-package mini-modeline
   :quelpa (mini-modeline :repo "kiennq/emacs-mini-modeline" :fetcher github)
   :config
-  (if (display-graphic-p)
+  (if (and user/mini-mode-line (display-graphic-p))
       (progn
         (setq mini-modeline-r-format '("%l:%c %b%* %e %m"))
         (setq mini-modeline-l-format '((:eval (m4d-indicator))

@@ -1,5 +1,9 @@
 (require 'm4d)
 
+(use-package god-mode
+  :quelpa
+  (god-mode :repo "DogLooksGood/god-mode" :fetcher github))
+
 (m4d-global-mode 1)
 
 (m4d-setup)
@@ -21,21 +25,21 @@
  '("@" . hs-toggle-hiding))
 
 (m4d-leader-define-key
- '("p" . counsel-projectile-find-file)
- '("G" . counsel-projectile-rg)
+ '("p" . projectile-find-file)
  '("g" . projectile-ripgrep)
+ '("," . highlight-symbol-prev)
+ '("." . highlight-symbol-next)
  '("f" . find-file)
- '("a" . counsel-projectile-switch-project)
+ '("a" . projectile-switch-project)
  '("Q" . pojectile-kill-buffers)
  '("d" . dired)
  '("k" . kill-buffer)
  '("l" . goto-line)
  '("h" . m4d-other-window)
  '("e" . m4d-eval-last-sexp)
- '("x" . m4d-eval-defun)
  '("w" . save-buffer)
  '("t" . transpose-sexps)
- '("i" . counsel-semantic-or-imenu)
+ '("i" . counsel-imenu)
  '("r" . sp-raise-sexp)
  '("s" . sp-split-sexp)
  '("u" . sp-splice-sexp)
@@ -49,9 +53,10 @@
  '("3" . split-window-right)
  '("o" . delete-other-windows)
  '("-" . split-window-below)
+ '("/" . swiper)
  '("\\" . split-window-right)
  '("0" . delete-window)
- '("b" . counsel-switch-buffer)
+ '("b" . switch-to-buffer)
  '("'" . paredit-meta-doublequote)
  '("q" . projectile-kill-buffers)
  '("m" . magit-status))
@@ -68,8 +73,14 @@
    '("c&" . cider-jack-in-clj&cljs)
    '("ck" . cider-eval-buffer)
    '("cq" . cider-quit)
+   '("cr" . cider-ns-reload-all)
    '("cz" . cider-switch-to-repl-buffer)
    '(";" . user/clojure-hash-comment)))
+
+(m4d-leader-define-mode-key
+ 'cider-repl-mode
+ '("cq" . cider-quit)
+ '("cz" . cider-switch-to-last-clojure-buffer))
 
 (m4d-leader-define-mode-key
  'rust-mode
