@@ -13,12 +13,13 @@
     (push-mark (cdr pos) t t)))
 
 (defun m4d--should-enable-motion-p ()
-  (or (minibufferp)
-      (member major-mode m4d-motion-mode-list)
-      (derived-mode-p 'special-mode)))
+  (and (not (minibufferp))
+       (or (member major-mode m4d-motion-mode-list)
+           (derived-mode-p 'special-mode))))
 
 (defun m4d--should-enable-normal-p ()
-  (and (or (equal major-mode 'fundamental-mode)
+  (and (not (minibufferp))
+       (or (equal major-mode 'fundamental-mode)
            view-mode
            (member major-mode m4d-normal-mode-list)
            (derived-mode-p 'text-mode 'conf-mode 'prog-mode))))

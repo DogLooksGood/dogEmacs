@@ -2,7 +2,9 @@
 
 (use-package god-mode
   :quelpa
-  (god-mode :repo "DogLooksGood/god-mode" :fetcher github))
+  (god-mode :repo "DogLooksGood/god-mode" :fetcher github)
+  :init
+  (setq god-mode-can-omit-literal-key t))
 
 (m4d-global-mode 1)
 

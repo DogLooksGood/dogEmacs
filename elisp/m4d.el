@@ -47,12 +47,13 @@
   "A hook runs when we enter the motion modal.")
 
 (defvar m4d-motion-mode-list nil
-  "A list of modes should be treated as special mode .")
+  "A list of modes should enable motion mode.")
 (setq m4d-motion-mode-list
       '(dired-mode
         ripgrep-search-mode
         help-mode
-        compilation-mode))
+        compilation-mode
+        dired-sidebar-mode))
 
 (defvar m4d-normal-mode-list nil
   "A list of modes should enable normal mode.")
@@ -63,6 +64,10 @@
         json-mode))
 
 ;;; Internal Variables
+
+(defvar m4d--keymap-loaded nil
+  "If keymap is loaded in this buffer.")
+(make-variable-buffer-local 'm4d--keymap-loaded)
 
 (defvar m4d--space-command nil
   "SPC mapping in this buffer.")
@@ -104,19 +109,25 @@
 ;;;###autoload
 
 (defun m4d--normal-init ()
+  ;; (message "%s normal init" major-mode)
   (run-hooks 'm4d-normal-modal-hook)
-  (let ((keymap (m4d--get-mode-leader-keymap major-mode t)))
-    (define-key m4d-normal-keymap (kbd "SPC") keymap))
+  (unless m4d--keymap-loaded
+    (let ((keymap (m4d--get-mode-leader-keymap major-mode t)))
+      (define-key m4d-normal-keymap (kbd "SPC") keymap)
+      (setq m4d--keymap-loaded t)))
   (m4d--update-cursor-shape))
 
-
 (defun m4d--motion-init ()
+  ;; (message "%s motion init" major-mode)
   (run-hooks 'm4d-motion-modal-hook)
-  (let ((keymap (m4d--get-mode-leader-keymap major-mode t)))
-    (define-key m4d-motion-keymap (kbd "SPC") keymap))
+  (unless m4d--keymap-loaded
+    (let ((keymap (m4d--get-mode-leader-keymap major-mode t)))
+      (define-key m4d-motion-keymap (kbd "SPC") keymap))
+    (setq m4d--keymap-loaded t))
   (m4d--update-cursor-shape))
 
 (defun m4d--mode-init ()
+  ;; (message "%s mode init" major-mode)
   (when (m4d--should-enable-motion-p)
     (unless m4d--space-command
       (let ((cmd (key-binding (read-kbd-macro "SPC"))))
@@ -162,7 +173,7 @@
 (define-global-minor-mode m4d-global-mode m4d-mode
   (lambda ()
     (add-hook 'post-command-hook #'m4d--update-cursor-shape t t)
-    (m4d-mode 1)
+    (unless (minibufferp) (m4d-mode 1))
     (when (m4d--should-enable-normal-p)
       (m4d-normal-mode 1))
     (when (m4d--should-enable-motion-p)

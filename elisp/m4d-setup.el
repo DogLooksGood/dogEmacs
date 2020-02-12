@@ -100,7 +100,6 @@ Basically, all navigation commands should trigger eldoc."
 ;;; Minibuffer
 
 (defun m4d--minibuffer-setup ()
-  (add-hook 'minibuffer-setup-hook 'm4d-motion-mode)
   (define-key minibuffer-local-map (kbd "<escape>") 'm4d-esc)
   (define-key minibuffer-local-map (kbd "C-u") 'keyboard-escape-quit))
 

@@ -11,10 +11,7 @@
    ("}" . 'ivy-next-line)
    ("[" . 'ivy-previous-history-element)
    ("]" . 'ivy-next-history-element)
-   ("<mouse-3>". 'ivy-done)
-   ;; ("<tab>" . 'ivy-alt-done)
-   ;; ("TAB" . 'ivy-alt-done)
-   )
+   ("<mouse-3>". 'ivy-done))
   :init
   (setq ivy-use-virtual-buffers nil
 	    ivy-use-selectable-prompt t)
