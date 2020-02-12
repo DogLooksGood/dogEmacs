@@ -1,7 +1,7 @@
 ;; (require 'mhtml-mode)
 
 (use-package emmet-mode
-  :hook (mhtml-mode)
+  :hook (mhtml-mode nxml-mode)
   :bind
   (:map emmet-mode-keymap
         ("M-RET" . 'emmet-expand-line))

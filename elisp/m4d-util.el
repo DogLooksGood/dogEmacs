@@ -1,3 +1,18 @@
+(defun m4d--switch-modal (modal)
+  (cond
+   ((equal modal 'normal)
+    (m4d-normal-mode 1)
+    (m4d-motion-mode -1)
+    (m4d-insert-mode -1))
+   ((equal modal 'insert)
+    (m4d-normal-mode -1)
+    (m4d-motion-mode -1)
+    (m4d-insert-mode 1))
+   ((equal modal 'motion)
+    (m4d-normal-mode -1)
+    (m4d-motion-mode 1)
+    (m4d-insert-mode -1))))
+
 (defun m4d--save-position-record ()
   (let ((first-pos (car m4d--position-record)))
     (unless (and first-pos
@@ -28,12 +43,25 @@
   (cond
    (god-local-mode
     (setq cursor-type 'hollow))
-   ((and (m4d--should-enable-normal-p) (not m4d-normal-mode))
+   (m4d-insert-mode
     (setq cursor-type '(bar . 5)))
    (m4d-normal-mode
     (setq cursor-type 'box))
    (m4d-motion-mode
     (setq cursor-type 'box))))
+
+(defun m4d--post-command-hook-function ()
+  (unless (member major-mode m4d--stick-modes)
+    (cond
+     ((and (or m4d-insert-mode m4d-normal-mode)
+           (m4d--should-enable-motion-p))
+      (m4d--switch-modal 'motion)
+      (message "Auto switch to MOTION mode."))
+     ((and m4d-motion-mode
+           (m4d--should-enable-normal-p))
+      (m4d--switch-modal 'normal)
+      (message "Auto switch to NORMAL mode."))))
+  (m4d--update-cursor-shape))
 
 (defun m4d--direction-right-p ()
   (if (region-active-p)
@@ -64,6 +92,12 @@
       (when (and beg end)
         (push-mark (if direction-right beg end) t t)
         (goto-char (if direction-right end beg))))))
+
+(defun m4d--to-normal ()
+  (m4d--switch-modal 'normal))
+
+(defun m4d--to-motion ()
+  (m4d--switch-modal 'motion))
 
 (defun m4d--in-string-p ()
   "Return if we are in string."

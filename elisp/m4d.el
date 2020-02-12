@@ -61,9 +61,15 @@
       '(cider-repl-mode
         eshell-mode
         vterm-mode
-        json-mode))
+        json-mode
+        wdired-mode))
 
 ;;; Internal Variables
+
+(defvar m4d--stick-modes nil
+  "In these modes, don't auto switch mode.")
+(setq m4d--stick-modes
+      '(ripgrep-search-mode))
 
 (defvar m4d--keymap-loaded nil
   "If keymap is loaded in this buffer.")
@@ -101,10 +107,12 @@
     (propertize "KMACRO" 'face 'm4d-kmacro-indicator))
    (m4d-normal-mode
     (propertize "NORMAL" 'face 'm4d-visual-indicator))
-   ((m4d--should-enable-motion-p)
+   (m4d-motion-mode
     (propertize "MOTION" 'face 'm4d-motion-indicator))
+   (m4d-insert-mode
+    (propertize "INSERT" 'face 'm4d-insert-indicator))
    (t
-    (propertize "INSERT" 'face 'm4d-insert-indicator))))
+    "INACTIVE")))
 
 ;;;###autoload
 
@@ -135,12 +143,11 @@
                    (not (equal cmd 'undefined)))
           (setq-local m4d--space-command cmd))))))
 
-(define-minor-mode m4d-kmacro-mode
-  "m4d kmacro modal state."
+(define-minor-mode m4d-insert-mode
+  "m4d insert modal state."
   nil
   ""
-  (when m4d-kmacro-mode
-    (m4d--kmacro-init)))
+  m4d-insert-keymap)
 
 ;;;###autoload
 (define-minor-mode m4d-normal-mode
@@ -172,11 +179,11 @@
 ;;;###autoload
 (define-global-minor-mode m4d-global-mode m4d-mode
   (lambda ()
-    (add-hook 'post-command-hook #'m4d--update-cursor-shape t t)
+    (add-hook 'post-command-hook #'m4d--post-command-hook-function t t)
     (unless (minibufferp) (m4d-mode 1))
     (when (m4d--should-enable-normal-p)
-      (m4d-normal-mode 1))
+      (m4d--switch-modal 'normal))
     (when (m4d--should-enable-motion-p)
-      (m4d-motion-mode 1))))
+      (m4d--switch-modal 'motion))))
 
 (provide 'm4d)

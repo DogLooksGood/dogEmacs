@@ -46,6 +46,7 @@
 (require 'the-lisp)
 (require 'the-clojure)
 (require 'the-java)
+(require 'the-javascript)
 ;; Don't use these languages for now.
 ;; (require 'the-haskell)
 ;; (require 'the-elixir)
@@ -67,6 +68,7 @@
 ;; (require 'the-modal)
 ;; (require 'the-latex)
 ;; (require 'the-ebook)
+(require 'the-wechat-mini)
 (require 'the-tab)
 (require 'the-hold)
 (require 'the-docker)

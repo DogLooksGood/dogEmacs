@@ -10,15 +10,16 @@
     m4d-quit
     m4d-find-ref
     m4d-pop-ref
-    m4d-leader))
+    m4d-leader
+    m4d-last-buffer))
 
 (defconst m4d--mc-cmd-run-for-all
-  '(m4d-undo
+  '(m4d-escape-or-normal-modal
+    m4d-undo
     m4d-space
     m4d-search
     m4d-reverse-search
     m4d-insert-after
-    m4d-esc
     m4d-mark-whole-buffer
     m4d-copy
     m4d-delete
@@ -99,9 +100,7 @@ Basically, all navigation commands should trigger eldoc."
 
 ;;; Minibuffer
 
-(defun m4d--minibuffer-setup ()
-  (define-key minibuffer-local-map (kbd "<escape>") 'm4d-esc)
-  (define-key minibuffer-local-map (kbd "C-u") 'keyboard-escape-quit))
+(defun m4d--minibuffer-setup ())
 
 ;;; ISearch
 
@@ -111,37 +110,39 @@ Basically, all navigation commands should trigger eldoc."
   (define-key isearch-mode-map (kbd "<escape>") 'isearch-abort)
   (define-key isearch-mode-map (kbd "C-u") 'isearch-abort))
 
-(defun m4d--select-window-advice (&rest args)
-  "Auto toggle mode when switch buffers.
+;;; WGrep
 
-The default mode is set with priority: MOTION > NORMAL > INSERT."
-  (when (and (not (equal (last-buffer) (current-buffer)))
-             (not (minibufferp))
-             (not (minibufferp (last-buffer))))
-    (when (m4d--should-enable-motion-p)
-      (m4d-normal-mode -1))
-    (when (m4d--should-enable-normal-p)
-      (m4d-insert-exit))))
-
-(defun m4d--toggle-modes-setup ()
-  (advice-add 'select-window :after 'm4d--select-window-advice))
+(defun m4d--wgrep-setup ()
+  ;; WGrep doesn't call its hooks.
+  (advice-add 'wgrep-change-to-wgrep-mode
+              :after
+              'm4d--to-normal)
+  (advice-add 'wgrep-exit
+              :after
+              'm4d--to-motion)
+  (advice-add 'wgrep-finish-edit
+              :after
+              'm4d--to-motion)
+  (advice-add 'wgrep-save-all-buffers
+              :after
+              'm4d--to-motion))
 
 ;;; Global keybindings
 
 (defun m4d--global-setup ()
   ;; These global key bindings are used for fundamental mode.
-  (global-set-key (kbd "<escape>") 'm4d-esc)
-  (global-set-key (kbd "C-u") 'm4d-esc))
+  (global-set-key (kbd "<escape>") 'm4d-escape-or-normal-modal)
+  (global-set-key (kbd "C-u") 'm4d-escape-or-normal-modal))
 
 (defun m4d-setup ()
   ;; This is important, otherwise we have to deactivate region before delete char.
   (setq delete-active-region nil)
   (m4d--global-setup)
+  (m4d--wgrep-setup)
   (m4d--mc-setup)
   (m4d--isearch-setup)
   (m4d--minibuffer-setup)
   (m4d--eldoc-setup)
-  (m4d--toggle-modes-setup)
   (m4d--kmacro-mode-setup))
 
 (provide 'm4d-setup)

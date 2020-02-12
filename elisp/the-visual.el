@@ -29,11 +29,6 @@
   :init
   (add-hook 'prog-mode-hook 'highlight-numbers-mode))
 
-(use-package paren-face
-  :init
-  (setq paren-face-regexp "[()]")
-  (global-paren-face-mode 1))
-
 (use-package yascroll
   :init
   (global-yascroll-bar-mode))

@@ -43,9 +43,8 @@
 (setq-default frame-title-format
               '("["
                 (:eval
-                 (when vc-mode
-                   (replace-regexp-in-string "^ Git:" "" vc-mode)))
-                "]"
+                 (when vc-mode vc-mode))
+                " ]"
                 " %b%* %e <%m>"))
 
 (setq user/mini-mode-line t)
@@ -55,7 +54,7 @@
   :config
   (if (and user/mini-mode-line (display-graphic-p))
       (progn
-        (setq mini-modeline-r-format '("%l:%c %b%* %e %m"))
+        (setq mini-modeline-r-format '("%l:%c" (vc-mode vc-mode) " %b%* %e %m"))
         (setq mini-modeline-l-format '((:eval (m4d-indicator))
                                        " "
                                        (:eval (mini-modeline-msg))))

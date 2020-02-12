@@ -516,6 +516,7 @@ Do nothing if always at the end."
     (goto-char (min (mark) (point)))
     (m4d--clear-select))
   (m4d-normal-mode -1)
+  (m4d-insert-mode 1)
   (run-hooks 'm4d-insert-modal-hook))
 
 (defun m4d-slurp ()
@@ -725,14 +726,6 @@ Do nothing if always at the end."
   (interactive)
   (call-interactively #'mc/skip-))
 
-(defun m4d-insert-exit ()
-  (interactive)
-  (when (and (fboundp 'company-mode)
-             (company--active-p))
-    (company-abort))
-  (m4d-normal-mode 1)
-  (run-hooks 'm4d-normal-modal-hook))
-
 (defun m4d-god ()
   (interactive)
   (god-local-mode 1)
@@ -744,20 +737,16 @@ Do nothing if always at the end."
       (call-interactively m4d--space-command)
     (m4d--execute-kbd-macro m4d-execute-extended-command-kbd-macro)))
 
-(defun m4d-esc ()
+(defun m4d-escape-or-normal-modal ()
   (interactive)
   (cond
    (god-local-mode
     (god-local-mode -1))
-   ((minibufferp)
-    (call-interactively #'keyboard-escape-quit))
-   (multiple-cursors-mode
-    (m4d-insert-exit))
-   (m4d-motion-mode
-    (mode-line-other-buffer))
-   ((not m4d-normal-mode)
-    (m4d-insert-exit))
-   (m4d-normal-mode
-    (mode-line-other-buffer))))
+   ((or multiple-cursors-mode m4d-insert-mode)
+    (m4d--switch-modal 'normal))))
+
+(defun m4d-last-buffer ()
+  (interactive)
+  (mode-line-other-buffer))
 
 (provide 'm4d-core)
