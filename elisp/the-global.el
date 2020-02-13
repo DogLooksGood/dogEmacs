@@ -43,7 +43,7 @@
  window-divider-default-bottom-width 1
  window-divider-default-places t
  ;; Don't wait for keystrokes display
- echo-keystrokes 0
+ echo-keystrokes 1
  show-paren-style 'parenthese
  ;; Overline no margin
  overline-margin 0

@@ -23,9 +23,7 @@
   (interactive)
   (if company-candidates
       (company-abort)
-    (progn
-      (yas-abort-snippet)
-      (m4d-normal-mode))))
+    (yas-abort-snippet)))
 
 (defun user/yas-start ()
   (setq-local cursor-type '(hbar . 4)))

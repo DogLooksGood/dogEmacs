@@ -10,10 +10,6 @@
 
 (m4d-setup)
 
-(add-to-list 'm4d-motion-mode-list 'ripgrep-search-mode)
-(add-to-list 'm4d-motion-mode-list 'cider-repl-mode)
-(add-to-list 'm4d-motion-mode-list 'vterm-mode)
-
 (defun user/kill-window-or-quit ()
   (interactive)
   (condition-case e
@@ -59,6 +55,7 @@
  '("0" . delete-window)
  '("b" . switch-to-buffer)
  '("'" . paredit-meta-doublequote)
+ '("#" . deft)
  '("q" . projectile-kill-buffers)
  '("m" . magit-status))
 

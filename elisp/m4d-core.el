@@ -508,15 +508,14 @@ Do nothing if always at the end."
   (when (and (mark) (region-active-p))
     (goto-char (max (mark) (point)))
     (m4d--clear-select))
-  (m4d-normal-mode -1))
+  (m4d--switch-modal 'insert))
 
 (defun m4d-insert ()
   (interactive)
   (when (and (mark) (region-active-p))
     (goto-char (min (mark) (point)))
     (m4d--clear-select))
-  (m4d-normal-mode -1)
-  (m4d-insert-mode 1)
+  (m4d--switch-modal 'insert)
   (run-hooks 'm4d-insert-modal-hook))
 
 (defun m4d-slurp ()
@@ -641,23 +640,28 @@ Do nothing if always at the end."
   (interactive)
   (end-of-buffer))
 
-(defun m4d-select ()
-  (interactive)
-  (unless multiple-cursors-mode
-    (if (region-active-p)
-        (call-interactively #'mc/mark-all-in-region-regexp)
-      (message "No selection!")))
-  (setq m4d--last-select nil))
-
-;; (defun m4d-leader (arg)
-;;   "Don't support digit argument yet, can't figure out the reason."
-;;   (interactive "P")
-;;   (let ((keymap (or (m4d--get-mode-leader-keymap major-mode)
-;;                     m4d-leader-base-keymap)))
-;;     (set-transient-map keymap)
-;;     (cond
-;;      ((equal '(4) arg)
-;;       (universal-argument)))))
+;;; Copy from multiple-cursor, change the prompt word "Mark" to "Select" the key S.
+(defun m4d-select (beg end &optional search)
+  (interactive "r")
+  (if (region-active-p)
+      (let ((search (or search (read-from-minibuffer "Select: ")))
+            (case-fold-search nil))
+        (if (string= search "")
+            (message "Select aborted")
+          (progn
+            (mc/remove-fake-cursors)
+            (goto-char beg)
+            (while (search-forward search end t)
+              (push-mark (match-beginning 0))
+              (mc/create-fake-cursor-at-point))
+            (let ((first (mc/furthest-cursor-before-point)))
+              (if (not first)
+                  (error "Search failed for %S" search)
+                (mc/pop-state-from-overlay first)))
+            (if (> (mc/num-cursors) 1)
+                (multiple-cursors-mode 1)
+              (multiple-cursors-mode 0)))))
+    (message "No selection!")))
 
 (defun m4d-pop-ref ()
   (interactive)
@@ -698,11 +702,15 @@ Do nothing if always at the end."
   (interactive)
   (m4d--execute-kbd-macro m4d-other-window-kbd-macro))
 
+(defun m4d-quoted-insert ()
+  (interactive)
+  (call-interactively 'quoted-insert))
+
 (defun m4d-quit ()
   (interactive)
   (if (> (seq-length (window-list (selected-frame))) 1)
-      (delete-window)
-    (save-buffers-kill-terminal)))
+    (delete-window)
+    (mode-line-other-buffer)))
 
 (defun m4d-undo ()
   (interactive)

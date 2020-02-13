@@ -37,6 +37,9 @@
 
 ;;; Custom Variables
 
+(defvar m4d-dvorak-layout-type 'programmer
+  "Can be `programmer' or `simplified'.")
+
 (defvar m4d-insert-modal-hook nil
   "A hook runs when we enter the insert modal.")
 
@@ -50,6 +53,7 @@
   "A list of modes should enable motion mode.")
 (setq m4d-motion-mode-list
       '(dired-mode
+        ivy-occur-grep-mode
         ripgrep-search-mode
         help-mode
         compilation-mode
@@ -62,14 +66,16 @@
         eshell-mode
         vterm-mode
         json-mode
-        wdired-mode))
+        wdired-mode
+        deft-mode))
 
 ;;; Internal Variables
 
 (defvar m4d--stick-modes nil
   "In these modes, don't auto switch mode.")
 (setq m4d--stick-modes
-      '(ripgrep-search-mode))
+      '(ripgrep-search-mode
+        ivy-occur-grep-mode))
 
 (defvar m4d--keymap-loaded nil
   "If keymap is loaded in this buffer.")

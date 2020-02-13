@@ -69,6 +69,7 @@
 ;; (require 'the-latex)
 ;; (require 'the-ebook)
 (require 'the-wechat-mini)
+(require 'the-deft)
 (require 'the-tab)
 (require 'the-hold)
 (require 'the-docker)

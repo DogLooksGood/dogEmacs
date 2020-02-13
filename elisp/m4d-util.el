@@ -1,3 +1,14 @@
+(defun m4d--update-cursor-shape ()
+  (cond
+   (god-local-mode
+    (setq cursor-type 'hollow))
+   (m4d-insert-mode
+    (setq cursor-type '(bar . 5)))
+   (m4d-normal-mode
+    (setq cursor-type 'box))
+   (m4d-motion-mode
+    (setq cursor-type 'box))))
+
 (defun m4d--switch-modal (modal)
   (cond
    ((equal modal 'normal)
@@ -11,7 +22,8 @@
    ((equal modal 'motion)
     (m4d-normal-mode -1)
     (m4d-motion-mode 1)
-    (m4d-insert-mode -1))))
+    (m4d-insert-mode -1)))
+  (m4d--update-cursor-shape))
 
 (defun m4d--save-position-record ()
   (let ((first-pos (car m4d--position-record)))
@@ -38,17 +50,6 @@
            view-mode
            (member major-mode m4d-normal-mode-list)
            (derived-mode-p 'text-mode 'conf-mode 'prog-mode))))
-
-(defun m4d--update-cursor-shape ()
-  (cond
-   (god-local-mode
-    (setq cursor-type 'hollow))
-   (m4d-insert-mode
-    (setq cursor-type '(bar . 5)))
-   (m4d-normal-mode
-    (setq cursor-type 'box))
-   (m4d-motion-mode
-    (setq cursor-type 'box))))
 
 (defun m4d--post-command-hook-function ()
   (unless (member major-mode m4d--stick-modes)

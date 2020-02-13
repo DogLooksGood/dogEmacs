@@ -8,3 +8,9 @@
 (use-package vue-mode
   :config
   (setq mmm-submode-decoration-level 0))
+
+(setq-default js-indent-level 2)
+
+(use-package json
+  :init
+  (add-hook 'json-mode-hook 'smartparens-mode))

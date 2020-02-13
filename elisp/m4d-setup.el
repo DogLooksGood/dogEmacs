@@ -4,7 +4,6 @@
 
 (defconst m4d--mc-cmd-run-once
   '(mc/vertical-align-with-space
-    m4d-select
     m4d-visit-next
     m4d-visit-skip
     m4d-quit
@@ -89,7 +88,7 @@ Basically, all navigation commands should trigger eldoc."
     (advice-add fn :around #'m4d--mc-prompt-once-advice)))
 
 (defun m4d--mc-setup ()
-  (m4d--mc-prompt-once #'m4d-select)
+  ;; (m4d--mc-prompt-once #'m4d-select)
   (dolist (cmd m4d--mc-cmd-run-once)
     (add-to-list 'mc/cmds-to-run-once cmd))
   (dolist (cmd m4d--mc-cmd-run-for-all)
@@ -127,6 +126,11 @@ Basically, all navigation commands should trigger eldoc."
               :after
               'm4d--to-motion))
 
+;;; Yasnippet
+
+(defun m4d--yas-setup ()
+  (add-hook 'yas-after-exit-snippet-hook 'm4d--to-normal))
+
 ;;; Global keybindings
 
 (defun m4d--global-setup ()
@@ -143,6 +147,7 @@ Basically, all navigation commands should trigger eldoc."
   (m4d--isearch-setup)
   (m4d--minibuffer-setup)
   (m4d--eldoc-setup)
-  (m4d--kmacro-mode-setup))
+  (m4d--kmacro-mode-setup)
+  (m4d--yas-setup))
 
 (provide 'm4d-setup)
