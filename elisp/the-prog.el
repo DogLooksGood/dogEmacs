@@ -15,11 +15,16 @@ Otherwise will insert a singlequote."
 (use-package smartparens
   :bind
   (:map smartparens-mode-map
-   ("C-k" . 'sp-kill-hybrid-sexp))
+        ("C-k" . 'sp-kill-hybrid-sexp)
+        ("C-)" . 'sp-forward-slurp-sexp)
+        ("C-}" . 'sp-forward-barf-sexp))
   :config
   (sp-with-modes
       '(rust-mode go-mode java-mode rjsx-mode)
-    (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET")))))
+    (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET"))))
+  :init
+  (setq sp-highlight-pair-overlay nil
+        sp-highlight-wrap-overlay nil))
 
 (use-package flycheck
   :init

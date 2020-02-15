@@ -102,6 +102,7 @@
    (define-key keymap (kbd ",") 'm4d-pop-ref)
    (define-key keymap (kbd "-") 'negative-argument)
    (define-key keymap (kbd ";") 'm4d-comment)
+   (define-key keymap (kbd "'") 'm4d-quoted-insert)
    (define-key keymap (kbd "$") 'm4d-end-of-line)
    (define-key keymap (kbd "^") 'm4d-back-to-indentation)
    (define-key keymap (kbd "/") 'm4d-search)

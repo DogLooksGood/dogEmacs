@@ -1,15 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 ;;; Look And Feels
-;;  setup for font, frame alpha, mode line and themes.
-
-;; Transparency Setup
-(defvar user/alpha nil)
-(setq user/alpha 100)
-
-(when (display-graphic-p)
-  (defun user/set-alpha ()
-    (set-frame-parameter (selected-frame) 'alpha (cons user/alpha user/alpha)))
-  (user/set-alpha))
+;;  setup for font, mode line and themes.
 
 ;;; Font Setup
 ;; sample text:
@@ -17,10 +8,8 @@
 ;;   | Mixed monospace  |
 ;; get this script from cnfont
 
-(when (display-graphic-p)
-  (defun user/set-font (&rest args)
-    (set-frame-font "unifont 11" t t))
-  (user/set-font))
+(add-to-list 'default-frame-alist '(font . "Unifont 16"))
+;; (set-frame-font "unifont 16" t t)
 
 (setq underline-minimum-offset 0)
 
@@ -47,6 +36,7 @@
                 " ]"
                 " %b%* %e <%m>"))
 
+;;; If we want hide the mode line
 (setq user/mini-mode-line t)
 
 (use-package mini-modeline
@@ -70,18 +60,22 @@
             mini-modeline-echo-duration 2)
       (mini-modeline-mode t)
       (setq-default mode-line-format
-                    '((:eval (user/simple-mode-line-render
-                              (format-mode-line '())
-                              (format-mode-line '("%l:%c %b%* %e %m")))))))))
+              '((:eval (user/simple-mode-line-render
+                        (format-mode-line '())
+                        (format-mode-line '(" %l:%c %b%*"
+                                            (vc-mode vc-mode)
+                                            " %m")))))))))
 
-;;; Run setup for future frames.
+;; Only show window divider when there's more than one window.
+(defun user/toggle-window-divider-and-border ()
+  (if (> (count-windows) 1)
+      (progn
+        (window-divider-mode 1))
+    (progn
+      (window-divider-mode -1))))
 
-(defun user/new-frame-setup (frame)
-  (select-frame frame)
-  (user/set-font)
-  (user/set-alpha))
-
-(when (display-graphic-p)
-  (add-hook 'after-make-frame-functions 'user/new-frame-setup))
+(when (and user/mini-mode-line (display-graphic-p))
+  (window-divider-mode -1)
+  (add-hook 'window-configuration-change-hook #'user/toggle-window-divider-and-border))
 
 (provide 'the-look-and-feel)

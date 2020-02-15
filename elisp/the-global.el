@@ -3,8 +3,10 @@
 ;; Better Defaults
 (setq-default
  inhibit-x-resources t
- ;; inhibit-splash-screen t
- ;; inhibit-startup-screen t
+ inhibit-splash-screen t
+ inhibit-startup-screen t
+ frame-inhibit-implied-resize t
+ initial-major-mode 'fundamental-mode
  initial-scratch-message ""
  ;; Don't highlight line when buffer is inactive
  hl-line-sticky-flag nil
@@ -22,8 +24,6 @@
  default-terminal-coding-system 'utf-8-unix
  ;; Add final newline
  require-final-newline t
- ;; Larger GC threshold
- gc-cons-threshold (* 100 1024 1024)
  ;; Backup setups
  backup-directory-alist `((".*" . ,temporary-file-directory))
  auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
@@ -84,24 +84,15 @@
 (global-auto-revert-mode 1)
 
 ;; Delete trailing whitespace on save.
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(defun user/setup-delete-trailing-whitespace ()
+  (add-hook 'before-save-hook 'delete-trailing-whitespace t t))
 
+(add-hook 'prog-mode-hook 'user/setup-delete-trailing-whitespace)
 
 ;; Custom file path
 ;; Actually we don't need custom file, this file can be generated
 ;; accidentally, so we add this file to .gitignore and never load it.
 (setq custom-file "~/.emacs.d/custom.el")
-
-;; Only show window divider when there's more than one window.
-(defun user/toggle-window-divider-and-border ()
-  (if (> (count-windows) 1)
-      (progn
-        (window-divider-mode 1))
-    (progn
-      (window-divider-mode -1))))
-
-(window-divider-mode -1)
-(add-hook 'window-configuration-change-hook #'user/toggle-window-divider-and-border)
 
 ;; Replace all "yes or no" with "y or n".
 (fset 'yes-or-no-p 'y-or-n-p)

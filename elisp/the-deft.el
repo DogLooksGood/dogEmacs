@@ -3,6 +3,7 @@
   :commands (deft)
   :init
   (setq deft-directory "~/deft"
-        deft-extensions '("org" "md")))
+        deft-extensions '("text" "org" "md")
+        deft-auto-save-interval 5.0))
 
 (provide 'the-deft)

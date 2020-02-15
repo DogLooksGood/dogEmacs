@@ -241,8 +241,10 @@ Do nothing if always at the end."
       (while (not (or (= (point) (point-max))
                       (looking-at "\\s)")))
         (forward-char))
-    (while (not (or (= (point) (point-max))
-                    (looking-at "\n\\|\\s)")))
+    (while (and
+            (< (point) (point-max))
+            (not (or (= (point) (point-max))
+                         (looking-at "\n\\|\\s)"))))
       (forward-char))))
 
 (defun m4d--flip-left ()
@@ -330,8 +332,11 @@ Do nothing if always at the end."
     (unless (m4d--select-thing 'sexp t)
       (when (looking-at "\\s)")
         (backward-sexp))
-      (m4d--select-thing 'sexp t)
-      (m4d-exchange)))
+      (if (m4d--select-thing 'sexp t)
+          (m4d-exchange)
+        (ignore-errors
+            (push-mark (point) t t)
+            (forward-sexp)))))
 
    ((not (m4d--direction-right-p))
     (push-mark (point) t t)
@@ -434,7 +439,7 @@ Do nothing if always at the end."
 (defun m4d-god-exchange ()
   (interactive)
   (if (region-active-p)
-      (exchange-point-and-mark)
+      (m4d-exchange)
     (god-local-mode 1)
     (call-interactively #'god-mode-self-insert)))
 
@@ -521,20 +526,12 @@ Do nothing if always at the end."
 (defun m4d-slurp ()
   "Forward slurp the paren, call the command of keybinding \"C-)\"."
   (interactive)
-  (if (looking-at "\\s(")
-      (save-mark-and-excursion
-        (forward-char)
-        (m4d--execute-kbd-macro m4d-backward-barf-kbd-macro))
-    (m4d--execute-kbd-macro m4d-slurp-kbd-macro)))
+  (m4d--execute-kbd-macro m4d-slurp-kbd-macro))
 
 (defun m4d-barf ()
   "Forward barf the paren, call the command of keybinding \"C-(\"."
   (interactive)
-  (if (looking-at "\\s(")
-      (save-mark-and-excursion
-        (forward-char)
-        (m4d--execute-kbd-macro m4d-backward-slurp-kbd-macro))
-    (m4d--execute-kbd-macro m4d-barf-kbd-macro)))
+  (m4d--execute-kbd-macro m4d-barf-kbd-macro))
 
 (defun m4d-duplicate-line ()
   (interactive)
@@ -547,13 +544,18 @@ Do nothing if always at the end."
 (defun m4d-copy ()
   (interactive)
   (if (region-active-p)
-      (m4d--execute-kbd-macro m4d-kill-ring-save-kbd-macro)
+      (progn
+        (when (and (equal 'line m4d--last-select)
+                   (m4d--direction-right-p)
+                   (< (point) (point-max)))
+          (forward-char 1))
+        (m4d--execute-kbd-macro m4d-kill-ring-save-kbd-macro))
     (message "No selection!")))
 
 (defun m4d-god-copy ()
   (interactive)
   (if (region-active-p)
-      (m4d--execute-kbd-macro m4d-kill-ring-save-kbd-macro)
+      (m4d-copy)
     (god-local-mode 1)
     (call-interactively #'god-mode-self-insert)))
 
@@ -710,7 +712,7 @@ Do nothing if always at the end."
   (interactive)
   (if (> (seq-length (window-list (selected-frame))) 1)
     (delete-window)
-    (mode-line-other-buffer)))
+    (previous-buffer)))
 
 (defun m4d-undo ()
   (interactive)
@@ -752,6 +754,16 @@ Do nothing if always at the end."
     (god-local-mode -1))
    ((or multiple-cursors-mode m4d-insert-mode)
     (m4d--switch-modal 'normal))))
+
+(defun m4d-global-esc ()
+  (interactive)
+  (cond
+   ((minibufferp)
+    (call-interactively #'minibuffer-keyboard-quit))
+   ((equal major-mode 'fundamental-mode)
+    (m4d--to-normal))
+   (t
+    (message "Add %s to either `m4d-normal-mode-list' or `m4d-motion-mode-list'."))))
 
 (defun m4d-last-buffer ()
   (interactive)

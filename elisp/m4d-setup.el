@@ -129,14 +129,14 @@ Basically, all navigation commands should trigger eldoc."
 ;;; Yasnippet
 
 (defun m4d--yas-setup ()
-  (add-hook 'yas-after-exit-snippet-hook 'm4d--to-normal))
+  (advice-add 'yas-abort-snippet :after 'm4d--to-normal))
 
 ;;; Global keybindings
 
 (defun m4d--global-setup ()
   ;; These global key bindings are used for fundamental mode.
-  (global-set-key (kbd "<escape>") 'm4d-escape-or-normal-modal)
-  (global-set-key (kbd "C-u") 'm4d-escape-or-normal-modal))
+  (global-set-key (kbd "<escape>") 'm4d-global-esc)
+  (global-set-key (kbd "C-u") 'm4d-global-esc))
 
 (defun m4d-setup ()
   ;; This is important, otherwise we have to deactivate region before delete char.

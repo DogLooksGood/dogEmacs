@@ -8,8 +8,7 @@
    ("<tab>" . 'user/insert-tab)
    :map company-active-map
    ("}" . 'company-select-next)
-   ("{" . 'company-select-previous)
-   ("[" . 'company-show-doc-buffer))
+   ("{" . 'company-select-previous))
   :config
   (unbind-key "RET" company-active-map)
   (unbind-key "<return>" company-active-map)
@@ -39,7 +38,7 @@
         company-require-match nil
         company-global-modes '(not dired-mode dired-sidebar-mode))
   (add-hook 'prog-mode-hook 'company-mode)
-  (add-hook 'text-mode-hook 'company-mode)
+  ;; (remove-hook 'text-mode-hook 'company-mode)
   (add-hook 'conf-mode-hook 'company-mode)
   (add-hook 'eshell-mode-hook 'company-mode))
 

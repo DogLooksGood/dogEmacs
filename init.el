@@ -1,3 +1,5 @@
+(setq gc-cons-threshold (* 100000 1024 1024))
+
 (require 'package)
 
 (setq package-archives
@@ -75,3 +77,5 @@
 (require 'the-docker)
 (require 'the-server)
 (require 'the-m4d)
+
+(setq gc-cons-threshold (* 100 1024 1024))
