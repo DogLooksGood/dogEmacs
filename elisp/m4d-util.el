@@ -1,13 +1,17 @@
 (defun m4d--update-cursor-shape ()
   (cond
    (god-local-mode
-    (setq cursor-type 'hollow))
+    (setq cursor-type 'hollow)
+    (send-string-to-terminal "\033[3 q"))
    (m4d-insert-mode
-    (setq cursor-type '(bar . 5)))
+    (setq cursor-type '(bar . 5))
+    (send-string-to-terminal "\033[5 q"))
    (m4d-normal-mode
-    (setq cursor-type 'box))
+    (setq cursor-type 'box)
+    (send-string-to-terminal "\033[2 q"))
    (m4d-motion-mode
-    (setq cursor-type 'box))))
+    (setq cursor-type 'box)
+    (send-string-to-terminal "\033[2 q"))))
 
 (defun m4d--switch-modal (modal)
   (cond

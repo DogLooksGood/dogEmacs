@@ -8,8 +8,8 @@
 ;;   | Mixed monospace  |
 ;; get this script from cnfont
 
-(add-to-list 'default-frame-alist '(font . "Unifont 16"))
-;; (set-frame-font "unifont 16" t t)
+(add-to-list 'default-frame-alist '(font . "Unifont 12"))
+;; (set-frame-font "unifont 12" t t)
 
 (setq underline-minimum-offset 0)
 
@@ -18,7 +18,7 @@
 
 (progn
   (require 'joker-theme)
-  (setq visible-cursor nil)
+  (setq visible-cursor t)
   (load-theme 'joker t))
 
 ;;; Mode Line Setup

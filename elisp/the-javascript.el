@@ -9,6 +9,10 @@
   :config
   (setq mmm-submode-decoration-level 0))
 
+(use-package css-mode
+  :init
+  (add-hook 'css-mode-hook 'smartparens-mode))
+
 (setq-default js-indent-level 2)
 
 (use-package json

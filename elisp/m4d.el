@@ -104,6 +104,7 @@
 (require 'm4d-kmacro)
 (require 'm4d-keys)
 (require 'm4d-helpers)
+(require 'm4d-esc)
 (require 'm4d-setup)
 
 (defun m4d-indicator ()

@@ -9,14 +9,12 @@
 (setq m4d-motion-keymap
       (let ((keymap (make-sparse-keymap)))
         (define-key keymap [escape] 'm4d-last-buffer)
-        (define-key keymap (kbd "C-u") 'm4d-last-buffer)
         keymap))
 
 (defvar m4d-insert-keymap nil)
 (setq m4d-insert-keymap
       (let ((keymap (make-sparse-keymap)))
         (define-key keymap [escape] 'm4d-escape-or-normal-modal)
-        (define-key keymap (kbd "C-u") 'm4d-escape-or-normal-modal)
         keymap))
 
 (defvar m4d-leader-base-keymap nil)
@@ -112,7 +110,6 @@
    (define-key keymap (kbd "<") 'm4d-barf)
    (define-key keymap (kbd "#") 'universal-argument)
    (define-key keymap [escape] 'm4d-last-buffer)
-   (define-key keymap (kbd "C-u") 'm4d-last-buffer)
    keymap))
 
 (provide 'm4d-keys)

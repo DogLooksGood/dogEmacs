@@ -473,7 +473,7 @@ Do nothing if always at the end."
         (m4d--execute-kbd-macro m4d-kill-region-kbd-macro)
         (m4d-insert)
         (when (eq (line-end-position) (line-beginning-position))
-          (lisp-indent-line)))
+          (indent-for-tab-command)))
     (if (not (equal last-command 'm4d-c-g))
         (message "No selection!")
       (m4d--execute-kbd-macro m4d-kill-line-kbd-macro)
@@ -734,7 +734,7 @@ Do nothing if always at the end."
 
 (defun m4d-visit-skip ()
   (interactive)
-  (call-interactively #'mc/skip-))
+  (call-interactively #'mc/skip-to-next-like-this))
 
 (defun m4d-god ()
   (interactive)

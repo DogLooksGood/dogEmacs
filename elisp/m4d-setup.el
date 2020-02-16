@@ -70,6 +70,7 @@
 (defconst m4d--specific-vars
   '(m4d--last-select))
 
+
 ;;; ElDoc
 
 (defun m4d--eldoc-setup ()
@@ -106,8 +107,7 @@ Basically, all navigation commands should trigger eldoc."
 (defun m4d--isearch-setup ()
   (define-key isearch-mode-map (kbd "}") 'isearch-repeat-forward)
   (define-key isearch-mode-map (kbd "{") 'isearch-repeat-backward)
-  (define-key isearch-mode-map (kbd "<escape>") 'isearch-abort)
-  (define-key isearch-mode-map (kbd "C-u") 'isearch-abort))
+  (define-key isearch-mode-map (kbd "<escape>") 'isearch-abort))
 
 ;;; WGrep
 
@@ -131,16 +131,27 @@ Basically, all navigation commands should trigger eldoc."
 (defun m4d--yas-setup ()
   (advice-add 'yas-abort-snippet :after 'm4d--to-normal))
 
+;;; TUI
+
+(defun m4d--terminal-restore-cursor-shape ()
+  (send-string-to-terminal "\033[2 q"))
+
+(defun m4d--tui-setup ()
+  (unless (display-graphic-p)
+    (m4d--init-esc (selected-frame))
+    (add-hook 'kill-emacs-hook 'm4d--terminal-restore-cursor-shape)
+    (add-hook 'suspend-hook 'm4d--terminal-restore-cursor-shape)))
+
 ;;; Global keybindings
 
 (defun m4d--global-setup ()
   ;; These global key bindings are used for fundamental mode.
-  (global-set-key (kbd "<escape>") 'm4d-global-esc)
-  (global-set-key (kbd "C-u") 'm4d-global-esc))
+  (global-set-key (kbd "<escape>") 'm4d-global-esc))
 
 (defun m4d-setup ()
   ;; This is important, otherwise we have to deactivate region before delete char.
   (setq delete-active-region nil)
+  (m4d--tui-setup)
   (m4d--global-setup)
   (m4d--wgrep-setup)
   (m4d--mc-setup)

@@ -36,6 +36,7 @@
 (add-to-list 'load-path (concat user/emacs-dir "elisp/"))
 
 (require 'the-elisp)
+;; (require 'the-cursor)
 (require 'the-look-and-feel)
 (require 'the-global)
 (require 'the-git)

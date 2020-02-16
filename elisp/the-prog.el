@@ -51,4 +51,6 @@ Otherwise will insert a singlequote."
 ;;   :init
 ;;   (setq dumb-jump-selector 'ivy))
 
+(add-hook 'prog-mode-hook 'subword-mode)
+
 (provide 'the-prog)
