@@ -1,5 +1,5 @@
 (use-package xml
-  :mode ("\\.wxml\\'" . xml-mode))
+  :mode ("\\.wxml\\'" . web-mode))
 
 (use-package css-mode
   :mode ("\\.wxss\\'" . css-mode))

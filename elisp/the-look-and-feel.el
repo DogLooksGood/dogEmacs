@@ -9,7 +9,7 @@
 ;; get this script from cnfont
 
 (add-to-list 'default-frame-alist '(font . "Unifont 12"))
-;; (set-frame-font "unifont 12" t t)
+(set-face-attribute 'fixed-pitch nil :family "Unifont")
 
 (setq underline-minimum-offset 0)
 

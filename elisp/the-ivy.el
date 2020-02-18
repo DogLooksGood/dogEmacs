@@ -14,7 +14,8 @@
    ("<mouse-3>". 'ivy-done))
   :init
   (setq ivy-use-virtual-buffers nil
-	    ivy-use-selectable-prompt t)
+	    ivy-use-selectable-prompt t
+        ivy-height 15)
   (ivy-mode 1))
 
 (use-package counsel

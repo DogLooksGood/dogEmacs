@@ -10,7 +10,7 @@
 
 (setq joker--hl-line
       (if (display-graphic-p)
-          '((t (:underline "#353535" :overline "#353535" :background "#1F1F1F")))
+          '((t (:background "#272729")))
         '((t (:background "#202020")))))
 
 (custom-theme-set-faces

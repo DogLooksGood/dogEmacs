@@ -18,7 +18,7 @@
      (save-buffers-kill-terminal))))
 
 (m4d-normal-define-key
- '("@" . hs-toggle-hiding))
+ '("C" . hs-toggle-hiding))
 
 (m4d-leader-define-key
  '("p" . projectile-find-file)
@@ -40,6 +40,7 @@
  '("r" . sp-raise-sexp)
  '("s" . sp-split-sexp)
  '("u" . sp-splice-sexp)
+ '("n" . dumb-jump-go)
  '("j" . sp-join-sexp)
  '("(" . sp-wrap-round)
  '("[" . sp-wrap-square)

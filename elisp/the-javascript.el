@@ -1,9 +1,15 @@
 (provide 'the-javascript)
 
-(use-package rjsx-mode
+;; (use-package js2-mode
+;;   :init
+;;   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;;   (add-hook 'js2-mode-hook 'smartparens-mode))
+
+(use-package web-mode
   :init
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
-  (add-hook 'rjsx-mode-hook 'smartparens-mode))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+  (add-hook 'web-mode-hook 'smartparens-mode)
+  (setq web-mode-code-indent-offset 2))
 
 (use-package vue-mode
   :config

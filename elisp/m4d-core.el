@@ -20,6 +20,9 @@
 (defvar m4d-find-ref-kbd-macro "M-."
   "The kbd macro used in `m4d-find-ref'.")
 
+(defvar m4d-pop-ref-kbd-macro "M-,"
+  "The kbd macro used in `m4d-pop-ref'.")
+
 (defvar m4d-backward-slurp-kbd-macro "C-("
   "The kbd macro used in `m4d-barf'.")
 
@@ -233,29 +236,17 @@ Do nothing if always at the end."
 
 (defun m4d--flip-right ()
   (push-mark (point) t t)
-  (goto-char (save-mark-and-excursion
-               (ignore-errors
-                 (while (< (point) (point-max)) (forward-sexp)))
-               (point)))
-  (if (and (fboundp 'paredit-mode) paredit-mode)
-      (while (not (or (= (point) (point-max))
-                      (looking-at "\\s)")))
-        (forward-char))
-    (while (and
-            (< (point) (point-max))
-            (not (or (= (point) (point-max))
-                         (looking-at "\n\\|\\s)"))))
-      (forward-char))))
+  (let ((bounds (bounds-of-thing-at-point 'list)))
+    (if (and bounds (< (car bounds) (point) (cdr bounds)))
+        (goto-char (1- (cdr bounds)))
+      (goto-char (point-max)))))
 
 (defun m4d--flip-left ()
   (push-mark (point) t t)
-  (goto-char (save-mark-and-excursion
-               (ignore-errors
-                 (while (> (point) (point-min)) (backward-sexp)))
-               (point)))
-  (while (not (or (= (point) (point-min))
-                  (looking-back "\\s(" 1)))
-    (backward-char)))
+  (let ((bounds (bounds-of-thing-at-point 'list)))
+    (if (and bounds (< (car bounds) (point) (cdr bounds)))
+        (goto-char (1+ (car bounds)))
+      (goto-char (point-min)))))
 
 (defun m4d--flip-string-right ()
   (push-mark (point) t t)
@@ -383,28 +374,55 @@ Do nothing if always at the end."
 
 (defun m4d-block-expand ()
   (interactive)
-  (unless (equal m4d--last-select 'list)
-    (m4d--clear-select))
-  (if (m4d--in-string-p)
-      (progn (while (and (m4d--in-string-p)
-                         (not (equal (point) (point-max))))
-               (forward-char))
-             (push-mark (scan-sexps (point) -1) t t))
-    (m4d--select-thing 'list (m4d--direction-right-p)))
+  (let ((min)
+        (max))
+    (when (region-active-p)
+      (setq min (region-beginning)
+            max (region-end)))
+    (if (m4d--in-string-p)
+        (progn
+          (unless (equal m4d--last-select 'list)
+            (m4d--clear-select))
+          (while (and (m4d--in-string-p)
+                      (not (equal (point) (point-max))))
+            (forward-char))
+          (push-mark (scan-sexps (point) -1) t t))
+      (when-let ((bounds (bounds-of-thing-at-point 'list)))
+        (let* ((beg (car bounds))
+               (end (cdr bounds)))
+          (when (and beg
+                     end
+                     (or (and (not min))
+                         (and
+                          (<= beg min)
+                          (>= end max))))
+            (unless (equal m4d--last-select 'list)
+              (m4d--clear-select))
+            (push-mark beg t t)
+            (goto-char end))))))
   (setq m4d--last-select 'list)
   (m4d--save-position-record))
 
+;;; Better support on sub word
 (defun m4d-word (arg)
   (interactive "P")
-  (unless (equal m4d--last-select 'word)
-    (when (let ((bound (bounds-of-thing-at-point 'word)))
-            (and bound
-                 (<= (car bound) (point))
-                 (< (point) (cdr bound))))
-      (forward-word)))
-  (forward-word (prefix-numeric-value arg))
-  (m4d--select-thing 'word t)
-  (setq m4d--last-select 'word))
+  (if (or (equal last-command 'm4d-backward-word)
+          (equal m4d--last-select 'word-select))
+      (progn
+        (exchange-point-and-mark)
+        (m4d-word-select arg))
+    (let ((pos (point)))
+      (unless (equal m4d--last-select 'word)
+        (when (let ((bound (bounds-of-thing-at-point 'word)))
+                (and bound
+                     (<= (car bound) (point))
+                     (< (point) (cdr bound))))
+          (forward-word)))
+      (forward-word (prefix-numeric-value arg))
+      (unless (equal (1+ pos) (point))
+        (backward-char 1))
+      (m4d--select-thing 'word t)
+      (setq m4d--last-select 'word))))
 
 (defun m4d-word-select (arg)
   (interactive "P")
@@ -412,7 +430,7 @@ Do nothing if always at the end."
     (m4d-exchange))
   (m4d--keep-select)
   (forward-word (prefix-numeric-value arg))
-  (setq m4d--last-select 'word))
+  (setq m4d--last-select 'word-select))
 
 (defun m4d-backward-word (arg)
   (interactive "P")
@@ -429,7 +447,7 @@ Do nothing if always at the end."
     (m4d-exchange))
   (m4d--keep-select)
   (backward-word (prefix-numeric-value arg))
-  (setq m4d--last-select 'word))
+  (setq m4d--last-select 'word-select))
 
 (defun m4d-exchange ()
   (interactive)
@@ -670,7 +688,7 @@ Do nothing if always at the end."
   (if multiple-cursors-mode
       (message "Can't pop ref when multiple cursor is enabled.")
     (m4d--clear-select)
-    (xref-pop-marker-stack)))
+    (m4d--execute-kbd-macro m4d-pop-ref-kbd-macro)))
 
 (defun m4d-find-ref ()
   (interactive)
@@ -726,6 +744,7 @@ Do nothing if always at the end."
    (multiple-cursors-mode
     (m4d--clear-select))
    (t
+    (m4d--clear-select)
     (m4d--execute-kbd-macro m4d-keyboard-quit-kbd-macro))))
 
 (defun m4d-visit-next ()

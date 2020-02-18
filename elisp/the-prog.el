@@ -45,12 +45,8 @@ Otherwise will insert a singlequote."
   (setq lsp-ui-flycheck-live-reporting nil)
   (setq lsp-ui-doc-enable nil))
 
-;; (use-package dumb-jump
-;;   :bind
-;;   ("M-." . 'dumb-jump-go)
-;;   :init
-;;   (setq dumb-jump-selector 'ivy))
-
-(add-hook 'prog-mode-hook 'subword-mode)
+(use-package dumb-jump
+  :init
+  (setq dumb-jump-selector 'ivy))
 
 (provide 'the-prog)

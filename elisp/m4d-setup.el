@@ -102,13 +102,6 @@ Basically, all navigation commands should trigger eldoc."
 
 (defun m4d--minibuffer-setup ())
 
-;;; ISearch
-
-(defun m4d--isearch-setup ()
-  (define-key isearch-mode-map (kbd "}") 'isearch-repeat-forward)
-  (define-key isearch-mode-map (kbd "{") 'isearch-repeat-backward)
-  (define-key isearch-mode-map (kbd "<escape>") 'isearch-abort))
-
 ;;; WGrep
 
 (defun m4d--wgrep-setup ()
@@ -155,7 +148,6 @@ Basically, all navigation commands should trigger eldoc."
   (m4d--global-setup)
   (m4d--wgrep-setup)
   (m4d--mc-setup)
-  (m4d--isearch-setup)
   (m4d--minibuffer-setup)
   (m4d--eldoc-setup)
   (m4d--kmacro-mode-setup)

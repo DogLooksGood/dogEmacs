@@ -8,11 +8,8 @@
 ;;     "#FFFFFF" "#EEEEEE" "#DDDDDD" "#CCCCCC" "#BBBBBB" "#AAAAAA" "#999999" "#888888" "#777777" "#666666" "#555555" "#444444"
 ;;     "#333333" "#222222" "#111111" "#000000"))
 (setq user/cursor-color-list
-      '("#222222" "#444444" "#666666"
-        "#888888" "#AAAAAA" "#CCCCCC"
-        "#EEEEEE" "#FFFFFF" "#FFFFFF"
-        "#DDDDDD" "#BBBBBB" "#999999"
-        "#777777" "#555555" "#333333"))
+      '("#999999" "#AAAAAA" "#BBBBBB" "#CCCCCC" "#DDDDDD" "#EEEEEE" "#FFFFFF"
+        "#FFFFFF" "#EEEEEE" "#DDDDDD" "#CCCCCC" "#BBBBBB" "#AAAAAA" "#999999"))
 
 (defun user/cursor-timer-function ()
   (if (>= (1+ user/cursor-color-index) (length user/cursor-color-list))
@@ -25,7 +22,7 @@
 
 (unless user/cursor-timer
   (setq user/cursor-timer
-        (run-with-timer 0 0.05 #'user/cursor-timer-function)))
+        (run-with-timer 0 0.1 #'user/cursor-timer-function)))
 
 (blink-cursor-mode -1)
 

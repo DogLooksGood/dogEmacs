@@ -89,6 +89,8 @@
 
 (add-hook 'prog-mode-hook 'user/setup-delete-trailing-whitespace)
 
+(global-subword-mode 1)
+
 ;; Custom file path
 ;; Actually we don't need custom file, this file can be generated
 ;; accidentally, so we add this file to .gitignore and never load it.
@@ -160,10 +162,9 @@ point reaches the beginning or end of the buffer, stop there."
              (lambda (&rest args) nil)))
     (apply func args)))
 
-(bind-key "C-S-U" 'browse-url-at-point)
-(bind-key "C-S-P" 'proced)
-(bind-key "C-x C-n" 'user/new-buffer)
-(bind-key "<XF86Copy>" 'kill-ring-save)
-(bind-key "<XF86Paste>" 'yank)
+;;; Isearch Setup
+(define-key isearch-mode-map (kbd "}") 'isearch-repeat-forward)
+(define-key isearch-mode-map (kbd "{") 'isearch-repeat-backward)
+(define-key isearch-mode-map (kbd "<escape>") 'isearch-abort)
 
 (provide 'the-global)
