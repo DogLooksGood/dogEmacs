@@ -6,3 +6,6 @@
   :init
   (setq markdown-command "multimarkdown"
         markdown-fontify-code-blocks-natively t))
+
+;;; For monospace font in markdown
+(set-face-attribute 'fixed-pitch nil :family "Unifont")

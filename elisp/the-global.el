@@ -50,24 +50,16 @@
  tab-width 4
  ;; Don't show cursor in non selected window.
  cursor-in-non-selected-windows nil
- comment-empty-lines t)
+ comment-empty-lines t
+ visible-cursor t)
+
+;;; Fix underline display
+(setq underline-minimum-offset 0)
+(setq x-underline-at-descent-line t)
 
 (setq-default indent-tabs-mode nil)
 
 (prefer-coding-system 'utf-8)
-
-;; Distraction Free. Also move these to Xresources for faster startup.
-(defun user/setup-distraction-free (&optional new-frame)
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  ;; For emacs-nox
-  (when (fboundp 'scroll-bar-mode)
-    (scroll-bar-mode -1)))
-
-(when (display-graphic-p)
-  (add-hook 'after-make-frame-functions #'user/setup-distraction-free))
-
-(user/setup-distraction-free)
 
 ;; Show matched parens
 (setq show-paren-delay 0.01)

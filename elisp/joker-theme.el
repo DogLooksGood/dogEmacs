@@ -2,24 +2,13 @@
 
 (deftheme joker "A simple medium contrast dark theme.")
 
-(defvar joker--bg nil)
-
-(if (display-graphic-p)
-    (setq joker--bg "#171717")
-  (setq joker--bg nil))
-
-(setq joker--hl-line
-      (if (display-graphic-p)
-          '((t (:background "#272729")))
-        '((t (:background "#202020")))))
-
 (custom-theme-set-faces
  'joker
- `(default                        ((t (:foreground "#A8A8A8" :background ,joker--bg))))
+ `(default                        ((t (:foreground "#A8A8A8" :background "#211F23"))))
  '(mc/cursor-face                 ((t (:background "#949494" :foreground "black"))))
  '(region                         ((t (:background "#113F2B" :overline nil :underline nil))))
  '(highlight-symbol-face          ((t ())))
- `(hl-line                        ,joker--hl-line)
+ `(hl-line                        ((t (:background "#272727"))))
  '(yascroll:thumb-fringe          ((t (:background "#3F3F3F" :foreground "#3F3F3F"))))
  '(yascroll:thumb-text-area       ((t (:background "#3F3F3F" :foreground "#3F3F3F"))))
  '(fringe                         ((t (:background nil))))
@@ -53,7 +42,7 @@
  '(isearch                        ((t (:background "#00D75F" :foreground "black"))))
  '(isearch-fail                   ((t (:backgronud "#D75FFF" :foreground "#606060"))))
  '(popup-isearch-match            ((t (:background "#D7AF00" :foreground "black"))))
- '(ivy-highlight-face             ((t (:inherit default))))
+ '(ivy-highlight-face             ((t ())))
  '(ivy-yanked-word                ((t (:background "yellow" :foreground "black"))))
  '(ivy-remote                     ((t ())))
  '(vertical-border                ((t (:background nil :foreground "black"))))
@@ -69,10 +58,10 @@
  '(magit-diff-added-highlight     ((t (:inherit font-lock-comment-face :background "#303030"))))
  '(magit-diff-highlight           ((t (:background "#303030"))))
  '(magit-diff-context-highlight   ((t (:background "#303030"))))
- '(swiper-background-match-face-1 ((t (:background "#00D75F" :foreground "black"))))
- '(swiper-background-match-face-2 ((t (:background "#00D75F" :foreground "black"))))
- '(swiper-background-match-face-3 ((t (:background "#00D75F" :foreground "black"))))
- '(swiper-background-match-face-4 ((t (:background "#00D75F" :foreground "black"))))
+ '(swiper-background-match-face-1 ((t (:inherit hl-line))))
+ '(swiper-background-match-face-2 ((t (:inherit hl-line))))
+ '(swiper-background-match-face-3 ((t (:inherit hl-line))))
+ '(swiper-background-match-face-4 ((t (:inherit hl-line))))
  '(solaire-default-face           ((t (:background "#262626"))))
  '(compilation-info               ((t (:inherit font-lock-function-name-face))))
  '(match                          ((t (:inherit font-lock-doc-face))))
@@ -82,15 +71,16 @@
  '(swiper-match-face-4            ((t (:foreground "white"))))
  '(ivy-current-match              ((t (:background "#303030"))))
  '(ivy-minibuffer-match-highlight ((t (:foreground "#00D7D7"))))
- '(ivy-minibuffer-match-face-1    ((t (:foreground "#9E9E9E"))))
- '(ivy-minibuffer-match-face-2    ((t (:foreground "#D7005F"))))
- '(ivy-minibuffer-match-face-3    ((t (:foreground "#D7AF00"))))
- '(ivy-minibuffer-match-face-4    ((t (:foreground "#00FFD7"))))
- '(yas-field-highlight-face       ((t (:background "#350035"))))
+ '(ivy-minibuffer-match-face-1    ((t ())))
+ '(ivy-minibuffer-match-face-2    ((t ())))
+ '(ivy-minibuffer-match-face-3    ((t ())))
+ '(ivy-minibuffer-match-face-4    ((t ())))
+'(yas-field-highlight-face       ((t (:background "#350035"))))
  '(org-document-title             ((t (:inherit font-lock-string-face))))
  '(line-number-current-line       ((t (:foreground "#D7AF00"))))
  '(parenthesis                    ((t (:foreground "#606060"))))
  '(term-color-blue                ((t (:foreground "#3366FF" :background "#3366FF")))))
+
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

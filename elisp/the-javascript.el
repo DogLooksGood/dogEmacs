@@ -9,7 +9,8 @@
   :init
   (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
   (add-hook 'web-mode-hook 'smartparens-mode)
-  (setq web-mode-code-indent-offset 2))
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-markup-indent-offset 2))
 
 (use-package vue-mode
   :config

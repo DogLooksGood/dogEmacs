@@ -142,7 +142,6 @@
   (m4d--update-cursor-shape))
 
 (defun m4d--mode-init ()
-  ;; (message "%s mode init" major-mode)
   (when (m4d--should-enable-motion-p)
     (unless m4d--space-command
       (let ((cmd (key-binding (read-kbd-macro "SPC"))))
@@ -153,14 +152,14 @@
 (define-minor-mode m4d-insert-mode
   "m4d insert modal state."
   nil
-  ""
+  "[I]"
   m4d-insert-keymap)
 
 ;;;###autoload
 (define-minor-mode m4d-normal-mode
   "m4d normal modal state."
   nil
-  ""
+  "[N]"
   m4d-normal-keymap
   (when m4d-normal-mode
     (m4d--normal-init)))
@@ -169,7 +168,7 @@
 (define-minor-mode m4d-motion-mode
   "m4d special mode"
   nil
-  nil
+  "[M]"
   m4d-motion-keymap
   (when m4d-motion-mode
     (m4d--motion-init)))
@@ -178,7 +177,7 @@
 (define-minor-mode m4d-mode
   "Modal for Dvorak."
   nil
-  " M4D"
+  ""
   m4d-keymap
   (when m4d-mode
     (m4d--mode-init)))

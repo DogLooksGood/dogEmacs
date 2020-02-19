@@ -6,7 +6,8 @@
   (:map emmet-mode-keymap
         ("M-RET" . 'emmet-expand-line))
   :init
-  (add-hook 'mhtml-mode-hook 'emmet-mode))
+  (add-hook 'mhtml-mode-hook 'emmet-mode)
+  (add-hook 'web-mode-hook 'emmet-mode))
 
 (add-hook 'mhtml-mode-hook 'smartparens-mode)
 

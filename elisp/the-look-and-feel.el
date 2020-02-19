@@ -2,24 +2,11 @@
 ;;; Look And Feels
 ;;  setup for font, mode line and themes.
 
-;;; Font Setup
-;; sample text:
-;;   | 中英文等宽的字体 |
-;;   | Mixed monospace  |
-;; get this script from cnfont
-
-(add-to-list 'default-frame-alist '(font . "Unifont 12"))
-(set-face-attribute 'fixed-pitch nil :family "Unifont")
-
-(setq underline-minimum-offset 0)
-
-;;; Theme Setup
-(setq x-underline-at-descent-line t)
-
 (progn
   (require 'joker-theme)
-  (setq visible-cursor t)
-  (load-theme 'joker t))
+  (if user/dumped-load-path
+      (enable-theme 'joker)
+    (load-theme 'joker t)))
 
 ;;; Mode Line Setup
 (defun user/simple-mode-line-render (left right)

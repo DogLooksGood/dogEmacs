@@ -1,4 +1,6 @@
-(setq gc-cons-threshold (* 100000 1024 1024))
+(defvar user/dumped-load-path nil)
+(when user/dumped-load-path
+  (setq load-path user/dumped-load-path))
 
 (require 'package)
 
@@ -10,7 +12,11 @@
 (setq package-selected-packages
       '(use-package quelpa-use-package))
 
-(package-initialize)
+(if user/dumped-load-path
+    (progn
+      (global-font-lock-mode t)
+      (transient-mark-mode t))
+  (package-initialize))
 
 (unless package-archive-contents
   (package-refresh-contents))
@@ -36,13 +42,11 @@
 (add-to-list 'load-path (concat user/emacs-dir "elisp/"))
 
 (require 'the-elisp)
-;; (require 'the-cursor)
 (require 'the-look-and-feel)
 (require 'the-global)
 (require 'the-git)
 ;; (require 'the-ido)
 (require 'the-ivy)
-;; (require 'the-grep)
 (require 'the-register)
 (require 'the-prog)
 (require 'the-completion)
@@ -51,15 +55,15 @@
 (require 'the-java)
 (require 'the-javascript)
 ;; Don't use these languages for now.
-;; (require 'the-haskell)
-;; (require 'the-elixir)
-;; (require 'the-golang)
+(require 'the-haskell)
+(require 'the-elixir)
+(require 'the-golang)
 (require 'the-rust)
 (require 'the-sql)
 (require 'the-html)
 (require 'the-edit)
 ;; I don't really need more than three windows.
-;; (require 'the-window)
+(require 'the-window)
 (require 'the-nav)
 (require 'the-project)
 (require 'the-visual)
@@ -67,10 +71,10 @@
 (require 'the-dired)
 (require 'the-conf)
 (require 'the-org)
+(require 'the-w3m)
 (require 'the-snippet)
-;; (require 'the-modal)
-;; (require 'the-latex)
-;; (require 'the-ebook)
+(require 'the-latex)
+(require 'the-ebook)
 (require 'the-wechat-mini)
 (require 'the-deft)
 (require 'the-tab)
@@ -79,4 +83,4 @@
 (require 'the-server)
 (require 'the-m4d)
 
-(setq gc-cons-threshold (* 100 1024 1024))
+(setq gc-cons-threshold (* 16 1024 1024))
