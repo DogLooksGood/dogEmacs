@@ -150,7 +150,6 @@ Basically, all navigation commands should trigger eldoc."
   (m4d--mc-setup)
   (m4d--minibuffer-setup)
   (m4d--eldoc-setup)
-  (m4d--kmacro-mode-setup)
   (m4d--yas-setup))
 
 (provide 'm4d-setup)

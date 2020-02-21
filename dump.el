@@ -43,7 +43,6 @@
                    use-package
                    quelpa-use-package
                    w3m
-                   god-mode
                    dockerfile-mode
                    docker
                    ivy
@@ -76,7 +75,7 @@
                    hydra
                    ripgrep
                    projectile
-                   m4d
+                   ;; m4d
                    joker-theme
                    shiftless))
   (require package))

@@ -454,12 +454,12 @@ Do nothing if always at the end."
   (when (region-active-p)
     (exchange-point-and-mark)))
 
-(defun m4d-god-exchange ()
+(defun m4d-exchange+ ()
   (interactive)
   (if (region-active-p)
       (m4d-exchange)
-    (god-local-mode 1)
-    (call-interactively #'god-mode-self-insert)))
+    (m4d-kmacro-mode)
+    (call-interactively #'m4d-kmacro-self-insert)))
 
 (defun m4d-mark-whole-buffer ()
   (interactive)
@@ -570,12 +570,12 @@ Do nothing if always at the end."
         (m4d--execute-kbd-macro m4d-kill-ring-save-kbd-macro))
     (message "No selection!")))
 
-(defun m4d-god-copy ()
+(defun m4d-copy+ ()
   (interactive)
   (if (region-active-p)
       (m4d-copy)
-    (god-local-mode 1)
-    (call-interactively #'god-mode-self-insert)))
+    (m4d-kmacro-mode 1)
+    (call-interactively #'m4d-kmacro-self-insert)))
 
 (defun m4d-yank (arg)
   (interactive "P")
@@ -755,10 +755,10 @@ Do nothing if always at the end."
   (interactive)
   (call-interactively #'mc/skip-to-next-like-this))
 
-(defun m4d-god ()
+(defun m4d-kmacro-start ()
   (interactive)
-  (god-local-mode 1)
-  (call-interactively #'god-mode-self-insert))
+  (m4d-kmacro-mode 1)
+  (call-interactively #'m4d-kmacro-self-insert))
 
 (defun m4d-space ()
   (interactive)
@@ -769,8 +769,8 @@ Do nothing if always at the end."
 (defun m4d-escape-or-normal-modal ()
   (interactive)
   (cond
-   (god-local-mode
-    (god-local-mode -1))
+   (m4d-kmacro-mode
+    (m4d-kmacro-mode -1))
    ((or multiple-cursors-mode m4d-insert-mode)
     (m4d--switch-modal 'normal))))
 

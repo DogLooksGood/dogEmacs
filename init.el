@@ -1,3 +1,4 @@
+(defvar user/launch-time (current-time))
 (defvar user/dumped-load-path nil)
 (when user/dumped-load-path
   (setq load-path user/dumped-load-path))
@@ -84,3 +85,6 @@
 (require 'the-m4d)
 
 (setq gc-cons-threshold (* 16 1024 1024))
+(when user/dumped-load-path
+  (tramp-unload-tramp))
+(message "Startup cost: %.3fs" (time-to-seconds (time-since user/launch-time)))

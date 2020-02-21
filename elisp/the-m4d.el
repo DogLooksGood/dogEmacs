@@ -1,11 +1,5 @@
 (require 'm4d)
 
-(use-package god-mode
-  :quelpa
-  (god-mode :repo "DogLooksGood/god-mode" :fetcher github)
-  :init
-  (setq god-mode-can-omit-literal-key t))
-
 (m4d-global-mode 1)
 
 (m4d-setup)
@@ -58,7 +52,8 @@
  '("'" . paredit-meta-doublequote)
  '("#" . deft)
  '("q" . projectile-kill-buffers)
- '("m" . magit-status))
+ '("m" . magit-status)
+ '("B" . magit-blame))
 
 (dolist (m '(clojure-mode clojurescript-mode clojurec-mode))
   (m4d-leader-define-mode-key

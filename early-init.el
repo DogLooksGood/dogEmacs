@@ -5,7 +5,10 @@
 
 ;;; | 中英文等宽的字体 |
 ;;; | Mixed monospace  |
-(set-face-attribute 'default nil  :family "Unifont" :height 120 :weight 'normal)
+(set-face-attribute 'default nil  :family "unifont" :height 120 :weight 'normal)
+
+(custom-set-faces
+ '(default ((t (:background "#211F23")))))
 
 (when (file-exists-p (expand-file-name "~/.emacs.d/emacs.pdmp"))
   (setq package-enable-at-startup nil

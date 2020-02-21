@@ -97,6 +97,9 @@
 (defvar m4d--leader-mode-keymaps nil
   "Leader keymaps used for major modes.")
 
+(defvar m4d--kmacro-keys nil
+  "Current keys in kmacro mode.")
+
 ;;; Define key helpers
 
 (require 'm4d-util)
@@ -110,10 +113,16 @@
 (defun m4d-indicator ()
   (interactive)
   (cond
-   (god-local-mode
-    (propertize "KMACRO" 'face 'm4d-kmacro-indicator))
+   (m4d-kmacro-mode
+    (concat
+     (propertize "KEYMOD [" 'face 'm4d-kmacro-indicator)
+     (m4d--kmacro-format-keys)
+     (propertize "]" 'face 'm4d-kmacro-indicator)))
    (m4d-normal-mode
-    (propertize "NORMAL" 'face 'm4d-visual-indicator))
+    (propertize (if (m4d--direction-right-p)
+                    "NORMAL"
+                  "NORMAL«")
+                'face 'm4d-visual-indicator))
    (m4d-motion-mode
     (propertize "MOTION" 'face 'm4d-motion-indicator))
    (m4d-insert-mode
@@ -140,6 +149,15 @@
       (define-key m4d-motion-keymap (kbd "SPC") keymap))
     (setq m4d--keymap-loaded t))
   (m4d--update-cursor-shape))
+
+(defun m4d--kmacro-init ()
+  (run-hooks 'm4d-kmacro-mode-hook)
+  (setq m4d--kmacro-keys nil
+        m4d--use-literal nil
+        m4d--use-meta nil))
+
+(defun m4d--kmacro-uninit ()
+  )
 
 (defun m4d--mode-init ()
   (when (m4d--should-enable-motion-p)
@@ -172,6 +190,16 @@
   m4d-motion-keymap
   (when m4d-motion-mode
     (m4d--motion-init)))
+
+;;;###autoload
+(define-minor-mode m4d-kmacro-mode
+  "m4d kmacro mode"
+  nil
+  "[K]"
+  m4d-kmacro-keymap
+  (if m4d-kmacro-mode
+      (m4d--kmacro-init)
+    (m4d--kmacro-uninit)))
 
 ;;;###autoload
 (define-minor-mode m4d-mode

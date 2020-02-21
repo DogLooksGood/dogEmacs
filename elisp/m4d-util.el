@@ -1,6 +1,6 @@
 (defun m4d--update-cursor-shape ()
   (cond
-   (god-local-mode
+   (m4d-kmacro-mode
     (setq cursor-type 'hollow)
     (unless (display-graphic-p) (send-string-to-terminal "\033[3 q")))
    (m4d-insert-mode
@@ -107,6 +107,7 @@
 (defun m4d--in-string-p ()
   "Return if we are in string."
   (nth 3 (syntax-ppss)))
+
 
 (defun m4d--get-mode-leader-keymap (mode &optional ensure)
   "Return the leader keymap for mode.

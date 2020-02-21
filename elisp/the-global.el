@@ -43,7 +43,7 @@
  window-divider-default-bottom-width 1
  window-divider-default-places t
  ;; Don't wait for keystrokes display
- echo-keystrokes 1
+ echo-keystrokes 0
  show-paren-style 'parenthese
  ;; Overline no margin
  overline-margin 0
@@ -158,5 +158,9 @@ point reaches the beginning or end of the buffer, stop there."
 (define-key isearch-mode-map (kbd "}") 'isearch-repeat-forward)
 (define-key isearch-mode-map (kbd "{") 'isearch-repeat-backward)
 (define-key isearch-mode-map (kbd "<escape>") 'isearch-abort)
+
+;;; Suspend-frame is not work well in i3wm
+(define-key global-map (kbd "C-x C-z") nil)
+(define-key global-map (kbd "C-z") nil)
 
 (provide 'the-global)

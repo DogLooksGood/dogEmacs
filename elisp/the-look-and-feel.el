@@ -44,7 +44,8 @@
                                      " "
                                      (:eval (mini-modeline-msg))))
       (setq mini-modeline-enhance-visual nil
-            mini-modeline-echo-duration 2)
+            mini-modeline-echo-duration 2
+            mini-modeline-update-interval 1)
       (mini-modeline-mode t)
       (setq-default mode-line-format
               '((:eval (user/simple-mode-line-render
