@@ -124,14 +124,14 @@
     (save-mark-and-excursion
       (goto-char beg)
       (while (and (forward-symbol 1) (<= (point) end))
-        (let ((bounds (bounds-of-thing-at-point 'symbol)))
+        (when-let ((bounds (bounds-of-thing-at-point 'symbol)))
           (push (buffer-substring-no-properties (car bounds) (cdr bounds)) list)))
       (goto-char beg)
       (while (and (forward-word 1) (<= (point) end))
-        (let ((bounds (bounds-of-thing-at-point 'word)))
+        (when-let ((bounds (bounds-of-thing-at-point 'word)))
           (push (buffer-substring-no-properties (car bounds) (cdr bounds)) list))))
     (setq list (delete-dups list))
-    (completing-read "Select:" list)))
+    (completing-read "Select: " list)))
 
 (defun m4d--get-mode-leader-keymap (mode &optional ensure)
   "Return the leader keymap for mode.
