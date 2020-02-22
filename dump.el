@@ -1,8 +1,6 @@
 (require 'package)
 ;; load autoload files and populate load-path’s
 (package-initialize)
-;; (package-initialize) doens’t require each package, we need to load
-;; those we want manually
 
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 (setq user/dumped-load-path load-path)
@@ -75,7 +73,7 @@
                    hydra
                    ripgrep
                    projectile
-                   ;; m4d
+                   m4d
                    joker-theme
                    shiftless))
   (require package))

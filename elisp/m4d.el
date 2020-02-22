@@ -115,9 +115,9 @@
   (cond
    (m4d-kmacro-mode
     (concat
-     (propertize "KEYMOD [" 'face 'm4d-kmacro-indicator)
+     (propertize "KEYPAD [" 'face 'm4d-kmacro-indicator)
      (m4d--kmacro-format-keys)
-     (propertize "]" 'face 'm4d-kmacro-indicator)))
+     (propertize "] " 'face 'm4d-kmacro-indicator)))
    (m4d-normal-mode
     (propertize (if (m4d--direction-right-p)
                     "NORMAL"
@@ -126,9 +126,14 @@
    (m4d-motion-mode
     (propertize "MOTION" 'face 'm4d-motion-indicator))
    (m4d-insert-mode
-    (propertize "INSERT" 'face 'm4d-insert-indicator))
-   (t
-    "INACTIVE")))
+    (cond
+     (buffer-read-only
+      (propertize "READONLY" 'face 'm4d-insert-indicator))
+     ((bound-and-true-p overwrite-mode)
+      (propertize "OVERWRITE" 'face 'm4d-insert-indicator))
+     (t (propertize "INSERT" 'face 'm4d-insert-indicator))))
+   (t "")))
+
 
 ;;;###autoload
 

@@ -5,6 +5,10 @@
    ("w" . 'wgrep-change-to-wgrep-mode)))
 
 (use-package projectile
+  :bind
+  (:map
+   projectile-mode-map
+   ("C-c C-p" . 'projectile-command-map))
   :init
   (projectile-global-mode 1))
 

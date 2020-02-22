@@ -21,6 +21,7 @@
     m4d-insert-after
     m4d-mark-whole-buffer
     m4d-copy
+    m4d-copy+
     m4d-delete
     m4d-duplicate-line
     m4d-exp
@@ -49,6 +50,7 @@
     m4d-word
     m4d-word-select
     m4d-exchange
+    m4d-exchange+
     m4d-yank
     m4d-slurp
     m4d-barf

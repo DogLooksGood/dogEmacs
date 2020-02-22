@@ -58,6 +58,7 @@
      (define-key keymap (kbd "^") 'm4d-back-to-indentation))
    ;; Fundamental commands
    (define-key keymap (kbd "a") 'm4d-insert-after)
+   (define-key keymap (kbd "A") 'm4d-overwrite-after)
    (define-key keymap (kbd "b") 'm4d-block-expand)
    (define-key keymap (kbd "B") 'm4d-page-up)
    (define-key keymap (kbd "c") 'm4d-copy+)
@@ -71,6 +72,7 @@
    (define-key keymap (kbd "h") 'm4d-head)
    (define-key keymap (kbd "H") 'm4d-head-select)
    (define-key keymap (kbd "i") 'm4d-insert)
+   (define-key keymap (kbd "I") 'm4d-overwrite)
    (define-key keymap (kbd "j") 'm4d-join)
    (define-key keymap (kbd "k") 'm4d-kill)
    (define-key keymap (kbd "l") 'm4d-line)

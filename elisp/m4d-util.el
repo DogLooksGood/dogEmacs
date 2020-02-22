@@ -1,11 +1,20 @@
+
+
+
+
 (defun m4d--update-cursor-shape ()
   (cond
    (m4d-kmacro-mode
     (setq cursor-type 'hollow)
     (unless (display-graphic-p) (send-string-to-terminal "\033[3 q")))
    (m4d-insert-mode
-    (setq cursor-type '(bar . 5))
-    (unless (display-graphic-p) (send-string-to-terminal "\033[5 q")))
+    (cond
+     (overwrite-mode
+      (setq cursor-type '(hbar . 3))
+      (unless (display-graphic-p) (send-string-to-terminal "\033[7 q")))
+     (t
+      (setq cursor-type '(bar . 5))
+      (unless (display-graphic-p) (send-string-to-terminal "\033[5 q")))))
    (m4d-normal-mode
     (setq cursor-type 'box)
     (unless (display-graphic-p) (send-string-to-terminal "\033[2 q")))
@@ -20,9 +29,11 @@
     (m4d-motion-mode -1)
     (m4d-insert-mode -1))
    ((equal modal 'insert)
-    (m4d-normal-mode -1)
-    (m4d-motion-mode -1)
-    (m4d-insert-mode 1))
+    (if buffer-read-only
+        (message "Buffer is read only.")
+      (m4d-normal-mode -1)
+      (m4d-motion-mode -1)
+      (m4d-insert-mode 1)))
    ((equal modal 'motion)
     (m4d-normal-mode -1)
     (m4d-motion-mode 1)
@@ -108,6 +119,19 @@
   "Return if we are in string."
   (nth 3 (syntax-ppss)))
 
+(defun m4d--prompt-symbol-and-words (beg end)
+  (let ((list))
+    (save-mark-and-excursion
+      (goto-char beg)
+      (while (and (forward-symbol 1) (<= (point) end))
+        (let ((bounds (bounds-of-thing-at-point 'symbol)))
+          (push (buffer-substring-no-properties (car bounds) (cdr bounds)) list)))
+      (goto-char beg)
+      (while (and (forward-word 1) (<= (point) end))
+        (let ((bounds (bounds-of-thing-at-point 'word)))
+          (push (buffer-substring-no-properties (car bounds) (cdr bounds)) list))))
+    (setq list (delete-dups list))
+    (completing-read "Select:" list)))
 
 (defun m4d--get-mode-leader-keymap (mode &optional ensure)
   "Return the leader keymap for mode.
