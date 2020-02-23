@@ -7,11 +7,14 @@
 ;;;
 ;;; II. If you use modal edit.
 ;;;
-;;;   a) You have to need a predicate function to tell if rime should be enable in this mode.
+;;;   a) You have to need a predicate function to tell if rime should disable.
 ;;;
 ;;;   (defun my-predicate-fn () some-mode)
 ;;;
-;;;   (setq rime--enable-predicates '(my-predicate-fn))
+;;;   (setq rime--disable-predicates
+;;;         '(rime--after-alphabet-char-p
+;;;           rime--prog-in-code-p
+;;;           my-predicate-fn))
 ;;;
 ;;;   b) You need add `rime-update-input-method-state' to the hooks those get called when mode toggling.
 ;;;
@@ -34,7 +37,7 @@
   "Face for code in minibuffer"
   :group 'rime)
 
-(defvar rime--enable-predicates t)
+(defvar rime--disable-predicates nil)
 (defvar rime--preedit-overlay nil)
 (defvar rime--backspace-fallback nil)
 (defvar rime--return-fallback nil)
@@ -46,9 +49,20 @@
 (make-variable-buffer-local 'rime--preedit-overlay)
 (make-variable-buffer-local 'rime--backspace-fallback)
 
+(defun rime--after-alphabet-char-p ()
+  (when (char-before)
+    (string-match-p "[a-zA-Z]" (char-to-string (char-before)))))
+
+(defun rime--prog-in-code-p ()
+  (when (derived-mode-p 'prog-mode 'conf-mode)
+    (let ((f (get-text-property (point) 'face)))
+      (not (or (nth 3 (syntax-ppss))
+               (nth 4 (syntax-ppss))
+               (eq f 'font-lock-comment-face)
+               (eq f 'font-lock-comment-delimiter-face))))))
+
 (defun rime--should-enable-p ()
-  (or (equal rime--enable-predicates t)
-      (seq-find 'funcall rime--enable-predicates)))
+  (not (seq-find 'funcall rime--disable-predicates)))
 
 (defun rime--show-candidates ()
   (when rime--show-candidate
@@ -93,7 +107,11 @@
           (call-interactively rime--backspace-fallback)
         (liberime-process-key 65288)
         (rime--show-candidates)
-        (rime--display-preedit)))))
+        (rime--display-preedit)
+        (setq rime--prev-preedit
+              (thread-last (liberime-get-context)
+                (alist-get 'composition)
+                (alist-get 'preedit))())))))
 
 (defun rime--return ()
   (interactive)
@@ -101,12 +119,14 @@
       (when rime--return-fallback
         (call-interactively rime--return-fallback))
     (liberime-clear-composition)
+    (setq rime--prev-preedit nil)
     (rime--show-candidates)
     (rime--clear-overlay)
     (call-interactively rime--return-fallback)))
 
 (defun rime-input-method (key)
-  (if (not (rime--should-enable-p))
+  (if (and (not (rime--should-enable-p))
+           (not (liberime-get-context)))
       (list key)
     (liberime-process-key key)
     (with-silent-modifications
@@ -138,15 +158,32 @@
                 (rime--display-preedit)))
           (setq rime--prev-preedit preedit))))))
 
+(defun rime--clean-state ()
+  (liberime-clear-composition)
+  (when (overlayp rime--preedit-overlay)
+    (delete-overlay rime--preedit-overlay)
+    (setq rime--preedit-overlay nil))
+  (setq rime--prev-preedit nil))
+
 (defun rime-update-input-method-state ()
-  (if (and (rime--should-enable-p) rime--enable)
-      (set-input-method 'rime)
-    (set-input-method nil)))
+  (if rime--enable
+      (progn
+        (rime--clean-state)
+        (rime-mode -1)
+        (setq-local rime--backspace-fallback (key-binding (kbd "DEL")))
+        (setq-local rime--return-fallback (key-binding (kbd "RET")))
+        (rime-mode 1))
+    (progn
+      (setq-local rime--backspace-fallback nil)
+      (setq-local rime--return-fallback nil)
+      (rime-mode -1))))
 
 (defun rime-toggle ()
   (interactive)
   (setq rime--enable (not rime--enable))
-  (rime-update-input-method-state)
+  (if rime--enable
+      (set-input-method 'rime)
+    (set-input-method nil))
   (message (if rime--enable "Rime enable" "Rime disable")))
 
 (defun rime-select-schema ()
@@ -163,27 +200,17 @@
     (liberime-select-schema schema)))
 
 (defun rime-activate (name)
-  (interactive)
   (setq input-method-function 'rime-input-method
         deactivate-current-input-method-function #'rime-deactivate)
   (liberime-clear-composition)
-  (setq-local rime--backspace-fallback (key-binding (kbd "DEL")))
-  (setq-local rime--return-fallback (key-binding (kbd "RET")))
   (setq rime--prev-preedit nil)
-  (rime-mode 1)
-  (add-hook 'post-self-insert-hook 'rime--display-preedit nil t)
-  (add-hook 'post-self-insert-hook 'rime--show-candidates nil t))
+  (rime-update-input-method-state)
+  (rime-mode 1))
 
 (defun rime-deactivate ()
   "When quit the input method, we preserve the preedit, remove the overlay."
-  (liberime-clear-composition)
-  (when (overlayp rime--preedit-overlay)
-    (delete-overlay rime--preedit-overlay)
-    (setq rime--preedit-overlay nil))
-  (setq rime--prev-preedit nil)
-  (rime-mode -1)
-  (remove-hook 'post-self-insert-hook 'rime--display-preedit)
-  (remove-hook 'post-self-insert-hook 'rime--show-candidates))
+  (rime--clean-state)
+  (rime-mode -1))
 
 (defvar rime-mode-map nil)
 (setq rime-mode-map
@@ -194,14 +221,30 @@
 
 (defun rime-lighter ()
   (if rime--enable
-      " Rime"
+      " 中"
     ""))
+
+(defun rime-mode--init ()
+  (unless rime--backspace-fallback
+    (setq-local rime--backspace-fallback (key-binding (kbd "DEL"))))
+  (unless rime--return-fallback
+    (setq-local rime--return-fallback (key-binding (kbd "RET"))))
+  (add-hook 'post-self-insert-hook 'rime--display-preedit nil t)
+  (add-hook 'post-self-insert-hook 'rime--show-candidates nil t))
+
+(defun rime-mode--uninit ()
+  (remove-hook 'post-self-insert-hook 'rime--display-preedit)
+  (remove-hook 'post-self-insert-hook 'rime--show-candidates))
 
 (define-minor-mode rime-mode
   "Provide rime input method specific keybindings."
   nil
   nil
-  rime-mode-map)
+  rime-mode-map
+  (if rime-mode
+      (rime-mode--init)
+    (rime-mode--uninit)))
+
 (register-input-method "rime" "euc-cn" 'rime-activate "中")
 
 (setq default-input-method 'rime)
