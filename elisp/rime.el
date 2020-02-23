@@ -111,7 +111,7 @@
         (setq rime--prev-preedit
               (thread-last (liberime-get-context)
                 (alist-get 'composition)
-                (alist-get 'preedit))())))))
+                (alist-get 'preedit)))))))
 
 (defun rime--return ()
   (interactive)
