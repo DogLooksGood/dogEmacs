@@ -26,11 +26,20 @@
   "Face for preedit string"
   :group 'rime)
 
+(defface rime-code-face
+  '((((class color) (background dark))
+     (:inherit hl-line))
+    (((class color) (background light))
+     (:inherit hl-line)))
+  "Face for code in minibuffer"
+  :group 'rime)
+
 (defvar rime--enable-predicates t)
 (defvar rime--preedit-overlay nil)
 (defvar rime--backspace-fallback nil)
 (defvar rime--return-fallback nil)
 (defvar rime--enable nil)
+(defvar rime--show-candidate t)
 
 (make-variable-buffer-local 'rime--preedit-overlay)
 (make-variable-buffer-local 'rime--backspace-fallback)
@@ -40,14 +49,20 @@
       (seq-find 'funcall rime--enable-predicates)))
 
 (defun rime--show-candidates ()
-  (let ((candidates (alist-get 'candidates (alist-get 'menu (liberime-get-context))))
-        (idx 1)
-        (result ""))
-    (dolist (c candidates)
-      (setq result
-            (concat result (format "%d. %s " idx c)))
-      (setq idx (1+ idx)))
-    (message result)))
+  (when rime--show-candidate
+    (let* ((context (liberime-get-context))
+           (candidates (alist-get 'candidates (alist-get 'menu context)))
+           (preedit (alist-get 'preedit (alist-get 'composition context)))
+           (idx 1)
+           (result ""))
+      (when context
+        (setq result
+              (concat result (format "%s ┃ " preedit)))
+        (dolist (c candidates)
+          (setq result
+                (concat result (format "%d. %s " idx c)))
+          (setq idx (1+ idx))))
+      (message result))))
 
 (defun rime--clear-overlay ()
   (when (overlayp rime--preedit-overlay)
