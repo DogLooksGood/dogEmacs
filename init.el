@@ -42,8 +42,8 @@
 
 (add-to-list 'load-path (concat user/emacs-dir "elisp/"))
 
+
 (require 'the-elisp)
-(require 'the-look-and-feel)
 (require 'the-global)
 (require 'the-git)
 ;; (require 'the-ido)
@@ -83,8 +83,13 @@
 (require 'the-docker)
 (require 'the-server)
 (require 'the-m4d)
+(require 'the-look-and-feel)
+(require 'the-rime)
 
 (setq gc-cons-threshold (* 16 1024 1024))
+
 (when user/dumped-load-path
-  (tramp-unload-tramp))
+  (require 'tramp)
+  (setq tramp-mode 1))
+
 (message "Startup cost: %.3fs" (time-to-seconds (time-since user/launch-time)))

@@ -12,6 +12,7 @@
   :init
   (projectile-global-mode 1))
 
+
 ;; (require 'project)
 ;;
 ;; (setq project-vc-ignores '(".gitignore"))

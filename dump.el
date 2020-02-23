@@ -27,9 +27,6 @@
                    focus
                    xml
                    css-mode
-                   ido
-                   ido-completing-read+
-                   smex
                    highlight-symbol
                    swiper
                    dired-hide-dotfiles
@@ -50,7 +47,6 @@
                    haskell-mode
                    intero
                    deft
-                   js2-mode
                    web-mode
                    vue-mode
                    css-mode
@@ -79,6 +75,8 @@
   (require package))
 
 (load-theme 'joker t t)
+
+(tramp-unload-tramp)
 
 ;; dump image
 (dump-emacs-portable "~/.emacs.d/emacs.pdmp")

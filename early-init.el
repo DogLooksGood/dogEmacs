@@ -3,8 +3,6 @@
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
-;;; | 中英文等宽的字体 |
-;;; | Mixed monospace  |
 (set-face-attribute 'default nil  :family "unifont" :height 120 :weight 'normal)
 
 (custom-set-faces

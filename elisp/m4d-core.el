@@ -467,7 +467,7 @@ Do nothing if always at the end."
 
 (defun m4d-mark-whole-buffer ()
   (interactive)
-  (if (equal m4d--last-select 'buffer)
+  (if (and (region-active-p) (equal m4d--last-select 'buffer))
       (m4d-exchange)
     (mark-whole-buffer)
     (setq m4d--last-select 'buffer)))

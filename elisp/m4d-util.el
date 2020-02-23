@@ -29,11 +29,11 @@
     (m4d-motion-mode -1)
     (m4d-insert-mode -1))
    ((equal modal 'insert)
-    (if buffer-read-only
-        (message "Buffer is read only.")
-      (m4d-normal-mode -1)
-      (m4d-motion-mode -1)
-      (m4d-insert-mode 1)))
+    (when buffer-read-only
+      (message "Buffer is read only."))
+    (m4d-normal-mode -1)
+    (m4d-motion-mode -1)
+    (m4d-insert-mode 1))
    ((equal modal 'motion)
     (m4d-normal-mode -1)
     (m4d-motion-mode 1)

@@ -31,7 +31,7 @@
   :config
   (if (and user/mini-mode-line (display-graphic-p))
       (progn
-        (setq mini-modeline-r-format '("%l:%c" (vc-mode vc-mode) " %b%* %e %m"))
+        (setq mini-modeline-r-format '("%l:%c" (vc-mode vc-mode) " %b%* %e %m" (:eval (rime-lighter))))
         (setq mini-modeline-l-format '((:eval (m4d-indicator))
                                        " "
                                        (:eval (mini-modeline-msg))))

@@ -35,6 +35,15 @@
 
 (advice-add 'user/yas-init :around #'user/make-silent)
 
+(defun user/yas-load-local-snippets ()
+  (interactive)
+  (when (projectile-project-root)
+    (let ((local-yas-dir (concat (projectile-project-root) ".yas")))
+      (when (file-directory-p local-yas-dir)
+        (yas-load-directory local-yas-dir)))))
+
+(make-variable-buffer-local 'yas-snippet-dirs)
+
 (use-package yasnippet
   :bind
   (:map
@@ -53,7 +62,8 @@
   (unbind-key "TAB" yas-keymap)
   (unbind-key "S-TAB" yas-keymap)
   :init
-  (add-hook 'snippet-mode-hook 'smartparens-mode)
-  (add-hook 'prog-mode-hook #'yas-minor-mode))
+  (add-hook 'snippet-mode-hook #'smartparens-mode)
+  (add-hook 'prog-mode-hook #'yas-minor-mode)
+  (add-hook 'yas-minor-mode-hook #'user/yas-load-local-snippets))
 
 (provide 'the-snippet)

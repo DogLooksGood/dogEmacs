@@ -43,6 +43,9 @@
 (defvar m4d-insert-modal-hook nil
   "A hook runs when we enter the insert modal.")
 
+(defvar m4d-insert-exit-hook nil
+  "A hook runs when we exit the insert modal.")
+
 (defvar m4d-normal-modal-hook nil
   "A hook runs when we enter the normal modal.")
 
@@ -119,10 +122,11 @@
      (m4d--kmacro-format-keys)
      (propertize "] " 'face 'm4d-kmacro-indicator)))
    (m4d-normal-mode
-    (propertize (if (m4d--direction-right-p)
-                    "NORMAL"
-                  "NORMAL«")
-                'face 'm4d-visual-indicator))
+    (propertize
+     (if (m4d--direction-right-p)
+         "NORMAL"
+       "NORMAL«")
+     'face 'm4d-visual-indicator))
    (m4d-motion-mode
     (propertize "MOTION" 'face 'm4d-motion-indicator))
    (m4d-insert-mode
@@ -133,7 +137,6 @@
       (propertize "OVERWRITE" 'face 'm4d-insert-indicator))
      (t (propertize "INSERT" 'face 'm4d-insert-indicator))))
    (t "")))
-
 
 ;;;###autoload
 
@@ -161,8 +164,13 @@
         m4d--use-literal nil
         m4d--use-meta nil))
 
-(defun m4d--kmacro-uninit ()
-  )
+(defun m4d--kmacro-uninit ())
+
+(defun m4d--insert-init ()
+  (run-hooks 'm4d-insert-mode-hook))
+
+(defun m4d--insert-uninit ()
+  (run-hooks 'm4d-insert-exit-hook))
 
 (defun m4d--mode-init ()
   (when (m4d--should-enable-motion-p)
@@ -176,7 +184,10 @@
   "m4d insert modal state."
   nil
   "[I]"
-  m4d-insert-keymap)
+  m4d-insert-keymap
+  (if m4d-insert-mode
+      (m4d--insert-init)
+    (m4d--insert-uninit)))
 
 ;;;###autoload
 (define-minor-mode m4d-normal-mode
