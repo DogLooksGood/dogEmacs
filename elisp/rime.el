@@ -40,6 +40,8 @@
 (defvar rime--return-fallback nil)
 (defvar rime--enable nil)
 (defvar rime--show-candidate t)
+(defvar rime--prev-preedit nil
+  "Record the previous preedit, to prevent empty candidate clear the composition.")
 
 (make-variable-buffer-local 'rime--preedit-overlay)
 (make-variable-buffer-local 'rime--backspace-fallback)
@@ -108,18 +110,33 @@
       (list key)
     (liberime-process-key key)
     (with-silent-modifications
-      (progn
-        (let ((context (liberime-get-context))
-              (commit (liberime-get-commit)))
-          (cond
-           ((and (not context) (not commit))
-            (liberime-clear-composition)
-            (list key))
-           (commit
-            (rime--clear-overlay)
-            (mapcar 'identity commit))
-           (t (rime--show-candidates)
-              (rime--display-preedit))))))))
+      (let* ((context (liberime-get-context))
+             (preedit (thread-last context
+                        (alist-get 'composition)
+                        (alist-get 'preedit)))
+             (commit (liberime-get-commit)))
+        (unwind-protect
+            (cond
+             ((and (not context) (not commit) (not preedit))
+              (if rime--prev-preedit
+                  (progn
+                    (liberime-clear-composition)
+                    (dolist (c (mapcar 'identity rime--prev-preedit))
+                      (liberime-process-key c)
+                      (rime--show-candidates)
+                      (rime--display-preedit))
+                    (setq preedit
+                          (thread-last (liberime-get-context)
+                            (alist-get 'composition)
+                            (alist-get 'preedit))))
+                (liberime-clear-composition)
+                (list key)))
+             (commit
+              (rime--clear-overlay)
+              (mapcar 'identity commit))
+             (t (rime--show-candidates)
+                (rime--display-preedit)))
+          (setq rime--prev-preedit preedit))))))
 
 (defun rime-update-input-method-state ()
   (if (and (rime--should-enable-p) rime--enable)
@@ -152,6 +169,7 @@
   (liberime-clear-composition)
   (setq-local rime--backspace-fallback (key-binding (kbd "DEL")))
   (setq-local rime--return-fallback (key-binding (kbd "RET")))
+  (setq rime--prev-preedit nil)
   (rime-mode 1)
   (add-hook 'post-self-insert-hook 'rime--display-preedit nil t)
   (add-hook 'post-self-insert-hook 'rime--show-candidates nil t))
@@ -162,6 +180,7 @@
   (when (overlayp rime--preedit-overlay)
     (delete-overlay rime--preedit-overlay)
     (setq rime--preedit-overlay nil))
+  (setq rime--prev-preedit nil)
   (rime-mode -1)
   (remove-hook 'post-self-insert-hook 'rime--display-preedit)
   (remove-hook 'post-self-insert-hook 'rime--show-candidates))
