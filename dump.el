@@ -71,7 +71,8 @@
                    projectile
                    m4d
                    joker-theme
-                   shiftless))
+                   shiftless
+                   rime))
   (require package))
 
 (load-theme 'joker t t)
