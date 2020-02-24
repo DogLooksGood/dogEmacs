@@ -27,16 +27,16 @@
 (setq user/mini-mode-line t)
 
 (use-package mini-modeline
-  :quelpa (mini-modeline :repo "kiennq/emacs-mini-modeline" :fetcher github)
+  :quelpa (mini-modeline :repo "DogLooksGood/emacs-mini-modeline" :fetcher github)
   :config
   (if (and user/mini-mode-line (display-graphic-p))
       (progn
-        (setq mini-modeline-r-format '("%l:%c" (vc-mode vc-mode) " %b%* %e %m" (:eval (rime-lighter))))
+        (setq mini-modeline-r-format '("%l:%c" (vc-mode vc-mode) " %b(%*) %e %m" (:eval (rime-lighter))))
         (setq mini-modeline-l-format '((:eval (m4d-indicator))
                                        " "
                                        (:eval (mini-modeline-msg))))
         (setq mini-modeline-enhance-visual nil
-              mini-modeline-echo-duration 2)
+              mini-modelineecho-duration 2)
         (mini-modeline-mode t))
     (progn
       (setq mini-modeline-r-format '())

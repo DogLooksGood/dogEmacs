@@ -6,13 +6,18 @@
 
 (require 'rime)
 
+(rime-register-and-set-default)
+
 (defun m4d-insert-mode-p ()
   m4d-insert-mode)
 
-(setq rime--show-candidate t)
+(setq rime--show-candidate nil)
 
 (defun user/rime-not-in-insert-mode ()
   (not m4d-insert-mode))
+
+(defun user/rime-in-elisp-quote ()
+  (and (equal major-mode 'emacs-lisp-mode) (equal ?` (char-before))))
 
 (defun user/rime-in-quote ()
   (and (equal ?` (char-before)) (equal ?` (char-after))))
@@ -22,7 +27,8 @@
        (looking-back "<kbd>" 1)))
 
 (setq rime--disable-predicates
-      '(rime--after-alphabet-char-p
+      '(user/rime-in-elisp-quote
+        rime--after-alphabet-char-p
         rime--prog-in-code-p
         user/rime-not-in-insert-mode
         user/rime-in-quote
@@ -30,7 +36,7 @@
 
 (global-set-key (kbd "C-\\") 'rime-toggle)
 
-(add-hook 'm4d-insert-mode-hook 'rime-update-input-method-state)
-(add-hook 'm4d-insert-exit-hook 'rime-update-input-method-state)
+(add-hook 'm4d-insert-mode-hook 'rime-update-binding)
+(add-hook 'm4d-insert-exit-hook 'rime-update-binding)
 
 (provide 'the-rime)

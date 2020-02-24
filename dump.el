@@ -72,7 +72,8 @@
                    m4d
                    joker-theme
                    shiftless
-                   rime))
+                   ;; rime
+                   ))
   (require package))
 
 (load-theme 'joker t t)
