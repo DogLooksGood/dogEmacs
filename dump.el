@@ -5,6 +5,15 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/")
 (setq user/dumped-load-path load-path)
 
+(setq package-archives
+      '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+        ("melpa" . "http://elpa.emacs-china.org/melpa/")
+        ("melpa-stable" . "http://elpa.emacs-china.org/melpa-stable/")))
+(setq quelpa-checkout-melpa-p nil)
+(setq quelpa-update-melpa-p nil)
+(setq use-package-always-ensure t)
+(setq use-package-always-demand t)
+
 (dolist (package '(paredit
                    emmet-mode
                    nov
@@ -18,13 +27,11 @@
                    lsp-mode
                    lsp-ui
                    dumb-jump
-                   elixir-mode
                    rust-mode
                    markdown-mode
                    hideshow
                    highlight-numbers
                    yascroll
-                   focus
                    xml
                    css-mode
                    highlight-symbol
@@ -37,7 +44,6 @@
                    cider
                    use-package
                    quelpa-use-package
-                   w3m
                    dockerfile-mode
                    docker
                    ivy
@@ -73,7 +79,22 @@
                    joker-theme
                    shiftless
                    rime
-                   the-global))
+                   ;; Try to dump a few config files
+                   the-global
+                   the-git
+                   the-look-and-feel
+                   the-ivy
+                   the-snippet
+                   the-prog
+                   the-completion
+                   the-org
+                   the-lisp
+                   the-clojure
+                   the-project
+                   the-deft
+                   the-docker
+                   the-edit
+                   the-visual))
   (require package))
 
 (load-theme 'joker t t)

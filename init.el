@@ -51,7 +51,6 @@
 (require 'the-global)
 (require 'the-git)
 (require 'the-ivy)
-(require 'the-register)
 (require 'the-prog)
 (require 'the-completion)
 (require 'the-lisp)
@@ -59,7 +58,6 @@
 (require 'the-java)
 (require 'the-javascript)
 (require 'the-haskell)
-(require 'the-elixir)
 (require 'the-golang)
 (require 'the-rust)
 (require 'the-sql)
@@ -73,11 +71,9 @@
 (require 'the-dired)
 (require 'the-conf)
 (require 'the-org)
-(require 'the-w3m)
 (require 'the-snippet)
 (require 'the-latex)
 (require 'the-ebook)
-(require 'the-wechat-mini)
 (require 'the-deft)
 (require 'the-tab)
 (require 'the-hold)
@@ -87,6 +83,9 @@
 (require 'the-look-and-feel)
 (require 'the-rime)
 
+;;; Temporary needs
+(require 'the-wechat-mini)
+
 (setq gc-cons-threshold (* 16 1024 1024))
 
-(message "Emacs is ready, startup cost: %.3fs" (time-to-seconds (time-since user/launch-time)))
+(message "Emacs is ready, startup cost: %.3f seconds." (time-to-seconds (time-since user/launch-time)))

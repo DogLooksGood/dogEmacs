@@ -37,33 +37,19 @@
 (setq user/mini-mode-line t)
 
 (use-package mini-modeline
-  :quelpa (mini-modeline :repo "DogLooksGood/emacs-mini-modeline" :fetcher github)
-  :config
-  (if (and user/mini-mode-line (display-graphic-p))
-      (progn
-        (setq mini-modeline-r-format '("%l:%c" (vc-mode vc-mode) " %b %*%e %m" (:eval (when (fboundp 'rime-lighter)
-                                                                                        (rime-lighter)))))
-        (setq mini-modeline-l-format '((:eval (m4d-indicator))
-                                       " "
-                                       (:eval (mini-modeline-msg))))
-        (setq mini-modeline-enhance-visual nil
-              mini-modelineecho-duration 2)
-        (mini-modeline-mode t))
-    (progn
-      (setq mini-modeline-r-format '())
-      (setq mini-modeline-l-format '((:eval (m4d-indicator))
-                                     " "
-                                     (:eval (mini-modeline-msg))))
-      (setq mini-modeline-enhance-visual nil
-            mini-modeline-echo-duration 2
-            mini-modeline-update-interval 1)
-      (mini-modeline-mode t)
-      (setq-default mode-line-format
-              '((:eval (user/simple-mode-line-render
-                        (format-mode-line '())
-                        (format-mode-line '(" %l:%c %b%*"
-                                            (vc-mode vc-mode)
-                                            " %m")))))))))
+  :quelpa (mini-modeline :repo "DogLooksGood/emacs-mini-modeline" :fetcher github))
+
+(setq mini-modeline-r-format '("%l:%c"
+                               (vc-mode vc-mode)
+                               " %b %*%e %m"
+                               (:eval (when (fboundp 'rime-lighter)
+                                        (rime-lighter)))))
+(setq mini-modeline-l-format '((:eval (m4d-indicator))
+                               " "
+                               (:eval (mini-modeline-msg))))
+(setq mini-modeline-enhance-visual nil
+      mini-modelineecho-duration 2)
+(mini-modeline-mode t)
 
 ;; Only show window divider when there's more than one window.
 (defun user/toggle-window-divider-and-border ()
@@ -73,8 +59,7 @@
     (progn
       (window-divider-mode -1))))
 
-(when (and user/mini-mode-line (display-graphic-p))
-  (window-divider-mode -1)
-  (add-hook 'window-configuration-change-hook #'user/toggle-window-divider-and-border))
+(window-divider-mode -1)
+(add-hook 'window-configuration-change-hook #'user/toggle-window-divider-and-border)
 
 (provide 'the-look-and-feel)

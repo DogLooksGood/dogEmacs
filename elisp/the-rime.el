@@ -10,7 +10,9 @@
                :files ("CMakeLists.txt" "Makefile" "src" "liberime-config.el")))
     (require 'rime)
     (rime-register-and-set-default)
-    (setq user/rime-loaded t))
+    (setq user/rime-loaded t)
+    (add-hook 'm4d-insert-mode-hook 'rime-update-binding)
+    (add-hook 'm4d-insert-exit-hook 'rime-update-binding))
   (rime-toggle))
 
 (defun m4d-insert-mode-p ()
@@ -41,7 +43,5 @@
 
 (global-set-key (kbd "C-\\") 'user/rime-toggle)
 
-(add-hook 'm4d-insert-mode-hook 'rime-update-binding)
-(add-hook 'm4d-insert-exit-hook 'rime-update-binding)
 
 (provide 'the-rime)
