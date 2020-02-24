@@ -1,12 +1,17 @@
-(use-package liberime-config
-  :quelpa (liberime-config
-           :fetcher github
-           :repo "DogLooksGood/liberime"
-           :files ("CMakeLists.txt" "Makefile" "src" "liberime-config.el")))
+(defvar user/rime-loaded nil)
 
-(require 'rime)
-
-(rime-register-and-set-default)
+(defun user/rime-toggle ()
+  (interactive)
+  (unless user/rime-loaded
+    (use-package liberime-config
+      :quelpa (liberime-config
+               :fetcher github
+               :repo "DogLooksGood/liberime"
+               :files ("CMakeLists.txt" "Makefile" "src" "liberime-config.el")))
+    (require 'rime)
+    (rime-register-and-set-default)
+    (setq user/rime-loaded t))
+  (rime-toggle))
 
 (defun m4d-insert-mode-p ()
   m4d-insert-mode)
@@ -34,7 +39,7 @@
         user/rime-in-quote
         user/rime-in-kbd))
 
-(global-set-key (kbd "C-\\") 'rime-toggle)
+(global-set-key (kbd "C-\\") 'user/rime-toggle)
 
 (add-hook 'm4d-insert-mode-hook 'rime-update-binding)
 (add-hook 'm4d-insert-exit-hook 'rime-update-binding)
