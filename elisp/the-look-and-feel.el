@@ -2,6 +2,16 @@
 ;;; Look And Feels
 ;;  setup for font, mode line and themes.
 
+(defvar user/fonts nil)
+(setq user/fonts '("unifont" "iosevka"))
+
+(defun user/select-font ()
+  (interactive)
+  (let ((font (completing-read "Set font: " user/fonts)))
+    (set-face-attribute 'default nil  :family font :height 120 :weight 'normal)))
+
+(global-set-key (kbd "C-S-f") 'user/select-font)
+
 (progn
   (require 'joker-theme)
   (if user/dumped-load-path
@@ -31,7 +41,8 @@
   :config
   (if (and user/mini-mode-line (display-graphic-p))
       (progn
-        (setq mini-modeline-r-format '("%l:%c" (vc-mode vc-mode) " %b(%*) %e %m" (:eval (rime-lighter))))
+        (setq mini-modeline-r-format '("%l:%c" (vc-mode vc-mode) " %b %*%e %m" (:eval (when (fboundp 'rime-lighter)
+                                                                                        (rime-lighter)))))
         (setq mini-modeline-l-format '((:eval (m4d-indicator))
                                        " "
                                        (:eval (mini-modeline-msg))))

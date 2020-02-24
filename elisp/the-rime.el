@@ -11,7 +11,7 @@
 (defun m4d-insert-mode-p ()
   m4d-insert-mode)
 
-(setq rime--show-candidate nil)
+(setq rime-show-candidate nil)
 
 (defun user/rime-not-in-insert-mode ()
   (not m4d-insert-mode))
@@ -26,7 +26,7 @@
   (and (looking-at "</kbd>")
        (looking-back "<kbd>" 1)))
 
-(setq rime--disable-predicates
+(setq rime-disable-predicates
       '(user/rime-in-elisp-quote
         rime--after-alphabet-char-p
         rime--prog-in-code-p

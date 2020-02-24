@@ -19,12 +19,12 @@
 (make-variable-buffer-local 'input-method-function)
 (make-variable-buffer-local 'deactivate-current-input-method-function)
 
-(defcustom rime--disable-predicates nil
+(defcustom rime-disable-predicates nil
   "当此列表中任何一个断言函数成立时，进入临时英文模式。"
   :type 'list
   :group 'rime)
 
-(defcustom rime--show-candidate t
+(defcustom rime-show-candidate t
   "是否在`minibuffer'中显示候选列表。")
 
 (make-variable-buffer-local
@@ -59,10 +59,10 @@
              (nth 4 (syntax-ppss))))))
 
 (defun rime--should-enable-p ()
-  (not (seq-find 'funcall rime--disable-predicates)))
+  (not (seq-find 'funcall rime-disable-predicates)))
 
-(defun rime--show-candidates ()
-  (when rime--show-candidate
+(defun rime--show-candidate ()
+  (when rime-show-candidate
     (let* ((context (liberime-get-context))
            (candidates (alist-get 'candidates (alist-get 'menu context)))
            (preedit (alist-get 'preedit (alist-get 'composition context)))
@@ -70,7 +70,7 @@
            (result ""))
       (when context
         (setq result
-              (concat result (format "%s ┃ " preedit)))
+              (concat result (format "%s: " preedit)))
         (dolist (c candidates)
           (setq result
                 (concat result (format "%d. %s " idx c)))
@@ -103,7 +103,7 @@
       (if (not context)
           (call-interactively rime--backspace-fallback)
         (liberime-process-key 65288)
-        (rime--show-candidates)
+        (rime--show-candidate)
         (rime--display-preedit)
         (setq-local rime--prev-preedit
               (thread-last (liberime-get-context)
@@ -130,7 +130,7 @@
             (liberime-clear-composition))
         (liberime-clear-composition)
         (setq-local rime--prev-preedit nil)
-        (rime--show-candidates)
+        (rime--show-candidate)
         (rime--clear-overlay)
         (call-interactively rime--return-fallback)))))
 
@@ -153,7 +153,7 @@
                     (liberime-clear-composition)
                     (dolist (c (mapcar 'identity rime--prev-preedit))
                       (liberime-process-key c)
-                      (rime--show-candidates)
+                      (rime--show-candidate)
                       (rime--display-preedit))
                     (setq preedit
                           (thread-last (liberime-get-context)
@@ -164,7 +164,7 @@
              (commit
               (rime--clear-overlay)
               (mapcar 'identity commit))
-             (t (rime--show-candidates)
+             (t (rime--show-candidate)
                 (rime--display-preedit)))
           (setq-local rime--prev-preedit preedit))))))
 
@@ -254,11 +254,11 @@
   (unless rime--return-fallback
     (setq-local rime--return-fallback (key-binding (kbd "RET"))))
   (add-hook 'post-self-insert-hook 'rime--display-preedit nil t)
-  (add-hook 'post-self-insert-hook 'rime--show-candidates nil t))
+  (add-hook 'post-self-insert-hook 'rime--show-candidate nil t))
 
 (defun rime-mode--uninit ()
   (remove-hook 'post-self-insert-hook 'rime--display-preedit)
-  (remove-hook 'post-self-insert-hook 'rime--show-candidates))
+  (remove-hook 'post-self-insert-hook 'rime--show-candidate))
 
 (define-minor-mode rime-mode
   "仅用于提供输入法激活状态下的按键绑定。

@@ -1,7 +1,10 @@
 ;;; -*- lexical-binding: t -*-
 
+(defun display-startup-echo-area-message ())
+
 ;; Better Defaults
 (setq-default
+ inhibit-startup-message t
  inhibit-x-resources t
  inhibit-splash-screen t
  inhibit-startup-screen t

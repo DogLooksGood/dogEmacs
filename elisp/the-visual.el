@@ -33,10 +33,6 @@
   :init
   (global-yascroll-bar-mode))
 
-(use-package focus
-  :bind
-  (("C-S-F" . 'focus-mode)))
-
 ;; Vertical Border
 (set-face-inverse-video-p 'vertical-border nil)
 (set-face-background 'vertical-border (face-background 'default))

@@ -32,6 +32,11 @@
 (setq use-package-always-ensure t)
 (setq use-package-always-demand t)
 
+;;; Some shim code for tramp
+(defun tramp-file-name-method--cmacro (&rest args))
+(require 'tramp)
+(setq tramp-mode 1)
+
 ;; Requires
 (require 'use-package)
 (require 'quelpa-use-package)
@@ -42,11 +47,9 @@
 
 (add-to-list 'load-path (concat user/emacs-dir "elisp/"))
 
-
 (require 'the-elisp)
 (require 'the-global)
 (require 'the-git)
-;; (require 'the-ido)
 (require 'the-ivy)
 (require 'the-register)
 (require 'the-prog)
@@ -55,7 +58,6 @@
 (require 'the-clojure)
 (require 'the-java)
 (require 'the-javascript)
-;; Don't use these languages for now.
 (require 'the-haskell)
 (require 'the-elixir)
 (require 'the-golang)
@@ -63,7 +65,6 @@
 (require 'the-sql)
 (require 'the-html)
 (require 'the-edit)
-;; I don't really need more than three windows.
 (require 'the-window)
 (require 'the-nav)
 (require 'the-project)
@@ -88,8 +89,4 @@
 
 (setq gc-cons-threshold (* 16 1024 1024))
 
-(when user/dumped-load-path
-  (require 'tramp)
-  (setq tramp-mode 1))
-
-(message "Startup cost: %.3fs" (time-to-seconds (time-since user/launch-time)))
+(message "Emacs is ready, startup cost: %.3fs" (time-to-seconds (time-since user/launch-time)))

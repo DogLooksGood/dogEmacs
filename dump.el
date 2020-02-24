@@ -72,12 +72,13 @@
                    m4d
                    joker-theme
                    shiftless
-                   ;; rime
-                   ))
+                   rime
+                   the-global))
   (require package))
 
 (load-theme 'joker t t)
 
+;;; We have to unload tramp in dump, otherwise tramp will not work.
 (tramp-unload-tramp)
 
 ;; dump image
