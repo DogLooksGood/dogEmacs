@@ -11,7 +11,7 @@
         ("melpa-stable" . "http://elpa.emacs-china.org/melpa-stable/")))
 
 (setq package-selected-packages
-      '(use-package quelpa-use-package))
+      '(use-package quelpa-use-package company))
 
 (if user/dumped-load-path
     (progn
@@ -89,3 +89,4 @@
 (setq gc-cons-threshold (* 16 1024 1024))
 
 (message "Emacs is ready, startup cost: %.3f seconds." (time-to-seconds (time-since user/launch-time)))
+(setq user/launch-time nil)

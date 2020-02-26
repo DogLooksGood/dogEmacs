@@ -1,7 +1,27 @@
+;;; -*- lexical-binding: t -*-
+
+;;; Custom helpers
+
+(defun user/fulcro-destructing-to-keys (text)
+  "text is like {:keys [] :as props}"
+  (save-match-data
+    (if (string-match "{:\\(.+\\)/keys \\[\\(.+\\)] :as props}" text)
+        (let ((ns (match-string 1 text))
+              (ks (match-string 2 text)))
+          (string-join
+           (mapcar (lambda (k) (concat ":" ns "/" k))
+                   (split-string ks " "))
+           " "))
+      "")))
+
+;;; Custom commands
+
 (defun user/clojure-hide-comment (&rest args)
   (save-mark-and-excursion
     (while (search-forward "(comment" nil t)
-      (hs-hide-block))))
+      ;; We ignore the comment block in comment.
+      (unless (nth 4 (syntax-ppss))
+        (hs-hide-block)))))
 
 (defun user/clojure-hash-comment (arg)
   (interactive "P")
@@ -42,6 +62,8 @@
         (if (equal "#_" (buffer-substring-no-properties (point) (+ 2 (point))))
             (delete-char 2)
           (insert "#_")))))))
+
+;;; Packages
 
 (use-package clojure-mode
   :bind
@@ -97,17 +119,5 @@
         cider-enhanced-cljs-completion-p t
         cider-offer-to-open-cljs-app-in-browser nil)
   (setq-default cider-default-cljs-repl 'shadow))
-
-(defun user/fulcro-destructing-to-keys (text)
-  "text is like {:keys [] :as props}"
-  (save-match-data
-    (if (string-match "{:\\(.+\\)/keys \\[\\(.+\\)] :as props}" text)
-        (let ((ns (match-string 1 text))
-              (ks (match-string 2 text)))
-          (string-join
-           (mapcar (lambda (k) (concat ":" ns "/" k))
-                   (split-string ks " "))
-           " "))
-      "")))
 
 (provide 'the-clojure)

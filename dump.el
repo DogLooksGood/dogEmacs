@@ -21,7 +21,6 @@
                    string-inflection
                    seq
                    company
-                   company-posframe
                    smartparens
                    flycheck
                    lsp-mode
@@ -81,18 +80,14 @@
                    rime
                    ;; Try to dump a few config files
                    the-global
-                   the-git
                    the-look-and-feel
                    the-ivy
                    the-snippet
-                   the-prog
                    the-completion
                    the-org
                    the-lisp
                    the-clojure
                    the-project
-                   the-deft
-                   the-docker
                    the-edit
                    the-visual))
   (require package))

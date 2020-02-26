@@ -40,5 +40,4 @@
                         'vertical-border
                         (make-glyph-code ?┃))
 
-
 (provide 'the-visual)

@@ -1,14 +1,18 @@
 ;;; -*- lexical-binding: t -*-
 ;;; Look And Feels
 ;;  setup for font, mode line and themes.
-
+;;;
 (defvar user/fonts nil)
-(setq user/fonts '("unifont" "iosevka"))
+(setq user/fonts '("unifont@120" "iosevka@120"))
 
 (defun user/select-font ()
   (interactive)
-  (let ((font (completing-read "Set font: " user/fonts)))
-    (set-face-attribute 'default nil  :family font :height 120 :weight 'normal)))
+  (let* ((font (completing-read "Set font: " user/fonts))
+         (family+height (split-string font "@"))
+         (family (car family+height))
+         (height (string-to-number (cadr family+height))))
+    (message "%s %d" family height)
+    (set-face-attribute 'default nil  :family family :height height :weight 'normal)))
 
 (global-set-key (kbd "C-S-f") 'user/select-font)
 
@@ -39,9 +43,14 @@
 (use-package mini-modeline
   :quelpa (mini-modeline :repo "DogLooksGood/emacs-mini-modeline" :fetcher github))
 
-(setq mini-modeline-r-format '("%l:%c"
-                               (vc-mode vc-mode)
-                               " %b %*%e %m"
+(defun user/mode-base-info (format-string)
+  "Return formatted string if there's still enough space."
+  (let ((s (format-mode-line format-string)))
+    (when (or (not mini-modeline--msg)
+              (> (window-width) (+ 12 (string-width s) (string-width mini-modeline--msg))))
+      s)))
+
+(setq mini-modeline-r-format '((:eval (user/mode-base-info '("%l:%c %b %* %m" (vc-mode vc-mode))))
                                (:eval (when (fboundp 'rime-lighter)
                                         (rime-lighter)))))
 (setq mini-modeline-l-format '((:eval (m4d-indicator))

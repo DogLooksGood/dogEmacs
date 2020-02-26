@@ -75,12 +75,14 @@
  '(ivy-minibuffer-match-face-2    ((t ())))
  '(ivy-minibuffer-match-face-3    ((t ())))
  '(ivy-minibuffer-match-face-4    ((t ())))
-'(yas-field-highlight-face       ((t (:background "#350035"))))
+ '(yas-field-highlight-face       ((t (:background "#350035"))))
+ '(company-template-field         ((t (:inherit yas-field-highlight-face))))
  '(org-document-title             ((t (:inherit font-lock-string-face))))
+ '(org-code                       ((t (:inherit font-lock-constant-face))))
  '(line-number-current-line       ((t (:foreground "#D7AF00"))))
  '(parenthesis                    ((t (:foreground "#606060"))))
- '(term-color-blue                ((t (:foreground "#3366FF" :background "#3366FF")))))
-
+ '(term-color-blue                ((t (:foreground "#3366FF" :background "#3366FF"))))
+ '(popup-tip-face                 ((t (:background "#303030" :foreground "#C5C5C5")))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

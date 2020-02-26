@@ -84,7 +84,7 @@
    (define-key keymap (kbd "O") 'm4d-open-line-up)
    (define-key keymap (kbd "p") 'm4d-prev)
    (define-key keymap (kbd "P") 'm4d-prev-select)
-   (define-key keymap (kbd "q") 'm4d-quit)
+   (define-key keymap (kbd "q") 'm4d-quoted-insert)
    (define-key keymap (kbd "r") 'm4d-replace)
    (define-key keymap (kbd "R") 'm4d-replace-with-yank)
    (define-key keymap (kbd "s") 'm4d-select)

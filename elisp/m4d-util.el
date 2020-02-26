@@ -1,7 +1,3 @@
-
-
-
-
 (defun m4d--update-cursor-shape ()
   (cond
    (m4d-kmacro-mode
@@ -124,14 +120,13 @@
     (save-mark-and-excursion
       (goto-char beg)
       (while (and (forward-symbol 1) (<= (point) end))
-        (when-let ((bounds (bounds-of-thing-at-point 'symbol)))
-          (push (buffer-substring-no-properties (car bounds) (cdr bounds)) list)))
-      (goto-char beg)
-      (while (and (forward-word 1) (<= (point) end))
-        (when-let ((bounds (bounds-of-thing-at-point 'word)))
-          (push (buffer-substring-no-properties (car bounds) (cdr bounds)) list))))
+        (when-let ((thing (thing-at-point 'symbol)))
+          (push (org-no-properties thing) list)))
+      (while (and (forward-symbol 1) (<= (point) end))
+        (when-let ((thing (thing-at-point 'word)))
+          (push (org-no-properties thing) list))))
     (setq list (delete-dups list))
-    (completing-read "Select: " list)))
+    (completing-read "Select: " list nil nil)))
 
 (defun m4d--get-mode-leader-keymap (mode &optional ensure)
   "Return the leader keymap for mode.

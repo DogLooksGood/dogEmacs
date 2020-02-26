@@ -1,24 +1,17 @@
 ;;; -*- lexical-binding: t -*-
 ;;; Completion
 
-(use-package company
-  :ensure t
-  :bind
-  (:map company-mode-map
-   ("<tab>" . 'user/insert-tab)
-   :map company-active-map
-   ("}" . 'company-select-next)
-   ("{" . 'company-select-previous))
-  :config
-  (unbind-key "RET" company-active-map)
-  (unbind-key "<return>" company-active-map)
-  (unbind-key "TAB" company-active-map)
-  (unbind-key "SPC" company-active-map)
-  :init
-  (setq company-frontends '(company-tng-frontend
-                            company-pseudo-tooltip-frontend
-                            company-echo-metadata-frontend))
-  (setq company-begin-commands
+(require 'company)
+
+(add-hook 'prog-mode-hook 'company-mode)
+(add-hook 'conf-mode-hook 'company-mode)
+(add-hook 'eshell-mode-hook 'company-mode)
+
+(setq company-frontends '(company-tng-frontend
+                          company-pseudo-tooltip-frontend
+                          company-echo-metadata-frontend))
+
+(setq company-begin-commands
       '(self-insert-command
         user/insert-mode
         m4d-insert
@@ -31,19 +24,30 @@
         backward -delete-char
         backward-kill-word
         backward-kill-sexp))
-  (setq company-idle-delay 0.4
-        company-minimum-prefix-length 4
-        company-dabbrev-downcase nil
-        company-abort-manual-when-too-short t
-        company-require-match nil
-        company-global-modes '(not dired-mode dired-sidebar-mode))
-  (add-hook 'prog-mode-hook 'company-mode)
-  ;; (remove-hook 'text-mode-hook 'company-mode)
-  (add-hook 'conf-mode-hook 'company-mode)
-  (add-hook 'eshell-mode-hook 'company-mode))
 
-(use-package company-posframe
-  :init
-  (company-posframe-mode -1))
+(setq company-idle-delay 0.8
+      company-minimum-prefix-length 4
+      company-dabbrev-downcase nil
+      company-abort-manual-when-too-short t
+      company-require-match nil
+      company-global-modes '(not dired-mode dired-sidebar-mode))
+
+(with-eval-after-load "company"
+  (progn
+    (define-key company-mode-map (kbd "<tab>") 'user/insert-tab)
+    (define-key company-active-map (kbd "}") 'company-select-next)
+    (define-key company-active-map (kbd "{") 'company-select-previous)
+    (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
+    (define-key company-active-map (kbd "TAB") 'company-complete-selection)
+    (define-key company-active-map (kbd "RET") nil)
+    (define-key company-active-map (kbd "<return>") nil)
+    (define-key company-active-map (kbd "SPC") nil)))
+
+(require 'company-template)
+(with-eval-after-load "company-template"
+  (progn
+    (define-key company-template-nav-map (kbd "RET") 'company-template-forward-field)
+    (define-key company-template-nav-map (kbd "TAB") nil)
+    (define-key company-template-nav-map (kbd "<tab>") nil)))
 
 (provide 'the-completion)

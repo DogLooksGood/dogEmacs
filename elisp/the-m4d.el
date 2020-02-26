@@ -11,6 +11,8 @@
     (error
      (save-buffers-kill-terminal))))
 
+(global-set-key (kbd "C-x C-x") 'execute-extended-command)
+
 (m4d-normal-define-key
  '("C" . hs-toggle-hiding))
 
@@ -48,10 +50,10 @@
  '("/" . swiper)
  '("\\" . split-window-right)
  '("0" . delete-window)
- '("b" . switch-to-buffer)
+ '("b" . counsel-switch-buffer)
  '("'" . paredit-meta-doublequote)
  '("#" . deft)
- '("q" . projectile-kill-buffers)
+ '("q" . m4d-quit)
  '("m" . magit-status)
  '("B" . magit-blame))
 
@@ -70,6 +72,10 @@
    '("cr" . cider-ns-reload-all)
    '("cz" . cider-switch-to-repl-buffer)
    '(";" . user/clojure-hash-comment)))
+
+(m4d-leader-define-mode-key
+ 'emacs-lisp-mode
+ '("RET" . eval-buffer))
 
 (m4d-leader-define-mode-key
  'cider-repl-mode
