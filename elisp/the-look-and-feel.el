@@ -1,20 +1,12 @@
 ;;; -*- lexical-binding: t -*-
 ;;; Look And Feels
-;;  setup for font, mode line and themes.
-;;;
-(defvar user/fonts nil)
-(setq user/fonts '("unifont@120" "iosevka@120"))
+;;  mode line and themes.
 
-(defun user/select-font ()
-  (interactive)
-  (let* ((font (completing-read "Set font: " user/fonts))
-         (family+height (split-string font "@"))
-         (family (car family+height))
-         (height (string-to-number (cadr family+height))))
-    (message "%s %d" family height)
-    (set-face-attribute 'default nil  :family family :height height :weight 'normal)))
+;; (set-frame-parameter nil 'alpha '(80 . 80))
 
-(global-set-key (kbd "C-S-f") 'user/select-font)
+;;; Ensure the fonts is monospaced.
+;;; 一二三四五六七八九十
+;;; 11223344556677889900
 
 (progn
   (require 'joker-theme)

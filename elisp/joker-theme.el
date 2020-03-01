@@ -4,9 +4,9 @@
 
 (custom-theme-set-faces
  'joker
- `(default                        ((t (:foreground "#A8A8A8" :background "#211F23"))))   ;6.9/1
+ '(default                        ((t (:foreground "#A8A8A8" :background "#211F23"))))
  '(mc/cursor-face                 ((t (:background "#949494" :foreground "black"))))
- '(region                         ((t (:background "#4F0030"))))
+ '(region                         ((t (:background "#3F0018" :foreground "#A5A5A5"))))
  '(highlight-symbol-face          ((t ())))
  `(hl-line                        ((t (:background "#272727"))))
  '(yascroll:thumb-fringe          ((t (:background "#3F3F3F" :foreground "#3F3F3F"))))
@@ -30,7 +30,7 @@
  '(font-lock-constant-face        ((t (:foreground "#CFA300"))))
  '(font-lock-function-name-face   ((t (:foreground "#00BBBB"))))
  '(font-lock-warning-face         ((t (:foreground "yellow"))))
- '(m4d-kmacro-indicator           ((t (:foreground "#CC2F2F"))))
+ '(m4d-keypad-indicator           ((t (:foreground "#CC2F2F"))))
  '(m4d-insert-indicator           ((t (:foreground "#CFA300"))))
  '(m4d-visual-indicator           ((t (:foreground "#00D787"))))
  '(m4d-motion-indicator           ((t (:foreground "#00AFD7"))))
@@ -50,8 +50,8 @@
  '(completions-common-part        ((t ())))
  '(minibuffer-prompt              ((t ())))
  '(lazy-highlight                 ((t (:foreground "white"))))
- '(magit-diff-file-heading-highlight ((t (:background "#000087"))))
- '(magit-section-highlight           ((t (:background "#000087"))))
+ '(magit-diff-file-heading-highlight ((t (:background "#171730"))))
+ '(magit-section-highlight           ((t (:background "#171730"))))
  '(magit-diff-removed             ((t (:inherit font-lock-string-face))))
  '(magit-diff-added               ((t (:inherit font-lock-comment-face))))
  '(magit-diff-removed-highlight   ((t (:inherit font-lock-string-face :background "#303030"))))

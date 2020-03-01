@@ -1,6 +1,6 @@
 (defun m4d--update-cursor-shape ()
   (cond
-   (m4d-kmacro-mode
+   (m4d-keypad-mode
     (setq cursor-type 'hollow)
     (unless (display-graphic-p) (send-string-to-terminal "\033[3 q")))
    (m4d-insert-mode
@@ -25,7 +25,7 @@
     (m4d-motion-mode -1)
     (m4d-insert-mode -1))
    ((equal modal 'insert)
-    (when buffer-read-only
+    (when (and buffer-read-only (not (equal major-mode 'vterm-mode)))
       (message "Buffer is read only."))
     (m4d-normal-mode -1)
     (m4d-motion-mode -1)
@@ -119,12 +119,13 @@
   (let ((list))
     (save-mark-and-excursion
       (goto-char beg)
-      (while (and (forward-symbol 1) (<= (point) end))
-        (when-let ((thing (thing-at-point 'symbol)))
-          (push (org-no-properties thing) list)))
-      (while (and (forward-symbol 1) (<= (point) end))
-        (when-let ((thing (thing-at-point 'word)))
-          (push (org-no-properties thing) list))))
+      (while (re-search-forward "\\_<\\(\\sw\\|\\s_\\)+" end t)
+        (let ((result (match-string-no-properties 0)))
+          (push result list)))
+      (goto-char beg)
+      (while (re-search-forward "\\_<\\(\\sw\\)+" end t)
+        (let ((result (match-string-no-properties 0)))
+          (push result list))))
     (setq list (delete-dups list))
     (completing-read "Select: " list nil nil)))
 

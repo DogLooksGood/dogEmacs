@@ -60,22 +60,12 @@
 (dolist (m '(clojure-mode clojurescript-mode clojurec-mode))
   (m4d-leader-define-mode-key
    m
-   '("ce" . cider-eval-last-sexp)
-   '("cc" . cider-eval-defun-at-point)
-   '("cl" . cider-load-file)
-   '("cn" . cider-eval-ns-form)
-   '("cj" . cider-jack-in)
-   '("cs" . cider-jack-in-cljs)
-   '("c&" . cider-jack-in-clj&cljs)
-   '("ck" . cider-eval-buffer)
-   '("cq" . cider-quit)
-   '("cr" . cider-ns-reload-all)
-   '("cz" . cider-switch-to-repl-buffer)
    '(";" . user/clojure-hash-comment)))
 
 (m4d-leader-define-mode-key
  'emacs-lisp-mode
- '("RET" . eval-buffer))
+ '("RET" . eval-buffer)
+ '(";" . eval-expression))
 
 (m4d-leader-define-mode-key
  'cider-repl-mode

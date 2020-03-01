@@ -3,7 +3,7 @@
 
 ;;; Faces
 
-(defface m4d-kmacro-indicator
+(defface m4d-keypad-indicator
   '((((class color) (background dark))
      (:inherit font-lock-string-face))
     (((class color) (background light))
@@ -100,14 +100,14 @@
 (defvar m4d--leader-mode-keymaps nil
   "Leader keymaps used for major modes.")
 
-(defvar m4d--kmacro-keys nil
+(defvar m4d--keypad-keys nil
   "Current keys in kmacro mode.")
 
 ;;; Define key helpers
 
 (require 'm4d-util)
 (require 'm4d-core)
-(require 'm4d-kmacro)
+(require 'm4d-keypad)
 (require 'm4d-keys)
 (require 'm4d-helpers)
 (require 'm4d-esc)
@@ -116,11 +116,11 @@
 (defun m4d-indicator ()
   (interactive)
   (cond
-   (m4d-kmacro-mode
+   (m4d-keypad-mode
     (concat
-     (propertize "KEYPAD [" 'face 'm4d-kmacro-indicator)
-     (m4d--kmacro-format-keys)
-     (propertize "] " 'face 'm4d-kmacro-indicator)))
+     (propertize "KEYPAD [" 'face 'm4d-keypad-indicator)
+     (m4d--keypad-format-keys)
+     (propertize "] " 'face 'm4d-keypad-indicator)))
    (m4d-normal-mode
     (propertize
      (if (m4d--direction-right-p)
@@ -131,7 +131,7 @@
     (propertize "MOTION" 'face 'm4d-motion-indicator))
    (m4d-insert-mode
     (cond
-     (buffer-read-only
+     ((and buffer-read-only (not (equal major-mode 'vterm-mode)))
       (propertize "READONLY" 'face 'm4d-insert-indicator))
      ((bound-and-true-p overwrite-mode)
       (propertize "OVERWRITE" 'face 'm4d-insert-indicator))
@@ -158,13 +158,13 @@
     (setq m4d--keymap-loaded t))
   (m4d--update-cursor-shape))
 
-(defun m4d--kmacro-init ()
-  (run-hooks 'm4d-kmacro-mode-hook)
-  (setq m4d--kmacro-keys nil
+(defun m4d--keypad-init ()
+  (run-hooks 'm4d-keypad-mode-hook)
+  (setq m4d--keypad-keys nil
         m4d--use-literal nil
         m4d--use-meta nil))
 
-(defun m4d--kmacro-uninit ())
+(defun m4d--keypad-uninit ())
 
 (defun m4d--insert-init ()
   (run-hooks 'm4d-insert-mode-hook))
@@ -208,14 +208,14 @@
     (m4d--motion-init)))
 
 ;;;###autoload
-(define-minor-mode m4d-kmacro-mode
+(define-minor-mode m4d-keypad-mode
   "m4d kmacro mode"
   nil
   "[K]"
-  m4d-kmacro-keymap
-  (if m4d-kmacro-mode
-      (m4d--kmacro-init)
-    (m4d--kmacro-uninit)))
+  m4d-keypad-keymap
+  (if m4d-keypad-mode
+      (m4d--keypad-init)
+    (m4d--keypad-uninit)))
 
 ;;;###autoload
 (define-minor-mode m4d-mode

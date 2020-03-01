@@ -12,31 +12,43 @@
   (when (char-before)
     (string-match-p "[a-zA-Z%\\-_]" (char-to-string (char-before)))))
 
-(defun user/rime-toggle ()
-  (interactive)
-  (unless user/rime-loaded
-    (use-package liberime-config
-      :quelpa (liberime-config
-               :fetcher github
-               :repo "DogLooksGood/liberime"
-               :files ("CMakeLists.txt" "Makefile" "src" "liberime-config.el")))
-    (use-package rime
-      :quelpa (rime
-               :fetcher github
-               :repo "DogLooksGood/emacs-rime")
-      :init
-      (setq rime-disable-predicates
-            '(user/rime-in-elisp-quote
-              rime--after-code-char-p
-              rime--prog-in-code-p
-              user/rime-not-in-insert-mode
-              user/rime-in-quote
-              user/rime-in-org-quote
-              user/rime-force-english-p
-              user/rime-in-kbd))
-      (setq rime-show-candidate 'message))
-    (setq user/rime-loaded t))
-  (rime-toggle))
+(use-package liberime-config
+  :defer t
+  :quelpa (liberime-config
+           :fetcher github
+           :repo "DogLooksGood/liberime"
+           :files ("CMakeLists.txt" "Makefile" "src" "liberime-config.el")))
+
+(use-package rime
+  :quelpa (rime
+           ;; :fetcher github
+           ;; :repo "DogLooksGood/emacs-rime"
+           :fetcher file
+           :path "~/develop/emacs-rime/rime.el")
+  :init
+  (setq rime-disable-predicates
+        '(user/rime-in-elisp-quote
+          rime--after-code-char-p
+          rime--prog-in-code-p
+          user/rime-not-in-insert-mode
+          user/rime-in-quote
+          user/rime-in-org-quote
+          user/rime-force-english-p
+          user/rime-in-kbd))
+  (setq rime-show-candidate 'message))
+
+;; (add-to-list 'load-path "~/develop/emacrs-rime")
+;; (require 'rime)
+;; (setq rime-disable-predicates
+;;       '(user/rime-in-elisp-quote
+;;         rime--after-code-char-p
+;;         rime--prog-in-code-p
+;;         user/rime-not-in-insert-mode
+;;         user/rime-in-quote
+;;         user/rime-in-org-quote
+;;         user/rime-force-english-p
+;;         user/rime-in-kbd)
+;;       rime-show-candidate 'message)
 
 (defun m4d-insert-mode-p ()
   m4d-insert-mode)
@@ -45,6 +57,12 @@
   m4d-normal-mode)
 
 (add-hook 'm4d-normal-mode-hook (lambda () (setq user/rime-use-english nil)))
+
+(defun user/rime-force-english ()
+  (interactive)
+  (setq user/rime-use-english (not user/rime-use-english)))
+
+(define-key m4d-insert-keymap (kbd "C-\\") 'user/rime-force-english)
 
 (defun user/rime-not-in-insert-mode ()
   (not m4d-insert-mode))
@@ -62,11 +80,8 @@
   (and (looking-at "</kbd>")
        (looking-back "<kbd>" 1)))
 
-(defun user/rime-force-english ()
-  (interactive)
-  (setq user/rime-use-english t))
+(global-set-key (kbd "C-SPC") 'rime-toggle)
+(global-unset-key (kbd "C-\\"))
 
-(global-set-key (kbd "C-\\") 'user/rime-toggle)
-(global-set-key (kbd "C-SPC") 'user/rime-force-english)
 
 (provide 'the-rime)

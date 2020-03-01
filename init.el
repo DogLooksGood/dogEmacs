@@ -48,6 +48,8 @@
 (add-to-list 'load-path (concat user/emacs-dir "elisp/"))
 
 (require 'the-elisp)
+(require 'the-tab)
+(require 'the-look-and-feel)
 (require 'the-global)
 (require 'the-git)
 (require 'the-ivy)
@@ -60,6 +62,7 @@
 (require 'the-haskell)
 (require 'the-golang)
 (require 'the-rust)
+(require 'the-m4d)
 (require 'the-sql)
 (require 'the-html)
 (require 'the-edit)
@@ -75,15 +78,11 @@
 (require 'the-latex)
 (require 'the-ebook)
 (require 'the-deft)
-(require 'the-tab)
 (require 'the-hold)
 (require 'the-docker)
 (require 'the-server)
-(require 'the-m4d)
-(require 'the-look-and-feel)
+(require 'the-vterm)
 (require 'the-rime)
-
-;;; Temporary needs
 (require 'the-wechat-mini)
 
 (setq gc-cons-threshold (* 16 1024 1024))

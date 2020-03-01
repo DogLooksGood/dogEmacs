@@ -75,13 +75,14 @@
   :config
   (modify-syntax-entry ?: "w" clojure-mode-syntax-table)
   (setq clojure-indent-style 'always-indent)
-  (add-to-list 'clojure-font-lock-keywords
-               `(,(concat "\\(:\\{1,2\\}\\)\\("
-                          clojure--sym-regexp
-                          "?\\)\\(/\\)\\("
-                          clojure--sym-regexp
-                          "\\)")
-                 (0 'clojure-keyword-face)))
+  (setq clojure-font-lock-keywords user/clojure-font-lock-keywords)
+  ;; (add-to-list 'clojure-font-lock-keywords
+  ;;              `(,(concat "\\(:\\{1,2\\}\\)\\("
+  ;;                         clojure--sym-regexp
+  ;;                         "?\\)\\(/\\)\\("
+  ;;                         clojure--sym-regexp
+  ;;                         "\\)")
+  ;;                (0 'clojure-keyword-face)))
   (add-hook 'clojure-mode-hook 'user/clojure-hide-comment))
 
 (use-package clj-refactor

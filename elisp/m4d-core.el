@@ -462,8 +462,8 @@ Do nothing if always at the end."
   (interactive)
   (if (region-active-p)
       (m4d-exchange)
-    (m4d-kmacro-mode)
-    (call-interactively #'m4d-kmacro-self-insert)))
+    (m4d-keypad-mode)
+    (call-interactively #'m4d-keypad-self-insert)))
 
 (defun m4d-mark-whole-buffer ()
   (interactive)
@@ -476,17 +476,28 @@ Do nothing if always at the end."
 
 (defun m4d-kill ()
   "Semantic kill, will call the kbdmacro C-k.
- It is supposed to bind C-k with commands like `paredit-kill' or `sp-kill-hybrid-sexp'."
+ It is supposed to bind C-k with commands like `paredit-kill' or `sp-kill-hybrid-sexp'.
+
+Will handle the whitespace when kill `sexp' selection and newline when kill `line' selection."
   (interactive)
   (if (not (region-active-p))
       (if (equal last-command 'm4d-c-g)
           (m4d--execute-kbd-macro m4d-kill-line-kbd-macro)
         (message "No selection!"))
-    (when (and (equal 'line m4d--last-select)
+    (cond
+     ((and (equal 'line m4d--last-select)
                (m4d--direction-right-p)
                (< (point) (point-max)))
-      (forward-char 1))
-    (m4d--execute-kbd-macro m4d-kill-region-kbd-macro)))
+      (forward-char 1)
+      (m4d--execute-kbd-macro m4d-kill-region-kbd-macro))
+     ((equal 'exp m4d--last-select)
+      (m4d--execute-kbd-macro m4d-kill-region-kbd-macro)
+      (when (and (save-mark-and-excursion
+                   (search-backward-regexp "[^ ]" (line-beginning-position) t))
+                 (save-mark-and-excursion
+                   (search-forward-regexp "[^ ]" (line-end-position) t)))
+        (just-one-space)))
+     (t (m4d--execute-kbd-macro m4d-kill-region-kbd-macro)))))
 
 (defun m4d-replace ()
   (interactive)
@@ -597,8 +608,8 @@ Do nothing if always at the end."
   (interactive)
   (if (region-active-p)
       (m4d-copy)
-    (m4d-kmacro-mode 1)
-    (call-interactively #'m4d-kmacro-self-insert)))
+    (m4d-keypad-mode 1)
+    (call-interactively #'m4d-keypad-self-insert)))
 
 (defun m4d-yank (arg)
   (interactive "P")
@@ -779,10 +790,10 @@ Do nothing if always at the end."
   (interactive)
   (call-interactively #'mc/skip-to-next-like-this))
 
-(defun m4d-kmacro-start ()
+(defun m4d-keypad-start ()
   (interactive)
-  (m4d-kmacro-mode 1)
-  (call-interactively #'m4d-kmacro-self-insert))
+  (m4d-keypad-mode 1)
+  (call-interactively #'m4d-keypad-self-insert))
 
 (defun m4d-space ()
   (interactive)
@@ -797,8 +808,8 @@ Do nothing if always at the end."
     (when (company--active-p)
       (company-abort)))
   (cond
-   (m4d-kmacro-mode
-    (m4d-kmacro-mode -1))
+   (m4d-keypad-mode
+    (m4d-keypad-mode -1))
    ((or multiple-cursors-mode m4d-insert-mode)
     (when overwrite-mode
       (overwrite-mode -1))
@@ -812,7 +823,7 @@ Do nothing if always at the end."
    ((equal major-mode 'fundamental-mode)
     (m4d--to-normal))
    (t
-    (message "Add %s to either `m4d-normal-mode-list' or `m4d-motion-mode-list'."))))
+    (message "Add %s to either `m4d-normal-mode-list' or `m4d-motion-mode-list'." major-mode))))
 
 (defun m4d-last-buffer ()
   (interactive)

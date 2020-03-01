@@ -21,8 +21,8 @@
 (setq m4d-leader-base-keymap
       (let ((keymap (make-sparse-keymap)))
         (define-key keymap (kbd "SPC") 'm4d-space)
-        (define-key keymap (kbd "x") 'm4d-kmacro-start)
-        (define-key keymap (kbd "c") 'm4d-kmacro-start)
+        (define-key keymap (kbd "x") 'm4d-keypad-start)
+        (define-key keymap (kbd "c") 'm4d-keypad-start)
         keymap))
 
 (defvar m4d-normal-keymap nil)
@@ -114,20 +114,20 @@
    (define-key keymap [escape] 'm4d-last-buffer)
    keymap))
 
-(defvar m4d-kmacro-keymap nil)
-(setq m4d-kmacro-keymap
+(defvar m4d-keypad-keymap nil)
+(setq m4d-keypad-keymap
       (let ((map (make-sparse-keymap)))
         (suppress-keymap map t)
-        (define-key map [remap self-insert-command] 'm4d-kmacro-self-insert)
+        (define-key map [remap self-insert-command] 'm4d-keypad-self-insert)
         (let ((i ?\s))
           (while (< i 256)
-            (define-key map (vector i) 'm4d-kmacro-self-insert)
+            (define-key map (vector i) 'm4d-keypad-self-insert)
             (setq i (1+ i)))
-          (define-key map (kbd "DEL") 'm4d-kmacro-undo)
+          (define-key map (kbd "DEL") 'm4d-keypad-undo)
           (define-key map (kbd "<escape>") 'm4d-escape-or-normal-modal)
-          (define-key map (kbd "<tab>") 'm4d-kmacro-self-insert)
-          (define-key map (kbd "TAB") 'm4d-kmacro-self-insert)
-          (define-key map (kbd "<return>") 'm4d-kmacro-self-insert))
+          (define-key map (kbd "<tab>") 'm4d-keypad-self-insert)
+          (define-key map (kbd "TAB") 'm4d-keypad-self-insert)
+          (define-key map (kbd "<return>") 'm4d-keypad-self-insert))
         map))
 
 (provide 'm4d-keys)

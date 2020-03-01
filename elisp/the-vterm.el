@@ -1,6 +1,8 @@
-(use-package vterm)
-
-(use-package vterm-toggle
+(use-package vterm
   :bind
-  (("<f1>" . 'vterm-toggle)
-   :map vterm-mode-map ("<f1>" . 'vterm-toggle)))
+  (:map
+   vterm-mode-map
+   ("C-\\" . 'rime-toggle)))
+
+
+(provide 'the-vterm)
