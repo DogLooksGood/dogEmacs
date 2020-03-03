@@ -65,6 +65,8 @@
 
 ;;; Packages
 
+(require 'the-clojure-highlight)
+
 (use-package clojure-mode
   :bind
   (:map clojure-mode-map

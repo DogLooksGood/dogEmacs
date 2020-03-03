@@ -86,6 +86,7 @@
                    the-completion
                    the-org
                    the-lisp
+                   the-clojure-highlight
                    the-clojure
                    the-project
                    the-edit

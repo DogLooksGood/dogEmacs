@@ -1,6 +1,7 @@
 (defvar m4d--keypad-meta-prefix "m")
 (defvar m4d--keypad-literal-prefix " ")
 
+(defvar m4d--prefix-arg nil)
 (defvar m4d--use-literal nil)
 (defvar m4d--use-meta nil)
 
@@ -9,6 +10,14 @@
     ('meta (format "M-%s" (cdr k)))
     ('control (format "C-%s" (cdr k)))
     ('literal (cdr k))))
+
+(defun m4d--keypad-format-prefix ()
+  (cond
+   ((equal '(4) m4d--prefix-arg)
+    "C-u ")
+   (m4d--prefix-arg
+    (format "%s " m4d--prefix-arg))
+   (t "")))
 
 (defun m4d--keypad-format-keys ()
   (let ((result ""))
@@ -37,12 +46,15 @@
       (cond
        ((commandp cmd t)
         (m4d--keypad-quit)
+        (setq current-prefix-arg m4d--prefix-arg)
+        (setq m4d--prefix-arg nil)
         (call-interactively cmd))
        ((keymapp cmd))
        ((equal 'control (caar m4d--keypad-keys))
         (setcar m4d--keypad-keys (cons 'literal (cdar m4d--keypad-keys)))
         (m4d--keypad-try-execute))
        (t
+        (setq m4d--prefix-arg nil)
         (m4d--keypad-quit))))))
 
 (defun m4d-keypad-undo ()

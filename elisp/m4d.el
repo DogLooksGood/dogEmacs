@@ -119,6 +119,7 @@
    (m4d-keypad-mode
     (concat
      (propertize "KEYPAD [" 'face 'm4d-keypad-indicator)
+     (m4d--keypad-format-prefix)
      (m4d--keypad-format-keys)
      (propertize "] " 'face 'm4d-keypad-indicator)))
    (m4d-normal-mode
@@ -160,9 +161,11 @@
 
 (defun m4d--keypad-init ()
   (run-hooks 'm4d-keypad-mode-hook)
-  (setq m4d--keypad-keys nil
-        m4d--use-literal nil
-        m4d--use-meta nil))
+  (setq
+   m4d--prefix-arg current-prefix-arg
+   m4d--keypad-keys nil
+   m4d--use-literal nil
+   m4d--use-meta nil))
 
 (defun m4d--keypad-uninit ())
 
