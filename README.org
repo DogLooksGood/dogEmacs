@@ -1,26 +1,23 @@
-#+TITLE: My Emacs Configuration
+#+TITLE: This configuration is not suitable for you, but...
 
+This configuration is highly opinioned.
 
-* This configuration is not suitable for you, but...
-
-  This configuration is highly opinioned.
-
-  I'm using Programmer Dvorak keyboard layout and a self made modal editing layer which I name it M4D(Modal For Dvorak). 
-  So this configuration is probably not suitable for you, 
-  But there are some experience I can share with you if you are making your own.
-
+I'm using Programmer Dvorak keyboard layout and a self made modal editing layer which I name it M4D(Modal For Dvorak). 
+So this configuration is probably not suitable for you, 
+But there are some experience I can share with you if you are making your own.
+  
 * Performance
 
-** Some variables affect the performance
+*** Some variables affect the performance
 
    The most important one is ~gc-cons-threshold~, try make it a little bigger. 
 
    The ~auto-window-vscroll~, I don't know its functionality
    but with it default set to ~t~, the cursor movement is very laggy sometimes.
    When you hold the arrow key, the cursor should move line by line, no jump or flicker, 
-   if it's not, set this variable to ~nil~.
+   if it's not, try set this variable to ~nil~.
 
-** If you are using Emacs 27, dump is a good option.
+*** If you are using Emacs 27, dump is a good option.
 
    In the past we knew EMACS MAKE A COMPUTER SLOW.
    Nowadays, many configurations can startup up really quick(less than 1 seconds) with lazy load basically everything. 
@@ -34,7 +31,7 @@
 
 * Modal Edit
 
-** The idea in god-mode is great for translate vanilla keybindings into modal edit.
+*** The idea in god-mode is great for translate vanilla keybindings into modal edit.
 
    [[file:https://i.imgur.com/4vkA6I4.gif]]
 
@@ -42,11 +39,11 @@
    If I do translation I can use in INSERT mode and NORMAL mode both without confusion, for example, 
    ~C-c C-p p~ and ~SPC c p p~. 
 
-   Another benefit, I don't have to write a lot key bindings in your config file anymore.
+   Another benefit, I don't have to write a lot key bindings in config file anymore.
 
    Learn more about [[https://github.com/chrisdone/god-mode][God Mode]].
 
-** The idea in Kakoune is awesome.
+*** The idea in Kakoune is awesome.
 
    Kakoune combines movement and selection, I found it really handy and I really like how it works. 
    So I write my own modal edit on Emacs.
@@ -63,7 +60,7 @@
 
    Learn more about [[https://github.com/mawww/kakoune][Kakoune]]
 
-** Only Emacs input method can play well with modal editing for non-english typing.
+*** Only Emacs input method can play well with modal editing for non-english typing.
 
    [[file:https://i.imgur.com/RqJkzlx.gif]]
 
