@@ -126,12 +126,12 @@
       ;;  ;; (2 'clojure-keyword-face)
       ;;  (3 'default)
       ;;  (4 'clojure-keyword-face))
-      (,(concat "\\(:\\{1,2\\}\\)\\("
-                clojure--sym-regexp
-                "?\\)\\(/\\)\\("
-                clojure--sym-regexp
-                "\\)")
-       (0 'clojure-keyword-face))
+      ;; (,(concat "\\(:\\{1,2\\}\\)\\("
+      ;;           clojure--sym-regexp
+      ;;           "?\\)\\(/\\)\\("
+      ;;           clojure--sym-regexp
+      ;;           "\\)")
+      ;;  (0 'clojure-keyword-face))
       (,(concat "\\(:\\{1,2\\}\\)\\(" clojure--sym-regexp "\\)")
        (1 'clojure-keyword-face)
        (2 'clojure-keyword-face))

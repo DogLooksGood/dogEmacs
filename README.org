@@ -1,0 +1,75 @@
+#+TITLE: My Emacs Configuration
+
+
+* This configuration is not suitable for you, but...
+
+  This configuration is highly opinioned.
+
+  I'm using Programmer Dvorak keyboard layout and a self made modal editing layer which I name it M4D(Modal For Dvorak). 
+  So this configuration is probably not suitable for you, 
+  But there are some experience I can share with you if you are making your own.
+
+* Performance
+
+** Some variables affect the performance
+
+   The most important one is ~gc-cons-threshold~, try make it a little bigger. 
+
+   The ~auto-window-vscroll~, I don't know its functionality
+   but with it default set to ~t~, the cursor movement is very laggy sometimes.
+   When you hold the arrow key, the cursor should move line by line, no jump or flicker, 
+   if it's not, set this variable to ~nil~.
+
+** If you are using Emacs 27, dump is a good option.
+
+   In the past we knew EMACS MAKE A COMPUTER SLOW.
+   Nowadays, many configurations can startup up really quick(less than 1 seconds) with lazy load basically everything. 
+   Dump gives you a instantly startup with everything ready.
+
+   And the setup for dump is not complex. Just disable lazy load for all packages and provide a [[file:dump.el][dump file]].
+
+   And dump just cost about 20 seconds, worth it.
+   
+   [[https://archive.casouri.cat/note/2020/painless-transition-to-portable-dumper/index.html][I learn how to dump in this post]]
+
+* Modal Edit
+
+** The idea in god-mode is great for translate vanilla keybindings into modal edit.
+
+   [[file:https://i.imgur.com/4vkA6I4.gif]]
+
+   The default keybinding for each packages are usually meaningful. 
+   If I do translation I can use in INSERT mode and NORMAL mode both without confusion, for example, 
+   ~C-c C-p p~ and ~SPC c p p~. 
+
+   Another benefit, I don't have to write a lot key bindings in your config file anymore.
+
+   Learn more about [[https://github.com/chrisdone/god-mode][God Mode]].
+
+** The idea in Kakoune is awesome.
+
+   Kakoune combines movement and selection, I found it really handy and I really like how it works. 
+   So I write my own modal edit on Emacs.
+
+   For example, I have a command called ~m4d-word~, which mark the next word, bound to key ~w~.
+
+   If I want insert at beginning of next word, I press ~i~.
+
+   If I want insert at end of next word, I press ~a~.
+
+   If I want to kill the word, press ~k~.
+
+   In this way, one command ~w~, replace both ~w~ and ~e~ in Vim.
+
+   Learn more about [[https://github.com/mawww/kakoune][Kakoune]]
+
+** Only Emacs input method can play well with modal editing for non-english typing.
+
+   [[file:https://i.imgur.com/RqJkzlx.gif]]
+
+   One annoying thing with modal edit in Emacs is you can't toggle input method state along with change modal layer.
+   To solve this, you have to use the input method in Emacs, Emacs has its own input method interface. Although the built-in 
+   input methods are hard to use, you can write your own or integrate RIME(with librime) which is a nice input method framework support 
+   support multiple languages and schemas.
+
+

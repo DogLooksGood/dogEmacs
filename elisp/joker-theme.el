@@ -82,7 +82,9 @@
  '(line-number-current-line       ((t (:foreground "#D7AF00"))))
  '(parenthesis                    ((t (:foreground "#606060"))))
  '(term-color-blue                ((t (:foreground "#3366FF" :background "#3366FF"))))
- '(popup-tip-face                 ((t (:background "#303030" :foreground "#C5C5C5")))))
+ '(popup-tip-face                 ((t (:background "#303030" :foreground "#C5C5C5"))))
+ '(smerge-refined-added           ((t (:background "#253325"))))
+ '(smerge-lower                   ((t (:background "#173017")))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

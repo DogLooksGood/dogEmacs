@@ -11,7 +11,11 @@
    ("}" . 'ivy-next-line)
    ("[" . 'ivy-previous-history-element)
    ("]" . 'ivy-next-history-element)
-   ("<mouse-3>". 'ivy-done))
+   ("<M-return>" . 'ivy-occur)
+   ("<mouse-3>". 'ivy-done)
+   :map ivy-occur-grep-mode-map
+   ("n" . 'ivy-occur-next-line)
+   ("p" . 'ivy-occur-previous-line))
   :init
   (setq ivy-use-virtual-buffers nil
 	    ivy-use-selectable-prompt t

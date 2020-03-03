@@ -12,4 +12,11 @@
   :init
   (projectile-global-mode 1))
 
+;; (use-package rg
+;;   :bind
+;;   (("C-c s" . 'rg-menu)
+;;    :map
+;;    rg-mode-map
+;;    ("w" . 'wgrep-change-to-wgrep-mode)))
+
 (provide 'the-project)

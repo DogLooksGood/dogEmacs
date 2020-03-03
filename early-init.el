@@ -10,7 +10,7 @@
 (when (file-exists-p (expand-file-name "~/.emacs.d/emacs.pdmp"))
   (setq package-enable-at-startup nil
         file-name-handler-alist nil
-        message-log-max 16384
+        message-log-max 400
         gc-cons-threshold most-positive-fixnum
         gc-cons-percentage 0.6
         auto-window-vscroll nil))

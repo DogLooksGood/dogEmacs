@@ -18,15 +18,15 @@
         m4d-insert-after
         m4d-open-line
         m4d-open-line-up
-        m4d-change
+        m4d-replace
         kill-line
         paredit-backward-delete
         backward -delete-char
         backward-kill-word
         backward-kill-sexp))
 
-(setq company-idle-delay 0.8
-      company-minimum-prefix-length 4
+(setq company-idle-delay 0.5
+      company-minimum-prefix-length 5
       company-dabbrev-downcase nil
       company-abort-manual-when-too-short t
       company-require-match nil
