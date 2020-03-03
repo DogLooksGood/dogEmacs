@@ -88,58 +88,68 @@
 
 ;;; Digit arguments
 
+(defun m4d--numeric-value (n)
+  (if (equal prefix-arg '-)
+      (setq prefix-arg (- n))
+    (+
+     (* 10
+        (if prefix-arg
+            (prefix-numeric-value prefix-arg)
+          0))
+     n)))
+
 (defun m4d-digit-1 ()
   (interactive)
   (prefix-command-preserve-state)
-  (setq prefix-arg (+ (* (or (prefix-numeric-value prefix-arg) 0) 10) 1))
+  (m4d--numeric-value 1)
   (universal-argument--mode))
 
 (defun m4d-digit-2 ()
   (interactive)
   (prefix-command-preserve-state)
-  (setq prefix-arg (+ (* (or (prefix-numeric-value prefix-arg) 0) 10) 2))
+  (m4d--numeric-value 2)
   (universal-argument--mode))
 
 (defun m4d-digit-3 ()
   (interactive)
   (prefix-command-preserve-state)
-  (setq prefix-arg (+ (* (or (prefix-numeric-value prefix-arg) 0) 10) 3))
+  (m4d--numeric-value 3)
   (universal-argument--mode))
 
 (defun m4d-digit-4 ()
   (interactive)
   (prefix-command-preserve-state)
-  (setq prefix-arg (+ (* (or (prefix-numeric-value prefix-arg) 0) 10) 4))
+  (m4d--numeric-value 4)
   (universal-argument--mode))
 
 (defun m4d-digit-5 ()
   (interactive)
   (prefix-command-preserve-state)
-  (setq prefix-arg (+ (* (or (prefix-numeric-value prefix-arg) 0) 10) 5))
+  (m4d--numeric-value 5)
   (universal-argument--mode))
 
 (defun m4d-digit-6 ()
   (interactive)
   (prefix-command-preserve-state)
-  (setq prefix-arg (+ (* (or (prefix-numeric-value prefix-arg) 0) 10) 6))
+  (m4d--numeric-value 6)
   (universal-argument--mode))
 
 (defun m4d-digit-7 ()
   (interactive)
   (prefix-command-preserve-state)
-  (setq prefix-arg (+ (* (or (prefix-numeric-value prefix-arg) 0) 10) 7))
+  (m4d--numeric-value 7)
   (universal-argument--mode))
 
 (defun m4d-digit-8 ()
   (interactive)
   (prefix-command-preserve-state)
-  (setq prefix-arg (+ (* (or (prefix-numeric-value prefix-arg) 0) 10) 8))
+  (m4d--numeric-value 8)
   (universal-argument--mode))
 
 (defun m4d-digit-9 ()
   (interactive)
   (prefix-command-preserve-state)
-  (setq prefix-arg (+ (* (or (prefix-numeric-value prefix-arg) 0) 10) 9))
+  (m4d--numeric-value 9)
   (universal-argument--mode))
 
 ;;; Navigations & Selections

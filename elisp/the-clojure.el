@@ -64,9 +64,6 @@
           (insert "#_")))))))
 
 ;;; Packages
-
-(require 'the-clojure-highlight)
-
 (use-package clojure-mode
   :bind
   (:map clojure-mode-map
@@ -76,6 +73,7 @@
   (setq clojure-toplevel-inside-comment-form t)
   :config
   (modify-syntax-entry ?: "w" clojure-mode-syntax-table)
+  (require 'the-clojure-highlight)
   (setq clojure-indent-style 'always-indent)
   (setq clojure-font-lock-keywords user/clojure-font-lock-keywords)
   (add-hook 'clojure-mode-hook 'user/clojure-hide-comment))

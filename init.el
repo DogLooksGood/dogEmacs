@@ -81,7 +81,7 @@
 (require 'the-hold)
 (require 'the-docker)
 (require 'the-server)
-(require 'the-vterm)
+;; (require 'the-vterm)
 (require 'the-rime)
 (require 'the-wechat-mini)
 

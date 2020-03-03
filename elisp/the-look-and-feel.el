@@ -2,7 +2,7 @@
 ;;; Look And Feels
 ;;  mode line and themes.
 
-;; (set-frame-parameter nil 'alpha '(80 . 80))
+;; (set-frame-parameter nil 'alpha '(100 . 90))
 
 ;;; Ensure the fonts is monospaced.
 ;;; 一二三四五六七八九十
