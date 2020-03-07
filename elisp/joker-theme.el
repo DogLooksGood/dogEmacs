@@ -6,7 +6,7 @@
  'joker
  '(default                        ((t (:foreground "#A8A8A8" :background "#211F23"))))
  '(mc/cursor-face                 ((t (:background "#949494" :foreground "black"))))
- '(region                         ((t (:background "#3F0018" :foreground "#A5A5A5"))))
+ '(region                         ((t (:background "#173525"))))
  '(highlight-symbol-face          ((t ())))
  `(hl-line                        ((t (:background "#272727"))))
  '(yascroll:thumb-fringe          ((t (:background "#3F3F3F" :foreground "#3F3F3F"))))

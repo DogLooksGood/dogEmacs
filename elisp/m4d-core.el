@@ -91,12 +91,13 @@
 (defun m4d--numeric-value (n)
   (if (equal prefix-arg '-)
       (setq prefix-arg (- n))
-    (+
-     (* 10
-        (if prefix-arg
-            (prefix-numeric-value prefix-arg)
-          0))
-     n)))
+    (setq prefix-arg
+          (+
+           (* 10
+              (if prefix-arg
+                  (prefix-numeric-value prefix-arg)
+                0))
+           n))))
 
 (defun m4d-digit-1 ()
   (interactive)

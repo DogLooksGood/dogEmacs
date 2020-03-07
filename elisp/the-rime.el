@@ -5,12 +5,8 @@
    "Should use english"))
 
 (defun user/rime-force-english-p ()
-  user/rime-use-english)
-
-(defun rime--after-code-char-p ()
   "当前光标是否在英文的后面。"
-  (when (char-before)
-    (string-match-p "[a-zA-Z%\\-_]" (char-to-string (char-before)))))
+  user/rime-use-english)
 
 (use-package liberime-config
   :defer t
@@ -18,6 +14,10 @@
            :fetcher github
            :repo "DogLooksGood/liberime"
            :files ("CMakeLists.txt" "Makefile" "src" "liberime-config.el")))
+
+(defun user/rime--after-alphabet-char-p ()
+  "当前光标是否在英文的后面。"
+  (looking-back "[a-zA-Z][-_:.0-9/]*" 1))
 
 (use-package rime
   :quelpa (rime
@@ -28,14 +28,14 @@
   :init
   (setq rime-disable-predicates
         '(user/rime-in-elisp-quote
-          rime--after-code-char-p
           rime--prog-in-code-p
+          user/rime--after-alphabet-char-p
           user/rime-not-in-insert-mode
           user/rime-in-quote
           user/rime-in-org-quote
           user/rime-force-english-p
           user/rime-in-kbd))
-  (setq rime-show-candidate 'message))
+  (setq rime-show-candidate nil))
 
 ;; (add-to-list 'load-path "~/develop/emacrs-rime")
 ;; (require 'rime)

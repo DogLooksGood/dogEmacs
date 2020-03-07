@@ -3,6 +3,10 @@
 (when user/dumped-load-path
   (setq load-path user/dumped-load-path))
 
+(setq user/init-file (or load-file-name (buffer-file-name)))
+(setq user/emacs-dir (file-name-directory user/init-file))
+(add-to-list 'load-path (concat user/emacs-dir "elisp/"))
+
 (require 'package)
 
 (setq package-archives
@@ -32,20 +36,10 @@
 (setq use-package-always-ensure t)
 (setq use-package-always-demand t)
 
-;;; Some shim code for tramp
-(defun tramp-file-name-method--cmacro (&rest args))
-(require 'tramp)
-(setq tramp-mode 1)
-
 ;; Requires
 (require 'use-package)
 (require 'quelpa-use-package)
 (quelpa-use-package-activate-advice)
-
-(setq user/init-file (or load-file-name (buffer-file-name)))
-(setq user/emacs-dir (file-name-directory user/init-file))
-
-(add-to-list 'load-path (concat user/emacs-dir "elisp/"))
 
 (require 'the-elisp)
 (require 'the-tab)

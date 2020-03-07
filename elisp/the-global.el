@@ -54,7 +54,10 @@
  ;; Don't show cursor in non selected window.
  cursor-in-non-selected-windows nil
  comment-empty-lines t
- visible-cursor t)
+ visible-cursor t
+ ;; Improve long line display performance
+ bidi-inhibit-bpa t
+ bidi-paragraph-direction 'left-to-right)
 
 ;;; Fix underline display
 (setq underline-minimum-offset 0)
@@ -165,5 +168,10 @@ point reaches the beginning or end of the buffer, stop there."
 ;;; Suspend-frame is not work well in i3wm
 (define-key global-map (kbd "C-x C-z") nil)
 (define-key global-map (kbd "C-z") nil)
+
+;;; Some shim code for tramp
+(defun tramp-file-name-method--cmacro (&rest args))
+(require 'tramp)
+(setq tramp-mode 1)
 
 (provide 'the-global)
