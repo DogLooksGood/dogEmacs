@@ -19,7 +19,7 @@
   (define-key isearch-mode-map (kbd "C-u") 'isearch-abort)
   (global-set-key (kbd "C-u") 'm4d-global-esc)
   (define-key m4d-insert-keymap (kbd "C-u") 'm4d-escape-or-normal-modal)
-  (define-key keymap [escape] 'm4d-last-buffer))
+  (define-key m4d-normal-keymap (kbd "C-u") 'm4d-last-buffer))
 
 (m4d-normal-define-key
  '("C" . hs-toggle-hiding))

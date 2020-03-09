@@ -45,7 +45,8 @@
 (setq mini-modeline-r-format '((:eval (user/mode-base-info '("%l:%c %b %* %m" (vc-mode vc-mode))))
                                (:eval (when (fboundp 'rime-lighter)
                                         (rime-lighter)))))
-(setq mini-modeline-l-format '((:eval (m4d-indicator))
+(setq mini-modeline-l-format '((:eval (when (fboundp 'm4d-indicator)
+                                        (m4d-indicator)))
                                " "
                                (:eval (mini-modeline-msg))))
 (setq mini-modeline-enhance-visual nil

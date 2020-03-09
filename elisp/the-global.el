@@ -166,8 +166,9 @@ point reaches the beginning or end of the buffer, stop there."
 (define-key isearch-mode-map (kbd "<escape>") 'isearch-abort)
 
 ;;; Suspend-frame is not work well in i3wm
-(define-key global-map (kbd "C-x C-z") nil)
-(define-key global-map (kbd "C-z") nil)
+(when (display-graphic-p)
+  (define-key global-map (kbd "C-x C-z") nil)
+  (define-key global-map (kbd "C-z") nil))
 
 ;;; Some shim code for tramp
 (defun tramp-file-name-method--cmacro (&rest args))
