@@ -1,13 +1,11 @@
-;; (require 'mhtml-mode)
+;;; -*- lexical-binding: t -*-
 
 (use-package emmet-mode
-  :hook (mhtml-mode nxml-mode)
+  :hook (mhtml-mode nxml-mode web-mode)
   :bind
-  (:map emmet-mode-keymap
-        ("M-RET" . 'emmet-expand-line))
-  :init
-  (add-hook 'mhtml-mode-hook 'emmet-mode)
-  (add-hook 'web-mode-hook 'emmet-mode))
+  (:map
+   emmet-mode-keymap
+   ("M-RET" . 'emmet-expand-line)))
 
 (add-hook 'mhtml-mode-hook 'smartparens-mode)
 

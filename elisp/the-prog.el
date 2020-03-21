@@ -10,8 +10,6 @@ Otherwise will insert a singlequote."
         (insert "\""))
     (insert "'")))
 
-(bind-key "'" #'user/singlequote)
-
 (use-package smartparens
   :bind
   (:map smartparens-mode-map
@@ -22,9 +20,9 @@ Otherwise will insert a singlequote."
   (sp-with-modes
       '(rust-mode go-mode java-mode rjsx-mode)
     (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET"))))
-  :init
-  (setq sp-highlight-pair-overlay nil
-        sp-highlight-wrap-overlay nil))
+  :custom
+  (sp-highlight-pair-overlay nil)
+  (sp-highlight-wrap-overlay nil))
 
 (use-package flycheck
   :init
@@ -32,21 +30,21 @@ Otherwise will insert a singlequote."
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
-  :init
-  (setq lsp-prefer-flymake nil))
+  :custom
+  (lsp-prefer-flymake nil))
 
 (use-package lsp-ui
   :after (lsp-mode)
   :hook (lsp-mode . lsp-ui-mode)
   :bind
-  :init
-  (setq lsp-ui-flycheck-enable nil)
-  (setq lsp-ui-sideline-enable nil)
-  (setq lsp-ui-flycheck-live-reporting nil)
-  (setq lsp-ui-doc-enable nil))
+  :custom
+  (lsp-ui-flycheck-enable nil)
+  (lsp-ui-sideline-enable nil)
+  (lsp-ui-flycheck-live-reporting nil)
+  (lsp-ui-doc-enable nil))
 
 (use-package dumb-jump
-  :init
-  (setq dumb-jump-selector 'ivy))
+  :custom
+  (dumb-jump-selector 'ivy))
 
 (provide 'the-prog)

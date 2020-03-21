@@ -13,16 +13,15 @@ otherwise will insert a colon."
   (define-key paredit-mode-map (kbd "M-[") nil))
 
 (use-package paredit
-  :ensure t
+  :hook
+  ((paredit-mode . user/paredit-setup-for-terminal)
+   (emacs-lisp-mode . paredit-mode)
+   (clojure-mode . paredit-mode))
   :bind
   (:map
    paredit-mode-map
    ("M-[" . 'paredit-wrap-square)
    ("M-{" . 'paredit-wrap-curly)
-   (";" . 'user/lisp-semicolon))
-  :init
-  (add-hook 'paredit-mode-hook 'user/paredit-setup-for-terminal)
-  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
-  (add-hook 'clojure-mode-hook #'paredit-mode))
+   (";" . 'user/lisp-semicolon)))
 
 (provide 'the-lisp)

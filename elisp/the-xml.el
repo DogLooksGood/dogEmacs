@@ -1,6 +1,2 @@
 
-
-
-
-
 (provide 'the-xml)

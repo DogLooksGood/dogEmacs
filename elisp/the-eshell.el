@@ -32,12 +32,4 @@
 (defun user/eshell-setup ()
   (setq-local company-idle-delay nil))
 
-;; (use-package eshell
-;;   :bind
-;;   (("C-$" . 'eshell)
-;;    :map eshell-mode-map
-;;    ("M-h" . 'user/eshell-ls-lh))
-;;   :init
-;;   (add-hook 'eshell-mode-hook 'user/eshell-setup))
-
 (provide 'the-eshell)

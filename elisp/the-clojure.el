@@ -64,29 +64,32 @@
           (insert "#_")))))))
 
 ;;; Packages
+
 (use-package clojure-mode
   :bind
-  (:map clojure-mode-map
-        ("C-c C-i" . 'cider-inspect-last-result)
-        ("C-#" . 'user/clojure-hash-comment))
+  (:map
+   clojure-mode-map
+   ("C-c C-i" . 'cider-inspect-last-result)
+   ("C-#" . 'user/clojure-hash-comment))
   :init
-  (setq clojure-toplevel-inside-comment-form t)
+  (require 'the-clojure-highlight)
+  (add-hook 'clojure-mode-hook 'user/clojure-hide-comment)
   :config
   (modify-syntax-entry ?: "w" clojure-mode-syntax-table)
-  (require 'the-clojure-highlight)
-  (setq clojure-indent-style 'always-indent)
-  (setq clojure-font-lock-keywords user/clojure-font-lock-keywords)
-  (add-hook 'clojure-mode-hook 'user/clojure-hide-comment))
+  :custom
+  (clojure-toplevel-inside-comment-form t)
+  (clojure-indent-style 'always-indent)
+  (clojure-font-lock-keywords user/clojure-font-lock-keywords))
 
 (use-package clj-refactor
   :pin "melpa-stable"
   :hook (clojure-mode . clj-refactor-mode)
-  :init
-  (setq cljr-warn-on-eval t)
-  (setq cljr-suppress-middleware-warnings t)
   :config
   (unbind-key "/" clj-refactor-map)
-  (cljr-add-keybindings-with-prefix "C-c C-r"))
+  (cljr-add-keybindings-with-prefix "C-c C-r")
+  :custom
+  (cljr-warn-on-eval t)
+  (cljr-suppress-middleware-warnings t))
 
 (use-package cider
   :pin "melpa-stable"
@@ -103,15 +106,18 @@
    ("<backspace>" . 'paredit-backward-delete))
   :config
   (unbind-key "M-." cider-mode-map)
+  (unbind-key "C-c C-p" cider-mode-map)
   :init
   (add-hook 'cider--debug-mode-hook 'user/insert-mode)
   (add-hook 'cider-repl-mode-hook 'smartparens-mode)
-  (setq cider-font-lock-dynamically nil
-        cider-font-lock-reader-conditionals nil
-        cider-use-fringe-indicators t
-        cider-prompt-for-symbol nil
-        cider-enhanced-cljs-completion-p t
-        cider-offer-to-open-cljs-app-in-browser nil)
-  (setq-default cider-default-cljs-repl 'shadow))
+  (setq-default cider-default-cljs-repl 'shadow)
+  :custom
+  (cider-font-lock-dynamically nil)
+  (cider-font-lock-reader-conditionals nil)
+  (cider-use-fringe-indicators t)
+  (cider-prompt-for-symbol nil)
+  (cider-save-file-on-load t)
+  (cider-enhanced-cljs-completion-p t)
+  (cider-offer-to-open-cljs-app-in-browser nil))
 
 (provide 'the-clojure)

@@ -6,6 +6,8 @@
     (hl-line-mode 1)))
 
 (use-package multiple-cursors
+  :hook
+  (multiple-cursors-mode . user/mc-toggle-hl-line)
   :bind
   (("C-v" . 'mc/mark-next-like-this)
    ("M-v" . 'mc/skip-to-next-like-this)
@@ -14,8 +16,7 @@
   :init
   (multiple-cursors-mode 1)
   (global-unset-key (kbd "M-<down-mouse-1>"))
-  (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
-  (add-hook 'multiple-cursors-mode-hook 'user/mc-toggle-hl-line))
+  (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click))
 
 (use-package wgrep
   :bind

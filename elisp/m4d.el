@@ -60,7 +60,8 @@
         ripgrep-search-mode
         help-mode
         compilation-mode
-        dired-sidebar-mode))
+        dired-sidebar-mode
+        telega-root-mode))
 
 (defvar m4d-normal-mode-list nil
   "A list of modes should enable normal mode.")
@@ -70,7 +71,8 @@
         vterm-mode
         json-mode
         wdired-mode
-        deft-mode))
+        deft-mode
+        telega-chat-mode))
 
 ;;; Internal Variables
 

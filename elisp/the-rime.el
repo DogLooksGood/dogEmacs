@@ -1,87 +1,59 @@
-(defvar user/rime-loaded nil)
-
-(make-variable-buffer-local
- (defvar user/rime-use-english t
-   "Should use english"))
-
-(defun user/rime-force-english-p ()
-  "当前光标是否在英文的后面。"
-  user/rime-use-english)
-
-(use-package liberime-config
-  :defer t
-  :quelpa (liberime-config
-           :fetcher github
-           :repo "DogLooksGood/liberime"
-           :files ("CMakeLists.txt" "Makefile" "src" "liberime-config.el")))
-
-(defun user/rime--after-alphabet-char-p ()
-  "当前光标是否在英文的后面。"
-  (looking-back "[a-zA-Z][-_:.0-9/]*" 1))
-
-(use-package rime
-  :quelpa (rime
-           ;; :fetcher github
-           ;; :repo "DogLooksGood/emacs-rime"
-           :fetcher file
-           :path "~/develop/emacs-rime/rime.el")
-  :init
-  (setq rime-disable-predicates
-        '(user/rime-in-elisp-quote
-          rime--prog-in-code-p
-          user/rime--after-alphabet-char-p
-          user/rime-not-in-insert-mode
-          user/rime-in-quote
-          user/rime-in-org-quote
-          user/rime-force-english-p
-          user/rime-in-kbd))
-  (setq rime-show-candidate nil))
-
-;; (add-to-list 'load-path "~/develop/emacrs-rime")
-;; (require 'rime)
-;; (setq rime-disable-predicates
-;;       '(user/rime-in-elisp-quote
-;;         rime--after-code-char-p
-;;         rime--prog-in-code-p
-;;         user/rime-not-in-insert-mode
-;;         user/rime-in-quote
-;;         user/rime-in-org-quote
-;;         user/rime-force-english-p
-;;         user/rime-in-kbd)
-;;       rime-show-candidate 'message)
-
-(defun m4d-insert-mode-p ()
-  m4d-insert-mode)
-
-(defun m4d-normal-mode-p ()
-  m4d-normal-mode)
-
-(add-hook 'm4d-normal-mode-hook (lambda () (setq user/rime-use-english nil)))
-
-(defun user/rime-force-english ()
-  (interactive)
-  (setq user/rime-use-english (not user/rime-use-english)))
-
-(define-key m4d-insert-keymap (kbd "C-\\") 'user/rime-force-english)
 
 (defun user/rime-not-in-insert-mode ()
-  (not m4d-insert-mode))
+  (or m4d-keypad-mode
+      m4d-normal-mode
+      m4d-motion-mode))
 
-(defun user/rime-in-elisp-quote ()
-  (and (equal major-mode 'emacs-lisp-mode) (equal ?` (char-before))))
+;; (use-package rime
+;;   ;; :quelpa (rime
+;;   ;;          :files ("rime.el" "Makefile" "lib.c")
+;;   ;;          :fetcher file
+;;   ;;          :path "~/develop/emacs-rime/")
+;;   :quelpa (rime
+;;            :fetcher github
+;;            :files ("rime.el" "Makefile" "lib.c")
+;;            :repo "DogLooksGood/emacs-rime")
+;;   :bind
+;;   (:map
+;;    rime-mode-map
+;;    ("C-$" . 'rime-send-keybinding)
+;;    ("M-j" . 'rime-force-enable)
+;;    ("C-SPC" . 'toggle-input-method))
+;;   :custom
+;;   ((rime-disable-predicates '(user/rime-not-in-insert-mode
+;;                               rime-predicate-prog-in-code-p
+;;                               rime-predicate-after-alphabet-char-p))
+;;    (rime-translate-keybindings '("C-`" "C-f" "C-b" "C-n" "C-p" "C-g"))
+;;    (default-input-method "rime")
+;;    (rime-cursor "˰")
+;;    (rime-show-candidate 'posframe)
+;;    (rime-posframe-properties
+;;     (list :background-color "#333333"
+;;           :foreground-color "#dcdccc"
+;;           :font "sarasa ui sc"
+;;           :internal-border-width 10))))
 
-(defun user/rime-in-quote ()
-  (and (equal ?` (char-before)) (equal ?` (char-after))))
 
-(defun user/rime-in-org-quote ()
-  (and (equal major-mode 'org-mode) (equal ?~ (char-before))))
+;;; Used for package developing
 
-(defun user/rime-in-kbd ()
-  (and (looking-at "</kbd>")
-       (looking-back "<kbd>" 1)))
+(setq rime-librime-root "~/.emacs.d/librime/dist")
+(add-to-list 'load-path "~/develop/emacs-rime/")
+(require 'rime)
+(setq default-input-method "rime")
+(setq rime-show-candidate 'posframe)
+(bind-key "M-j" 'rime-force-enable rime-mode-map)
+(bind-key "M-j" 'rime-inline-ascii rime-active-mode-map)
+(bind-key "C-SPC" 'toggle-input-method)
+(bind-key "C-$" 'rime-send-keybinding rime-mode-map)
+(setq rime-disable-predicates '(user/rime-not-in-insert-mode
+                                rime-predicate-prog-in-code-p
+                                rime-predicate-after-alphabet-char-p))
+(setq rime-inline-predicates '(rime-predicate-space-after-cc-p))
 
-(global-set-key (kbd "C-SPC") 'rime-toggle)
-(global-unset-key (kbd "C-\\"))
-
+(setq rime-posframe-properties
+ (list :background-color "#333333"
+       :foreground-color "#dcdccc"
+       ;; :font "sarasa ui sc"
+       :internal-border-width 10))
 
 (provide 'the-rime)

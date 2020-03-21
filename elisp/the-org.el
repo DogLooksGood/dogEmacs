@@ -1,20 +1,9 @@
-(defun user/org-mode-setup ()
-  (org-bullets-mode t))
-
 (use-package org
   :commands (org-mode)
-  :bind
-  ("C-<tab>" . org-cycle)
   :config
-  (unbind-key "M-h" org-mode-map)
-  (unbind-key "M-a" org-mode-map)
-  (setq org-hide-emphasis-markers t)
-  (setq org-export-html-postamble nil))
-
-(when (display-graphic-p)
-  (use-package org-bullets
-    :init
-    (setq org-ellipsis "⤵")
-    (add-hook 'org-mode-hook 'user/org-mode-setup)))
+  (add-to-list 'org-modules 'org-tempo t)
+  :custom
+  (org-hide-emphasis-markers t)
+  (org-export-html-postamble nil))
 
 (provide 'the-org)

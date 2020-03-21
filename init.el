@@ -1,5 +1,6 @@
 (defvar user/launch-time (current-time))
-(defvar user/dumped-load-path nil)
+(defvar user/dumped-load-path nil
+  "Not nil when using dump.")
 (when user/dumped-load-path
   (setq load-path user/dumped-load-path))
 
@@ -33,8 +34,15 @@
 
 (setq quelpa-checkout-melpa-p nil)
 (setq quelpa-update-melpa-p nil)
-(setq use-package-always-ensure t)
+(if user/dumped-load-path
+    (setq use-package-always-ensure nil)
+  (setq use-package-always-ensure t))
 (setq use-package-always-demand t)
+
+;;; Some shim code for tramp
+(defun tramp-file-name-method--cmacro (&rest args))
+(require 'tramp)
+(setq tramp-mode 1)
 
 ;; Requires
 (require 'use-package)
@@ -77,6 +85,7 @@
 (require 'the-server)
 ;; (require 'the-vterm)
 (require 'the-rime)
+(require 'the-telegram)
 (require 'the-wechat-mini)
 
 (setq gc-cons-threshold (* 16 1024 1024))

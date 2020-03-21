@@ -4,6 +4,10 @@
   (scroll-bar-mode -1))
 
 (set-face-attribute 'default nil  :family "unifont" :height 120 :weight 'normal)
+(set-face-attribute 'fixed-pitch nil  :family "unifont" :height 120 :weight 'normal)
+
+;; (set-face-attribute 'default nil  :family "sarasa mono sc" :height 120 :weight 'normal)
+;; (set-face-attribute 'fixed-pitch nil  :family "sarasa mono sc" :height 120 :weight 'normal)
 
 (setq warning-minimum-level :emergency)
 

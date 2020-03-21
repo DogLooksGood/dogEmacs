@@ -170,9 +170,4 @@ point reaches the beginning or end of the buffer, stop there."
   (define-key global-map (kbd "C-x C-z") nil)
   (define-key global-map (kbd "C-z") nil))
 
-;;; Some shim code for tramp
-(defun tramp-file-name-method--cmacro (&rest args))
-(require 'tramp)
-(setq tramp-mode 1)
-
 (provide 'the-global)

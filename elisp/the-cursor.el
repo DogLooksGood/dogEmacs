@@ -1,12 +1,6 @@
 (defvar user/cursor-timer nil)
 
 (defvar user/cursor-color-index 0)
-;; (defvar user/cursor-color-list
-;;   '("#000000" "#111111" "#222222" "#333333" "#444444" "#555555"
-;;     "#666666" "#777777" "#888888" "#999999" "#AAAAAA" "#BBBBBB"
-;;     "#CCCCCC" "#DDDDDD" "#EEEEEE" "#FFFFFF"
-;;     "#FFFFFF" "#EEEEEE" "#DDDDDD" "#CCCCCC" "#BBBBBB" "#AAAAAA" "#999999" "#888888" "#777777" "#666666" "#555555" "#444444"
-;;     "#333333" "#222222" "#111111" "#000000"))
 (setq user/cursor-color-list
       '("#999999" "#AAAAAA" "#BBBBBB" "#CCCCCC" "#DDDDDD" "#EEEEEE" "#FFFFFF"
         "#FFFFFF" "#EEEEEE" "#DDDDDD" "#CCCCCC" "#BBBBBB" "#AAAAAA" "#999999"))

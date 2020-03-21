@@ -62,7 +62,6 @@
   (unbind-key "TAB" yas-keymap)
   (unbind-key "S-TAB" yas-keymap)
   :init
-  (setq yas--default-user-snippets-dir (concat user/emacs-dir "snippets"))
   (add-hook 'snippet-mode-hook #'smartparens-mode)
   (add-hook 'prog-mode-hook #'yas-minor-mode)
   (add-hook 'yas-minor-mode-hook #'user/yas-load-local-snippets))

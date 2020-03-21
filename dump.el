@@ -65,7 +65,6 @@
                    eshell
                    ace-window
                    org
-                   org-bullets
                    flyspell
                    yaml-mode
                    toml-mode
@@ -77,7 +76,8 @@
                    m4d
                    joker-theme
                    shiftless
-                   rime
+                   phi-search
+                   ;; rime
                    ;; Try to dump a few config files
                    the-global
                    the-look-and-feel

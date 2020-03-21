@@ -4,7 +4,7 @@
 
 (custom-theme-set-faces
  'joker
- '(default                        ((t (:foreground "#A8A8A8" :background "#211F23"))))
+ '(default                        ((t (:background "#211F23"  :foreground "#A8A8A8"))))
  '(mc/cursor-face                 ((t (:background "#949494" :foreground "black"))))
  '(region                         ((t (:background "#173525"))))
  '(highlight-symbol-face          ((t ())))

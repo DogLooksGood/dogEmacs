@@ -501,13 +501,6 @@ Will handle the whitespace when kill `sexp' selection and newline when kill `lin
                (< (point) (point-max)))
       (forward-char 1)
       (m4d--execute-kbd-macro m4d-kill-region-kbd-macro))
-     ((equal 'exp m4d--last-select)
-      (m4d--execute-kbd-macro m4d-kill-region-kbd-macro)
-      (when (and (save-mark-and-excursion
-                   (search-backward-regexp "[^ ]" (line-beginning-position) t))
-                 (save-mark-and-excursion
-                   (search-forward-regexp "[^ ]" (line-end-position) t)))
-        (just-one-space)))
      (t (m4d--execute-kbd-macro m4d-kill-region-kbd-macro)))))
 
 (defun m4d-replace ()
@@ -516,7 +509,7 @@ Will handle the whitespace when kill `sexp' selection and newline when kill `lin
       (progn
         (m4d--execute-kbd-macro m4d-kill-region-kbd-macro)
         (m4d-insert)
-        (when (eq (line-end-position) (line-beginning-position))
+        (when (and (derived-mode-p 'prog-mode) (eq (line-end-position) (line-beginning-position)))
           (indent-for-tab-command)))
     (if (not (equal last-command 'm4d-c-g))
         (message "No selection!")

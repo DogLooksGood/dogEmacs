@@ -20,14 +20,14 @@
 (add-hook 'text-mode-hook 'hl-line-mode)
 
 (use-package hideshow
+  :hook
+  (prog-mode . hs-minor-mode)
   :bind
-  (("C-S-H" . 'hs-toggle-hiding))
-  :init
-  (add-hook 'prog-mode-hook #'hs-minor-mode))
+  (("C-S-H" . 'hs-toggle-hiding)))
 
 (use-package highlight-numbers
-  :init
-  (add-hook 'prog-mode-hook 'highlight-numbers-mode))
+  :hook
+  (prog-mode . highlight-numbers-mode))
 
 (use-package yascroll
   :init
