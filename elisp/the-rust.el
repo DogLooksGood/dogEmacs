@@ -53,7 +53,6 @@
     (insert "_")))
 
 (use-package rust-mode
-  :ensure t
   :bind
   (:map
    rust-mode-map
@@ -63,17 +62,7 @@
    (";" . 'user/rust-semicolon)
    ("C-c C-c" . 'rust-run)
    ("C-c C-p" . 'rust-compile)
-   ("C-c C-t" . 'rust-test)
-   :map
-   compilation-mode-map
-   ("n" . 'forward-line)
-   ("p" . 'previous-line)
-   ("f" . 'forward-char)
-   ("b" . 'backward-char))
-  :init
-  (add-hook 'rust-mode-hook 'smartparens-mode)
-  (add-hook 'rust-mode-hook 'lsp)
-  (add-hook 'rust-mode-hook 'flycheck-mode)
+   ("C-c C-t" . 'rust-test))
   :config
   (sp-local-pair 'rust-mode "<" ">"))
 

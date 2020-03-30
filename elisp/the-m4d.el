@@ -22,7 +22,9 @@
   (define-key m4d-normal-keymap (kbd "C-u") 'm4d-last-buffer))
 
 (m4d-normal-define-key
- '("C" . hs-toggle-hiding))
+ '("C" . hs-toggle-hiding)
+ '("<tab>" . back-to-indentation)
+ '("TAB" . back-to-indentation))
 
 (m4d-leader-define-key
  '("," . highlight-symbol-prev)
@@ -54,7 +56,8 @@
  '("p" . projectile-find-file)
  '("b" . counsel-switch-buffer)
  '("g" . projectile-ripgrep)
- '("f" . find-file))
+ '("f" . find-file)
+ '("F" . find-file-literally))
 
 (dolist (m '(clojure-mode clojurescript-mode clojurec-mode))
   (m4d-leader-define-mode-key

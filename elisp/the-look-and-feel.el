@@ -8,6 +8,9 @@
 ;;; 一二三四五六七八九十
 ;;; 11223344556677889900
 
+(set-face-attribute 'default nil  :family "unifont" :height 120 :weight 'normal)
+(set-face-attribute 'fixed-pitch nil  :family "unifont" :height 120 :weight 'normal)
+
 (progn
   (require 'joker-theme)
   (if user/dumped-load-path
@@ -43,8 +46,10 @@
   :quelpa (mini-modeline :repo "DogLooksGood/emacs-mini-modeline" :fetcher github))
 
 (setq mini-modeline-r-format '((:eval (user/mode-base-info '("%l:%c %b %* %m" (vc-mode vc-mode))))
-                               (:eval (when (fboundp 'rime-lighter)
-                                        (rime-lighter)))))
+                               " ["
+                               (:eval (number-to-string (point)))
+                               "] "
+                               (:eval (when (featurep 'rime) (rime-lighter)))))
 (setq mini-modeline-l-format '((:eval (when (fboundp 'm4d-indicator)
                                         (m4d-indicator)))
                                " "

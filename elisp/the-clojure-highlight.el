@@ -51,5 +51,7 @@
       (clojure-font-lock-regexp-groups
        (1 'font-lock-regexp-grouping-construct prepend)))))
 
+;;;###autoload
+(setq clojure-font-lock-keywords user/clojure-font-lock-keywords)
 
 (provide 'the-clojure-highlight)

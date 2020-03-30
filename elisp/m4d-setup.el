@@ -129,7 +129,8 @@ Basically, all navigation commands should trigger eldoc."
 ;;; TUI
 
 (defun m4d--terminal-restore-cursor-shape ()
-  (send-string-to-terminal "\033[2 q"))
+  ;; (send-string-to-terminal "\033[2 q")
+  )
 
 (defun m4d--tui-setup ()
   (unless (display-graphic-p)

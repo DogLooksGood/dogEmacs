@@ -3,18 +3,16 @@
 (make-variable-buffer-local 'company-backends)
 
 (defun user/java-setup ()
-  (meghanada-mode t)
-  (flycheck-mode 1)
-  (smartparens-mode)
-  (sp-local-pair 'java-mode "<" ">")
-  (setq c-basic-offset 4))
+  (meghanada-mode t))
 
 (use-package meghanada
+  :hook
+  (java-mode)
+  :config
+  (setq-local c-basic-offset 4)
   :bind
-  (:map meghanada-mode-map
-        ("C-c C-c C-r" . 'meghanada-exec-main))
-  :init
-  (setq flycheck-idle-change-delay 2)
-  (add-hook 'java-mode-hook 'user/java-setup))
+  (:map
+   meghanada-mode-map
+   ("C-c C-c C-r" . 'meghanada-exec-main)))
 
 (provide 'the-java)

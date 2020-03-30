@@ -64,7 +64,6 @@
           (insert "#_")))))))
 
 ;;; Packages
-
 (use-package clojure-mode
   :bind
   (:map
@@ -72,14 +71,14 @@
    ("C-c C-i" . 'cider-inspect-last-result)
    ("C-#" . 'user/clojure-hash-comment))
   :init
-  (require 'the-clojure-highlight)
   (add-hook 'clojure-mode-hook 'user/clojure-hide-comment)
   :config
   (modify-syntax-entry ?: "w" clojure-mode-syntax-table)
   :custom
   (clojure-toplevel-inside-comment-form t)
-  (clojure-indent-style 'always-indent)
-  (clojure-font-lock-keywords user/clojure-font-lock-keywords))
+  (clojure-indent-style 'always-indent))
+
+(require 'the-clojure-highlight)
 
 (use-package clj-refactor
   :pin "melpa-stable"
@@ -109,7 +108,6 @@
   (unbind-key "C-c C-p" cider-mode-map)
   :init
   (add-hook 'cider--debug-mode-hook 'user/insert-mode)
-  (add-hook 'cider-repl-mode-hook 'smartparens-mode)
   (setq-default cider-default-cljs-repl 'shadow)
   :custom
   (cider-font-lock-dynamically nil)

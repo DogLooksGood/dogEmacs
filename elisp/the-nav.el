@@ -1,4 +1,10 @@
-;;; packages for NAV
+;;; -*- lexical-binding: t -*-
+
+;;; packages for navigation.
+
+(use-package dumb-jump
+  :custom
+  (dumb-jump-selector 'ivy))
 
 (use-package highlight-symbol
   :hook
