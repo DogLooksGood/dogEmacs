@@ -5,13 +5,9 @@
 (setq display-line-numbers-width 3)
 (defun +update-line-number-relative ()
   (when display-line-numbers
-    (setq-local display-line-numbers
-                (if (or m4d-normal-mode buffer-read-only)
-                    'visual
-                  t))))
+    (setq-local display-line-numbers 'visual)))
 
-(add-hook 'm4d-insert-modal-hook '+update-line-number-relative)
-(add-hook 'm4d-normal-modal-hook '+update-line-number-relative)
+
 (add-hook 'display-line-numbers-mode-hook #'+update-line-number-relative)
 
 ;; Highlight current line.

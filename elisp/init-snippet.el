@@ -30,8 +30,7 @@
 
 (defun +yas-init ()
   (yas-reload-all)
-  (add-hook 'yas/before-expand-snippet-hook '+yas-start)
-  (add-hook 'yas/after-exit-snippet-hook 'm4d--update-cursor-shape))
+  (add-hook 'yas/before-expand-snippet-hook '+yas-start))
 
 (advice-add '+yas-init :around #'+make-silent)
 

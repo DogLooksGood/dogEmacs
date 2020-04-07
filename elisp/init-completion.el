@@ -34,11 +34,10 @@
   (company-begin-commands
    '(self-insert-command
      +insert-mode
-     m4d-insert
-     m4d-insert-after
-     m4d-open-line
-     m4d-open-line-up
-     m4d-replace
+     meow-insert-before
+     meow-insert-open
+     meow-insert-after
+     meow-insert-kill
      kill-line
      paredit-backward-delete
      backward -delete-char
