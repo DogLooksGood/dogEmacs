@@ -8,7 +8,7 @@
 INSERT INTO "$1"
 ($2)
 VALUES
-(${2:$(user/yas-sql-mode-fields-to-values yas-text)})
+(${2:$(+yas-sql-mode-fields-to-values yas-text)})
 ON CONFLICT ($3) DO UPDATE SET
   "$4" = :$4
 $0

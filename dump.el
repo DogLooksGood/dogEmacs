@@ -9,7 +9,7 @@
 (tramp-unload-tramp)
 
 ;;; We use this variable to test if we are starting with dump.
-(setq user/dumped-load-path load-path)
+(setq +dumped-load-path load-path)
 
 ;;; Disable GC
 (setq gc-cons-threshold most-positive-fixnum

@@ -1,12 +1,12 @@
 ;;; -*- lexical-binding: t -*-
 
-(defvar user/dumped-load-path nil
+(defvar +dumped-load-path nil
   "Not nil when using dump.")
 
 ;;; Some setup for startup with dump
-(when user/dumped-load-path
+(when +dumped-load-path
   ;; Restore the load path
-  (setq load-path user/dumped-load-path)
+  (setq load-path +dumped-load-path)
   ;; Disable error message
   (setq warning-minimum-level :emergency)
   ;; Some shim code for tramp
@@ -17,11 +17,11 @@
   (global-font-lock-mode t)
   (transient-mark-mode t))
 
-(unless user/dumped-load-path
+(unless +dumped-load-path
   ;; Load path for user config
-  (setq user/init-file (or load-file-name (buffer-file-name)))
-  (setq user/emacs-dir (file-name-directory user/init-file))
-  (add-to-list 'load-path (concat user/emacs-dir "elisp/"))
+  (setq +init-file (or load-file-name (buffer-file-name)))
+  (setq +emacs-dir (file-name-directory +init-file))
+  (add-to-list 'load-path (concat +emacs-dir "elisp/"))
 
   ;; Package & use-package & Quelpa initialize
   (require 'package)
@@ -47,43 +47,44 @@
   (quelpa-use-package-activate-advice)
 
   ;; Require modules
-  (require 'the-elisp)
-  (require 'the-tab)
-  (require 'the-look-and-feel)
-  (require 'the-global)
-  (require 'the-git)
-  (require 'the-ivy)
-  (require 'the-completion)
-  (require 'the-paren)
-  (require 'the-clojure)
-  (require 'the-java)
-  (require 'the-javascript)
-  (require 'the-typescript)
-  (require 'the-haskell)
-  (require 'the-rust)
-  (require 'the-m4d)
-  (require 'the-sql)
-  (require 'the-html)
-  (require 'the-edit)
-  (require 'the-window)
-  (require 'the-nav)
-  (require 'the-project)
-  (require 'the-visual)
-  (require 'the-eshell)
-  (require 'the-lsp)
-  (require 'the-dired)
-  (require 'the-conf)
-  (require 'the-org)
-  (require 'the-snippet)
-  (require 'the-latex)
-  (require 'the-ebook)
-  (require 'the-deft)
-  (require 'the-hold)
-  (require 'the-docker)
-  (require 'the-server)
-  (require 'the-rime)
-  (require 'the-telegram)
-  (require 'the-wechat-mini))
+  (require 'init-elisp)
+  (require 'init-tab)
+  (require 'init-look-and-feel)
+  (require 'init-global)
+  (require 'init-git)
+  (require 'init-ivy)
+  (require 'init-completion)
+  (require 'init-paren)
+  (require 'init-clojure)
+  (require 'init-java)
+  (require 'init-javascript)
+  (require 'init-typescript)
+  (require 'init-haskell)
+  (require 'init-rust)
+  (require 'init-sql)
+  (require 'init-html)
+  (require 'init-edit)
+  (require 'init-window)
+  (require 'init-nav)
+  (require 'init-project)
+  (require 'init-visual)
+  (require 'init-eshell)
+  (require 'init-lsp)
+  (require 'init-dired)
+  (require 'init-conf)
+  (require 'init-org)
+  (require 'init-snippet)
+  (require 'init-latex)
+  (require 'init-ebook)
+  (require 'init-deft)
+  (require 'init-hold)
+  (require 'init-docker)
+  (require 'init-server)
+  (require 'init-rime)
+  (require 'init-telegram)
+  (require 'init-emoji)
+  (require 'init-wechat-mini)
+  (require 'init-meow))
 
 ;; Proper GC
 (setq gc-cons-threshold (* 1024 128))
