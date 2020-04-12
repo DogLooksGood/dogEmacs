@@ -12,7 +12,7 @@
   :bind
   (:map
    rime-active-mode-map
-   ("M-j" . 'rime-inline-ascii)
+   ("<tab>" . 'rime-inline-ascii)
    :map rime-mode-map
    ("C-$" . 'rime-send-keybinding)
    ("M-j" . 'rime-force-enable)
@@ -28,7 +28,7 @@
    (default-input-method "rime")
    (rime-cursor "˰")
    (rime-show-candidate 'posframe)))
-#'rime-predicate-evil-mode-p
+
 ;;; Used for package developing
 
 ;; (setq rime-librime-root "~/.emacs.d/librime/dist")
