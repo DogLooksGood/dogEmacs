@@ -118,4 +118,7 @@
   (cider-enhanced-cljs-completion-p t)
   (cider-offer-to-open-cljs-app-in-browser nil))
 
+(require 'ob)
+(require 'ob-clojure)
+
 (provide 'init-clojure)
