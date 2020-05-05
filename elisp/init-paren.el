@@ -15,12 +15,8 @@ otherwise will insert a colon."
       (insert ";")
     (insert ":")))
 
-(defun +paredit-setup-for-terminal ()
-  (define-key paredit-mode-map (kbd "M-[") nil))
-
 (use-package paredit
   :hook
-  (paredit-mode . +paredit-setup-for-terminal)
   ((emacs-lisp-mode clojure-mode) . paredit-mode)
   :bind
   (:map

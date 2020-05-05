@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: try-catch
-# key: t
+# key: try
 # --
 (try
   `yas-selected-text`$0

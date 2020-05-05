@@ -5,8 +5,7 @@
 (setq display-line-numbers-width 3)
 (defun +update-line-number-relative ()
   (when display-line-numbers
-    (setq-local display-line-numbers 'visual)))
-
+    (setq-local display-line-numbers t)))
 
 (add-hook 'display-line-numbers-mode-hook #'+update-line-number-relative)
 
@@ -14,6 +13,11 @@
 (add-hook 'prog-mode-hook 'hl-line-mode)
 (add-hook 'conf-mode-hook 'hl-line-mode)
 (add-hook 'text-mode-hook 'hl-line-mode)
+
+(use-package rainbow-mode
+  :hook
+  ((prog-mode . rainbow-mode)
+   (conf-mode . rainbow-mode)))
 
 (use-package hideshow
   :hook

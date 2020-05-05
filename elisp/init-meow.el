@@ -1,16 +1,16 @@
 (defun +meow-setup ()
+  (meow-normal-define-key
+   '("S" . kmacro-start-macro)
+   '("E" . kmacro-end-macro)
+   '("A" . apply-macro-to-region-lines)
+   '("M" . kmacro-call-macro))
+
   (meow-leader-define-key
-   '("," . highlight-symbol-prev)
-   '("." . highlight-symbol-next)
    '("k" . kill-buffer)
    '("l" . goto-line)
    '("h" . other-window)
    '("z" . +eval-and-bound-to-c-z)
-   '("t" . transpose-sexps)
    '("i" . counsel-imenu)
-   '("r" . sp-raise-sexp)
-   '("s" . sp-split-sexp)
-   '("u" . sp-splice-sexp)
    '("n" . dumb-jump-go)
    '("j" . sp-join-sexp)
    '("(" . sp-wrap-round)
@@ -31,11 +31,13 @@
    '("F" . find-file-literally)))
 
 (use-package meow
-  :quelpa
-  (meow :repo "DogLooksGood/meow" :fetcher github)
+  ;; :quelpa
+  ;; (meow :repo "DogLooksGood/meow" :fetcher github)
   ;; (meow :fetcher file :path "~/develop/meow")
   :config
   (+meow-setup)
-  (meow-global-mode 1))
+  (meow-global-mode 1)
+  :custom
+  (meow-layout 'dvp))
 
 (provide 'init-meow)
