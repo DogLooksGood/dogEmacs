@@ -83,7 +83,7 @@
   (require 'init-rime)
   (require 'init-telegram)
   (require 'init-emoji)
-  (require 'init-wechat-mini)
+  (require 'init-tmux)
   (require 'init-meow))
 
 ;; Proper GC

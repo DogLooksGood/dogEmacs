@@ -29,7 +29,8 @@
    '("g" . projectile-ripgrep)
    '("f" . find-file)
    '("F" . find-file-literally)
-   '("y" . tiny-expand)))
+   '("y" . tiny-expand)
+   '("a" . emamux:send-region)))
 
 (use-package meow
   :quelpa
