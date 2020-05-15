@@ -84,7 +84,8 @@
   (require 'init-telegram)
   (require 'init-emoji)
   (require 'init-tmux)
-  (require 'init-meow))
+  (require 'init-meow)
+  (require 'init-work))
 
 ;; Proper GC
 (setq gc-cons-threshold (* 1024 128))
