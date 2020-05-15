@@ -101,8 +101,7 @@
    :map
    cider-repl-mode-map
    ("M-," . 'cider-repl-handle-shortcut)
-   ("C-," . 'cider-repl-handle-shortcut)
-   ("<backspace>" . 'paredit-backward-delete))
+   ("C-," . 'cider-repl-handle-shortcut))
   :config
   (unbind-key "M-." cider-mode-map)
   (unbind-key "C-c C-p" cider-mode-map)

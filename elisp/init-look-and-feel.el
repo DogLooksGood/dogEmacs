@@ -14,7 +14,9 @@
 (progn
   (use-package joker-theme
     :quelpa
-    (joker-theme :repo "DogLooksGood/joker-theme" :fetcher github))
+    (joker-theme :repo "DogLooksGood/joker-theme" :fetcher github)
+    ;; (joker-theme :fetcher file :path "~/develop/joker-theme")
+    )
   (if +dumped-load-path
       (enable-theme 'joker)
     (load-theme 'joker t)))

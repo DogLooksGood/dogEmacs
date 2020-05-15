@@ -28,11 +28,12 @@
    '("b" . counsel-switch-buffer)
    '("g" . projectile-ripgrep)
    '("f" . find-file)
-   '("F" . find-file-literally)))
+   '("F" . find-file-literally)
+   '("y" . tiny-expand)))
 
 (use-package meow
-  ;; :quelpa
-  ;; (meow :repo "DogLooksGood/meow" :fetcher github)
+  :quelpa
+  (meow :repo "DogLooksGood/meow" :fetcher github)
   ;; (meow :fetcher file :path "~/develop/meow")
   :config
   (+meow-setup)
