@@ -8,8 +8,16 @@
 ;;; 一二三四五六七八九十
 ;;; 11223344556677889900
 
-(set-face-attribute 'default nil  :family "unifont" :height 120 :weight 'normal)
-(set-face-attribute 'fixed-pitch nil  :family "unifont" :height 120 :weight 'normal)
+(let ((family "unifont")
+      (height 120))
+  (set-face-attribute 'default nil
+                      :family family
+                      :height height
+                      :weight 'normal)
+  (set-face-attribute 'fixed-pitch nil
+                      :family family
+                      :height height
+                      :weight 'normal))
 
 (progn
   (use-package joker-theme

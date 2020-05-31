@@ -14,7 +14,7 @@
    rime-active-mode-map
    ("<tab>" . 'rime-inline-ascii)
    :map rime-mode-map
-   ("C-$" . 'rime-send-keybinding)
+   ("C-`" . 'rime-send-keybinding)
    ("M-j" . 'rime-force-enable)
    ("C-SPC" . 'toggle-input-method))
   :custom

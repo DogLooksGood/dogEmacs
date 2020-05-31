@@ -82,7 +82,6 @@
   (require 'init-server)
   (require 'init-rime)
   (require 'init-telegram)
-  (require 'init-emoji)
   (require 'init-tmux)
   (require 'init-meow)
   (require 'init-work))
