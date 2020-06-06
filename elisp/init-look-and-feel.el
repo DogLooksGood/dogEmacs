@@ -8,8 +8,8 @@
 ;;; 一二三四五六七八九十
 ;;; 11223344556677889900
 
-(let ((family "unifont")
-      (height 120))
+(let ((family "sarasa mono sc")
+      (height 105))
   (set-face-attribute 'default nil
                       :family family
                       :height height
@@ -19,15 +19,18 @@
                       :height height
                       :weight 'normal))
 
-(progn
-  (use-package joker-theme
-    :quelpa
-    (joker-theme :repo "DogLooksGood/joker-theme" :fetcher github)
-    ;; (joker-theme :fetcher file :path "~/develop/joker-theme")
-    )
-  (if +dumped-load-path
-      (enable-theme 'joker)
-    (load-theme 'joker t)))
+(require 'joker-light-theme)
+(load-theme 'joker-light t)
+
+;; (progn
+;;   (use-package joker-theme
+;;     :quelpa
+;;     (joker-theme :repo "DogLooksGood/joker-theme" :fetcher github)
+;;     ;; (joker-theme :fetcher file :path "~/develop/joker-theme")
+;;     )
+;;   (if +dumped-load-path
+;;       (enable-theme 'joker)
+;;     (load-theme 'joker t)))
 
 ;;; Mode Line Setup
 (defun +simple-mode-line-render (left right)
@@ -37,12 +40,7 @@
     (format (format "%%s %%%ds " available-width) left right)))
 
 ;;; title line setup
-(setq-default frame-title-format
-              '("["
-                (:eval
-                 (when vc-mode vc-mode))
-                " ]"
-                " %b%* %e <%m>"))
+(setq-default frame-title-format "Emacs")
 
 ;;; If we want hide the mode line
 (setq +mini-mode-line t)

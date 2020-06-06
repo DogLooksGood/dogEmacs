@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun +meow-setup ()
   (meow-normal-define-key
    '("S" . kmacro-start-macro)
@@ -6,9 +8,11 @@
    '("M" . kmacro-call-macro))
 
   (meow-leader-define-key
+   '("SPC" . avy-goto-line)
    '("k" . kill-buffer)
    '("l" . goto-line)
-   '("h" . other-window)
+   '("h" . ace-window)
+   '("w" . ace-swap-window)
    '("z" . +eval-and-bound-to-c-z)
    '("i" . counsel-imenu)
    '("n" . dumb-jump-go)
@@ -21,6 +25,7 @@
    '("/" . swiper)
    '("\\" . split-window-right)
    '("'" . paredit-meta-doublequote)
+   '("*" . ivy-pass)
    '("#" . deft)
    '("m" . magit-status)
    '("b" . magit-blame)
@@ -34,8 +39,8 @@
 
 (use-package meow
   :quelpa
-  (meow :repo "DogLooksGood/meow" :fetcher github)
-  ;; (meow :fetcher file :path "~/develop/meow")
+  ;; (meow :repo "DogLooksGood/meow" :fetcher github)
+  (meow :fetcher file :path "~/Projects/meow")
   :config
   (+meow-setup)
   (meow-global-mode 1)

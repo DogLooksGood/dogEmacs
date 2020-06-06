@@ -8,6 +8,6 @@
   (setq aw-ignore-on nil)
   (setq aw-scope 'frame)
   (setq aw-ignored-buffers '())
-  (setq aw-keys '(?d ?h ?t ?n ?s)))
+  (setq aw-keys '(?a ?o ?e ?u ?i)))
 
 (provide 'init-window)

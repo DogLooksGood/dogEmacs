@@ -1,13 +1,9 @@
+;;; -*- lexical-binding: t -*-
 ;;; Vterm
-
-(defun +project-open-vterm ()
-  (interactive)
-  (vterm--set-directory (vc-root-dir))
-  (vterm))
 
 (use-package vterm
   :bind
-  (("C-c C-p RET" . +project-open-vterm)
+  (("C-c C-p RET" . projectile-run-vterm)
    :map
    vterm-mode-map
    ("C-\\" . 'rime-toggle)))
