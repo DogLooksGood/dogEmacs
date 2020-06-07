@@ -9,7 +9,7 @@
 ;;; 11223344556677889900
 
 (defun +get-available-font (fonts)
-  (first
+  (car
    (seq-filter 'stringp
                (mapcar (lambda (ft)
                          (when (member ft (font-family-list))
