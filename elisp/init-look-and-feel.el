@@ -8,7 +8,19 @@
 ;;; 一二三四五六七八九十
 ;;; 11223344556677889900
 
-(let ((family "sarasa mono sc")
+(defun +get-available-font (fonts)
+  (first
+   (seq-filter 'stringp
+               (mapcar (lambda (ft)
+                         (when (member ft (font-family-list))
+                           ft))
+                       fonts))))
+
+(let ((family (+get-available-font
+               '("Sarasa Mono SC"
+                 "Unifont"
+                 "Menlo"
+                 "DejaVu Sans Mono")) )
       (height 105))
   (set-face-attribute 'default nil
                       :family family
@@ -20,17 +32,13 @@
                       :weight 'normal))
 
 (require 'joker-light-theme)
-(load-theme 'joker-light t)
 
-;; (progn
-;;   (use-package joker-theme
-;;     :quelpa
-;;     (joker-theme :repo "DogLooksGood/joker-theme" :fetcher github)
-;;     ;; (joker-theme :fetcher file :path "~/develop/joker-theme")
-;;     )
-;;   (if +dumped-load-path
-;;       (enable-theme 'joker)
-;;     (load-theme 'joker t)))
+(progn
+  (use-package joker-theme
+    :quelpa
+    (joker-theme :repo "DogLooksGood/joker-theme" :fetcher github))
+  (unless +dumped-load-path
+    (load-theme 'joker-light t)))
 
 ;;; Mode Line Setup
 (defun +simple-mode-line-render (left right)

@@ -13,8 +13,8 @@
    phi-search-default-map
    ("<escape>" . 'phi-search-abort)))
 
-;; (use-package avy
-;;   :custom
-;;   (avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)))
+(use-package avy
+  :custom
+  (avy-keys '(?a ?o ?e ?u ?i ?d ?h ?t ?n ?s)))
 
 (provide 'init-nav)

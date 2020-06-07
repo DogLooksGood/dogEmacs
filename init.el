@@ -84,7 +84,7 @@
   (require 'init-telegram)
   (require 'init-tmux)
   (require 'init-meow)
-  ;; (require 'init-pass)
+  (require 'init-pass)
   (require 'init-work))
 
 ;; Proper GC

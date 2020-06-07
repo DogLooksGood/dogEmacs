@@ -68,6 +68,7 @@
   :bind
   (:map
    clojure-mode-map
+   ("/" . 'cljr-slash)
    ("C-c C-i" . 'cider-inspect-last-result)
    ("C-#" . '+clojure-hash-comment))
   :init

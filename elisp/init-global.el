@@ -72,8 +72,8 @@
 (show-paren-mode -1)
 
 ;; Add internal margin
-(set-frame-parameter (selected-frame) 'internal-border-width 0)
-(add-to-list 'default-frame-alist '(internal-border-width . 0))
+(set-frame-parameter (selected-frame) 'internal-border-width 15)
+(add-to-list 'default-frame-alist '(internal-border-width . 15))
 
 ;; Always use dir-locals.
 (defun safe-local-variable-p (sym val) t)
