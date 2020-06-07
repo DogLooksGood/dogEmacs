@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
 (setq dired-dwim-target t)
-(setq dired-listing-switches "-aBhl --group-directories-first")
 (bind-key "C-x C-d" 'dired)
 (bind-key "q" 'kill-buffer-and-window dired-mode-map)
 (bind-key "/" 'swiper dired-mode-map)
