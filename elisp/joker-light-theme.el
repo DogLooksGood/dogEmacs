@@ -31,7 +31,7 @@
    '(font-lock-keyword-face         ((t ())))
    '(font-lock-constant-face        ((t (:background "#f8f0ff"))))
    '(font-lock-function-name-face   ((t (:background "#e8fbff"))))
-   '(font-lock-warning-face         ((t (:underline (:style wave :color "#ffafa6")))))
+   '(font-lock-warning-face         ((t (:background "#FAFA88"))))
    '(meow-keypad-indicator           ((t (:foreground "#ab3007"))))
    '(meow-insert-indicator           ((t (:foreground "#257d22"))))
    '(meow-normal-indicator           ((t (:foreground "#713da6"))))

@@ -39,8 +39,8 @@
 
 (use-package meow
   :quelpa
-  ;; (meow :repo "DogLooksGood/meow" :fetcher github)
-  (meow :fetcher file :path "~/Projects/meow")
+  (meow :repo "DogLooksGood/meow" :fetcher github)
+  ;; (meow :fetcher file :path "~/Projects/meow")
   :config
   (+meow-setup)
   (meow-global-mode 1)
