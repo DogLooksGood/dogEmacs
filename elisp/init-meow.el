@@ -35,7 +35,9 @@
    '("f" . find-file)
    '("F" . find-file-literally)
    '("y" . tiny-expand)
-   '("a" . emamux:send-region)))
+   '("a" . emamux:send-region)
+   '("!" . +open-work-log)
+   '("$" . +send-clojure-ns-form)))
 
 (use-package meow
   :quelpa

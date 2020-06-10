@@ -115,7 +115,7 @@
   (cider-use-fringe-indicators t)
   (cider-prompt-for-symbol nil)
   (cider-save-file-on-load t)
-  (cider-enhanced-cljs-completion-p t)
+  (cider-enhanced-cljs-completion-p nil)
   (cider-offer-to-open-cljs-app-in-browser nil))
 
 (require 'ob)
