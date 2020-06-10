@@ -35,12 +35,14 @@
    '("f" . find-file)
    '("F" . find-file-literally)
    '("y" . tiny-expand)
-   '("a" . emamux:send-region)))
+   '("a" . emamux:send-region)
+   '("!" . +open-work-log)
+   '("$" . +send-clojure-ns-form)))
 
 (use-package meow
   :quelpa
-  ;; (meow :repo "DogLooksGood/meow" :fetcher github)
-  (meow :fetcher file :path "~/Projects/meow")
+  (meow :repo "DogLooksGood/meow" :fetcher github)
+  ;; (meow :fetcher file :path "~/Projects/meow")
   :config
   (+meow-setup)
   (meow-global-mode 1)

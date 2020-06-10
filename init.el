@@ -84,6 +84,7 @@
   (require 'init-telegram)
   (require 'init-tmux)
   (require 'init-meow)
+  (require 'init-macos)
   (require 'init-pass)
   (require 'init-work))
 
