@@ -16,11 +16,7 @@
                            ft))
                        fonts))))
 
-(let ((family (+get-available-font
-               '("Sarasa Mono SC"
-                 "Unifont"
-                 "Menlo"
-                 "DejaVu Sans Mono")) )
+(let ((family "sarasa mono sc")
       (height 105))
   (set-face-attribute 'default nil
                       :family family
@@ -32,13 +28,8 @@
                       :weight 'normal))
 
 (require 'joker-light-theme)
-
-(progn
-  (use-package joker-theme
-    :quelpa
-    (joker-theme :repo "DogLooksGood/joker-theme" :fetcher github))
-  (unless +dumped-load-path
-    (load-theme 'joker-light t)))
+(require 'joker-theme)
+(load-theme 'joker-light t)
 
 ;;; Mode Line Setup
 (defun +simple-mode-line-render (left right)

@@ -61,6 +61,7 @@
   (require 'init-typescript)
   (require 'init-haskell)
   (require 'init-rust)
+  (require 'init-markdown)
   (require 'init-sql)
   (require 'init-html)
   (require 'init-edit)
