@@ -9,6 +9,8 @@
       (equal rime--current-input-key ?~)))
 
 (use-package rime
+  :quelpa
+  (rime :fetcher file :path "~/Projects/emacs-rime" :files ("rime.el" "rime-predicates.el" "lib.c" "Makefile"))
   :bind
   (:map
    rime-active-mode-map

@@ -14,8 +14,8 @@
     :init
     (telega 1)
     :custom-face
-    (telega-entity-type-code ((t (:family "sarasa term sc" :inherit font-lock-constant-face))))
-    (telega-entity-type-pre ((t (:family "sarasa term sc" :bold t))))))
+    (telega-entity-type-code ((t (:family "unifont" :inherit font-lock-constant-face))))
+    (telega-entity-type-pre ((t (:family "unifont" :bold t))))))
 
 (bind-key "C-S-t" '+lazy-telega)
 

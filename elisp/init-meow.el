@@ -46,6 +46,7 @@
   :config
   (+meow-setup)
   (meow-global-mode 1)
+  (add-to-list 'meow-normal-state-mode-list 'restclient-mode)
   :custom
   (meow-layout 'dvp))
 

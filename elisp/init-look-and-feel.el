@@ -4,32 +4,11 @@
 
 (set-frame-parameter nil 'alpha '(100 . 100))
 
-;;; Ensure the fonts is monospaced.
-;;; 一二三四五六七八九十
-;;; 11223344556677889900
-
-(defun +get-available-font (fonts)
-  (car
-   (seq-filter 'stringp
-               (mapcar (lambda (ft)
-                         (when (member ft (font-family-list))
-                           ft))
-                       fonts))))
-
-(let ((family "sarasa mono sc")
-      (height 105))
-  (set-face-attribute 'default nil
-                      :family family
-                      :height height
-                      :weight 'normal)
-  (set-face-attribute 'fixed-pitch nil
-                      :family family
-                      :height height
-                      :weight 'normal))
-
 (require 'joker-light-theme)
 (require 'joker-theme)
-(load-theme 'joker-light t)
+(load-theme 'joker t)
+
+(set-frame-font "sarasa mono sc-16" t t)
 
 ;;; Mode Line Setup
 (defun +simple-mode-line-render (left right)
