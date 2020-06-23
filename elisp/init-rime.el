@@ -27,9 +27,11 @@
                              +rime-predicate-is-back-quote-or-tilde
                              rime-predicate-current-uppercase-letter-p))
    (rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g"))
+   (rime-inline-ascii-holder ?a)
    (default-input-method "rime")
    (rime-cursor "˰")
-   (rime-show-candidate 'posframe)))
+   (rime-show-candidate 'posframe)
+   (rime-posframe-fixed-position t)))
 
 ;;; Used for package developing
 

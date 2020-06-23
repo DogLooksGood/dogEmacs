@@ -8,17 +8,25 @@
 (require 'joker-theme)
 (load-theme 'joker t)
 
-(set-frame-font "sarasa mono sc-16" t t)
+(let ((font "sarasa mono sc-12"))
+  (add-to-list 'default-frame-alist (cons 'font font))
+  (set-face-attribute 'fixed-pitch nil :family "Unifont")
+  (set-frame-font font nil t))
 
-;;; Mode Line Setup
-(defun +simple-mode-line-render (left right)
-  "Return a string of `window-width' length containing LEFT, and RIGHT
- aligned respectively."
-  (let* ((available-width (- (window-width) (length left) 1)))
-    (format (format "%%s %%%ds " available-width) left right)))
+(defun +smart-file-name ()
+  (if vc-mode
+      (magit-file-relative-name)
+    (buffer-name)))
+
+(defun +project-name ()
+  (if vc-mode
+      (format "[%s]" (vc-root-dir))
+    ""))
 
 ;;; title line setup
-(setq-default frame-title-format "Emacs")
+(setq-default frame-title-format
+              '("Emacs"
+                (:eval (+project-name))))
 
 ;;; If we want hide the mode line
 (setq +mini-mode-line t)
@@ -34,14 +42,13 @@
   :quelpa
   (mini-modeline :repo "DogLooksGood/emacs-mini-modeline" :fetcher github)
   :init
-  (setq mini-modeline-r-format '((:eval (+mode-base-info '("%l:%c %b %* %m" (vc-mode vc-mode))))
-                                 ;; " ["
-                                 ;; (:eval (number-to-string (point)))
-                                 ;; "] "
+  (setq mini-modeline-r-format '("%l:%c "
+                                 (:eval (+smart-file-name))
+                                 " %* %m"
+                                 (vc-mode vc-mode)
                                  " "
                                  (:eval (when (featurep 'rime) (rime-lighter)))))
-  (setq mini-modeline-l-format '((:eval (when (fboundp 'meow-indicator)
-                                          (meow-indicator)))
+  (setq mini-modeline-l-format '((:eval (when (featurep 'meow) (meow-indicator)))
                                  " "
                                  (:eval (mini-modeline-msg))))
   (setq mini-modeline-enhance-visual nil

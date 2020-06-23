@@ -107,7 +107,6 @@
   (unbind-key "M-." cider-mode-map)
   (unbind-key "C-c C-p" cider-mode-map)
   :init
-  (add-hook 'cider--debug-mode-hook '+insert-mode)
   (setq-default cider-default-cljs-repl 'shadow)
   :custom
   (cider-font-lock-dynamically nil)

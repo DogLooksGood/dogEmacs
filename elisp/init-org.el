@@ -3,8 +3,15 @@
   :commands (org-mode)
   :config
   (add-to-list 'org-modules 'org-tempo t)
+  (font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
   :custom
   (org-hide-emphasis-markers t)
   (org-export-html-postamble nil))
+
+(use-package org-bullets
+  :config
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 
 (provide 'init-org)

@@ -6,7 +6,7 @@
       (bg-1 "#e3e1b3"))
   (custom-theme-set-faces
    'joker-light
-   '(default                        ((t (:background "#fcfcf2"  :foreground "#333207"))))
+   '(default                        ((t (:background "#fcfcf2"  :foreground "#000000"))))
    '(cursor                         ((t (:background "black"))))
    '(region                         ((t (:background "#f5ea9a"))))
    '(highlight-symbol-face          ((t ())))
@@ -36,6 +36,10 @@
    '(meow-insert-indicator           ((t (:foreground "#257d22"))))
    '(meow-normal-indicator           ((t (:foreground "#713da6"))))
    '(meow-motion-indicator           ((t (:foreground "#1853cc"))))
+   '(meow-keypad-cursor             ((t (:background "#ab3007"))))
+   '(meow-insert-cursor             ((t (:background "#257d22"))))
+   '(meow-normal-cursor             ((t (:background "#713da6"))))
+   '(meow-motion-cursor             ((t (:background "#1853cc"))))
    '(cider-result-overlay-face      ((t (:background "yellow"))))
    '(mode-line                      ((t (:background "yellow"))))
    '(mode-line-inactive             ((t (:background "yellow"))))
@@ -87,7 +91,10 @@
    '(telega-unmuted-count           ((t (:inherit font-lock-function-name-face))))
    '(rime-preedit-face              ((t (:inverse-video nil :underline t))))
    '(rime-cursor-face               ((t (:inherit font-lock-constant-face))))
+   '(rime-candidate-num-face        ((t ())))
+   '(rime-comment-face              ((t ())))
    '(rime-indicator-face            ((t (:foreground "#713da6"))))
+   '(rime-default-face              ((t (:background "#FEFEE0"))))
    '(dired-directory                ((t (:bold t))))))
 
 (and load-file-name

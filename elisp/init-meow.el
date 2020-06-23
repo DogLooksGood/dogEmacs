@@ -37,7 +37,9 @@
    '("y" . tiny-expand)
    '("a" . emamux:send-region)
    '("!" . +open-work-log)
-   '("$" . +send-clojure-ns-form)))
+   '("$" . +send-clojure-ns-form)
+   '("." . highlight-symbol-at-point)
+   '("," . unhighlight-regexp)))
 
 (use-package meow
   :quelpa

@@ -57,7 +57,9 @@
  visible-cursor t
  ;; Improve long line display performance
  bidi-inhibit-bpa t
- bidi-paragraph-direction 'left-to-right)
+ bidi-paragraph-direction 'left-to-right
+ ;; Allow resize by pixels
+ frame-resize-pixelwise t)
 
 ;;; Fix underline display
 (setq underline-minimum-offset 0)

@@ -16,8 +16,10 @@
 
 (use-package rainbow-mode
   :hook
-  ((prog-mode . rainbow-mode)
-   (conf-mode . rainbow-mode)))
+  ((css-mode . rainbow-mode)
+   (javascript-mode . rainbow-mode)
+   (mhtml-mode . rainbow-mode)
+   (web-mode . rainbow-mode)))
 
 (use-package hideshow
   :hook

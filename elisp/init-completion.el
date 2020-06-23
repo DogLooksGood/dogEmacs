@@ -33,7 +33,6 @@
                        company-echo-metadata-frontend))
   (company-begin-commands
    '(self-insert-command
-     +insert-mode
      meow-insert-before
      meow-insert-open
      meow-insert-after
