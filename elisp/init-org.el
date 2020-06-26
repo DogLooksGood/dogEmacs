@@ -1,7 +1,10 @@
+;;; -*- lexical-binding: t -*-
+
 (use-package org
   :hook (org-mode . org-indent-mode)
   :commands (org-mode)
   :config
+  (require 'ox-md)
   (add-to-list 'org-modules 'org-tempo t)
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "

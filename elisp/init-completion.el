@@ -49,4 +49,12 @@
   (company-require-match nil)
   (company-global-modes '(not dired-mode dired-sidebar-mode)))
 
+(use-package company-posframe
+  :init
+  (company-posframe-mode 1)
+  :custom
+  (company-posframe-show-indicator nil)
+  (company-posframe-show-metadata nil)
+  (company-posframe-quickhelp-delay nil))
+
 (provide 'init-completion)

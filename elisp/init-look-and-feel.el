@@ -8,9 +8,9 @@
 (require 'joker-theme)
 (load-theme 'joker t)
 
-(let ((font "sarasa mono sc-12"))
+(let ((font "unifont-11"))
   (add-to-list 'default-frame-alist (cons 'font font))
-  (set-face-attribute 'fixed-pitch nil :family "Unifont")
+  (set-face-attribute 'fixed-pitch nil :family "unifont")
   (set-frame-font font nil t))
 
 (defun +smart-file-name ()
@@ -20,7 +20,7 @@
 
 (defun +project-name ()
   (if vc-mode
-      (format "[%s]" (vc-root-dir))
+      (format "  { %s }" (vc-root-dir))
     ""))
 
 ;;; title line setup

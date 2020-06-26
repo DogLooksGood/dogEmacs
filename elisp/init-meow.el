@@ -49,6 +49,8 @@
   (+meow-setup)
   (meow-global-mode 1)
   (add-to-list 'meow-normal-state-mode-list 'restclient-mode)
+  (add-to-list 'meow-normal-state-mode-list 'slack-message-buffer-mode)
+  (add-to-list 'meow-normal-state-mode-list 'slack-thread-message-buffer-mode)
   :custom
   (meow-layout 'dvp))
 

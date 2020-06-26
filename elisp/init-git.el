@@ -10,4 +10,6 @@
 (use-package gitignore-mode
   :hook (gitignore-mode . yas-minor-mode))
 
+(bind-key "C-@" 'smerge-vc-next-conflict global-map)
+
 (provide 'init-git)

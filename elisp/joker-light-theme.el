@@ -95,7 +95,8 @@
    '(rime-comment-face              ((t ())))
    '(rime-indicator-face            ((t (:foreground "#713da6"))))
    '(rime-default-face              ((t (:background "#FEFEE0"))))
-   '(dired-directory                ((t (:bold t))))))
+   '(dired-directory                ((t (:bold t))))
+   '(slack-message-mention-face     ((t (:inherit font-lock-warning-face))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)
