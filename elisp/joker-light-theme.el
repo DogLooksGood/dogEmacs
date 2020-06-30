@@ -10,9 +10,9 @@
    '(cursor                         ((t (:background "black"))))
    '(region                         ((t (:background "#f5ea9a"))))
    '(highlight-symbol-face          ((t ())))
-   `(hl-line                        ((t ())))
-   '(yascroll:thumb-fringe          ((t (:background "#d4bbfa" :foreground "#d4bbfa"))))
-   '(yascroll:thumb-text-area       ((t (:background "#d4bbfa" :foreground "#d4bbfa"))))
+   '(hl-line                        ((t (:underline "#D9D9D9" :overline "#D9D9D9"))))
+   '(yascroll:thumb-fringe          ((t (:background "#d49bfa" :foreground "#d49bfa"))))
+   '(yascroll:thumb-text-area       ((t (:background "#d49bfa" :foreground "#d49bfa"))))
    '(fringe                         ((t (:background nil))))
    '(window-divider                 ((t (:foreground "#CCCCCC"))))
    '(show-paren-match               ((t (:underline "#257d22"))))
@@ -95,8 +95,8 @@
    '(rime-comment-face              ((t ())))
    '(rime-indicator-face            ((t (:foreground "#713da6"))))
    '(rime-default-face              ((t (:background "#FEFEE0"))))
-   '(dired-directory                ((t (:bold t))))
-   '(slack-message-mention-face     ((t (:inherit font-lock-warning-face))))))
+   '(dired-directory                ((t (:bold t)))))
+  '(slack-message-mention-face     ((t (:inherit font-lock-warning-face)))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

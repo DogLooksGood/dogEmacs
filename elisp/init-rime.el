@@ -28,7 +28,7 @@
    (default-input-method "rime")
    (rime-cursor "˰")
    (rime-show-candidate 'posframe)
-   (rime-posframe-fixed-position t)))
+   (rime-posframe-fixed-position nil)))
 
 ;;; Used for package developing
 

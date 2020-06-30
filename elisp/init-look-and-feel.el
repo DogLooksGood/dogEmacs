@@ -6,11 +6,11 @@
 
 (require 'joker-light-theme)
 (require 'joker-theme)
-(load-theme 'joker t)
+(load-theme 'joker-light t)
 
-(let ((font "unifont-11"))
+(let ((font "sarasa mono sc-11"))
   (add-to-list 'default-frame-alist (cons 'font font))
-  (set-face-attribute 'fixed-pitch nil :family "unifont")
+  (set-face-attribute 'fixed-pitch nil :family "sarasa mono sc")
   (set-frame-font font nil t))
 
 (defun +smart-file-name ()
