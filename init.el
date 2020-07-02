@@ -88,6 +88,7 @@
   (require 'init-meow)
   (require 'init-macos)
   (require 'init-pass)
+  (require 'init-dictionary)
   (require 'init-work))
 
 ;; Proper GC
