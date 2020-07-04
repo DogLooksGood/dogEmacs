@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (use-package deft
   :bind ("<f8>" . deft)
   :commands (deft)
@@ -7,3 +9,4 @@
   (deft-auto-save-interval 5.0))
 
 (provide 'init-deft)
+;;; init-deft.el ends here

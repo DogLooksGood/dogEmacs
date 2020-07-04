@@ -28,6 +28,31 @@
           '("true" "false" "nil") t)
          "\\>")
        0 font-lock-constant-face)
+      ;; Special forms
+      (,(concat
+         "("
+         (regexp-opt
+          '("def" "do" "if" "let" "let*" "var" "fn" "fn*" "loop" "loop*"
+            "recur" "throw" "try" "catch" "finally"
+            "set!" "new" "."
+            "monitor-enter" "monitor-exit" "quote") t)
+         "\\>")
+       1 font-lock-keyword-face)
+      ;; Built-in binding and flow of control forms
+      (,(concat
+         "(\\(?:clojure.core/\\)?"
+         (regexp-opt
+          '("letfn" "case" "cond" "cond->" "cond->>" "condp"
+            "for" "when" "when-not" "when-let" "when-first" "when-some"
+            "if-let" "if-not" "if-some"
+            ".." "->" "->>" "as->" "doto" "and" "or"
+            "dosync" "doseq" "dotimes" "dorun" "doall"
+            "ns" "in-ns"
+            "with-open" "with-local-vars" "binding"
+            "with-redefs" "with-redefs-fn"
+            "declare") t)
+         "\\>")
+       1 font-lock-keyword-face)
       ;; Character literals - \1, \a, \newline, \u0000
       ("\\\\\\([[:punct:]]\\|[a-z0-9]+\\>\\)" 0 'clojure-character-face)
 
