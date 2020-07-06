@@ -33,15 +33,19 @@
 
 (deftheme joker "A simple medium contrast dark theme.")
 
-(let ((family-comment "Source Han Sans")
-      (family-code "Source Han Mono")
+(defcustom joker-comment-font-family
+  "Source Han Mono"
+  "Font family for comment."
+  :group 'joker-theme)
+
+(let ((family-comment joker-comment-font-family)
       (height-comment 85)
       (height-code 80)
       (height-var 95)
-      (height-header 115))
+      (height-header 125))
   (custom-theme-set-faces
    `joker
-   `(default                        ((t (:family ,family-code :height ,height-code :background "#212121"  :foreground "#A8A8A8"))))
+   `(default                        ((t (:height ,height-code :background "#212121"  :foreground "#A8A8A8"))))
    `(mc/cursor-face                 ((t (:background "#949494" :foreground "black"))))
    `(cursor                         ((t (:background "white"))))
    `(region                         ((t (:background "#174535"))))
@@ -119,7 +123,7 @@
    `(company-template-field         ((t (:inherit yas-field-highlight-face))))
    `(org-document-title             ((t (:inherit font-lock-string-face))))
    `(org-code                       ((t (:inherit font-lock-constant-face))))
-   `(line-number-current-line       ((t (:foreground "#D7AF00"))))
+   `(line-number-current-line       ((t (:foreground "#D7AF00" :background "#272727"))))
    `(parenthesis                    ((t (:foreground "#606060"))))
    `(term-color-blue                ((t (:foreground "#3366FF" :background "#3366FF"))))
    `(popup-tip-face                 ((t (:background "#303030" :foreground "#C5C5C5"))))

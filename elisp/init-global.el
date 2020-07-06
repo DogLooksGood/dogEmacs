@@ -99,14 +99,6 @@
 ;; Replace all "yes or no" with "y or n".
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Remove mode line.
-
-(defun +project-name ()
-  (let ((proj-name (projectile-project-name)))
-    (if (equal proj-name "-")
-        ""
-      proj-name)))
-
 (setq-default cursor-type 'box)
 (blink-cursor-mode -1)
 

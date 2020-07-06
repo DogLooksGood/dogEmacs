@@ -5,15 +5,15 @@
 (set-frame-parameter nil 'alpha '(100 . 100))
 
 ;; (require 'joker-light-theme)
-;; (require 'joker-theme)
+(require 'joker-theme)
 (require 'storybook-theme)
 ;; (load-theme 'joker t)
 (load-theme 'storybook t)
 
-;; (let ((font "Fira Code iCursive S12, Italic-8"))
-;;   (add-to-list 'default-frame-alist (cons 'font font))
-;;   (set-face-attribute 'fixed-pitch nil :family "source han mono")
-;;   (set-frame-font font nil t))
+(let ((font "Fira Code-9"))
+  (add-to-list 'default-frame-alist (cons 'font font))
+  (set-face-attribute 'fixed-pitch nil :family font)
+  (set-frame-font font nil t))
 
 (defun +debug-load-theme ()
   (interactive)
@@ -33,9 +33,8 @@
 
 ;;; title line setup
 (setq-default frame-title-format
-              '("Emacs <"
-                (:eval (+project-name))
-                ">"))
+              '("Emacs "
+                (:eval (+project-name))))
 
 ;;; If we want hide the mode line
 (setq +mini-mode-line t)

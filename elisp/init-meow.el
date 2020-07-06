@@ -38,6 +38,7 @@
    '("a" . emamux:send-region)
    '("!" . +open-work-log)
    '("$" . +send-clojure-ns-form)
+   '("z" . winner-undo)
    '("." . highlight-symbol-at-point)
    '("," . unhighlight-regexp)))
 
