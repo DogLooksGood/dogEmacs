@@ -1,9 +1,13 @@
 ;;; Load the whole configuration
 (load (expand-file-name "init.el" user-emacs-directory))
 
+;;; Some packages to exclude during dump.
+(setq +dump-exclude-packages '(oauth2))
+
 ;;; Ensure every installed package is loaded.
 (dolist (package package-activated-list)
-  (require package))
+  (unless (member package package-activated-list)
+    (require package)))
 
 ;;; We have to unload tramp in pdump, otherwise tramp will not work.
 (tramp-unload-tramp)

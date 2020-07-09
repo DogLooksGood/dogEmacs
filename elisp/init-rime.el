@@ -4,8 +4,8 @@
   (eq (plist-get (text-properties-at (point)) 'face) 'font-lock-string-face))
 
 (use-package rime
-  :quelpa
-  (rime :fetcher file :path "~/Projects/emacs-rime" :files ("rime.el" "rime-predicates.el" "lib.c" "Makefile"))
+  ;; :quelpa
+  ;; (rime :fetcher file :path "~/Projects/emacs-rime" :files ("rime.el" "rime-predicates.el" "lib.c" "Makefile"))
   :bind
   (:map
    rime-active-mode-map
@@ -28,7 +28,10 @@
    (default-input-method "rime")
    (rime-cursor "˰")
    (rime-show-candidate 'posframe)
-   (rime-posframe-fixed-position nil)))
+   (rime-posframe-fixed-position t)
+   (rime-posframe-properties (list
+                              :internal-border-width 2
+                              :internal-border-color "#303030"))))
 
 ;;; Used for package developing
 

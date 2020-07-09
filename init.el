@@ -78,7 +78,6 @@
   (require 'init-latex)
   (require 'init-ebook)
   (require 'init-deft)
-  (require 'init-hold)
   (require 'init-docker)
   (require 'init-server)
   (require 'init-rime)

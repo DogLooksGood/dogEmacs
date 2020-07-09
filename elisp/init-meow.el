@@ -28,7 +28,7 @@
    '("*" . ivy-pass)
    '("#" . deft)
    '("m" . magit-status)
-   '("b" . magit-blame)
+   '("M" . magit-blame)
    '("p" . projectile-find-file)
    '("b" . counsel-switch-buffer)
    '("g" . projectile-ripgrep)
@@ -43,8 +43,8 @@
    '("," . unhighlight-regexp)))
 
 (use-package meow
-  :quelpa
-  (meow :repo "DogLooksGood/meow" :fetcher github)
+  ;; :quelpa
+  ;; (meow :repo "DogLooksGood/meow" :fetcher github)
   ;; (meow :fetcher file :path "~/Projects/meow")
   :config
   (+meow-setup)

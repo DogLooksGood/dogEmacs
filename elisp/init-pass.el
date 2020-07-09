@@ -1,9 +1,13 @@
 ;;; -*- lexical-binding: t -*-
 
-(use-package pass
-  :bind
-  (("C-S-p" . pass)))
+(defun +pass ()
+  (interactive)
+  (unless (featurep 'pass)
+    (use-package pass
+      :init
+      (use-package ivy-pass)))
+  (call-interactively #'pass))
 
-(use-package ivy-pass)
+(bind-key "C-S-p" '+pass global-map)
 
 (provide 'init-pass)

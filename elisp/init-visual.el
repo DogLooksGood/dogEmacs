@@ -25,15 +25,18 @@
   :hook
   (prog-mode . hs-minor-mode)
   :bind
-  (("C-S-H" . 'hs-toggle-hiding)))
+  (("C-S-H" . 'hs-toggle-hiding)
+   ("<C-tab>" . 'hs-toggle-hiding)))
 
 (use-package highlight-numbers
   :hook
   (prog-mode . highlight-numbers-mode))
 
-(use-package yascroll
-  :init
-  (global-yascroll-bar-mode))
+;; (use-package yascroll
+;;   :init
+;;   (global-yascroll-bar-mode -1))
+
+(scroll-bar-mode 1)
 
 ;; Vertical Border
 (set-face-inverse-video-p 'vertical-border nil)

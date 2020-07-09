@@ -42,6 +42,9 @@ otherwise will insert a colon."
   (sp-with-modes
       '(rust-mode java-mode)
     (sp-local-pair "<" ">"))
+  (sp-with-modes
+      '(cider-repl-mode)
+    (sp-local-pair "'" nil :actions nil))
   :custom
   (sp-highlight-pair-overlay nil)
   (sp-highlight-wrap-overlay nil))
