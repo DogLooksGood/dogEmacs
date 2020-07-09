@@ -6,12 +6,25 @@
 
 (defun +debug-load-theme ()
   (interactive)
-  (let ((font "sarasa mono sc-11"))
+  (let ((font "dejavu sans mono-9"))
   (add-to-list 'default-frame-alist (cons 'font font))
   (set-frame-font font nil t)
   (require 'storybook-theme)
-  (load-theme 'storybook t)
-  (set-face-attribute 'font-lock-function-name-face nil :height 140)))
+  (load-theme 'storybook t)))
+
+(defun +set-larger-function-name-face ()
+  (face-remap-add-relative 'font-lock-function-name-face :height 140))
+
+(add-hook 'prog-mode-hook '+set-larger-function-name-face)
+
+(defun +meow-update-mode-line-face (state)
+  (cl-case state
+    ('normal (set-face-attribute 'mode-line nil :background "#f0dcf4" :underline "purple4" :overline "purple4"))
+    ('motion (set-face-attribute 'mode-line nil :background "#dcebf4" :underline "dark blue" :overline "dark blue"))
+    ('insert (set-face-attribute 'mode-line nil :background "#dcf4e0" :underline "dark green" :overline "dark green"))
+    ('keypad (set-face-attribute 'mode-line nil :background "#f4e0dc" :underline "dark red" :overline "dark red"))))
+
+(add-hook 'meow-switch-state-hook '+meow-update-mode-line-face)
 
 (+debug-load-theme)
 

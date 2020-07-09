@@ -38,14 +38,13 @@
    '("a" . emamux:send-region)
    '("!" . +open-work-log)
    '("$" . +send-clojure-ns-form)
-   '("z" . winner-undo)
    '("." . highlight-symbol-at-point)
    '("," . unhighlight-regexp)))
 
 (use-package meow
-  ;; :quelpa
+  :quelpa
   ;; (meow :repo "DogLooksGood/meow" :fetcher github)
-  ;; (meow :fetcher file :path "~/Projects/meow")
+  (meow :fetcher file :path "~/Projects/meow")
   :config
   (+meow-setup)
   (meow-global-mode 1)
