@@ -60,6 +60,7 @@
   (require 'init-javascript)
   (require 'init-typescript)
   (require 'init-haskell)
+  (require 'init-elixir)
   (require 'init-rust)
   (require 'init-conf)
   (require 'init-org)

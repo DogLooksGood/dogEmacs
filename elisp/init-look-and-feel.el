@@ -1,32 +1,36 @@
 ;;; -*- lexical-binding: t -*-
-;;; Look And Feels
-;;  mode line and themes.
+;; Look And Feels
+;; mode line and themes.
 
 (set-frame-parameter nil 'alpha '(100 . 100))
 
 (defun +debug-load-theme ()
   (interactive)
-  (let ((font "dejavu sans mono-9"))
-  (add-to-list 'default-frame-alist (cons 'font font))
-  (set-frame-font font nil t)
-  (require 'storybook-theme)
-  (load-theme 'storybook t)))
+  (let ((font "dejavu sans mono-10"))
+    (add-to-list 'default-frame-alist (cons 'font font))
+    (set-frame-font font nil t)
+    (require 'storybook-theme)
+    (load-theme 'storybook t)))
+
+(+debug-load-theme)
 
 (defun +set-larger-function-name-face ()
   (face-remap-add-relative 'font-lock-function-name-face :height 140))
 
 (add-hook 'prog-mode-hook '+set-larger-function-name-face)
 
-(defun +meow-update-mode-line-face (state)
-  (cl-case state
-    ('normal (set-face-attribute 'mode-line nil :background "#f0dcf4" :underline "purple4" :overline "purple4"))
-    ('motion (set-face-attribute 'mode-line nil :background "#dcebf4" :underline "dark blue" :overline "dark blue"))
-    ('insert (set-face-attribute 'mode-line nil :background "#dcf4e0" :underline "dark green" :overline "dark green"))
-    ('keypad (set-face-attribute 'mode-line nil :background "#f4e0dc" :underline "dark red" :overline "dark red"))))
+(defun +meow-update-mode-line-face (&optional state)
+  (cond
+   ((meow-normal-mode-p)
+    (set-face-attribute 'mode-line nil :background "#f0dcf4" :underline "purple4" :overline "purple4"))
+   ((meow-motion-mode-p)
+    (set-face-attribute 'mode-line nil :background "#dcebf4" :underline "dark blue" :overline "dark blue"))
+   ((meow-insert-mode-p)
+    (set-face-attribute 'mode-line nil :background "#dcf4e0" :underline "dark green" :overline "dark green"))
+   ((meow-keypad-mode-p)
+    (set-face-attribute 'mode-line nil :background "#f4e0dc" :underline "dark red" :overline "dark red"))))
 
-(add-hook 'meow-switch-state-hook '+meow-update-mode-line-face)
-
-(+debug-load-theme)
+(add-hook 'post-command-hook '+meow-update-mode-line-face)
 
 (bind-key "C-z" '+debug-load-theme)
 

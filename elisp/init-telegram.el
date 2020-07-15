@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (defun +lazy-telega ()
   (interactive)
   (use-package telega
@@ -14,8 +16,8 @@
     :init
     (telega 1)
     :custom-face
-    (telega-entity-type-code ((t (:family "unifont" :inherit font-lock-constant-face))))
-    (telega-entity-type-pre ((t (:family "unifont" :bold t))))))
+    (telega-entity-type-code ((t (:inherit fixed-pitch :bold t))))
+    (telega-entity-type-pre ((t (:inherit fixed-pitch))))))
 
 (bind-key "C-S-t" '+lazy-telega)
 

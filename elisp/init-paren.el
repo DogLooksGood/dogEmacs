@@ -29,7 +29,7 @@ otherwise will insert a colon."
 
 (use-package smartparens
   :hook
-  ((rust-mode go-mode java-mode rjsx-mode conf-mode snippet-mode json-mode css-mode web-mode html-mode cider-repl-mode) . 'smartparens-mode)
+  ((rust-mode go-mode java-mode rjsx-mode conf-mode snippet-mode json-mode css-mode web-mode html-mode cider-repl-mode elixir-mode) . 'smartparens-mode)
   :bind
   (:map smartparens-mode-map
         ("C-k" . 'sp-kill-hybrid-sexp)

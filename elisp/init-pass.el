@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
-(defun +pass ()
+(defun +lazy-pass ()
   (interactive)
   (unless (featurep 'pass)
     (use-package pass
@@ -8,6 +8,6 @@
       (use-package ivy-pass)))
   (call-interactively #'pass))
 
-(bind-key "C-S-p" '+pass global-map)
+(bind-key "C-S-p" '+lazy-pass global-map)
 
 (provide 'init-pass)
