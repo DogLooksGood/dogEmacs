@@ -75,6 +75,7 @@
   (require 'init-eshell)
   (require 'init-lsp)
   (require 'init-dired)
+  (require 'init-ibuffer)
   (require 'init-snippet)
   (require 'init-latex)
   (require 'init-ebook)
@@ -86,10 +87,11 @@
   (require 'init-restclient)
   (require 'init-tmux)
   (require 'init-meow)
-  (require 'init-macos)
   (require 'init-pass)
   (require 'init-dictionary)
+  (require 'init-modeline)
+  (require 'init-macos)
   (require 'init-work))
 
-;; Proper GC
+;; Proper GC after startup
 (setq gc-cons-threshold (* 1024 128))

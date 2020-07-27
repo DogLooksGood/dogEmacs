@@ -1,4 +1,4 @@
-(provide 'init-javascript)
+;;; -*- lexical-binding: t -*-
 
 (setq-default js-indent-level 2)
 
@@ -20,3 +20,6 @@
 
 (use-package json
   :hook (json-mode . smartparens-mode))
+
+(provide 'init-javascript)
+;;; init-javascript.el ends here

@@ -8,6 +8,7 @@
    '("M" . kmacro-call-macro))
 
   (meow-leader-define-key
+   '(";" . dired-sidebar-toggle-sidebar)
    '("SPC" . avy-goto-line)
    '("k" . kill-buffer)
    '("l" . goto-line)
@@ -39,12 +40,13 @@
    '("!" . +open-work-log)
    '("$" . +send-clojure-ns-form)
    '("." . highlight-symbol-at-point)
-   '("," . unhighlight-regexp)))
+   '("," . unhighlight-regexp)
+   '("|" . +toggle-theme)))
 
 (use-package meow
   :quelpa
-  ;; (meow :repo "DogLooksGood/meow" :fetcher github)
-  (meow :fetcher file :path "~/Projects/meow")
+  (meow :repo "DogLooksGood/meow" :fetcher github)
+  ;; (meow :fetcher file :path "~/Projects/meow")
   :config
   (+meow-setup)
   (meow-global-mode 1)

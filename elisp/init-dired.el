@@ -6,6 +6,11 @@
 (bind-key "/" 'swiper dired-mode-map)
 (bind-key "F" 'find-file dired-mode-map)
 
+(when (eq system-type 'darwin)
+  (setq insert-directory-program "gls" dired-use-ls-dired t))
+
+(setq dired-listing-switches "-lXGh --group-directories-first")
+
 (use-package dired-hide-dotfiles
   :bind
   (:map
@@ -15,14 +20,18 @@
 (use-package dired-sidebar
   :hook (dired-sidebar-mode . hl-line-mode)
   :bind
-  (("C-M-S" . 'dired-sidebar-toggle-sidebar)
+  (("C-|" . 'dired-sidebar-toggle-sidebar)
    :map
    dired-sidebar-mode-map
    ("q" . 'kill-buffer-and-window))
   :custom
   (dired-sidebar-subtree-line-prefix "  ")
-  (dired-sidebar-theme 'ascii)
   (dired-sidebar-use-term-integration t)
-  (dired-sidebar-use-custom-font t))
+  (dired-sidebar-should-follow-file t)
+  (dired-sidebar-follow-file-idle-delay 0.25)
+  (dired-sidebar-use-custom-font t)
+  :config
+  (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
+  (push 'rotate-windows dired-sidebar-toggle-hidden-commands))
 
 (provide 'init-dired)

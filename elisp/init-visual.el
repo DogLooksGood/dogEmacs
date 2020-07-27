@@ -36,7 +36,7 @@
 ;;   :init
 ;;   (global-yascroll-bar-mode -1))
 
-(scroll-bar-mode 1)
+;; (scroll-bar-mode 1)
 
 ;; Vertical Border
 (set-face-inverse-video-p 'vertical-border nil)

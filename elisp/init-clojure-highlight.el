@@ -1,3 +1,6 @@
+;;; This file overwrites how clojure-mode do highlighting
+;;; This patch remove some unnecessary highlight rules.
+
 (defconst +clojure-font-lock-keywords
   (eval-when-compile
     `(;; Function definition (anything that starts with def and is not

@@ -2,84 +2,81 @@
 ;; Look And Feels
 ;; mode line and themes.
 
-(set-frame-parameter nil 'alpha '(100 . 100))
+(require 'storybook-theme)
+(require 'joker-theme)
 
-(defun +debug-load-theme ()
-  (interactive)
-  (let ((font "dejavu sans mono-10"))
-    (add-to-list 'default-frame-alist (cons 'font font))
+(setq +font-fixed-family "DejaVu Sans Mono"
+      +font-variable-family "DejaVu Serif"
+      +font-size 10
+      +frame-margin 15
+      +alpha 100
+      +themes (list 'dark 'joker 'light 'storybook)
+      +theme 'dark)
+
+(defun +setup-prog-faces ()
+  (face-remap-add-relative 'font-lock-function-name-face :height 140)
+  (face-remap-add-relative 'font-lock-comment-face :family +font-variable-family))
+
+(defun +setup-text-faces ()
+  (face-remap-add-relative 'default :family +font-variable-family)
+  (when (derived-mode-p 'org-mode)
+    (face-remap-add-relative 'org-block :family +font-fixed-family)
+    (face-remap-add-relative 'org-code :family +font-fixed-family)))
+
+(defun +get-theme (dark-or-light)
+  (plist-get +themes dark-or-light))
+
+(defun +setup-theme ()
+  (disable-theme (+get-theme 'dark))
+  (disable-theme (+get-theme 'light))
+  (load-theme (+get-theme +theme) t))
+
+(defun +setup-font ()
+  (let ((font (concat +font-fixed-family "-" (number-to-string +font-size))))
     (set-frame-font font nil t)
-    (require 'storybook-theme)
-    (load-theme 'storybook t)))
+    (add-to-list 'default-frame-alist (cons 'font font))))
 
-(+debug-load-theme)
+(defun +setup-transparency ()
+  (set-frame-parameter nil 'alpha (cons +alpha +alpha)))
 
-(defun +set-larger-function-name-face ()
-  (face-remap-add-relative 'font-lock-function-name-face :height 140))
+(defun +setup-internal-margin ()
+  (set-frame-parameter (selected-frame) 'internal-border-width +frame-margin)
+  (add-to-list 'default-frame-alist '(internal-border-width . +frame-margin)))
 
-(add-hook 'prog-mode-hook '+set-larger-function-name-face)
+(defun +load-look-and-feel ()
+  "Load look and feel options.
 
-(defun +meow-update-mode-line-face (&optional state)
-  (cond
-   ((meow-normal-mode-p)
-    (set-face-attribute 'mode-line nil :background "#f0dcf4" :underline "purple4" :overline "purple4"))
-   ((meow-motion-mode-p)
-    (set-face-attribute 'mode-line nil :background "#dcebf4" :underline "dark blue" :overline "dark blue"))
-   ((meow-insert-mode-p)
-    (set-face-attribute 'mode-line nil :background "#dcf4e0" :underline "dark green" :overline "dark green"))
-   ((meow-keypad-mode-p)
-    (set-face-attribute 'mode-line nil :background "#f4e0dc" :underline "dark red" :overline "dark red"))))
+Will setup following customizations:
+- transparency
+- internal margin
+- font
+- theme
+- special faces for prog-mode and text-mode(handle all existing buffer as well)."
+  (interactive)
+  (+setup-font)
+  (+setup-transparency)
+  (+setup-internal-margin)
+  (+setup-theme)
+  (dolist (buf (buffer-list))
+    (with-current-buffer buf
+      (cond
+       ((derived-mode-p 'prog-mode)
+        (+setup-prog-faces))
+       ((derived-mode-p 'text-mode)
+        (+setup-text-faces))))))
 
-(add-hook 'post-command-hook '+meow-update-mode-line-face)
+(defun +toggle-theme ()
+  "Toggle themes between dark and light."
+  (interactive)
+  (setq +theme (if (eq +theme 'dark) 'light 'dark))
+  (+setup-theme))
 
-(bind-key "C-z" '+debug-load-theme)
+;;; Hook face setups
+(add-hook 'prog-mode-hook '+setup-prog-faces)
+(add-hook 'text-mode-hook '+setup-text-faces)
 
-(defvar-local +current-buffer-vc-path nil)
-
-(defun +smart-file-name ()
-  (if +current-buffer-vc-path
-      +current-buffer-vc-path
-    (if (not vc-mode)
-        (buffer-name)
-      (setq-local +current-buffer-vc-path (file-relative-name (buffer-file-name) (vc-root-dir)))
-      +current-buffer-vc-path)))
-
-(defun +project-name ()
-  (if vc-mode
-      (format "  { %s }" (vc-root-dir))
-    ""))
-
-;;; title line setup
-(setq-default frame-title-format
-              '("Emacs "
-                (:eval (+project-name))))
-
-;;; If we want hide the mode line
-(setq +mini-mode-line t)
-
-(defun +mode-base-info (format-string)
-  "Return formatted string if there's still enough space."
-  (let ((s (format-mode-line format-string)))
-    (when (or (not mini-modeline--msg)
-              (> (window-width) (+ 12 (string-width s) (string-width mini-modeline--msg))))
-      s)))
-
-(setq-default mode-line-format '((:eval (meow-indicator))
-                                 " "
-                                 (:eval (when rime-mode (concat  (rime-lighter) " ")))
-                                 (:eval (+smart-file-name))
-                                 " %* %m "
-                                 (vc-mode vc-mode)))
-
-;; Only show window divider when there's more than one window.
-;; (defun +toggle-window-divider-and-border ()
-;;   (unless (string-match-p ".*-posframe\\*" (buffer-name (current-buffer)))
-;;     (if (> (count-windows) 1)
-;;         (progn
-;;           (window-divider-mode 1))
-;;       (progn
-;;         (window-divider-mode -1)))))
-
-;; (add-hook 'window-configuration-change-hook #'+toggle-window-divider-and-border)
+;;; Load customizations
+(+load-look-and-feel)
 
 (provide 'init-look-and-feel)
+;;; init-look-and-feel.el ends here
