@@ -21,7 +21,8 @@
   (face-remap-add-relative 'default :family +font-variable-family)
   (when (derived-mode-p 'org-mode)
     (face-remap-add-relative 'org-block :family +font-fixed-family)
-    (face-remap-add-relative 'org-code :family +font-fixed-family)))
+    (face-remap-add-relative 'org-code :family +font-fixed-family)
+    (face-remap-add-relative 'org-table :family +font-fixed-family)))
 
 (defun +get-theme (dark-or-light)
   (plist-get +themes dark-or-light))
