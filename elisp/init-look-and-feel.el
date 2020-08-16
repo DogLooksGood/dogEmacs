@@ -5,8 +5,8 @@
 (require 'storybook-theme)
 (require 'joker-theme)
 
-(setq +font-fixed-family "DejaVu Sans Mono"
-      +font-variable-family "DejaVu Serif"
+(setq +font-fixed-family "dejavu sans mono"
+      +font-variable-family "dejavu sans"
       +font-size 10
       +frame-margin 15
       +alpha 100
@@ -15,14 +15,15 @@
 
 (defun +setup-prog-faces ()
   (face-remap-add-relative 'font-lock-function-name-face :height 140)
-  (face-remap-add-relative 'font-lock-comment-face :family +font-variable-family))
+  ;; (face-remap-add-relative 'font-lock-comment-face :family +font-variable-family)
+  )
 
 (defun +setup-text-faces ()
   (face-remap-add-relative 'default :family +font-variable-family)
   (when (derived-mode-p 'org-mode)
     (face-remap-add-relative 'org-block :family +font-fixed-family)
     (face-remap-add-relative 'org-code :family +font-fixed-family)
-    (face-remap-add-relative 'org-table :family +font-fixed-family)))
+    (face-remap-add-relative 'org-checkbox :family +font-fixed-family)))
 
 (defun +get-theme (dark-or-light)
   (plist-get +themes dark-or-light))
@@ -41,8 +42,9 @@
   (set-frame-parameter nil 'alpha (cons +alpha +alpha)))
 
 (defun +setup-internal-margin ()
-  (set-frame-parameter (selected-frame) 'internal-border-width +frame-margin)
-  (add-to-list 'default-frame-alist '(internal-border-width . +frame-margin)))
+  (when (fixnump +frame-margin)
+    (set-frame-parameter (selected-frame) 'internal-border-width +frame-margin)
+    (add-to-list 'default-frame-alist '(internal-border-width . +frame-margin))))
 
 (defun +load-look-and-feel ()
   "Load look and feel options.
@@ -56,7 +58,7 @@ Will setup following customizations:
   (interactive)
   (+setup-font)
   (+setup-transparency)
-  (+setup-internal-margin)
+  ;; (+setup-internal-margin)
   (+setup-theme)
   (dolist (buf (buffer-list))
     (with-current-buffer buf
@@ -70,7 +72,8 @@ Will setup following customizations:
   "Toggle themes between dark and light."
   (interactive)
   (setq +theme (if (eq +theme 'dark) 'light 'dark))
-  (+setup-theme))
+  (+setup-theme)
+  (+setup-font))
 
 ;;; Hook face setups
 (add-hook 'prog-mode-hook '+setup-prog-faces)

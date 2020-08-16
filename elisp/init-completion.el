@@ -47,12 +47,14 @@
   (company-dabbrev-downcase nil)
   (company-abort-manual-when-too-short t)
   (company-require-match nil)
-  (company-global-modes '(not dired-mode dired-sidebar-mode)))
+  (company-global-modes '(not dired-mode dired-sidebar-mode))
+  (company-tooltip-margin 0))
 
 (use-package company-posframe
   :init
-  (company-posframe-mode -1)
+  (company-posframe-mode 1)
   :custom
-  (company-posframe-show-indicator nil))
+  (company-posframe-show-indicator nil)
+  (company-posframe-show-metadata nil))
 
 (provide 'init-completion)
