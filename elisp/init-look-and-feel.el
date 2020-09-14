@@ -14,7 +14,8 @@
       +theme 'dark)
 
 (defun +setup-prog-faces ()
-  (face-remap-add-relative 'font-lock-function-name-face :height 140)
+  ;; (face-remap-add-relative 'font-lock-function-name-face :bold t)
+  (face-remap-add-relative 'font-lock-function-name-face :height 125)
   ;; (face-remap-add-relative 'font-lock-comment-face :family +font-variable-family)
   )
 

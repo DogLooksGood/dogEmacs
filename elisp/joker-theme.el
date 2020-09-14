@@ -52,11 +52,10 @@
  `(window-divider                 ((t (:foreground "#3F3F3F"))))
  `(show-paren-match               ((t (:underline "#00AF5F"))))
  `(company-tooltip-common         ((t ())))
- `(company-tooltip-common-selection ((t (:inherit font-lock-constant-face
-                                                  :inverse-video t))))
+ `(company-tooltip-common-selection ((t (:inherit font-lock-constant-face :inverse-video t))))
  `(company-tooltip                ((t (:background "#333333"))))
- `(company-tooltip-selection      ((t (:inherit font-lock-constant-face
-                                                :inverse-video t))))
+ `(company-tooltip-selection      ((t (:inherit font-lock-constant-face :inverse-video t))))
+ `(company-tooltip-annotation     ((t (:inherit font-lock-comment-face))))
  `(company-scrollbar-bg           ((t (:background "#303030"))))
  `(company-scrollbar-fg           ((t (:background "#4E4E4E"))))
  `(font-lock-comment-face         ((t (:foreground "#00AAAA"))))

@@ -59,11 +59,16 @@
    ("-" . '+rust-minus)
    ("<" . '+rust-lessthan)
    ("SPC" . '+rust-whitespace)
-   (";" . '+rust-semicolon)
-   ("C-c C-c" . 'rust-run)
-   ("C-c C-p" . 'rust-compile)
-   ("C-c C-t" . 'rust-test))
-  :config
-  (sp-local-pair 'rust-mode "<" ">"))
+   (";" . '+rust-semicolon)))
+
+(use-package cargo
+  :bind
+  (:map
+   rust-mode-map
+   ("C-c C-c" . 'cargo-process-run)
+   ("C-c C-t t" . 'cargo-process-current-test)
+   ("C-c C-t f" . 'cargo-process-current-file-tests)
+   ("C-c C-t p" . 'cargo-process-test)
+   ("C-c C-k" . 'cargo-process-check)))
 
 (provide 'init-rust)

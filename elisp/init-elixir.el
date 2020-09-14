@@ -1,7 +1,20 @@
 ;;; -*- lexical-binding: t -*-
 
 (use-package elixir-mode
-  :commands (elixir-mode))
+  ;;; Use web-mode for eex file.
+  :bind
+  (:map elixir-mode-map
+        ("C-c C-f" . 'elixir-format)
+        ("C-c C-k" . '+elixir-compile)
+        ("C-c C-r" . '+elixir-reload))
+  :commands (elixir-mode)
+  :config
+  (font-lock-add-keywords 'elixir-mode
+                          '(("[_a-zA-Z0-9]+:" . font-lock-constant-face)
+                            (":[_a-zA-Z0-9\"]+" . font-lock-constant-face)
+                            ("defmacro \\([a-zA-Z0-9!?_]+\\)" 1 font-lock-function-name-face)))
+  :init
+  (add-to-list 'auto-mode-alist '("\\.eex\\'" . web-mode)))
 
 (use-package mix
   :hook
@@ -9,8 +22,67 @@
   :custom
   (compilation-scroll-output t))
 
-(use-package alchemist
-  :hook
-  (elixir))
+(defun +elixir-auto-module-name ()
+  (let* ((file-name (+smart-file-name))
+         (lib-file-name (if (string-prefix-p "lib/" file-name)
+                            (substring file-name 4)
+                          file-name)))
+    (message file-name)
+    (-> (replace-regexp-in-string "\.exs?$" "" lib-file-name)
+        (split-string "/")
+        (->> (-map #'string-inflection-pascal-case-function))
+        (string-join "."))))
+
+(defun +elixir-handle-input ()
+  (unless (or (+in-string-p) (+in-comment-p))
+    (cond
+     ((looking-back ",,$" 2)
+      (backward-delete-char 2)
+      (insert "|> "))
+     ((looking-back "[[:graph:]]-" 2)
+      (backward-delete-char 1)
+      (insert "_"))
+     ((looking-back ";" 2)
+      (backward-delete-char 1)
+      (insert ":")))))
+
+(defun +elixir-compile ()
+  (interactive)
+  (when (buffer-modified-p) (save-buffer))
+  (emamux:send-keys (message "c \"%s\"" (+smart-file-name))))
+
+(defun +elixir-reload ()
+  (interactive)
+  (when (buffer-modified-p) (save-buffer))
+  (let ((module-name (save-mark-and-excursion
+                       (goto-char (point-min))
+                       (re-search-forward
+                        "defmodule \\([[:graph:]]+\\)")
+                       (match-string 1))))
+    (if module-name
+        (emamux:send-keys (message "r %s" module-name))
+      (message "Can't get module name in this file!"))))
+
+(defun +elixir-post-self-insert-hook-setup ()
+  (add-hook 'post-self-insert-hook '+elixir-handle-input nil t))
+
+(add-hook 'elixir-mode-hook '+elixir-post-self-insert-hook-setup)
+
+(use-package polymode
+  :mode ("\.ex$" . poly-elixir-web-mode)
+  :config
+  (define-hostmode poly-elixir-hostmode :mode 'elixir-mode)
+  (define-innermode poly-liveview-expr-elixir-innermode
+    :mode 'web-mode
+    :head-matcher "^[[:space:]]*~L[\"']\\{3\\}$"
+    :tail-matcher "^[[:space:]]*[\"']\\{3\\}$"
+    :head-mode 'host
+    :tail-mode 'host
+    :allow-nested nil
+    :keep-in-mode 'host
+    :fallback-mode 'host)
+  (define-polymode poly-elixir-web-mode
+    :hostmode 'poly-elixir-hostmode
+    :innermodes '(poly-liveview-expr-elixir-innermode)))
 
 (provide 'init-elixir)

@@ -27,26 +27,37 @@ otherwise will insert a colon."
 
 ;;; For C like languages
 
-(use-package smartparens
-  :hook
-  ((rust-mode go-mode java-mode rjsx-mode conf-mode snippet-mode json-mode css-mode web-mode html-mode cider-repl-mode elixir-mode) . 'smartparens-mode)
-  :bind
-  (:map smartparens-mode-map
-        ("C-k" . 'sp-kill-hybrid-sexp)
-        ("C-)" . 'sp-forward-slurp-sexp)
-        ("C-}" . 'sp-forward-barf-sexp))
-  :config
-  (sp-with-modes
-      '(rust-mode go-mode java-mode rjsx-mode)
-    (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET"))))
-  (sp-with-modes
-      '(rust-mode java-mode)
-    (sp-local-pair "<" ">"))
-  (sp-with-modes
-      '(cider-repl-mode)
-    (sp-local-pair "'" nil :actions nil))
-  :custom
-  (sp-highlight-pair-overlay nil)
-  (sp-highlight-wrap-overlay nil))
+(mapcar
+ (lambda (m)
+   (add-hook (intern (concat (symbol-name m) "-hook")) 'electric-pair-local-mode))
+ '(rust-mode go-mode java-mode js-mode conf-mode snippet-mode json-mode css-mode web-mode html-mode cider-repl-mode elixir-mode))
+
+;; (use-package smartparens
+;;   :hook
+;;   ((rust-mode go-mode java-mode js-mode conf-mode snippet-mode json-mode css-mode web-mode html-mode cider-repl-mode) . 'smartparens-mode)
+;;   :bind
+;;   (:map smartparens-mode-map
+;;         ("C-k" . 'sp-kill-hybrid-sexp)
+;;         ("C-)" . 'sp-slurp-hybrid-sexp)
+;;         ("C-}" . 'sp-forward-barf-sexp)
+;;         ("C-M-t" . 'sp-transpose-sexp)
+;;         ("M-r" . 'sp-raise-sexp))
+;;   :config
+;;   (sp-with-modes
+;;       '(elixir-mode)
+;;     (sp-local-pair "\"" "\""))
+;;   (sp-with-modes
+;;       '(rust-mode go-mode java-mode js-mode)
+;;     (sp-local-pair "{" nil :post-handlers '(:add ("||\n[i]" "RET"))))
+;;   (sp-with-modes
+;;       '(rust-mode java-mode)
+;;     (sp-local-pair "<" ">"))
+;;   (sp-with-modes
+;;       '(cider-repl-mode)
+;;     (sp-local-pair "'" nil :actions nil))
+;;   :custom
+;;   (sp-escape-quotes-after-insert nil)
+;;   (sp-highlight-pair-overlay nil)
+;;   (sp-highlight-wrap-overlay nil))
 
 (provide 'init-paren)

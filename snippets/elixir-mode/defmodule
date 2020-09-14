@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: defmodule
+# key: defmodule
+# --
+defmodule `(+elixir-auto-module-name)` do
+  @moduledoc """
+  ${1:Document}
+  """
+  $0$>
+end

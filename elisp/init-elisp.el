@@ -10,4 +10,16 @@
      ,@body
      (message "%.06f" (float-time (time-since time)))))
 
+(defun +in-string-p ()
+  "Returns non-nil if inside string, else nil.
+Result depends on syntax table's string quote character."
+  (interactive)
+  (nth 3 (syntax-ppss)))
+
+(defun +in-comment-p ()
+  "Returns non-nil if inside comment, else nil.
+Result depends on syntax table's comment character."
+  (interactive)
+  (nth 4 (syntax-ppss)))
+
 (provide 'init-elisp)

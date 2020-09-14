@@ -65,4 +65,9 @@
   (add-hook 'prog-mode-hook #'yas-minor-mode)
   (add-hook 'yas-minor-mode-hook #'+yas-load-local-snippets))
 
+(require 'autoinsert)
+(auto-insert-mode)
+
+(setq auto-insert-query nil)
+
 (provide 'init-snippet)

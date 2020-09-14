@@ -165,6 +165,7 @@ point reaches the beginning or end of the buffer, stop there."
   (interactive)
   (bind-key "C-z" (eval-defun nil)))
 
-
+(global-set-key (kbd "<M-next>") 'scroll-other-window)
+(global-set-key (kbd "<M-prior>") 'scroll-other-window-down)
 
 (provide 'init-global)

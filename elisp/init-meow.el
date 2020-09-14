@@ -9,7 +9,6 @@
 
   (meow-leader-define-key
    '(";" . dired-sidebar-toggle-sidebar)
-   '("SPC" . avy-goto-line)
    '("k" . kill-buffer)
    '("l" . goto-line)
    '("h" . ace-window)
@@ -38,7 +37,7 @@
    '("y" . tiny-expand)
    '("a" . emamux:send-region)
    '("!" . +open-work-log)
-   '("$" . +send-clojure-ns-form)
+   ;; '("$" . +send-clojure-ns-form)
    '("." . highlight-symbol-at-point)
    '("," . unhighlight-regexp)
    '("|" . +toggle-theme)))
@@ -54,6 +53,7 @@
   (add-to-list 'meow-normal-state-mode-list 'slack-message-buffer-mode)
   (add-to-list 'meow-normal-state-mode-list 'slack-thread-message-buffer-mode)
   (add-to-list 'meow-normal-state-mode-list 'messages-buffer-mode)
+  (add-to-list 'meow-normal-state-mode-list 'alchemist-iex-mode)
   :custom
   (meow-layout 'dvp))
 
