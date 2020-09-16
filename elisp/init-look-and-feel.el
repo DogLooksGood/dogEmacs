@@ -6,7 +6,7 @@
 (require 'joker-theme)
 
 (setq +font-fixed-family "dejavu sans mono"
-      +font-variable-family "dejavu sans"
+      +font-variable-family "dejavu sans mono"
       +font-size 10
       +frame-margin 15
       +alpha 100
@@ -14,10 +14,7 @@
       +theme 'dark)
 
 (defun +setup-prog-faces ()
-  ;; (face-remap-add-relative 'font-lock-function-name-face :bold t)
-  (face-remap-add-relative 'font-lock-function-name-face :height 125)
-  ;; (face-remap-add-relative 'font-lock-comment-face :family +font-variable-family)
-  )
+  (face-remap-add-relative 'font-lock-function-name-face :height 125))
 
 (defun +setup-text-faces ()
   (face-remap-add-relative 'default :family +font-variable-family)

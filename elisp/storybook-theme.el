@@ -4,17 +4,17 @@
 
 (custom-theme-set-faces
  'storybook
- `(default                        ((t (:background "#f0f0f0" :foreground "#222222"))))
+ `(default                        ((t (:background "#e9e9e9" :foreground "#333333"))))
  `(cursor                         ((t (:background "black"))))
  '(region                         ((t (:background "#AFCFFF"))))
  `(hl-line                        ((t ())))
- `(font-lock-comment-face         ((t (:background "#f2dae7" :extend t))))
- `(font-lock-doc-face             ((t (:background "#f2dae7" :extend t))))
+ `(font-lock-comment-face         ((t (:foreground "dark green"))))
+ `(font-lock-doc-face             ((t (:foreground "dark green"))))
  `(font-lock-warning-face         ((t (:background "dark red" :foreground "white"))))
- `(font-lock-string-face          ((t (:background "#c5eae0"))))
+ `(font-lock-string-face          ((t (:foreground "dark red"))))
  `(font-lock-function-name-face   ((t (:bold t))))
- `(font-lock-keyword-face         ((t (:foreground "black"))))
- `(font-lock-constant-face        ((t (:foreground "#5c14ad"))))
+ `(font-lock-keyword-face         ((t ())))
+ `(font-lock-constant-face        ((t (:foreground "DarkBlue"))))
  `(font-lock-builtin-face         ((t ())))
  `(font-lock-variable-name-face   ((t ())))
  `(font-lock-type-face            ((t ())))

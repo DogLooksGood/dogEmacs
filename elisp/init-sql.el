@@ -35,10 +35,4 @@
    ;; For placeholder
    (":[-a-zA-Z0-9_]+" . font-lock-variable-name-face)))
 
-
-(use-package ejc-sql
-  :bind
-  (("C-c e c" . 'ejc-connect)))
-
-
 (provide 'init-sql)

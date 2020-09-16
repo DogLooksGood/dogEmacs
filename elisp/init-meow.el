@@ -54,6 +54,7 @@
   (add-to-list 'meow-normal-state-mode-list 'slack-thread-message-buffer-mode)
   (add-to-list 'meow-normal-state-mode-list 'messages-buffer-mode)
   (add-to-list 'meow-normal-state-mode-list 'alchemist-iex-mode)
+  (add-to-list 'meow-normal-state-mode-list 'inf-iex-mode)
   :custom
   (meow-layout 'dvp))
 

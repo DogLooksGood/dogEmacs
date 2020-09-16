@@ -1,12 +1,13 @@
 ;;; -*- lexical-binding: t -*-
 
+(require 'inf-iex)
+
 (use-package elixir-mode
   ;;; Use web-mode for eex file.
+  :hook (elixir-mode . inf-iex-minor-mode)
   :bind
   (:map elixir-mode-map
-        ("C-c C-f" . 'elixir-format)
-        ("C-c C-k" . '+elixir-compile)
-        ("C-c C-r" . '+elixir-reload))
+        ("C-c C-f" . 'elixir-format))
   :commands (elixir-mode)
   :config
   (font-lock-add-keywords 'elixir-mode
@@ -69,7 +70,7 @@
 (add-hook 'elixir-mode-hook '+elixir-post-self-insert-hook-setup)
 
 (use-package polymode
-  :mode ("\.ex$" . poly-elixir-web-mode)
+  :mode ("\.ex$" . poly-elixir-mode)
   :config
   (define-hostmode poly-elixir-hostmode :mode 'elixir-mode)
   (define-innermode poly-liveview-expr-elixir-innermode
@@ -81,7 +82,7 @@
     :allow-nested nil
     :keep-in-mode 'host
     :fallback-mode 'host)
-  (define-polymode poly-elixir-web-mode
+  (define-polymode poly-elixir-mode
     :hostmode 'poly-elixir-hostmode
     :innermodes '(poly-liveview-expr-elixir-innermode)))
 
