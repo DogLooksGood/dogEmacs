@@ -27,7 +27,7 @@
    (rime-inline-ascii-holder ?a)
    (default-input-method "rime")
    (rime-cursor "˰")
-   (rime-show-candidate 'posframe)
+   (rime-show-candidate 'minibuffer)
    (rime-posframe-fixed-position t)
    (rime-posframe-properties (list
                               :internal-border-width 2

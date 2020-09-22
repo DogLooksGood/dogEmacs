@@ -1,32 +1,43 @@
 ;;; -*- lexical-binding: t -*-
 ;;; A deadly simple mode line customization.
 
-(defvar-local +current-buffer-vc-path nil)
+
+(defvar-local +smart-file-name-cache nil
+  "Cache for the smart file name of current buffer.")
+
+(defvar-local +project-name-cache nil
+  "Cache for current project name.")
+
 (defun +smart-file-name ()
-  "Get current file name, if we are in project, the return relative path to the project root, otherwise return absolute file path."
-  (if +current-buffer-vc-path
-      +current-buffer-vc-path
-    (if (not vc-mode)
-        (buffer-name)
-      (setq-local +current-buffer-vc-path (file-relative-name (buffer-file-name) (vc-root-dir)))
-      +current-buffer-vc-path)))
+  "Get current file name, if we are in project, the return relative path to the project root, otherwise return absolute file path.
+This function is slow, so we have to use cache."
+  (cond
+   (+smart-file-name-cache +smart-file-name-cache)
+   ((and (buffer-file-name (current-buffer))
+         (project-current))
+    (setq-local +smart-file-name-cache
+          (file-relative-name
+           (buffer-file-name (current-buffer))
+           (project-root (project-current)))))
+   (t (setq-local +smart-file-name-cache (buffer-name)))))
 
 (defun +project-name ()
   "Get project name, which is used in title format."
-  (if vc-mode
-      (format "  { %s }" (vc-root-dir))
-    ""))
+  (cond
+   (+project-name-cache +project-name-cache)
+   ((project-current)
+    (setq-local +project-name-cache
+          (format " { %s } " (project-root (project-current)))))
+   (t (setq-local +project-name-cache ""))))
 
 ;;; title line setup
-(setq-default frame-title-format
-              '("Emacs "
-                (:eval (+project-name))))
+(setq-default frame-title-format '("Emacs"))
 
 (setq-default mode-line-format '((:eval (meow-indicator))
                                  " %l "
                                  (:eval (when rime-mode (concat  (rime-lighter) " ")))
                                  (:eval (+smart-file-name))
-                                 " %* %m "
+                                 "%* %m "
                                  (vc-mode vc-mode)))
 
 (provide 'init-modeline)

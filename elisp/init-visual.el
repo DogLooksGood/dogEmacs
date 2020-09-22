@@ -36,6 +36,10 @@
 ;;   :init
 ;;   (global-yascroll-bar-mode -1))
 
+(use-package writeroom-mode
+  :bind
+  ("C-z" . 'writeroom-mode))
+
 ;; (scroll-bar-mode 1)
 
 ;; Vertical Border

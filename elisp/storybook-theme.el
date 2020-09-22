@@ -32,7 +32,7 @@
  '(highlight-symbol-face          ((t ())))
  '(yascroll:thumb-fringe          ((t (:background "black" :foreground "black"))))
  '(yascroll:thumb-text-area       ((t (:background "black" :foreground "black"))))
- '(rime-indicator-face            ((t (:bold t :foreground "#1853cc"))))
+ '(rime-indicator-face            ((t (:foreground "#1853cc"))))
  '(rime-indicator-dim-face        ((t ())))
  '(rime-default-face              ((t (:foreground "#303030" :background "#ececec"))))
  '(rime-preedit-face              ((t (:inverse-video nil :underline t))))

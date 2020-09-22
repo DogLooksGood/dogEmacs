@@ -5,16 +5,17 @@
 (require 'storybook-theme)
 (require 'joker-theme)
 
+;;; 一些中文的字符用来参考。
+
 (setq +font-fixed-family "dejavu sans mono"
-      +font-variable-family "dejavu sans mono"
+      +font-variable-family "dejavu sans"
       +font-size 10
       +frame-margin 15
       +alpha 100
       +themes (list 'dark 'joker 'light 'storybook)
       +theme 'dark)
 
-(defun +setup-prog-faces ()
-  (face-remap-add-relative 'font-lock-function-name-face :height 125))
+(defun +setup-prog-faces ())
 
 (defun +setup-text-faces ()
   (face-remap-add-relative 'default :family +font-variable-family)

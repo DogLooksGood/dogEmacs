@@ -18,6 +18,6 @@
   (setq +cursor-timer
         (run-with-timer 0 0.1 #'+cursor-timer-function)))
 
-(blink-cursor-mode -1)
+(blink-cursor-mode 1)
 
 (provide 'init-cursor)

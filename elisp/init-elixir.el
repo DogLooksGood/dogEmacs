@@ -2,6 +2,13 @@
 
 (require 'inf-iex)
 
+(defface +elixir-dim-face
+  '((((class color) (background dark))
+     (:foreground "grey60"))
+    (((class color) (background light))
+     (:foreground "grey40")))
+  "Elixir dim face")
+
 (use-package elixir-mode
   ;;; Use web-mode for eex file.
   :hook (elixir-mode . inf-iex-minor-mode)
@@ -11,9 +18,14 @@
   :commands (elixir-mode)
   :config
   (font-lock-add-keywords 'elixir-mode
-                          '(("[_a-zA-Z0-9]+:" . font-lock-constant-face)
+                          '(("\\([_a-zA-Z0-9!?]+\\):" 1 '+elixir-dim-face)
                             (":[_a-zA-Z0-9\"]+" . font-lock-constant-face)
-                            ("defmacro \\([a-zA-Z0-9!?_]+\\)" 1 font-lock-function-name-face)))
+                            ("defmacro \\([a-zA-Z0-9!?_]+\\)" 1 font-lock-function-name-face)
+                            ("@[_a-zA-Z0-9!?]+" . font-lock-constant-face)
+                            ("\\<true\\>" . font-lock-constant-face)
+                            ("\\<false\\>" . font-lock-constant-face)
+                            ("\\<nil\\>" . font-lock-constant-face)
+                            ("\\<_\\>" . font-lock-comment-face)))
   :init
   (add-to-list 'auto-mode-alist '("\\.eex\\'" . web-mode)))
 
@@ -40,6 +52,7 @@
      ((looking-back ",,$" 2)
       (backward-delete-char 2)
       (insert "|> "))
+     ((looking-back "<-" 2))
      ((looking-back "[[:graph:]]-" 2)
       (backward-delete-char 1)
       (insert "_"))
@@ -47,12 +60,12 @@
       (backward-delete-char 1)
       (insert ":")))))
 
-(defun +elixir-compile ()
+(defun +elixir-compile-tmux ()
   (interactive)
   (when (buffer-modified-p) (save-buffer))
   (emamux:send-keys (message "c \"%s\"" (+smart-file-name))))
 
-(defun +elixir-reload ()
+(defun +elixir-reload-tmux ()
   (interactive)
   (when (buffer-modified-p) (save-buffer))
   (let ((module-name (save-mark-and-excursion

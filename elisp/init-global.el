@@ -59,7 +59,8 @@
  bidi-inhibit-bpa t
  bidi-paragraph-direction 'left-to-right
  ;; Allow resize by pixels
- frame-resize-pixelwise t)
+ frame-resize-pixelwise t
+ eldoc-idle-delay 1)
 
 ;;; Fix underline display
 (setq underline-minimum-offset 0)

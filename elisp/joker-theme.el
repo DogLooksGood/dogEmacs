@@ -132,6 +132,7 @@
  `(rime-preedit-face              ((t (:inverse-video nil :underline t))))
  `(rime-cursor-face               ((t (:inherit font-lock-constant-face))))
  `(rime-indicator-face            ((t (:foreground "#9256B4"))))
+ `(rime-indicator-dim-face        ((t (:foreground "grey40"))))
  `(tooltip                        ((t ())))
  `(parinfer-error-face            ((t (:underline (:style wave :color "red")))))
  '(dired-directory                ((t (:bold t))))

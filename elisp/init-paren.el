@@ -24,17 +24,10 @@ otherwise will insert a colon."
    ("M-{" . 'paredit-wrap-curly)
    (";" . '+lisp-semicolon)))
 
-;;; Use electric-pair mode for elixir and python
-(mapcar
- (lambda (m)
-   (add-hook (intern (concat (symbol-name m) "-hook")) 'electric-pair-local-mode))
- '(elixir-mode python-mode))
-
-
 ;;; Use smartparens for other modes
 (use-package smartparens
   :hook
-  ((rust-mode go-mode java-mode js-mode conf-mode snippet-mode json-mode css-mode web-mode html-mode cider-repl-mode) . 'smartparens-mode)
+  ((elixir-mode python-mode rust-mode go-mode java-mode js-mode conf-mode snippet-mode json-mode css-mode web-mode html-mode cider-repl-mode) . 'smartparens-mode)
   :bind
   (:map smartparens-mode-map
         ("C-k" . 'sp-kill-hybrid-sexp)
