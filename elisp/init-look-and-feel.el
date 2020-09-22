@@ -64,7 +64,7 @@ Will setup following customizations:
       (cond
        ((derived-mode-p 'prog-mode)
         (+setup-prog-faces))
-       ((derived-mode-p 'text-mode)
+       ((derived-mode-p 'org-mode 'markdown-mode)
         (+setup-text-faces))))))
 
 (defun +toggle-theme ()
@@ -76,7 +76,8 @@ Will setup following customizations:
 
 ;;; Hook face setups
 (add-hook 'prog-mode-hook '+setup-prog-faces)
-(add-hook 'text-mode-hook '+setup-text-faces)
+(add-hook 'org-mode-hook '+setup-text-faces)
+(add-hook 'markdown-mode-hook '+setup-text-faces)
 
 ;;; Load customizations
 (+load-look-and-feel)
