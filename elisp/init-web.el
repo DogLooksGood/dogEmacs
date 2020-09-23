@@ -6,9 +6,7 @@
   :hook (web-mode . smartparens-mode)
   :custom
   (web-mode-code-indent-offset 2)
-  (web-mode-markup-indent-offset 2)
-  :custom
-  (web-mode-engines-alist '(("elixir" . "\\.ex\\'"))))
+  (web-mode-markup-indent-offset 2))
 
 (use-package emmet-mode
   :hook (mhtml-mode nxml-mode web-mode)
@@ -18,4 +16,4 @@
 
 (add-hook 'mhtml-mode-hook 'smartparens-mode)
 
-(provide 'init-html)
+(provide 'init-web)

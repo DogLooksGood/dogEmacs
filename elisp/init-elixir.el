@@ -10,12 +10,11 @@
   "Elixir dim face")
 
 (use-package elixir-mode
-  ;;; Use web-mode for eex file.
   :hook (elixir-mode . inf-iex-minor-mode)
+  :mode ("\\.eex\\'" . web-mode)
   :bind
   (:map elixir-mode-map
         ("C-c C-f" . 'elixir-format))
-  :commands (elixir-mode)
   :config
   (font-lock-add-keywords 'elixir-mode
                           '(("\\([_a-zA-Z0-9!?]+\\):" 1 '+elixir-dim-face)
@@ -25,9 +24,7 @@
                             ("\\<true\\>" . font-lock-constant-face)
                             ("\\<false\\>" . font-lock-constant-face)
                             ("\\<nil\\>" . font-lock-constant-face)
-                            ("\\<_\\>" . font-lock-comment-face)))
-  :init
-  (add-to-list 'auto-mode-alist '("\\.eex\\'" . web-mode)))
+                            ("\\<_\\>" . font-lock-comment-face))))
 
 (use-package mix
   :hook
@@ -83,7 +80,7 @@
 (add-hook 'elixir-mode-hook '+elixir-post-self-insert-hook-setup)
 
 (use-package polymode
-  :mode ("\.ex$" . poly-elixir-mode)
+  :mode ("\\.ex\\'" . poly-elixir-mode)
   :config
   (define-hostmode poly-elixir-hostmode :mode 'elixir-mode)
   (define-innermode poly-liveview-expr-elixir-innermode

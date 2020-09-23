@@ -90,8 +90,7 @@
    (->> (buffer-substring-no-properties (region-beginning) (region-end))
         (replace-regexp-in-string "^#" "")
         (replace-regexp-in-string "\n#" "\n")
-        (replace-regexp-in-string "\n" " \\ \n")
-        (format "%s")
+        (format "(%s)")
         (string-trim-left))))
 
 (defun inf-iex-eval-line ()
@@ -142,7 +141,6 @@
         (set-buffer comint-buffer)
         (inf-iex-mode)
         (pop-to-buffer (current-buffer))))))
-
 
 (provide 'inf-iex)
 ;;; inf-iex.el ends here

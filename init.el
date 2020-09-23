@@ -66,7 +66,7 @@
   (require 'init-org)
   (require 'init-markdown)
   (require 'init-sql)
-  (require 'init-html)
+  (require 'init-web)
   (require 'init-edit)
   (require 'init-window)
   (require 'init-nav)

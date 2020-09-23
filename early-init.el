@@ -5,5 +5,4 @@
 
 (when (file-exists-p (expand-file-name "~/.emacs.d/emacs.pdmp"))
   (setq package-enable-at-startup nil
-        file-name-handler-alist nil
-        auto-window-vscroll nil))
+        file-name-handler-alist nil))

@@ -11,7 +11,7 @@
   :bind
   (:map eglot-mode-map ("M-." . '+lsp-xfind-or-dumb-jump))
   :hook
-  ((rust-mode c-mode web-mode elixir-mode) . eglot-ensure)
+  ((rust-mode c-mode elixir-mode) . eglot-ensure)
   :custom
   (eglot-stay-out-of '())
   (eglot-ignored-server-capabilites '(:documentHighlightProvider))
