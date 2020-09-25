@@ -136,6 +136,8 @@
  `(tooltip                        ((t ())))
  `(parinfer-error-face            ((t (:underline (:style wave :color "red")))))
  '(dired-directory                ((t (:bold t))))
+ '(web-mode-html-attr-name-face   ((t ())))
+ '(web-mode-html-tag-face         ((t ())))
  '(imenu-list-entry-face-0        ((t ())))
  '(imenu-list-entry-subalist-face-0 ((t (:bold t :underline t)))))
 

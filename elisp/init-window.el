@@ -2,8 +2,7 @@
   :ensure t
   :commands (ace-window)
   :bind
-  (("C-;" . ace-window)
-   ("M-<tab>" . ace-window))
+  (("M-<tab>" . ace-window))
   :init
   (setq aw-ignore-on nil)
   (setq aw-char-position 'top-left)

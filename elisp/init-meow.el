@@ -5,7 +5,9 @@
    '("S" . kmacro-start-macro)
    '("E" . kmacro-end-macro)
    '("A" . apply-macro-to-region-lines)
-   '("M" . kmacro-call-macro))
+   '("M" . kmacro-call-macro)
+   '("W" . mc/mark-next-like-this)
+   '("M" . mc/skip-to-next-like-this))
 
   (meow-leader-define-key
    '(";" . dired-sidebar-toggle-sidebar)
@@ -37,7 +39,7 @@
    '("y" . tiny-expand)
    '("a" . emamux:send-region)
    '("!" . +open-work-log)
-   ;; '("$" . +send-clojure-ns-form)
+   '("SPC" . iedit-mode)
    '("." . highlight-symbol-at-point)
    '("," . unhighlight-regexp)
    '("|" . +toggle-theme)))
@@ -57,8 +59,6 @@
   (add-to-list 'meow-normal-state-mode-list 'inf-iex-mode)
   :custom
   (meow-layout 'dvp))
-
-
 
 ;;; New concept:
 

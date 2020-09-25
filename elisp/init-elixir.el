@@ -34,9 +34,12 @@
 
 (defun +elixir-auto-module-name ()
   (let* ((file-name (+smart-file-name))
-         (lib-file-name (if (string-prefix-p "lib/" file-name)
-                            (substring file-name 4)
-                          file-name)))
+         (lib-file-name (cond
+                         ((string-prefix-p "lib/" file-name)
+                          (substring file-name 4))
+                         ((string-prefix-p "test/" file-name)
+                          (substring file-name 5))
+                         (t file-name))))
     (message file-name)
     (-> (replace-regexp-in-string "\.exs?$" "" lib-file-name)
         (split-string "/")

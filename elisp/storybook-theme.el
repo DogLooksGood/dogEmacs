@@ -7,7 +7,7 @@
  `(default                        ((t (:background "#e9e9e9" :foreground "#333333"))))
  `(cursor                         ((t (:background "black"))))
  '(region                         ((t (:background "#AFCFFF"))))
- `(hl-line                        ((t ())))
+ `(hl-line                        ((t (:background "#e6e6e6" :overline "#d0d0d0" :underline "#d0d0d0"))))
  `(font-lock-comment-face         ((t (:foreground "dark green"))))
  `(font-lock-doc-face             ((t (:foreground "dark green"))))
  `(font-lock-warning-face         ((t (:background "dark red" :foreground "white"))))
@@ -43,8 +43,11 @@
  '(telega-entity-type-code        ((t (:inherit fixed-pitch))))
  '(telega-entity-type-pre         ((t (:inherit fixed-pitch))))
  '(cider-fringe-good-face         ((t (:foreground "#006666"))))
+ '(web-mode-html-attr-name-face   ((t ())))
+ '(web-mode-html-tag-face         ((t ())))
  '(fringe                         ((t ())))
- `(line-number-current-line       ((t (:bold t)))))
+ `(line-number-current-line       ((t (:bold t))))
+ '(mc/cursor-bar-face             ((t (:background "grey50" :height 1)))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

@@ -14,7 +14,9 @@
   "Returns non-nil if inside string, else nil.
 Result depends on syntax table's string quote character."
   (interactive)
-  (nth 3 (syntax-ppss)))
+  (or (nth 3 (syntax-ppss))
+      (member 'font-lock-string-face
+              (text-properties-at (point)))))
 
 (defun +in-comment-p ()
   "Returns non-nil if inside comment, else nil.
