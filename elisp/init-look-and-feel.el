@@ -17,7 +17,7 @@
       +theme 'dark)
 
 (defun +setup-prog-faces ()
-  (set-face-attribute 'font-lock-function-name-face nil :height +large-font-scale))
+  (face-remap-add-relative 'font-lock-function-name-face :height +large-font-scale))
 
 (defun +setup-text-faces ()
   (face-remap-add-relative 'default :family +font-variable-family)
