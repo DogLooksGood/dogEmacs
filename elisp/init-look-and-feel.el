@@ -7,15 +7,17 @@
 
 ;;; 一些中文的字符用来参考。
 
-(setq +font-fixed-family "dejavu sans mono"
-      +font-variable-family "dejavu sans"
+(setq +font-fixed-family "JetBrains Mono SemiLight"
+      +font-variable-family "Sarasa Gothic SC Regular"
       +font-size 10
+      +large-font-scale 1.25
       +frame-margin 15
-      +alpha 100
+      +alpha 95
       +themes (list 'dark 'joker 'light 'storybook)
       +theme 'dark)
 
-(defun +setup-prog-faces ())
+(defun +setup-prog-faces ()
+  (set-face-attribute 'font-lock-function-name-face nil :height +large-font-scale))
 
 (defun +setup-text-faces ()
   (face-remap-add-relative 'default :family +font-variable-family)
@@ -72,7 +74,8 @@ Will setup following customizations:
   (interactive)
   (setq +theme (if (eq +theme 'dark) 'light 'dark))
   (+setup-theme)
-  (+setup-font))
+  (+setup-font)
+  (+load-look-and-feel))
 
 ;;; Hook face setups
 (add-hook 'prog-mode-hook '+setup-prog-faces)

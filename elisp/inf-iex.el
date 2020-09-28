@@ -19,10 +19,26 @@
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-
 ;;
+;; Enable `inf-iex-minor-mode' in `elixir-mode'
+;;
+;; (add-hook 'elixir-mode-hook 'inf-iex-minor-mode)
+;;
+;; Available Shortcuts:
+;;
+;; C-c C-v           - Switch between sending target, tmux or comint buffer.
+;; C-c C-r           - Send current region to target.
+;; C-c C-l           - Send current line to target.
+;; C-c C-k           - Reload current module.
+;; C-c C-c C-p       - Compile current file.
+;; C-c C-z           - Start IEx comint buffer.
 
 ;;; Code:
+
+(require 'comint)
+(require 'emamux)
+(require 'dash)
+(require 'cl-lib)
 
 (defvar inf-iex-minor-mode-map
   (let ((keymap (make-sparse-keymap)))
@@ -45,6 +61,7 @@
     keymap)
   "Keymap for IEx buffer.")
 
+
 (define-minor-mode inf-iex-minor-mode
   "Minor mode for Interaction with IEx."
   nil
@@ -56,6 +73,16 @@
   nil
   "IEx"
   inf-iex-mode-map)
+
+(defun inf-iex--proj-file-name ()
+  "Return relative file name of current buffer in current project.
+
+Will only work when we are in a project."
+  (when (and (buffer-file-name (current-buffer))
+             (project-current))
+    (file-relative-name
+     (buffer-file-name (current-buffer))
+     (project-root (project-current)))))
 
 (defun inf-iex-toggle-send-target ()
   (interactive)
@@ -104,7 +131,7 @@
 (defun inf-iex-compile ()
   (interactive)
   (when (buffer-modified-p) (save-buffer))
-  (inf-iex--send (message "c \"%s\"\n" (+smart-file-name))))
+  (inf-iex--send (message "c \"%s\"\n" (inf-iex--proj-file-name))))
 
 (defun inf-iex-reload ()
   (interactive)

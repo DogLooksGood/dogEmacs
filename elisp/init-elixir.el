@@ -11,7 +11,8 @@
 
 (use-package elixir-mode
   :hook (elixir-mode . inf-iex-minor-mode)
-  :mode ("\\.eex\\'" . web-mode)
+  :mode (("\\.eex\\'" . web-mode)
+         ("\\.leex\\'" . web-mode))
   :bind
   (:map elixir-mode-map
         ("C-c C-f" . 'elixir-format))

@@ -4,10 +4,10 @@
 
 (custom-theme-set-faces
  'storybook
- `(default                        ((t (:background "#e9e9e9" :foreground "#333333"))))
+ `(default                        ((t (:background "#f0e9d1" :foreground "#333333"))))
  `(cursor                         ((t (:background "black"))))
- '(region                         ((t (:background "#AFCFFF"))))
- `(hl-line                        ((t (:background "#e6e6e6" :overline "#d0d0d0" :underline "#d0d0d0"))))
+ '(region                         ((t (:background "#b6e3fa"))))
+ `(hl-line                        ((t (:background "#f5eed5" :overline "#d0d0d0" :underline "#d0d0d0"))))
  `(font-lock-comment-face         ((t (:foreground "dark green"))))
  `(font-lock-doc-face             ((t (:foreground "dark green"))))
  `(font-lock-warning-face         ((t (:background "dark red" :foreground "white"))))
@@ -47,7 +47,8 @@
  '(web-mode-html-tag-face         ((t ())))
  '(fringe                         ((t ())))
  `(line-number-current-line       ((t (:bold t))))
- '(mc/cursor-bar-face             ((t (:background "grey50" :height 1)))))
+ '(mc/cursor-bar-face             ((t (:background "grey50" :height 1))))
+ '(web-mode-function-call-face    ((t ()))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

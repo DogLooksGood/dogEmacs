@@ -1,7 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 ;;; A deadly simple mode line customization.
 
-
 (defvar-local +smart-file-name-cache nil
   "Cache for the smart file name of current buffer.")
 

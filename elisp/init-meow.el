@@ -7,7 +7,9 @@
    '("A" . apply-macro-to-region-lines)
    '("M" . kmacro-call-macro)
    '("W" . mc/mark-next-like-this)
-   '("M" . mc/skip-to-next-like-this))
+   '("M" . mc/skip-to-next-like-this)
+   '("u" . universal-argument)
+   '("z" . meow-undo))
 
   (meow-leader-define-key
    '(";" . dired-sidebar-toggle-sidebar)
@@ -66,11 +68,11 @@
 ;;; Use numeric argument to mark multiple at once.
 ;;; How `word' command work?
 ;;; W - to selection current word.
-;;;   with universal arg, to the end of sentence
+;;;   with universal arg, to the end of symbol
 ;;;   with numeric arg, mark multiple word at once.
 ;;;   if there's mark already, expand.
 ;;; M - mark current word and reverse the selection.
-;;;   with universal arg, to the begin of sentence
+;;;   with universal arg, to the begin of symbol
 ;;;   with numeric arg, mark multiple word at once.
 ;;; E - mark current symbol or exp
 ;;;   with universal arg, to the end of block
@@ -231,6 +233,86 @@ See `meow-prev-line' for how prefix arguments work."
     (let ((count (prefix-numeric-value arg)))
       (dotimes (i count)
         (call-interactively #'next-line))))))
+
+(defun meow--bounds-with-type (type thing)
+  (when-let ((bounds (bounds-of-thing-at-point thing)))
+    (cons type bounds)))
+
+(defun meow-forward-word (arg)
+  "Activate word selection, select current or next word.
+
+Use with universal argument to forward to the end of current symbol."
+  (interactive "P")
+  ;; result is (mark . pos) or nil
+  (let ((result
+         (or
+          (unless (region-active-p)
+            (meow--bounds-with-type 'word 'word))
+
+          (when (eq 'word-mark (meow--selection-type))
+           (save-mark-and-excursion
+             (let ((mark (point)))
+              (forward-word (if (meow--direction-backward-p) 2 -2))
+              (cons 'word-expand (cons mark (point))))))
+
+          (when (eq 'word-expand (meow--selection-type))
+            (save-mark-and-excursion
+              (let ((mark (mark)))
+                (forward-word (if (meow--direction-backward-p) -1 1))
+                (cons 'word-expand (cons mark (point))))))
+
+          (save-mark-and-excursion
+            (let ((orig-pos (point)))
+              (forward-word (if (meow--direction-backward-p) -1 1))
+              (unless (= orig-pos (point))
+                (meow--bounds-with-type 'word 'word)))))))
+    (if (not result)
+        (message "Can't forward word!")
+      (let ((type (car result))
+            (mark (cadr result))
+            (pos (cddr result)))
+        (-> (meow--make-selection type mark pos)
+            (meow--select))))
+    (when (meow--with-universal-argument-p arg)
+      (if (meow--direction-backward-p)
+          (re-search-forward "\\_<" nil t -1)
+        (re-search-forward "\\_>" nil t 1)))))
+
+
+(defun meow-mark-or-backward-word (arg)
+  "Mark current word or backward word.
+
+Use with universal argument to backward to the begin of current symbol."
+  (interactive "P")
+  (let ((result
+         (or
+          (unless (region-active-p)
+            (meow--bounds-with-type 'word-mark 'word))
+
+          (when (eq 'word-expand (meow--selection-type))
+            (meow--bounds-with-type 'word-mark 'word))
+
+          (when (region-active-p)
+            (save-mark-and-excursion
+             (let ((orig-pos (point)))
+              (forward-word -1)
+              (unless (= orig-pos (point))
+                (meow--bounds-with-type 'word-mark 'word)))))
+
+          (save-mark-and-excursion
+            (let ((orig-pos (point)))
+              (forward-word -1)
+              (unless (= orig-pos (point))
+                (meow--bounds-with-type 'word-mark 'word)))))))
+    (if (not result)
+        (message "Can't mark word!")
+      (let ((type (car result))
+            (mark (cddr result))
+            (pos (cadr result)))
+        (-> (meow--make-selection type mark pos)
+            (meow--select))))
+    (when (meow--with-universal-argument-p arg)
+      (re-search-forward "\\_<" nil t -1))))
 
 ;;; other char selection
 

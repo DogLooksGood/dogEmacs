@@ -9,10 +9,7 @@
 
 (add-hook 'display-line-numbers-mode-hook #'+update-line-number-relative)
 
-;; Highlight current line.
-(add-hook 'prog-mode-hook 'hl-line-mode)
-(add-hook 'conf-mode-hook 'hl-line-mode)
-(add-hook 'text-mode-hook 'hl-line-mode)
+(hl-line-mode 1)
 
 (use-package rainbow-mode
   :hook

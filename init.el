@@ -96,3 +96,4 @@
 ;; Proper GC after startup
 (setq gc-cons-threshold (* 1024 128))
 (put 'magit-edit-line-commit 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)
