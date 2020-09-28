@@ -34,6 +34,7 @@
 ;; C-c M-p p         - Add Pry button to above line.
 ;; C-c M-p k         - Remove Pry button in this file.
 ;; C-c M-p l         - Goto Pry button.
+;; C-c M-t           - Measure time.
 ;; C-c C-z           - Start IEx comint buffer.
 
 ;;; Code:
@@ -65,6 +66,10 @@
 (defvar-local inf-iex--pry-overlay
   nil
   "The overlay of pry button.")
+
+(defvar-local inf-iex--injected
+  nil
+  "If eval function is injected")
 
 (defface inf-iex-pry-face
   '((((class color) (background dark))
@@ -119,7 +124,7 @@ Will only work when we are in a project."
   (delete-region (line-beginning-position) (line-end-position))
   (join-line)
   (setq inf-iex--pry-overlay nil)
-  (inf-iex-compile))
+  (inf-iex-reload))
 
 (defun inf-iex--click-pry-button (ignored)
   (inf-iex-unset-pry))
@@ -145,7 +150,7 @@ Will only work when we are in a project."
     (setq inf-iex--pry-overlay
           (make-overlay beg end))
     (overlay-put inf-iex--pry-overlay 'face 'inf-iex-pry-face)
-    (inf-iex-compile)))
+    (inf-iex-reload)))
 
 (defun inf-iex-toggle-send-target ()
   (interactive)
@@ -174,13 +179,19 @@ Will only work when we are in a project."
    ((eq 'tmux inf-iex-send-target)
     (inf-iex--tmux-send string))))
 
+(defun inf-iex--format-eval (s)
+  (if (and (inf-iex--module-name) inf-iex--injected)
+      (format "%s.__inf_iex_eval(quote do %s end)" (inf-iex--module-name) s)
+    (message "Reload module to have better support!")
+    (format "(%s)" s)))
+
 (defun inf-iex-eval ()
   (interactive)
   (inf-iex--send
    (->> (buffer-substring-no-properties (region-beginning) (region-end))
         (replace-regexp-in-string "^ *#" "")
         (replace-regexp-in-string "\n#" "\n")
-        (format "(%s)")
+        (inf-iex--format-eval)
         (string-trim-left))))
 
 (defun inf-iex-eval-line ()
@@ -191,7 +202,7 @@ Will only work when we are in a project."
                                           (point))
                                         (line-end-position))
         (string-remove-prefix "# ")
-        (format "%s")
+        (inf-iex--format-eval)
         (string-trim-left))))
 
 (defun inf-iex-compile ()
@@ -199,18 +210,47 @@ Will only work when we are in a project."
   (when (buffer-modified-p) (save-buffer))
   (inf-iex--send (message "c \"%s\"\n" (inf-iex--proj-file-name))))
 
+
+(defun inf-iex--inject-eval-fn-code (module-name)
+  (format
+   "def __inf_iex_eval(code), do: elem(Code.eval_quoted(quote do (import %s; unquote(code)) end), 0)\n"
+   module-name))
+
+(defun inf-iex--inject-eval-fn (module-name)
+  (when (string-suffix-p ".ex" (buffer-name))
+    (save-mark-and-excursion
+      (goto-char (point-min))
+      (when (search-forward "do\n" nil t 1))
+      (forward-char 1)
+      (insert (inf-iex--inject-eval-fn-code module-name)))))
+
+(defun inf-iex--remove-eval-fn (module-name)
+  (let ((code (inf-iex--inject-eval-fn-code module-name)))
+    (save-mark-and-excursion
+      (goto-char (point-min))
+      (when (search-forward code nil t 1)
+        (delete-char
+         (- (length code)))))))
+
+(defun inf-iex--module-name ()
+  (save-mark-and-excursion
+    (goto-char (point-min))
+    (re-search-forward
+     "defmodule \\([[:graph:]]+\\)")
+    (match-string 1)))
+
 (defun inf-iex-reload ()
   (interactive)
-  (when (buffer-modified-p) (save-buffer))
-
-  (let ((module-name (save-mark-and-excursion
-                       (goto-char (point-min))
-                       (re-search-forward
-                        "defmodule \\([[:graph:]]+\\)")
-                       (match-string 1))))
-    (if module-name
-        (inf-iex--send (message "r %s\n" module-name))
-      (message "Can't get module name in this file!"))))
+  (let ((inhibit-redisplay t)
+        (module-name (inf-iex--module-name)))
+    (inf-iex--inject-eval-fn module-name)
+    (when (buffer-modified-p) (save-buffer))
+    (if (not module-name)
+        (message "Can't get module name in this file!")
+      (inf-iex--send (message "r %s\n" module-name))
+      (setq inf-iex--injected t))
+    (inf-iex--remove-eval-fn module-name)
+    (when (buffer-modified-p) (save-buffer))))
 
 (defun inf-iex--make-iex-buffer-name ()
   (format "IEx[%s]" (project-root (project-current))))
