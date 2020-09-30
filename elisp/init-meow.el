@@ -44,7 +44,8 @@
    '("SPC" . iedit-mode)
    '("." . highlight-symbol-at-point)
    '("," . unhighlight-regexp)
-   '("|" . +toggle-theme)))
+   '("|" . +toggle-theme)
+   '("'" . universal-argument)))
 
 (use-package meow
   :quelpa
@@ -265,6 +266,8 @@ Use with universal argument to forward to the end of current symbol."
             (let ((orig-pos (point)))
               (forward-word (if (meow--direction-backward-p) -1 1))
               (unless (= orig-pos (point))
+                ;; Fix behaviour in camelCase with subword-mode
+                (backward-char 1)
                 (meow--bounds-with-type 'word 'word)))))))
     (if (not result)
         (message "Can't forward word!")

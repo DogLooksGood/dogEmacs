@@ -1,7 +1,5 @@
 ;;; -*- lexical-binding: t -*-
 
-(require 'inf-iex)
-
 (defface +elixir-dim-face
   '((((class color) (background dark))
      (:foreground "grey60"))
@@ -10,7 +8,6 @@
   "Elixir dim face")
 
 (use-package elixir-mode
-  :hook (elixir-mode . inf-iex-minor-mode)
   :mode (("\\.eex\\'" . web-mode)
          ("\\.leex\\'" . web-mode))
   :bind
@@ -27,25 +24,16 @@
                             ("\\<nil\\>" . font-lock-constant-face)
                             ("\\<_\\>" . font-lock-comment-face))))
 
+(use-package inf-iex
+  :quelpa
+  (inf-iex :fetcher file :path "~/Projects/inf-iex")
+  :hook (elixir-mode . inf-iex-minor-mode))
+
 (use-package mix
   :hook
   ((elixir-mode) . 'mix-minor-mode)
   :custom
   (compilation-scroll-output t))
-
-(defun +elixir-auto-module-name ()
-  (let* ((file-name (+smart-file-name))
-         (lib-file-name (cond
-                         ((string-prefix-p "lib/" file-name)
-                          (substring file-name 4))
-                         ((string-prefix-p "test/" file-name)
-                          (substring file-name 5))
-                         (t file-name))))
-    (message file-name)
-    (-> (replace-regexp-in-string "\.exs?$" "" lib-file-name)
-        (split-string "/")
-        (->> (-map #'string-inflection-pascal-case-function))
-        (string-join "."))))
 
 (defun +elixir-handle-input ()
   (unless (or (+in-string-p) (+in-comment-p))
@@ -60,23 +48,6 @@
      ((looking-back ";" 2)
       (backward-delete-char 1)
       (insert ":")))))
-
-(defun +elixir-compile-tmux ()
-  (interactive)
-  (when (buffer-modified-p) (save-buffer))
-  (emamux:send-keys (message "c \"%s\"" (+smart-file-name))))
-
-(defun +elixir-reload-tmux ()
-  (interactive)
-  (when (buffer-modified-p) (save-buffer))
-  (let ((module-name (save-mark-and-excursion
-                       (goto-char (point-min))
-                       (re-search-forward
-                        "defmodule \\([[:graph:]]+\\)")
-                       (match-string 1))))
-    (if module-name
-        (emamux:send-keys (message "r %s" module-name))
-      (message "Can't get module name in this file!"))))
 
 (defun +elixir-post-self-insert-hook-setup ()
   (add-hook 'post-self-insert-hook '+elixir-handle-input nil t))

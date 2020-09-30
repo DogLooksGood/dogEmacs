@@ -12,12 +12,13 @@
       +font-size 10
       +large-font-scale 1.25
       +frame-margin 15
-      +alpha 95
+      +alpha 85
       +themes (list 'dark 'joker 'light 'storybook)
       +theme 'dark)
 
 (defun +setup-prog-faces ()
-  (face-remap-add-relative 'font-lock-function-name-face :height +large-font-scale))
+  ;; (face-remap-add-relative 'font-lock-function-name-face :height +large-font-scale)
+  )
 
 (defun +setup-text-faces ()
   (face-remap-add-relative 'default :family +font-variable-family)
@@ -84,6 +85,12 @@ Will setup following customizations:
 
 ;;; Load customizations
 (+load-look-and-feel)
+
+(defun +setup-blur-kde (&rest ignores)
+  (shell-command "sh ~/.emacs.d/blur.sh"))
+
+(when (eq window-system 'x)
+  (add-hook 'emacs-startup-hook #'+setup-blur-kde))
 
 (provide 'init-look-and-feel)
 ;;; init-look-and-feel.el ends here
