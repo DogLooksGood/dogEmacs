@@ -1,5 +1,3 @@
-;; Relative line number
-
 (bind-key "C-S-L" 'display-line-numbers-mode)
 
 (setq display-line-numbers-width 3)
@@ -9,7 +7,9 @@
 
 (add-hook 'display-line-numbers-mode-hook #'+update-line-number-relative)
 
-(hl-line-mode 1)
+(add-hook 'prog-mode-hook #'hl-line-mode)
+(add-hook 'text-mode-hook #'hl-line-mode)
+(add-hook 'conf-mode-hook #'hl-line-mode)
 
 (use-package rainbow-mode
   :hook
@@ -29,13 +29,13 @@
   :hook
   (prog-mode . highlight-numbers-mode))
 
-;; (use-package yascroll
-;;   :init
-;;   (global-yascroll-bar-mode -1))
+(use-package yascroll
+  :init
+  (global-yascroll-bar-mode 1))
 
-(use-package writeroom-mode
-  :bind
-  ("C-z" . 'writeroom-mode))
+(use-package olivetti
+  :init
+  (olivetti-mode 1))
 
 ;; (scroll-bar-mode 1)
 

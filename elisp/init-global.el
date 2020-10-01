@@ -60,7 +60,7 @@
  bidi-paragraph-direction 'left-to-right
  ;; Allow resize by pixels
  frame-resize-pixelwise t
- eldoc-idle-delay 0.25)
+ x-gtk-resize-child-frames nil)
 
 ;;; Fix underline display
 (setq underline-minimum-offset 0)
@@ -168,5 +168,6 @@ point reaches the beginning or end of the buffer, stop there."
 
 (global-set-key (kbd "<M-next>") 'scroll-other-window)
 (global-set-key (kbd "<M-prior>") 'scroll-other-window-down)
+(global-set-key (kbd "C-M-S-d") 'toggle-debug-on-error)
 
 (provide 'init-global)

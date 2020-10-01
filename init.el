@@ -90,6 +90,7 @@
   (require 'init-pass)
   (require 'init-dictionary)
   (require 'init-modeline)
+  (require 'init-eldoc)
   (require 'init-macos)
   (require 'init-work))
 

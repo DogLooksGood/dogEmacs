@@ -4,10 +4,10 @@
 
 (custom-theme-set-faces
  'storybook
- `(default                        ((t (:background "#f0e9d1" :foreground "#333333"))))
+ `(default                        ((t (:background "#f8f8f8" :foreground "#333333"))))
  `(cursor                         ((t (:background "black"))))
  '(region                         ((t (:background "#b6e3fa"))))
- `(hl-line                        ((t (:background "#f5eed5" :overline "#d0d0d0" :underline "#d0d0d0"))))
+ `(hl-line                        ((t (:background "#ffffff" :overline "#d0d0d0" :underline "#d0d0d0"))))
  `(font-lock-comment-face         ((t (:foreground "dark green"))))
  `(font-lock-doc-face             ((t (:foreground "dark green"))))
  `(font-lock-warning-face         ((t (:background "dark red" :foreground "white"))))
@@ -30,8 +30,8 @@
  '(mode-line                      ((t (:overline "#000"))))
  '(mode-line-inactive             ((t (:overline "#353535"))))
  '(highlight-symbol-face          ((t ())))
- '(yascroll:thumb-fringe          ((t (:background "black" :foreground "black"))))
- '(yascroll:thumb-text-area       ((t (:background "black" :foreground "black"))))
+ '(yascroll:thumb-fringe          ((t (:background "#606060" :foreground "#606060"))))
+ '(yascroll:thumb-text-area       ((t (:background "#606060" :foreground "#606060"))))
  '(rime-indicator-face            ((t (:foreground "#1853cc"))))
  '(rime-indicator-dim-face        ((t ())))
  '(rime-default-face              ((t (:foreground "#303030" :background "#ececec"))))

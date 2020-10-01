@@ -10,7 +10,7 @@
   (setq aw-ignored-buffers '())
   (setq aw-keys '(?a ?o ?e ?u ?i)))
 
-;; (require 'winner)
-;; (winner-mode 1)
+(require 'winner)
+(winner-mode 1)
 
 (provide 'init-window)
