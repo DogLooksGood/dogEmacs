@@ -39,11 +39,11 @@
      meow-insert-kill
      kill-line
      paredit-backward-delete
-     backward -delete-char
+     backward-delete-char
      backward-kill-word
      backward-kill-sexp))
-  (company-idle-delay nil)
-  (company-minimum-prefix-length 5)
+  (company-idle-delay 0.4)
+  (company-minimum-prefix-length 3)
   (company-dabbrev-downcase nil)
   (company-abort-manual-when-too-short t)
   (company-require-match nil)
@@ -56,5 +56,9 @@
   :custom
   (company-posframe-show-indicator nil)
   (company-posframe-show-metadata nil))
+
+(use-package company-prescient
+  :init
+  (company-prescient-mode 1))
 
 (provide 'init-completion)

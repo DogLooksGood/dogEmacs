@@ -54,6 +54,7 @@
   (require 'init-global)
   (require 'init-git)
   (require 'init-ivy)
+  ;; (require 'init-selectrum)
   (require 'init-completion)
   (require 'init-paren)
   (require 'init-clojure)
