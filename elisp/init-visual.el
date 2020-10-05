@@ -7,9 +7,10 @@
 
 (add-hook 'display-line-numbers-mode-hook #'+update-line-number-relative)
 
-(add-hook 'prog-mode-hook #'hl-line-mode)
-(add-hook 'text-mode-hook #'hl-line-mode)
-(add-hook 'conf-mode-hook #'hl-line-mode)
+(when window-system
+  (add-hook 'prog-mode-hook #'hl-line-mode)
+  (add-hook 'text-mode-hook #'hl-line-mode)
+  (add-hook 'conf-mode-hook #'hl-line-mode))
 
 (use-package rainbow-mode
   :hook
@@ -34,10 +35,11 @@
   (global-yascroll-bar-mode 1))
 
 (use-package olivetti
-  :init
-  (olivetti-mode 1))
+  :hook ((text-mode conf-mode prog-mode) . olivetti-mode)
+  :custom
+  (olivetti-body-width 120))
 
-;; (scroll-bar-mode 1)
+;; (scroll-bar-mode -1)
 
 ;; Vertical Border
 (set-face-inverse-video-p 'vertical-border nil)

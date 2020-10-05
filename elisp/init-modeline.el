@@ -26,15 +26,15 @@ This function is slow, so we have to use cache."
    (+project-name-cache +project-name-cache)
    ((project-current)
     (setq-local +project-name-cache
-          (format " { %s } " (project-root (project-current)))))
+          (format " : %s " (project-root (project-current)))))
    (t (setq-local +project-name-cache ""))))
 
 ;;; title line setup
-(setq-default frame-title-format '("Emacs"))
+(setq-default frame-title-format '("Emacs" (:eval (+project-name))))
 
-(setq-default mode-line-format '((:eval (meow-indicator))
-                                 " %l "
-                                 (:eval (when rime-mode (concat  (rime-lighter) " ")))
+(setq-default mode-line-format '(;; (:eval (meow-indicator))
+                                 " %l:%C "
+                                 (:eval (when rime-mode (concat (rime-lighter) " ")))
                                  (:eval (+smart-file-name))
                                  "%* %m "
                                  (vc-mode vc-mode)))

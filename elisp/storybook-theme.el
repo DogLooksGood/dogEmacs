@@ -10,7 +10,7 @@
  `(hl-line                        ((t (:background "#ffffff" :overline "#d0d0d0" :underline "#d0d0d0"))))
  `(font-lock-comment-face         ((t (:foreground "dark green"))))
  `(font-lock-doc-face             ((t (:foreground "dark green"))))
- `(font-lock-warning-face         ((t (:background "dark red" :foreground "white"))))
+ `(font-lock-warning-face         ((t (:foreground "red"))))
  `(font-lock-string-face          ((t (:foreground "dark red"))))
  `(font-lock-function-name-face   ((t (:bold t))))
  `(font-lock-keyword-face         ((t ())))

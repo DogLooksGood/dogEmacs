@@ -9,7 +9,7 @@
 (when (eq system-type 'darwin)
   (setq insert-directory-program "gls" dired-use-ls-dired t))
 
-(setq dired-listing-switches "-lXGh --group-directories-first")
+(setq dired-listing-switches "-alXGh --group-directories-first")
 
 (use-package dired-hide-dotfiles
   :bind

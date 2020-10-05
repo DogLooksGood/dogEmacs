@@ -24,6 +24,13 @@
                             ("\\<nil\\>" . font-lock-constant-face)
                             ("\\<_\\>" . font-lock-comment-face))))
 
+(defun inf-iex-patch-syntax-table ()
+  (modify-syntax-entry ?_ "_" elixir-mode-syntax-table)
+  (modify-syntax-entry ?% "_" elixir-mode-syntax-table)
+  (modify-syntax-entry ?? "-" elixir-mode-syntax-table))
+
+(inf-iex-patch-syntax-table)
+
 (use-package inf-iex
   :quelpa
   (inf-iex :fetcher file :path "~/Projects/inf-iex")
@@ -32,8 +39,27 @@
 (use-package mix
   :hook
   ((elixir-mode) . 'mix-minor-mode)
+  :config
+  (unbind-key "C-c C-c" mix-minor-mode-map)
+  (bind-key "C-c C-t t" 'mix-test-current-test)
+  (bind-key "C-c C-t b" 'mix-test-current-buffer)
+  (bind-key "C-c C-t p" 'mix-test)
   :custom
   (compilation-scroll-output t))
+
+(defun +elixir-auto-module-name ()
+  (let* ((file-name (+smart-file-name))
+         (lib-file-name (cond
+                         ((string-prefix-p "lib/" file-name)
+                          (substring file-name 4))
+                         ((string-prefix-p "test/" file-name)
+                          (substring file-name 5))
+                         (t file-name))))
+    (message file-name)
+    (-> (replace-regexp-in-string "\.exs?$" "" lib-file-name)
+        (split-string "/")
+        (->> (-map #'string-inflection-pascal-case-function))
+        (string-join "."))))
 
 (defun +elixir-handle-input ()
   (unless (or (+in-string-p) (+in-comment-p))

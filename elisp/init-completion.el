@@ -42,7 +42,7 @@
      backward -delete-char
      backward-kill-word
      backward-kill-sexp))
-  (company-idle-delay 0.5)
+  (company-idle-delay nil)
   (company-minimum-prefix-length 5)
   (company-dabbrev-downcase nil)
   (company-abort-manual-when-too-short t)
