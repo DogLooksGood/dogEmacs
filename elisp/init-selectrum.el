@@ -30,10 +30,6 @@
   :init
   (selectrum-mode 1))
 
-(use-package company-prescient
-  :init
-  (company-prescient-mode 1))
-
 (use-package selectrum-prescient
   :init
   (selectrum-prescient-mode 1))

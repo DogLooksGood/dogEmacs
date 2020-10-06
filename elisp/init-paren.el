@@ -20,8 +20,8 @@ otherwise will insert a colon."
   :bind
   (:map
    paredit-mode-map
-   ("M-[" . 'paredit-wrap-square)
-   ("M-{" . 'paredit-wrap-curly)
+   ;; ("M-[" . 'paredit-wrap-square)
+   ;; ("M-{" . 'paredit-wrap-curly)
    (";" . '+lisp-semicolon)))
 
 ;;; Use smartparens for other modes

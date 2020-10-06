@@ -40,12 +40,15 @@
 
 (custom-theme-set-faces
  `joker
- `(default                        ((t (:background "#212121"  :foreground "#A8A8A8"))))
+ `(default                        ((((type tty)))
+                                   (((type graphic))
+                                    :background "#212121" :foreground "#A8A8A8")))
  `(mc/cursor-face                 ((t (:background "#949494" :foreground "black"))))
  `(cursor                         ((t (:background "white"))))
  `(region                         ((t (:background "#174535"))))
  `(highlight-symbol-face          ((t ())))
- `(hl-line                        ((t (:background "#272727"))))
+ `(hl-line                        ((((type graphic)) :background "#272727")
+                                   (((type tty)))))
  `(yascroll:thumb-fringe          ((t (:background "#3F3F3F" :foreground "#3F3F3F"))))
  `(yascroll:thumb-text-area       ((t (:background "#3F3F3F" :foreground "#3F3F3F"))))
  `(fringe                         ((t (:background nil))))

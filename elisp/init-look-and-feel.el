@@ -33,10 +33,9 @@
   (plist-get +themes dark-or-light))
 
 (defun +setup-theme ()
-  (when window-system
-    (disable-theme (+get-theme 'dark))
-    (disable-theme (+get-theme 'light))
-    (load-theme (+get-theme +theme) t)))
+  (disable-theme (+get-theme 'dark))
+  (disable-theme (+get-theme 'light))
+  (load-theme (+get-theme +theme) t))
 
 (defun +setup-font ()
   (when window-system
@@ -64,17 +63,16 @@ Will setup following customizations:
 - theme
 - special faces for prog-mode and text-mode(handle all existing buffer as well)."
   (interactive)
-  (when window-system
-    (+setup-font)
-    (+setup-transparency)
-    (+setup-theme)
-    (dolist (buf (buffer-list))
-      (with-current-buffer buf
-        (cond
-         ((derived-mode-p 'prog-mode)
-          (+setup-prog-faces))
-         ((derived-mode-p 'org-mode 'markdown-mode)
-          (+setup-text-faces)))))))
+  (+setup-font)
+  (+setup-transparency)
+  (+setup-theme)
+  (dolist (buf (buffer-list))
+    (with-current-buffer buf
+      (cond
+       ((derived-mode-p 'prog-mode)
+        (+setup-prog-faces))
+       ((derived-mode-p 'org-mode 'markdown-mode)
+        (+setup-text-faces))))))
 
 (defun +toggle-theme ()
   "Toggle themes between dark and light."

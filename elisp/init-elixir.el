@@ -80,21 +80,21 @@
 
 (add-hook 'elixir-mode-hook '+elixir-post-self-insert-hook-setup)
 
-(use-package polymode
-  :mode ("\\.ex\\'" . poly-elixir-mode)
-  :config
-  (define-hostmode poly-elixir-hostmode :mode 'elixir-mode)
-  (define-innermode poly-liveview-expr-elixir-innermode
-    :mode 'web-mode
-    :head-matcher "^[[:space:]]*~L[\"']\\{3\\}$"
-    :tail-matcher "^[[:space:]]*[\"']\\{3\\}$"
-    :head-mode 'host
-    :tail-mode 'host
-    :allow-nested nil
-    :keep-in-mode 'host
-    :fallback-mode 'host)
-  (define-polymode poly-elixir-mode
-    :hostmode 'poly-elixir-hostmode
-    :innermodes '(poly-liveview-expr-elixir-innermode)))
+;; (use-package polymode
+;;   :mode ("\\.ex\\'" . poly-elixir-mode)
+;;   :config
+;;   (define-hostmode poly-elixir-hostmode :mode 'elixir-mode)
+;;   (define-innermode poly-liveview-expr-elixir-innermode
+;;     :mode 'web-mode
+;;     :head-matcher "^[[:space:]]*~L[\"']\\{3\\}$"
+;;     :tail-matcher "^[[:space:]]*[\"']\\{3\\}$"
+;;     :head-mode 'host
+;;     :tail-mode 'host
+;;     :allow-nested nil
+;;     :keep-in-mode 'host
+;;     :fallback-mode 'host)
+;;   (define-polymode poly-elixir-mode
+;;     :hostmode 'poly-elixir-hostmode
+;;     :innermodes '(poly-liveview-expr-elixir-innermode)))
 
 (provide 'init-elixir)
