@@ -7,27 +7,30 @@
 
 ;;; 一些中文的字符用来参考。
 
-(setq +font-fixed-family "JetBrains Mono SemiLight"
-      +font-variable-family "Sarasa Gothic SC Regular"
+(setq +font-fixed-family "jetbrains mono semilight"
+      +font-variable-family "noto sans"
       +font-size 9
-      +large-font-scale 1.25
+      +function-name-scale 1.1
       +frame-margin 15
       +alpha 95
       +themes (list 'dark 'joker 'light 'storybook)
       +theme 'dark)
 
+(defvar-local +prog-face-cookie nil
+  "Cookie for setup for larger font-lock-function-name-face.")
+
 (defun +setup-prog-faces ()
-  (when window-system
-    ;; (face-remap-add-relative 'font-lock-function-name-face :height +large-font-scale)
-    ))
+  (when +prog-face-cookie
+    (face-remap-remove-relative +prog-face-cookie))
+  (setq-local +prog-face-cookie
+              (face-remap-add-relative 'font-lock-function-name-face :height +function-name-scale)))
 
 (defun +setup-text-faces ()
-  (when window-system
-    (face-remap-add-relative 'default :family +font-variable-family)
-    (when (derived-mode-p 'org-mode)
-      (face-remap-add-relative 'org-block :family +font-fixed-family)
-      (face-remap-add-relative 'org-code :family +font-fixed-family)
-      (face-remap-add-relative 'org-checkbox :family +font-fixed-family))))
+  (face-remap-add-relative 'default :family +font-variable-family)
+  (when (derived-mode-p 'org-mode)
+    (face-remap-add-relative 'org-block :family +font-fixed-family)
+    (face-remap-add-relative 'org-code :family +font-fixed-family)
+    (face-remap-add-relative 'org-checkbox :family +font-fixed-family)))
 
 (defun +get-theme (dark-or-light)
   (plist-get +themes dark-or-light))
@@ -38,20 +41,17 @@
   (load-theme (+get-theme +theme) t))
 
 (defun +setup-font ()
-  (when window-system
-    (let ((font (concat +font-fixed-family "-" (number-to-string +font-size))))
-      (set-frame-font font nil t)
-      (add-to-list 'default-frame-alist (cons 'font font)))))
+  (let ((font (concat +font-fixed-family "-" (number-to-string +font-size))))
+    (set-frame-font font nil t)
+    (add-to-list 'default-frame-alist (cons 'font font))))
 
 (defun +setup-transparency ()
-  (when window-system
-    (set-frame-parameter nil 'alpha (cons +alpha +alpha))))
+  (set-frame-parameter nil 'alpha (cons +alpha +alpha)))
 
 (defun +setup-internal-margin ()
-  (when window-system
-    (when (fixnump +frame-margin)
-      (set-frame-parameter (selected-frame) 'internal-border-width +frame-margin)
-      (add-to-list 'default-frame-alist '(internal-border-width . +frame-margin)))))
+  (when (fixnump +frame-margin)
+    (set-frame-parameter (selected-frame) 'internal-border-width +frame-margin)
+    (add-to-list 'default-frame-alist '(internal-border-width . +frame-margin))))
 
 (defun +load-look-and-feel ()
   "Load look and feel options.
@@ -77,11 +77,10 @@ Will setup following customizations:
 (defun +toggle-theme ()
   "Toggle themes between dark and light."
   (interactive)
-  (when window-system
-    (setq +theme (if (eq +theme 'dark) 'light 'dark))
-    (+setup-theme)
-    (+setup-font)
-    (+load-look-and-feel)))
+  (setq +theme (if (eq +theme 'dark) 'light 'dark))
+  (+setup-theme)
+  (+setup-font)
+  (+load-look-and-feel))
 
 ;;; Hook face setups
 (add-hook 'prog-mode-hook '+setup-prog-faces)

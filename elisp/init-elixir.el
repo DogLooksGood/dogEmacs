@@ -5,7 +5,7 @@
      (:foreground "grey60"))
     (((class color) (background light))
      (:foreground "grey40")))
-  "Elixir dim face")
+  "Elixir dim face.")
 
 (use-package elixir-mode
   :mode (("\\.eex\\'" . web-mode)
@@ -15,14 +15,14 @@
         ("C-c C-f" . 'elixir-format))
   :config
   (font-lock-add-keywords 'elixir-mode
-                          '(("\\([_a-zA-Z0-9!?]+\\):" 1 '+elixir-dim-face)
-                            (":[_a-zA-Z0-9\"]+" . font-lock-constant-face)
+                          '(("\\([_a-zA-Z0-9!?]+\\):" 1 'default)
+                            (":[_a-zA-Z0-9\"!?]+" . font-lock-constant-face)
                             ("defmacro \\([a-zA-Z0-9!?_]+\\)" 1 font-lock-function-name-face)
-                            ("@[_a-zA-Z0-9!?]+" . font-lock-constant-face)
+                            ("\\_<@[_a-zA-Z0-9!?]+\\_>" . 'default)
                             ("\\<true\\>" . font-lock-constant-face)
                             ("\\<false\\>" . font-lock-constant-face)
                             ("\\<nil\\>" . font-lock-constant-face)
-                            ("\\<_\\>" . font-lock-comment-face))))
+                            ("\\_<_[a-zA-Z0-9]*\\_>" . '+elixir-dim-face))))
 
 (defun inf-iex-patch-syntax-table ()
   (modify-syntax-entry ?_ "_" elixir-mode-syntax-table)

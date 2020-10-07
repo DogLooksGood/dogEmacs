@@ -20,11 +20,11 @@
   :custom
   (org-superstar-special-todo-items t))
 
-(use-package valign
-  :quelpa
-  (valign :repo "casouri/valign" :fetcher github)
-  :init
-  (add-hook 'org-mode-hook #'valign-mode)
-  (add-hook 'markdown-mode-hook #'valign-mode))
+;; (use-package valign
+;;   :quelpa
+;;   (valign :repo "casouri/valign" :fetcher github)
+;;   :init
+;;   (add-hook 'org-mode-hook #'valign-mode)
+;;   (add-hook 'markdown-mode-hook #'valign-mode))
 
 (provide 'init-org)

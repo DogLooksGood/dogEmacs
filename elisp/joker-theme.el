@@ -67,9 +67,9 @@
  `(font-lock-builtin-face         ((t ())))
  `(font-lock-type-face            ((t ())))
  `(font-lock-variable-name-face   ((t ())))
- `(font-lock-keyword-face         ((t ())))
- `(font-lock-constant-face        ((t (:foreground "#CFA300"))))
- `(font-lock-function-name-face   ((t (:foreground "#c0c0c0" :bold t))))
+ `(font-lock-keyword-face         ((t (:foreground "#CFA300" :italic t))))
+ `(font-lock-constant-face        ((t (:foreground "#b762de"))))
+ `(font-lock-function-name-face   ((t (:bold t))))
  `(font-lock-warning-face         ((t (:foreground "yellow"))))
  `(meow-keypad-indicator          ((t (:foreground "#CC2F2F"))))
  `(meow-insert-indicator          ((t (:foreground "#00D787"))))
@@ -143,7 +143,8 @@
  '(web-mode-html-tag-face         ((t ())))
  '(imenu-list-entry-face-0        ((t ())))
  '(imenu-list-entry-subalist-face-0 ((t (:bold t :underline t))))
- '(web-mode-function-call-face    ((t ()))))
+ '(web-mode-function-call-face    ((t ())))
+ '(web-mode-function-name-face    ((t ()))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)
