@@ -127,7 +127,7 @@
  `(smerge-lower                   ((t (:background "#173017"))))
  `(telega-msg-heading             ((t (:inherit hl-line))))
  `(telega-unmuted-count           ((t (:inherit font-lock-function-name-face))))
- `(rime-preedit-face              ((t (:inverse-video nil :underline t))))
+ `(rime-preedit-face              ((t (:inverse-video t :underline t))))
  `(rime-cursor-face               ((t (:inherit font-lock-constant-face))))
  `(rime-indicator-face            ((t (:foreground "#9256B4"))))
  `(rime-indicator-dim-face        ((t (:foreground "grey40"))))

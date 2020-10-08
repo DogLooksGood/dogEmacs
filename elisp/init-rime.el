@@ -1,7 +1,9 @@
 ;;; -*- lexical-binding: t -*-
 
-(defun +rime-predicate-in-code-string ()
-  (eq (plist-get (text-properties-at (point)) 'face) 'font-lock-string-face))
+(defun rime-predicate-in-code-string-after-ascii-p ()
+  (and
+   (eq (plist-get (text-properties-at (point)) 'face) 'font-lock-string-face)
+   (rime-predicate-after-ascii-char-p)))
 
 (use-package rime
   ;; :quelpa
@@ -17,7 +19,7 @@
   ((rime-disable-predicates '(meow-normal-mode-p
                               meow-motion-mode-p
                               meow-keypad-mode-p
-                              +rime-predicate-in-code-string
+                              rime-predicate-in-code-string-after-ascii-p
                               rime-predicate-prog-in-code-p
                               rime-predicate-after-alphabet-char-p))
    (rime-inline-predicates '(rime-predicate-space-after-cc-p
@@ -27,10 +29,8 @@
    (default-input-method "rime")
    (rime-cursor "˰")
    (rime-show-candidate 'minibuffer)
-   (rime-posframe-fixed-position t)
-   (rime-posframe-properties (list
-                              :internal-border-width 2
-                              :internal-border-color "#303030"))))
+   (rime-title "RIME")
+   (rime-posframe-fixed-position t)))
 
 ;;; Used for package developing
 

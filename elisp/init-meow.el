@@ -9,7 +9,8 @@
    '("W" . mc/mark-next-like-this)
    '("M" . mc/skip-to-next-like-this)
    '("I" . iedit-mode)
-   '("/" . swiper))
+   '("/" . swiper)
+   '("$" . meow-mark-thing))
 
   (meow-leader-define-key
    '(";" . dired-sidebar-toggle-sidebar)
