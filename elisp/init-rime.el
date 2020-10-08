@@ -12,8 +12,7 @@
    ("<tab>" . 'rime-inline-ascii)
    :map rime-mode-map
    ("C-`" . 'rime-send-keybinding)
-   ("M-j" . 'rime-force-enable)
-   ("C-SPC" . 'toggle-input-method))
+   ("M-j" . 'rime-force-enable))
   :custom
   ((rime-disable-predicates '(meow-normal-mode-p
                               meow-motion-mode-p

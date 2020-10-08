@@ -33,16 +33,11 @@
 
 (deftheme joker "A simple medium contrast dark theme.")
 
-(defcustom joker-comment-font-family
-  "Source Han Mono"
-  "Font family for comment."
-  :group 'joker-theme)
-
 (custom-theme-set-faces
  `joker
  `(default                        ((((type tty)))
                                    (((type graphic))
-                                    :background "#212121" :foreground "#A8A8A8")))
+                                    :background "#212121" :foreground "#B6B6B0")))
  `(mc/cursor-face                 ((t (:background "#949494" :foreground "black"))))
  `(cursor                         ((t (:background "white"))))
  `(region                         ((t (:background "#174535"))))
@@ -62,7 +57,7 @@
  `(company-scrollbar-bg           ((t (:background "#303030"))))
  `(company-scrollbar-fg           ((t (:background "#4E4E4E"))))
  `(font-lock-comment-face         ((t (:foreground "#00AAAA"))))
- `(font-lock-string-face          ((t (:foreground "#CC4F4F"))))
+ `(font-lock-string-face          ((t (:foreground "#E24C49"))))
  `(font-lock-doc-face             ((t (:foreground "#00AAAA"))))
  `(font-lock-builtin-face         ((t ())))
  `(font-lock-type-face            ((t ())))
@@ -125,7 +120,7 @@
  `(org-document-title             ((t (:inherit font-lock-string-face))))
  `(org-code                       ((t (:inherit font-lock-constant-face))))
  `(line-number-current-line       ((t (:foreground "#D7AF00" :background "#272727"))))
- `(parenthesis                    ((t (:foreground "#606060"))))
+ `(parenthesis                    ((t (:foreground "#909090"))))
  `(term-color-blue                ((t (:foreground "#3366FF" :background "#3366FF"))))
  `(popup-tip-face                 ((t (:background "#303030" :foreground "#C5C5C5"))))
  `(smerge-refined-added           ((t (:background "#253325"))))

@@ -29,6 +29,7 @@
  '(dired-directory                ((t (:bold t))))
  '(mode-line                      ((t (:overline "#000"))))
  '(mode-line-inactive             ((t (:overline "#353535"))))
+ `(parenthesis                    ((t (:foreground "#909090"))))
  '(highlight-symbol-face          ((t ())))
  '(yascroll:thumb-fringe          ((t (:background "#606060" :foreground "#606060"))))
  '(yascroll:thumb-text-area       ((t (:background "#606060" :foreground "#606060"))))

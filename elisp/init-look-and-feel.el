@@ -11,7 +11,7 @@
       +font-size 9
       +function-name-scale 1.15
       +frame-margin 15
-      +alpha 90
+      +alpha 100
       +themes (list 'dark 'joker 'light 'storybook)
       +theme 'dark)
 

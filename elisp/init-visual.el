@@ -27,6 +27,12 @@
   :hook
   (prog-mode . highlight-numbers-mode))
 
+(use-package paren-face
+  :hook
+  (prog-mode . paren-face-mode)
+  :custom
+  (paren-face-regexp "[][(){}]"))
+
 (use-package yascroll
   :init
   (global-yascroll-bar-mode 1))
