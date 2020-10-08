@@ -5,7 +5,7 @@
 (bind-key "M-h" 'eldoc global-map)
 
 ;;; Don't popup eldoc automatically
-(setq eldoc-idle-delay 0.5)
+(setq eldoc-idle-delay 1)
 
 (provide 'init-eldoc)
 ;;; init-eldoc.el ends here

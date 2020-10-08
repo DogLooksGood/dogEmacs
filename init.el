@@ -76,6 +76,7 @@
   (require 'init-visual)
   (require 'init-eshell)
   (require 'init-lsp)
+  (require 'init-icons)
   (require 'init-dired)
   (require 'init-ibuffer)
   (require 'init-snippet)

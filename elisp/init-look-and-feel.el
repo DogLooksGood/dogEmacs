@@ -4,7 +4,6 @@
 
 (require 'storybook-theme)
 (require 'joker-theme)
-
 ;;; 一些中文的字符用来参考。
 
 (setq +font-fixed-family "jetbrains mono semilight"
@@ -12,7 +11,7 @@
       +font-size 9
       +function-name-scale 1.15
       +frame-margin 15
-      +alpha 100
+      +alpha 90
       +themes (list 'dark 'joker 'light 'storybook)
       +theme 'dark)
 
@@ -66,6 +65,7 @@ Will setup following customizations:
   (+setup-font)
   (+setup-transparency)
   (+setup-theme)
+  (+setup-internal-margin)
   (dolist (buf (buffer-list))
     (with-current-buffer buf
       (cond
@@ -93,8 +93,8 @@ Will setup following customizations:
 (defun +setup-blur-kde (&rest ignores)
   (shell-command "sh ~/.emacs.d/blur.sh"))
 
-;; (when (eq window-system 'x)
-;;   (add-hook 'emacs-startup-hook #'+setup-blur-kde))
+(when (eq window-system 'x)
+  (add-hook 'emacs-startup-hook #'+setup-blur-kde))
 
 (provide 'init-look-and-feel)
 ;;; init-look-and-feel.el ends here

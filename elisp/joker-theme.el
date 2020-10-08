@@ -62,7 +62,7 @@
  `(company-scrollbar-bg           ((t (:background "#303030"))))
  `(company-scrollbar-fg           ((t (:background "#4E4E4E"))))
  `(font-lock-comment-face         ((t (:foreground "#00AAAA"))))
- `(font-lock-string-face          ((t (:foreground "#CC2F2F"))))
+ `(font-lock-string-face          ((t (:foreground "#CC4F4F"))))
  `(font-lock-doc-face             ((t (:foreground "#00AAAA"))))
  `(font-lock-builtin-face         ((t ())))
  `(font-lock-type-face            ((t ())))

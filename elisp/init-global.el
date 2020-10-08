@@ -170,4 +170,7 @@ point reaches the beginning or end of the buffer, stop there."
 (global-set-key (kbd "<M-prior>") 'scroll-other-window-down)
 (global-set-key (kbd "C-M-S-d") 'toggle-debug-on-error)
 
+(defvar +use-icons t
+  "Use icons?")
+
 (provide 'init-global)

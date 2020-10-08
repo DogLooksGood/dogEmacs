@@ -20,20 +20,24 @@
    ("M-d" . 'dired-hide-dotfiles-mode)))
 
 (use-package dired-sidebar
-  :hook (dired-sidebar-mode . hl-line-mode)
   :bind
   (("C-|" . 'dired-sidebar-toggle-sidebar)
    :map
    dired-sidebar-mode-map
    ("q" . 'kill-buffer-and-window))
   :custom
+  (dired-sidebar-theme (if +use-icons 'icons 'none))
   (dired-sidebar-subtree-line-prefix "  ")
   (dired-sidebar-use-term-integration t)
-  (dired-sidebar-should-follow-file t)
+  (dired-sidebar-should-follow-file nil)
   (dired-sidebar-follow-file-idle-delay 0.25)
-  (dired-sidebar-use-custom-font nil)
+  (dired-sidebar-use-custom-font t)
   :config
   (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
   (push 'rotate-windows dired-sidebar-toggle-hidden-commands))
+
+(when +use-icons
+  (use-package all-the-icons-dired
+    :hook (dired-mode . all-the-icons-dired-mode)))
 
 (provide 'init-dired)

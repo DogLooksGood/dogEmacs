@@ -31,17 +31,7 @@
   (company-frontends '(company-tng-frontend
                        company-pseudo-tooltip-frontend
                        company-echo-metadata-frontend))
-  (company-begin-commands
-   '(self-insert-command
-     meow-insert-before
-     meow-insert-open
-     meow-insert-after
-     meow-insert-kill
-     kill-line
-     paredit-backward-delete
-     backward-delete-char
-     backward-kill-word
-     backward-kill-sexp))
+  (company-begin-commands '(self-insert-command))
   (company-idle-delay 0.4)
   (company-minimum-prefix-length 3)
   (company-dabbrev-downcase nil)
@@ -50,12 +40,17 @@
   (company-global-modes '(not dired-mode dired-sidebar-mode))
   (company-tooltip-margin 0))
 
-(use-package company-posframe
-  :init
-  (company-posframe-mode 1)
-  :custom
-  (company-posframe-show-indicator nil)
-  (company-posframe-show-metadata nil))
+(unless +use-icons
+  (use-package company-posframe
+    :init
+    (company-posframe-mode 1)
+    :custom
+    (company-posframe-show-indicator nil)
+    (company-posframe-show-metadata nil)))
+
+(when +use-icons
+  (use-package company-box
+    :hook (company-mode . company-box-mode)))
 
 (use-package company-prescient
   :init
