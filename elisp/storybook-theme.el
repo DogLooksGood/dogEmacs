@@ -4,10 +4,14 @@
 
 (custom-theme-set-faces
  'storybook
- `(default                        ((t (:background "#f8f8f8" :foreground "#333333"))))
+  `(default                        ((((type tty)))
+                                   (((type graphic))
+                                    :background "#f8f8f8" :foreground "#333333")))
+  `(hl-line                        ((((type graphic))
+                                     :background "#ffffff" :overline "#d0d0d0" :underline "#d0d0d0")
+                                   (((type tty)))))
  `(cursor                         ((t (:background "black"))))
  '(region                         ((t (:background "#b6e3fa"))))
- `(hl-line                        ((t (:background "#ffffff" :overline "#d0d0d0" :underline "#d0d0d0"))))
  `(font-lock-comment-face         ((t (:foreground "dark green"))))
  `(font-lock-doc-face             ((t (:foreground "dark green"))))
  `(font-lock-warning-face         ((t (:foreground "red"))))
