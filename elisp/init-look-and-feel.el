@@ -10,9 +10,9 @@
 (setq +font-fixed-family "jetbrains mono semilight"
       +font-variable-family "noto sans"
       +font-size 9
-      +function-name-scale 1.1
+      +function-name-scale 1.15
       +frame-margin 15
-      +alpha 95
+      +alpha 100
       +themes (list 'dark 'joker 'light 'storybook)
       +theme 'dark)
 
@@ -93,8 +93,8 @@ Will setup following customizations:
 (defun +setup-blur-kde (&rest ignores)
   (shell-command "sh ~/.emacs.d/blur.sh"))
 
-(when (eq window-system 'x)
-  (add-hook 'emacs-startup-hook #'+setup-blur-kde))
+;; (when (eq window-system 'x)
+;;   (add-hook 'emacs-startup-hook #'+setup-blur-kde))
 
 (provide 'init-look-and-feel)
 ;;; init-look-and-feel.el ends here

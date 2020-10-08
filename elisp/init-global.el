@@ -12,7 +12,7 @@
  initial-major-mode 'fundamental-mode
  initial-scratch-message ""
  ;; Don't highlight line when buffer is inactive
- hl-line-sticky-flag nil
+ hl-line-sticky-flag t
  ;; Prefer horizental split
  split-height-threshold nil
  split-width-threshold 120

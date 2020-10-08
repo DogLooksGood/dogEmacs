@@ -5,6 +5,8 @@
 (bind-key "q" 'kill-buffer-and-window dired-mode-map)
 (bind-key "/" 'swiper dired-mode-map)
 (bind-key "F" 'find-file dired-mode-map)
+(bind-key "TAB" 'dired-subtree-toggle dired-mode-map)
+(bind-key "," 'dired-subtree-up dired-mode-map)
 
 (when (eq system-type 'darwin)
   (setq insert-directory-program "gls" dired-use-ls-dired t))
@@ -29,7 +31,7 @@
   (dired-sidebar-use-term-integration t)
   (dired-sidebar-should-follow-file t)
   (dired-sidebar-follow-file-idle-delay 0.25)
-  (dired-sidebar-use-custom-font t)
+  (dired-sidebar-use-custom-font nil)
   :config
   (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
   (push 'rotate-windows dired-sidebar-toggle-hidden-commands))

@@ -46,7 +46,7 @@
  '(web-mode-html-attr-name-face   ((t ())))
  '(web-mode-html-tag-face         ((t ())))
  '(fringe                         ((t ())))
- `(line-number-current-line       ((t (:bold t))))
+ `(line-number-current-line       ((t (:bold t :background "#ffffff" :overline "#d0d0d0" :underline "#d0d0d0"))))
  '(mc/cursor-bar-face             ((t (:background "grey50" :height 1))))
  '(web-mode-function-call-face    ((t ())))
  '(web-mode-function-name-face    ((t ()))))

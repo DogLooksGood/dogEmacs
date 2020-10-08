@@ -31,15 +31,15 @@ This function is slow, so we have to use cache."
 
 (defun +mc-indicator ()
   "Display the number of cursors."
-  (format "cur:%d" (mc/num-cursors)))
+  (unless (= 1 (mc/num-cursors))
+    (format "cur:%d" (mc/num-cursors))))
 
 ;;; title line setup
 (setq-default frame-title-format '("Emacs" (:eval (+project-name))))
 
 (setq-default mode-line-format '((:eval (meow-minimal-indicator))
                                  (:eval (+mc-indicator))
-                                 ;; We have a fullwidth space here, make modeline have a fixed height.
-                                 "　%l:%C "
+                                 "%l:%C "
                                  (:eval (when rime-mode (concat (rime-lighter) " ")))
                                  (:eval (+smart-file-name))
                                  "%* %m "
