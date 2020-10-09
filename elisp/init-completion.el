@@ -2,6 +2,7 @@
 ;;; Completion
 
 (use-package company
+  :hook (company-mode . company-tng-mode)
   :bind
   (:map
    company-mode-map
@@ -28,6 +29,7 @@
    (conf-mode . company-mode)
    (eshell-mode . company-mode))
   :custom
+  (company-tng-auto-configure nil)
   (company-frontends '(company-tng-frontend
                        company-pseudo-tooltip-frontend
                        company-echo-metadata-frontend))

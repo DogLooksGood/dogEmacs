@@ -86,7 +86,7 @@
   (require 'init-docker)
   (require 'init-server)
   (require 'init-rime)
-  (require 'init-telegram)
+  ;; (require 'init-telegram)
   (require 'init-restclient)
   (require 'init-tmux)
   (require 'init-meow)

@@ -37,10 +37,10 @@
   :init
   (global-yascroll-bar-mode 1))
 
-(use-package olivetti
-  :hook ((text-mode conf-mode prog-mode) . olivetti-mode)
-  :custom
-  (olivetti-body-width 120))
+;; (use-package olivetti
+;;   :hook ((text-mode conf-mode prog-mode) . olivetti-mode)
+;;   :custom
+;;   (olivetti-body-width 120))
 
 ;; (scroll-bar-mode -1)
 

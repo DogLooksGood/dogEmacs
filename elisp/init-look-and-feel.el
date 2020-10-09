@@ -4,9 +4,9 @@
 
 (require 'storybook-theme)
 (require 'joker-theme)
-;;; 一些中文的字符用来参考。
 
-(setq +font-fixed-family "jetbrains mono semilight"
+;;; 一些中文的字符用来参考。
+(setq +font-fixed-family "dejavu sans mono"
       +font-variable-family "noto sans"
       +font-size 9
       +function-name-scale 1.15
