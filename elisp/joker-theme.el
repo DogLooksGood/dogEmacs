@@ -139,7 +139,8 @@
  '(imenu-list-entry-face-0        ((t ())))
  '(imenu-list-entry-subalist-face-0 ((t (:bold t :underline t))))
  '(web-mode-function-call-face    ((t ())))
- '(web-mode-function-name-face    ((t ()))))
+ '(web-mode-function-name-face    ((t ())))
+ '(web-mode-html-tag-bracket-face ((t (:inherit parenthesis)))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)
