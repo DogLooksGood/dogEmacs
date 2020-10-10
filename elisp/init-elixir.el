@@ -33,7 +33,7 @@
 
 (use-package inf-iex
   :quelpa
-  (inf-iex :fetcher file :path "~/Projects/inf-iex")
+  (inf-iex :fetcher file :path "~/source/inf-iex")
   :hook (elixir-mode . inf-iex-minor-mode))
 
 (use-package mix

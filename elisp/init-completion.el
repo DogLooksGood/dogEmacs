@@ -34,7 +34,12 @@
                        company-pseudo-tooltip-frontend
                        company-echo-metadata-frontend))
   (company-begin-commands '(self-insert-command))
-  (company-idle-delay 0.4)
+  (company-idle-delay 0.005)
+  (company-tooltip-limit 7)
+  (company-tooltip-align-annotations t)
+  (company-tooltip-offset-display 'lines)
+  (company-tooltip-width-grow-only t)
+  (company-tooltip-idle-delay 0.1)
   (company-minimum-prefix-length 3)
   (company-dabbrev-downcase nil)
   (company-abort-manual-when-too-short t)
