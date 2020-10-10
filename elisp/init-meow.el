@@ -13,6 +13,9 @@
    '("$" . meow-mark-thing))
 
   (meow-leader-define-key
+   '("L" . display-line-numbers-mode)
+   '("D" . docker)
+   '("G" . diff-hl-mode)
    '(";" . dired-sidebar-toggle-sidebar)
    '("k" . kill-buffer)
    '("h" . meow-keypad-start)

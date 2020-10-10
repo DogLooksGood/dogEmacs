@@ -33,9 +33,9 @@
   :custom
   (paren-face-regexp "[][(){}]"))
 
-(use-package yascroll
-  :init
-  (global-yascroll-bar-mode 1))
+;; (use-package yascroll
+;;   :init
+;;   (global-yascroll-bar-mode -1))
 
 ;; (use-package olivetti
 ;;   :hook ((text-mode conf-mode prog-mode) . olivetti-mode)

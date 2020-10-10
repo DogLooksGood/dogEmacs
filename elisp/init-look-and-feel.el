@@ -13,7 +13,7 @@
       +frame-margin 15
       +alpha 100
       +themes (list 'dark 'joker 'light 'storybook)
-      +theme 'dark)
+      +theme 'light)
 
 (defvar-local +prog-face-cookie nil
   "Cookie for setup for larger font-lock-function-name-face.")
