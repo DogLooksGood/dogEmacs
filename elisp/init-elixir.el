@@ -19,9 +19,9 @@
                             (":[_a-zA-Z0-9\"!?]+" . font-lock-constant-face)
                             ("defmacro \\([a-zA-Z0-9!?_]+\\)" 1 font-lock-function-name-face)
                             ("\\_<@[_a-zA-Z0-9!?]+\\_>" . 'default)
-                            ("\\<true\\>" . font-lock-constant-face)
-                            ("\\<false\\>" . font-lock-constant-face)
-                            ("\\<nil\\>" . font-lock-constant-face)
+                            ("\\_<true\\_>" . font-lock-constant-face)
+                            ("\\_<false\\_>" . font-lock-constant-face)
+                            ("\\_<nil\\_>" . font-lock-constant-face)
                             ("\\_<_[a-zA-Z0-9]*\\_>" . '+elixir-dim-face))))
 
 (defun inf-iex-patch-syntax-table ()
