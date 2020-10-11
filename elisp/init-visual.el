@@ -47,7 +47,7 @@
 ;; Vertical Border
 (set-face-inverse-video-p 'vertical-border nil)
 (set-face-background 'vertical-border (face-background 'default))
-(set-face-foreground 'vertical-border "brickblack")
+(set-face-foreground 'vertical-border "black")
 (set-display-table-slot standard-display-table
                         'vertical-border
                         (make-glyph-code ?┃))

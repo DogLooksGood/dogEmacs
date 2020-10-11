@@ -2,15 +2,7 @@
 
 (defun +meow-setup ()
   (meow-normal-define-key
-   '("S" . kmacro-start-macro)
-   '("E" . kmacro-end-macro)
-   '("A" . apply-macro-to-region-lines)
-   '("M" . kmacro-call-macro)
-   '("W" . mc/mark-next-like-this)
-   '("M" . mc/skip-to-next-like-this)
-   '("I" . iedit-mode)
-   '("/" . swiper)
-   '("$" . meow-mark-thing))
+   '("/" . swiper))
 
   (meow-leader-define-key
    '("L" . display-line-numbers-mode)

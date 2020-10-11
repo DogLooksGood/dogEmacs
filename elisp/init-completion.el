@@ -52,6 +52,7 @@
     :init
     (company-posframe-mode 1)
     :custom
+    (company-posframe-quickhelp-delay nil)
     (company-posframe-show-indicator nil)
     (company-posframe-show-metadata nil)))
 

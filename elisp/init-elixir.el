@@ -24,12 +24,12 @@
                             ("\\_<nil\\_>" . font-lock-constant-face)
                             ("\\_<_[a-zA-Z0-9]*\\_>" . '+elixir-dim-face))))
 
-(defun inf-iex-patch-syntax-table ()
-  (modify-syntax-entry ?_ "_" elixir-mode-syntax-table)
-  (modify-syntax-entry ?% "_" elixir-mode-syntax-table)
-  (modify-syntax-entry ?? "-" elixir-mode-syntax-table))
-
-(inf-iex-patch-syntax-table)
+;; (defun inf-iex-patch-syntax-table ()
+;;   (modify-syntax-entry ?_ "_" elixir-mode-syntax-table)
+;;   (modify-syntax-entry ?% "_" elixir-mode-syntax-table)
+;;   (modify-syntax-entry ?? "-" elixir-mode-syntax-table))
+;;
+;; (inf-iex-patch-syntax-table)
 
 (use-package inf-iex
   :quelpa
