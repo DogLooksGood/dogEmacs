@@ -8,7 +8,7 @@
 ;;; 一些中文的字符用来参考。
 (setq +font-fixed-family "dejavu sans mono"
       +font-variable-family "noto sans"
-      +font-size 9
+      +font-size 10
       +function-name-scale 1.15
       +frame-margin 15
       +alpha 100
@@ -29,6 +29,7 @@
   (when (derived-mode-p 'org-mode)
     (face-remap-add-relative 'org-block :family +font-fixed-family)
     (face-remap-add-relative 'org-code :family +font-fixed-family)
+    (face-remap-add-relative 'org-table :family +font-fixed-family)
     (face-remap-add-relative 'org-checkbox :family +font-fixed-family)))
 
 (defun +get-theme (dark-or-light)

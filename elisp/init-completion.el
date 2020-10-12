@@ -5,9 +5,6 @@
   :hook (company-mode . company-tng-mode)
   :bind
   (:map
-   company-mode-map
-   ("<tab>" . '+insert-tab)
-   :map
    company-active-map
    ("}" . 'company-select-next)
    ("{" . 'company-select-previous)

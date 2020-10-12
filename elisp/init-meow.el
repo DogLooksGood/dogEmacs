@@ -47,6 +47,9 @@
   :quelpa
   ;; (meow :repo "DogLooksGood/meow" :fetcher github)
   (meow :fetcher file :path "~/source/meow")
+  :bind
+  (:map meow-insert-state-keymap
+   ("<tab>" . '+insert-tab))
   :config
   (+meow-setup)
   (meow-global-mode 1)

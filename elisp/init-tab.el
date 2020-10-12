@@ -31,7 +31,4 @@ org-cycle in org-mode"
    (t
     (call-interactively #'indent-for-tab-command))))
 
-(bind-key "<tab>" '+insert-tab prog-mode-map)
-(bind-key "TAB" '+insert-tab prog-mode-map)
-
 (provide 'init-tab)
