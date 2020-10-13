@@ -33,6 +33,10 @@
   (package-initialize)
   (setq package-selected-packages
         '(use-package quelpa-use-package))
+  ;; Patch to a bug of quelpa
+  (unless (file-exists-p
+           (expand-file-name "~/.emacs.d/quelpa/melpa/recipes"))
+    (make-directory "~/.emacs.d/quelpa/melpa/recipes" t))
   (unless package-archive-contents
     (package-refresh-contents))
   (dolist (package package-selected-packages)
