@@ -36,4 +36,8 @@
   :init
   (counsel-projectile-mode 1))
 
+(use-package ivy-prescient
+  :init
+  (ivy-prescient-mode 1))
+
 (provide 'init-ivy)
