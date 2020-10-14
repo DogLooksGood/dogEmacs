@@ -31,6 +31,8 @@
 ;;
 ;; (inf-iex-patch-syntax-table)
 
+(modify-syntax-entry ?& "'" elixir-mode-syntax-table)
+
 (use-package inf-iex
   :quelpa
   (inf-iex :fetcher file :path "~/source/inf-iex")
@@ -46,20 +48,6 @@
   (bind-key "C-c C-t p" 'mix-test)
   :custom
   (compilation-scroll-output t))
-
-(defun +elixir-auto-module-name ()
-  (let* ((file-name (+smart-file-name))
-         (lib-file-name (cond
-                         ((string-prefix-p "lib/" file-name)
-                          (substring file-name 4))
-                         ((string-prefix-p "test/" file-name)
-                          (substring file-name 5))
-                         (t file-name))))
-    (message file-name)
-    (-> (replace-regexp-in-string "\.exs?$" "" lib-file-name)
-        (split-string "/")
-        (->> (-map #'string-inflection-pascal-case-function))
-        (string-join "."))))
 
 (defun +elixir-handle-input ()
   (unless (or (+in-string-p) (+in-comment-p))
@@ -79,22 +67,5 @@
   (add-hook 'post-self-insert-hook '+elixir-handle-input nil t))
 
 (add-hook 'elixir-mode-hook '+elixir-post-self-insert-hook-setup)
-
-;; (use-package polymode
-;;   :mode ("\\.ex\\'" . poly-elixir-mode)
-;;   :config
-;;   (define-hostmode poly-elixir-hostmode :mode 'elixir-mode)
-;;   (define-innermode poly-liveview-expr-elixir-innermode
-;;     :mode 'web-mode
-;;     :head-matcher "^[[:space:]]*~L[\"']\\{3\\}$"
-;;     :tail-matcher "^[[:space:]]*[\"']\\{3\\}$"
-;;     :head-mode 'host
-;;     :tail-mode 'host
-;;     :allow-nested nil
-;;     :keep-in-mode 'host
-;;     :fallback-mode 'host)
-;;   (define-polymode poly-elixir-mode
-;;     :hostmode 'poly-elixir-hostmode
-;;     :innermodes '(poly-liveview-expr-elixir-innermode)))
 
 (provide 'init-elixir)

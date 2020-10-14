@@ -3,7 +3,6 @@
 (setq dired-dwim-target t)
 (bind-key "C-x C-d" 'dired)
 (bind-key "q" 'kill-buffer-and-window dired-mode-map)
-(bind-key "/" 'swiper dired-mode-map)
 (bind-key "F" 'find-file dired-mode-map)
 (bind-key "TAB" 'dired-subtree-toggle dired-mode-map)
 (bind-key "," 'dired-subtree-up dired-mode-map)

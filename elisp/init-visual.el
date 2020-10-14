@@ -1,11 +1,8 @@
 (bind-key "C-S-L" 'display-line-numbers-mode)
 
-(setq display-line-numbers-width 3)
-(defun +update-line-number-relative ()
-  (when display-line-numbers
-    (setq-local display-line-numbers t)))
+(setq display-line-numbers-width 4)
 
-(add-hook 'display-line-numbers-mode-hook #'+update-line-number-relative)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 (global-hl-line-mode 1)
 
@@ -44,12 +41,5 @@
 
 ;; (scroll-bar-mode -1)
 
-;; Vertical Border
-(set-face-inverse-video-p 'vertical-border nil)
-(set-face-background 'vertical-border (face-background 'default))
-(set-face-foreground 'vertical-border "black")
-(set-display-table-slot standard-display-table
-                        'vertical-border
-                        (make-glyph-code ?┃))
 
 (provide 'init-visual)

@@ -5,6 +5,11 @@
    (eq (plist-get (text-properties-at (point)) 'face) 'font-lock-string-face)
    (rime-predicate-after-ascii-char-p)))
 
+(defun rime-predicate-in-code-after-ascii-p ()
+  (and
+   (rime-predicate-prog-in-code-p)
+   (not (looking-back "\\cc" 1))))
+
 (use-package rime
   ;; :quelpa
   ;; (rime :fetcher file :path "~/Projects/emacs-rime" :files ("rime.el" "rime-predicates.el" "lib.c" "Makefile"))
@@ -20,7 +25,7 @@
                               meow-motion-mode-p
                               meow-keypad-mode-p
                               rime-predicate-in-code-string-after-ascii-p
-                              rime-predicate-prog-in-code-p
+                              rime-predicate-in-code-after-ascii-p
                               rime-predicate-after-alphabet-char-p))
    (rime-inline-predicates '(rime-predicate-space-after-cc-p
                              rime-predicate-current-uppercase-letter-p))

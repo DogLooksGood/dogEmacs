@@ -16,6 +16,7 @@
   (eglot-stay-out-of '())
   (eglot-ignored-server-capabilites '(:documentHighlightProvider))
   :config
-  (add-to-list 'eglot-server-programs '(elixir-mode "/home/tianshu/source/elixir-ls/release/language_server.sh")))
+  (add-to-list 'eglot-server-programs '(elixir-mode "/home/tianshu/source/elixir-ls/release/language_server.sh"))
+  (add-to-list 'eglot-server-programs '(rust-mode "rust-analyzer")))
 
 (provide 'init-lsp)

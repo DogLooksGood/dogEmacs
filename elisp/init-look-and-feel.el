@@ -6,7 +6,7 @@
 (require 'joker-theme)
 
 ;;; 一些中文的字符用来参考。
-(setq +font-fixed-family "dejavu sans mono"
+(setq +font-fixed-family "Victor Mono"
       +font-variable-family "noto sans"
       +font-size 10
       +function-name-scale 1.15
@@ -53,6 +53,14 @@
     (set-frame-parameter (selected-frame) 'internal-border-width +frame-margin)
     (add-to-list 'default-frame-alist '(internal-border-width . +frame-margin))))
 
+(defun +setup-window-divider ()
+  (set-face-inverse-video-p 'vertical-border nil)
+  (set-face-background 'vertical-border (face-background 'default))
+  (set-face-foreground 'vertical-border (face-foreground 'default))
+  (set-display-table-slot standard-display-table
+                          'vertical-border
+                          (make-glyph-code ?┃)))
+
 (defun +load-look-and-feel ()
   "Load look and feel options.
 
@@ -67,6 +75,7 @@ Will setup following customizations:
   (+setup-transparency)
   (+setup-theme)
   (+setup-internal-margin)
+  (+setup-window-divider)
   (dolist (buf (buffer-list))
     (with-current-buffer buf
       (cond
