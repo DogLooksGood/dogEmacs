@@ -45,45 +45,6 @@
 
 (add-to-list 'default-frame-alist (cons 'undecorated t))
 
-;;; Fonts
-
-(defvar +font-family "Fira Code")
-(defvar +ufont-family "WenQuanYi Micro Hei")
-(defvar +fixed-pitch-family "Sarasa Mono SC")
-(defvar +variable-pitch-family "Sarasa Gothic SC")
-(defvar +font-size 11)
-
-;;; (+load-font)
-
-(defun +load-base-font ()
-  (let* ((font-spec (format "%s-%d" +font-family +font-size))
-         (variable-pitch-font-spec (format "%s-%d" +variable-pitch-family +font-size))
-         (fixed-pitch-font-spec (format "%s-%d" +fixed-pitch-family +font-size)))
-    (add-to-list 'default-frame-alist `(font . ,font-spec))
-    (set-face-attribute 'variable-pitch nil :font variable-pitch-font-spec)
-    (set-face-attribute 'fixed-pitch nil :font fixed-pitch-font-spec)))
-
-(defun +load-ext-font ()
-  (when window-system
-    (dolist (charset '(kana han cjk-misc bopomofo))
-      (set-fontset-font
-       (frame-parameter nil 'font)
-       charset
-       (font-spec :family +ufont-family)))))
-
-(defun +load-font ()
-  (let* ((font-spec (format "%s-%d" +font-family +font-size))
-         (variable-pitch-font-spec (format "%s-%d" +variable-pitch-family +font-size))
-         (fixed-pitch-font-spec (format "%s-%d" +fixed-pitch-family +font-size)))
-    (set-frame-font font-spec)
-    (set-face-attribute 'variable-pitch nil :font variable-pitch-font-spec)
-    (set-face-attribute 'fixed-pitch nil :font fixed-pitch-font-spec))
-  (+load-ext-font))
-
-(+load-base-font)
-
-(add-hook 'after-init-hook '+load-ext-font)
-
 ;;; Theme
 
 (defvar +after-change-theme-hook nil
@@ -91,18 +52,18 @@
 
 (defvar +theme-list '(joker printed storybook))
 
-(defun +change-theme (&optional init)
+(defun +change-theme ()
   (interactive)
   (let ((enabled-themes custom-enabled-themes)
 	(theme (car +theme-list)))
     (load-theme theme t)
+    (mapc #'disable-theme enabled-themes)
     (setq +theme-list (append (cdr +theme-list) (list (car +theme-list))))
-    (unless init
-      (+load-font)
-      (message "Load theme: %s" theme)
-      (run-hook-with-args '+after-change-theme-hook theme))
-    (mapc #'disable-theme enabled-themes)))
+    (+load-font)
+    (message "Load theme: %s" theme)
+    (run-hook-with-args '+after-change-theme-hook theme)))
 
-(+change-theme t)
+;; Load the first theme in `+theme-list'.
+(load-theme (car +theme-list) t)
 
 (provide 'init-laf)
