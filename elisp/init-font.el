@@ -4,18 +4,23 @@
 
 (+pdump-packages 'ligature)
 
-(require 'ligature)
+(defvar +font-ligature t
+  "If ligature is supported by current font.")
 
-(global-ligature-mode t)
+(when +font-ligature
 
-(with-eval-after-load "ligature"
-  (ligature-set-ligatures 'emacs-lisp-mode
-                          '("->" "->>" "<=" ">="))
-  (ligature-set-ligatures 'elixir-mode
-                          '("->" "=>" "|>" "<-" ">=" "<=" "!=" "!==" "===" "==" "::" "++" "&&" "||" "<<" ">>"))
-  (ligature-set-ligatures 'clojure-mode
-                          '("->" "->>" ">=" "<="  ".-"))
-  (ligature-set-ligatures 'web-mode
-                          '("</" "<!--" "-->" "/>")))
+  (require 'ligature)
+
+  (global-ligature-mode t)
+
+  (with-eval-after-load "ligature"
+    (ligature-set-ligatures 'emacs-lisp-mode
+                            '("->" "->>" "<=" ">="))
+    (ligature-set-ligatures 'elixir-mode
+                            '("->" "=>" "|>" "<-" ">=" "<=" "!=" "!==" "===" "==" "::" "++" "&&" "||" "<<" ">>"))
+    (ligature-set-ligatures 'clojure-mode
+                            '("->" "->>" ">=" "<="  ".-"))
+    (ligature-set-ligatures 'web-mode
+                            '("</" "<!--" "-->" "/>"))))
 
 (provide 'init-font)
