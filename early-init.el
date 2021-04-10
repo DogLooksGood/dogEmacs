@@ -22,5 +22,6 @@
   (when (file-exists-p private-conf)
     (load-file private-conf)))
 
-(require 'init-laf)
 (require 'init-defaults)
+(require 'init-laf)
+(require 'init-font)
