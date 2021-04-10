@@ -17,8 +17,10 @@
 
 (autoload #'toggle-input-method "rime" nil t)
 
+(global-set-key (kbd "C-SPC") 'toggle-input-method)
+
 (with-eval-after-load "rime"
-  (global-set-key (kbd "C-SPC") 'toggle-input-method)
+
   (define-key rime-active-mode-map [tab] 'rime-inline-ascii)
   (define-key rime-mode-map (kbd "C-`") 'rime-send-keybinding)
   (define-key rime-mode-map (kbd "M-j") 'rime-force-enable))
