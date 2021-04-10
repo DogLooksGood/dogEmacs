@@ -7,7 +7,7 @@
   (require pkg))
 
 ;; backup load-path, restore when startup with dump
-(setq +pdumped-load-path load-path)
+(setq +pdump-load-path load-path)
 
 ;; dump image
 (dump-emacs-portable (expand-file-name "emacs.pdmp" user-emacs-directory))
