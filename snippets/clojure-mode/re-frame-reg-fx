@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: re-frame-reg-fx
+# key: rfx
+# expand-env: ((yas-indent-line 'fixed))
+# --
+(re-frame/reg-fx ::${1:event-name}
+  (fn $1
+    [$2]
+    $0))

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: re-frame-dispatch
+# key: rdis
+# --
+(re-frame/dispatch [::$0])

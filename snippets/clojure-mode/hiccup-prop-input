@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: hiccup-prop-input
+# key: hi
+# --
+{:type "${1:text}"
+ :placeholder "$2"
+ :value $3
+ :on-change on-${4:change}}$0

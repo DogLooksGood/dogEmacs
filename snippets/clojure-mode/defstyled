@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: defstyled
+# key: ds
+# --
+(defstyled -${1:style-name} ${2::div}
+  [$3]
+  {$0})

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: defn-2
+# key: dd
+# --
+(defn make-${1:func}
+  "${2:TODO add docstring}"
+  [& {:keys [$3] :as opts}]
+  (fn $1 [${4:ctx}]
+    $0))

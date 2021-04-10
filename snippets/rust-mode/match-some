@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: match-some
+# key: ms
+# --
+match $1 {
+    Some($2) => ${3:{
+        $4
+    }},
+    None => ${5:{
+        $6
+    }}
+}

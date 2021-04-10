@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: defresolver
+# key: dr
+# --
+(pc/defresolver $1-resolver [env ${2:{:$1/keys [$3] :as props}}]
+  {::pc/input  #{${2:$(+fulcro-destructing-to-keys yas-text)}}
+   ::pc/output [$4]}
+  $0)

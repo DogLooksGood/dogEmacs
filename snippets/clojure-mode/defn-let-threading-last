@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: defn-let-threading-last
+# key: dll
+# --
+(defn ${1:func}
+  "${2:TODO docstring}"
+  [$3]
+  (let [$4]
+    (->> $0)))

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: hugsql-update
+# key: hu
+# expand-env: ((yas-indent-line 'fixed))
+# --
+-- :name update-$1 :!
+-- :doc ${2:TODO doc string}.
+update "$3" set
+  "$4" = :$4
+where
+  $5
+$0

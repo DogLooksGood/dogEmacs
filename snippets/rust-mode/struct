@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: struct
+# key: s
+# --
+#[derive(Debug)]
+struct ${1:Type} {
+    $0
+}

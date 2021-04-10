@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: defn
+# key: d
+# --
+(defn ${1:func}
+  "${2:TODO add docstring}"
+  [$3]
+  `yas-selected-text`$0)

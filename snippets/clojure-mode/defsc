@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: defsc
+# key: dsc
+# --
+(defsc $1 [this ${2:{:${1:$(string-inflection-kebab-case-function yas-text)}/keys [$3] :as props}}]
+  {:query [${2:$(+fulcro-destructing-to-keys yas-text)}]
+   :ident ${2:$(+yas-first (+fulcro-destructing-to-keys yas-text))
+   :initial-state {}}}
+  (dom/div$0))
+
+(def ui-${1:$(string-inflection-kebab-case-function yas-text)} (comp/factory $1 {:keyfn ${2:$(+yas-first (+fulcro-destructing-to-keys yas-text))}}))

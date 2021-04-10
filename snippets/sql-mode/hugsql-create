@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: hugsql-create
+# key: hc
+# expand-env: ((yas-indent-line 'fixed))
+# --
+-- :name create-${1:name}! :? :1
+-- :doc Create $1.
+INSERT INTO "$1"
+($2)
+VALUES
+(${2:$(+yas-sql-mode-fields-to-values yas-text)})
+RETURNING *
+$0

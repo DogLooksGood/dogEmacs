@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: clojure
+# key: clojure
+# --
+.cpcache
+.shadow-cljs
+cljs-runtime
+node_modules
+target
+.nrepl-port
+resources/public/js

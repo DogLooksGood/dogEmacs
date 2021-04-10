@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: if-let-ex
+# key: ile
+# --
+(if-let [$1]
+  (throw (ex-info "$2" {$3}))$0)

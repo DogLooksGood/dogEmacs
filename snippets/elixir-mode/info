@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: info
+# key: info
+# --
+Logger.info("$0")

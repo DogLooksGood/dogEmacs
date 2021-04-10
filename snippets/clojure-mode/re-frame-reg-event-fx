@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: re-frame-reg-event-fx
+# key: ref
+# expand-env: ((yas-indent-line 'fixed))
+# --
+(re-frame/reg-event-fx ::${1:event-name}
+  (fn $1
+    [{:keys [db] :as cofx} ${2:[_ $3]}]
+    {:db db
+     $0}))

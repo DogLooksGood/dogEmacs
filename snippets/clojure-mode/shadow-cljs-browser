@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: shadow-cljs
+# key: shadow-cljs-browser
+# --
+{:deps   ${1:{:aliases [${2::cljs}]}}
+ :builds {:app {:target :browser
+                :output-dir "resources/public/js"
+                :modules {:main {:init-fn $3/init}}
+                :devtools
+                {:http-port 8000
+                 :http-root "resources/public"
+                 :after-load $3/after-load
+                 :watch-dir "resources/public"
+                 :preloads [shadow.remote.runtime.cljs.browser]}}
+          :test {:target :browser-test
+                 :test-dir "resources/public/js/test"
+                 :devtools
+                 {:http-port 8021
+                  :http-root "resources/public/js/test"}}}
+ :nrepl {:init-ns user}}

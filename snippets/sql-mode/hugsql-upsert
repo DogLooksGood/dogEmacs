@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hugsql-upsert
+# key: hus
+# expand-env: ((yas-indent-line 'fixed))
+# --
+-- :name create-or-update-${1:name}! :!
+-- :doc Create or update $1.
+INSERT INTO "$1"
+($2)
+VALUES
+(${2:$(+yas-sql-mode-fields-to-values yas-text)})
+ON CONFLICT ($3) DO UPDATE SET
+  "$4" = :$4
+$0

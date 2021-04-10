@@ -1,0 +1,16 @@
+*~
+projects
+eln-cache
+auto-save-list
+straight/*
+!straight/versions
+transient
+rime
+recentf
+tramp
+.cache
+private.el
+org-roam.db
+bookmarks
+custom.el
+emacs.pdmp

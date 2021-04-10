@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: hugsql-get
+# key: hg
+# expand-env: ((yas-indent-line 'fixed))
+# --
+-- :name get-${1:name}-by-${2:field} :? :1
+-- :doc get $1 by $2.
+SELECT
+  ${3:*}
+FROM "$4"
+WHERE
+  "$2" = :$2
+LIMIT 1
+$0
