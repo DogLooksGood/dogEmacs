@@ -4,20 +4,18 @@
 
 (+pdump-packages 'ligature)
 
-(when window-system
+(require 'ligature)
 
-  (require 'ligature)
+(global-ligature-mode t)
 
-  (global-ligature-mode t)
-
-  (with-eval-after-load "ligature"
-    (ligature-set-ligatures 'emacs-lisp-mode
-                            '("->" "->>" "<=" ">="))
-    (ligature-set-ligatures 'elixir-mode
-                            '("->" "=>" "|>" "<-" ">=" "<=" "!=" "!==" "===" "==" "::" "++" "&&" "||" "<<" ">>"))
-    (ligature-set-ligatures 'clojure-mode
-                            '("->" "->>" ">=" "<="  ".-"))
-    (ligature-set-ligatures 'web-mode
-                            '("</" "<!--" "-->" "/>"))))
+(with-eval-after-load "ligature"
+  (ligature-set-ligatures 'emacs-lisp-mode
+                          '("->" "->>" "<=" ">="))
+  (ligature-set-ligatures 'elixir-mode
+                          '("->" "=>" "|>" "<-" ">=" "<=" "!=" "!==" "===" "==" "::" "++" "&&" "||" "<<" ">>"))
+  (ligature-set-ligatures 'clojure-mode
+                          '("->" "->>" ">=" "<="  ".-"))
+  (ligature-set-ligatures 'web-mode
+                          '("</" "<!--" "-->" "/>")))
 
 (provide 'init-font)
