@@ -9,8 +9,6 @@
 
 (autoload #'telega "telega")
 
-(global-set-key (kbd "<f6>") 'telega)
-
 (with-eval-after-load "telega"
   (setcdr (assq t org-file-apps-gnu) 'browse-url-xdg-open)
   (custom-set-faces

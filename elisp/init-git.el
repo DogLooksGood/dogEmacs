@@ -18,13 +18,6 @@
 (autoload #'magit-diff "magit" nil t)
 (autoload #'magit-blame "magit" nil t)
 
-(defvar +magit-keymap
-  (let ((keymap (make-sparse-keymap)))
-    (define-key keymap (kbd "s") #'magit-status)
-    (define-key keymap (kbd "b") #'magit-blame)
-    (define-key keymap (kbd "d") #'magit-diff)
-    keymap))
-
 ;;; diff-hl
 
 (autoload #'diff-hl-mode "diff-hl")

@@ -4,6 +4,13 @@
 
 (+pdump-packages 'meow)
 
+(defvar +magit-keymap
+  (let ((keymap (make-sparse-keymap)))
+    (define-key keymap (kbd "s") #'magit-status)
+    (define-key keymap (kbd "b") #'magit-blame)
+    (define-key keymap (kbd "d") #'magit-diff)
+    keymap))
+
 (defun meow-setup ()
   ;; Programmer Dvorak layout on ansi keyboard
   (setq meow-cheatsheet-physical-layout meow-cheatsheet-physical-layout-ansi

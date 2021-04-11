@@ -120,8 +120,6 @@
     :head "#+title: ${title}\n"
     :unnarrowed t)))
 
-(global-set-key (kbd "<f12>") 'org-roam-mode)
-
 (with-eval-after-load "org-roam"
   (define-key org-roam-mode-map (kbd "C-x C-r l") 'org-roam)
   (define-key org-roam-mode-map (kbd "C-x C-r f") 'org-roam-find-file)
