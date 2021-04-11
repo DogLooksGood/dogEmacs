@@ -5,48 +5,45 @@
 (+pdump-packages 'meow)
 
 (defun meow-setup ()
-  (setq meow-cheatsheet-physical-layout meow-cheatsheet-physical-layout-ansi)
-  (setq meow-cheatsheet-layout meow-cheatsheet-layout-dvp)
+  ;; Programmer Dvorak layout on ansi keyboard
+  (setq meow-cheatsheet-physical-layout meow-cheatsheet-physical-layout-ansi
+        meow-cheatsheet-layout meow-cheatsheet-layout-dvp)
+  ;; it's not a good idea to have a complex leader keymap
+  ;; here we create bindings for necessary, high frequency commands
   (meow-leader-define-key
-   '("'" . meow-wrap-string)
-   '("(" . meow-wrap-round)
-   '("[" . meow-wrap-square)
-   '("{" . meow-wrap-curly)
-   '("}" . meow-forward-barf)
-   '(")" . meow-forward-slurp)
-   '("e" . meow-eval-last-exp)
-   '("E" . eldoc-mode)
-   '("r" . meow-raise-sexp)
-   '("S" . meow-split-sexp)
-   '("s" . meow-splice-sexp)
-   '("t" . meow-transpose-sexp)
-   '("j" . meow-join-sexp)
-   '("," . meow-pop-marker)
-   '("." . meow-find-ref)
-   '(";" . meow-comment)
-   '("@ u" . smerge-keep-upper)
-   '("@ l" . smerge-keep-lower)
-   '("@ a" . smerge-keep-all)
-   '("@ m" . smerge-keep-mine)
-   '("@ o" . smerge-keep-other)
-   '("@ @" . smerge-next)
-   '("d" . dired)
-   '("o" . delete-other-windows)
-   '("L" . display-line-numbers-mode)
-   '("k" . kill-buffer)
+   ;; reverse command query
+   '("^" . meow-keypad-describe-key)
+   ;; cheatsheet
+   '("?" . meow-cheatsheet)
+   ;; high frequency keybindings
+   '("e" . "C-x C-e")
+   '(")" . "C-)")
+   '("}" . "C-}")
+   '("." . "M-.")
+   '("," . "M-,")
+   ;; window management
    '("w" . other-window)
    '("W" . +rotate-window)
    '("o" . delete-other-windows)
-   '("q" . delete-window)
-   '("v" . magit)
+   '("s" . +split-window-dwim)
+   ;; high frequency commands
    '("$" . +change-theme)
-   '("-" . split-window-below)
-   '("\\" . split-window-right)
+   '(";" . comment-dwim)
+   '("k" . kill-this-buffer)
    '("p" . project-find-file)
+   '("d" . dired)
    '("b" . switch-to-buffer)
-   '("a" . deadgrep)
+   '("r" . deadgrep)
    '("f" . find-file)
-   '("i" . imenu))
+   '("i" . imenu)
+   ;; toggles
+   '("t" . treemacs-select-window)
+   '("L" . display-line-numbers-mode)
+   '("T" . telega)
+   '("R" . org-roam-mode)
+   '("D" . writeroom-mode))
+  (meow-motion-overwrite-define-key
+   '("'" . repeat))
   (meow-normal-define-key
    '("*" . meow-expand-0)
    '("=" . meow-expand-9)
@@ -70,8 +67,6 @@
    '("0" . digit-argument)
    '("-" . negative-argument)
    '(";" . meow-reverse)
-   '("/" . meow-keypad-describe-key)
-   '("?" . meow-cheatsheet)
    '("," . meow-inner-of-thing)
    '("." . meow-bounds-of-thing)
    '("a" . meow-append)
@@ -131,7 +126,6 @@
    '("&" . meow-query-replace)
    '("%" . meow-query-replace-regexp)
    '("@" . recenter-top-bottom)
-   '("^" . meow-pop-to-mark)
    '("'" . repeat)
    '("<escape>" . meow-last-buffer)
    '("\\" . quoted-insert)
@@ -158,13 +152,17 @@
 (meow-global-mode 1)
 
 (with-eval-after-load "meow"
+  ;; make Meow usable in TUI Emacs
   (add-hook 'meow-mode-hook 'meow-esc-mode)
   (add-to-list 'meow-normal-state-mode-list 'inf-iex-mode)
   (add-to-list 'meow-normal-state-mode-list 'authinfo-mode)
   (add-to-list 'meow-grab-fill-commands 'eval-expression)
+  ;; use << and >> to select to bol/eol
   (add-to-list 'meow-char-thing-table '(?> . line))
   (add-to-list 'meow-char-thing-table '(?< . line))
+  ;; define our command layout
   (meow-setup)
+  ;; add indicator to modeline
   (meow-setup-indicator))
 
 (provide 'init-modal)

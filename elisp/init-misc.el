@@ -11,6 +11,4 @@
 
 (autoload #'writeroom-mode "writeroom-mode" nil t)
 
-(global-set-key (kbd "<f8>") #'writeroom-mode)
-
 (provide 'init-misc)
