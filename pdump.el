@@ -1,3 +1,6 @@
+;; disable native compile.
+(setq straight-disable-native-compile t)
+
 ;; load the whole configuration
 (load (expand-file-name "early-init.el" user-emacs-directory))
 (load (expand-file-name "init.el" user-emacs-directory))
