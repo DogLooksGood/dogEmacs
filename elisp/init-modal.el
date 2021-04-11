@@ -44,7 +44,8 @@
    '("r" . deadgrep)
    '("f" . find-file)
    '("i" . imenu)
-   (cons "a" +magit-keymap)
+   '("a" . "M-x")
+   (cons "v" +magit-keymap)
    ;; toggles
    '("t" . treemacs-select-window)
    '("L" . display-line-numbers-mode)
