@@ -82,7 +82,9 @@
  ;; prefer y or n
  y-or-n-p-use-read-key t
  ;; always follow link
- vc-follow-symlinks t)
+ vc-follow-symlinks t
+ ;; disable visual line move
+ line-move-visual nil)
 
 (add-hook 'prog-mode-hook 'visual-line-mode)
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
