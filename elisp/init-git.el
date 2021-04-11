@@ -3,6 +3,7 @@
 (straight-use-package 'dired-git-info)
 (straight-use-package 'diff-hl)
 (straight-use-package 'magit)
+(straight-use-package 'smerge-mode)
 
 (+pdump-packages 'dired-git-info
                  'diff-hl
@@ -30,5 +31,17 @@
 
 (with-eval-after-load "dired-git-info"
   (define-key dired-mode-map (kbd "v") 'dired-git-info-mode))
+
+;;; smerge
+
+(autoload #'smerge-mode "smerge-mode" nil t)
+
+(defun +try-smerge ()
+  (save-excursion
+  	(goto-char (point-min))
+  	(when (re-search-forward "^<<<<<<< " nil t)
+  	  (smerge-mode 1))))
+
+(add-hook 'find-file-hook '+try-smerge t)
 
 (provide 'init-git)
