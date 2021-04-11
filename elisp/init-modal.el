@@ -38,6 +38,7 @@
    '(";" . comment-dwim)
    '("k" . kill-this-buffer)
    '("p" . project-find-file)
+   '("j" . project-switch-to-buffer)
    '("d" . dired)
    '("b" . switch-to-buffer)
    '("r" . deadgrep)
