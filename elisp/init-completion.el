@@ -1,14 +1,13 @@
 ;;; -*- lexical-binding: t -*-
 
-(straight-use-package 'selectrum)
-(straight-use-package 'selectrum-prescient)
+(straight-use-package 'icomplete-vertical)
 (straight-use-package 'company)
 (straight-use-package 'deadgrep)
 (straight-use-package 'prescient)
 (straight-use-package 'yasnippet)
 
-(+pdump-packages 'selectrum
-                 'selectrum-prescient
+(+pdump-packages 'icomplete
+                 'icomplete-vertical
                  'company
                  'deadgrep
                  'prescient
@@ -85,27 +84,19 @@
   (define-key company-template-nav-map (kbd "TAB") nil)
   (define-key company-template-nav-map [tab] nil))
 
-;; (setq tab-always-indent 'complete)
+(require 'icomplete)
+(require 'icomplete-vertical)
+(icomplete-mode 1)
+(icomplete-vertical-mode 1)
 
-(require 'selectrum)
-(require 'selectrum-prescient)
-(selectrum-mode t)
-(selectrum-prescient-mode t)
-
-(with-eval-after-load "selectrum"
-  (define-key selectrum-minibuffer-map (kbd "{") #'selectrum-previous-candidate)
-  (define-key selectrum-minibuffer-map (kbd "}") #'selectrum-next-candidate)
-  (define-key selectrum-minibuffer-map (kbd "[") #'previous-history-element)
-  (define-key selectrum-minibuffer-map (kbd "]") #'next-history-element))
-
-;; (require 'icomplete)
-;; (icomplete-mode 1)
-;;
-;; (with-eval-after-load "icomplete"
-;;   (define-key icomplete-minibuffer-map (kbd "}") #'icomplete-forward-completions)
-;;   (define-key icomplete-minibuffer-map (kbd "{") #'icomplete-backward-completions)
-;;   (define-key icomplete-minibuffer-map (kbd "[") #'previous-history-element)
-;;   (define-key icomplete-minibuffer-map (kbd "]") #'next-history-element))
+(with-eval-after-load "icomplete"
+  (setq completion-styles '(basic partial-completion substring))
+  (define-key icomplete-minibuffer-map (kbd "RET") #'icomplete-force-complete-and-exit)
+  (define-key icomplete-minibuffer-map (kbd "M-RET") #'icomplete-ret)
+  (define-key icomplete-minibuffer-map (kbd "}") #'icomplete-forward-completions)
+  (define-key icomplete-minibuffer-map (kbd "{") #'icomplete-backward-completions)
+  (define-key icomplete-minibuffer-map (kbd "[") #'previous-history-element)
+  (define-key icomplete-minibuffer-map (kbd "]") #'next-history-element))
 
 ;;; deadgrep
 
