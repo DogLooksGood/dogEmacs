@@ -6,7 +6,7 @@
 If the window is wide enough, split at right, otherwise split at below."
   (interactive)
   (if (> (window-width) 160)
-      (split-window-right 80)
+      (split-window-right)
     (split-window-below)))
 
 (defun +rotate-window ()
