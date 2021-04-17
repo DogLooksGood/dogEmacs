@@ -11,8 +11,8 @@
  treemacs-no-png-images t
  treemacs-width 40)
 
-(autoload #'treemacs "treemacs")
-(autoload #'treemacs-select-window "treemacs")
+(autoload #'treemacs "treemacs" nil t)
+(autoload #'treemacs-select-window "treemacs" nil t)
 
 (with-eval-after-load "treemacs"
   (add-hook 'treemacs-mode-hook #'+treemacs-scale-font-size)

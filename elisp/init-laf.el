@@ -66,4 +66,6 @@
 ;; Load the first theme in `+theme-list'.
 (load-theme (car +theme-list) t)
 
+;; icons
+
 (provide 'init-laf)

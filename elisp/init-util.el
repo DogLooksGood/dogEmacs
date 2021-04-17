@@ -133,6 +133,6 @@ influence of C1 on the result."
             (color-values c1) (color-values c2)))))
 
 (defun +set-no-other-window ()
-  (set-window-parameter (first (window-list)) 'no-other-window t))
+  (set-window-parameter (car (window-list)) 'no-other-window t))
 
 (provide 'init-util)
