@@ -2,7 +2,7 @@
 
 (+pdump-packages 'writeroom-mode)
 
-(add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
+;; (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
 
 (with-eval-after-load "writeroom-mode"
   (setq writeroom-width 120

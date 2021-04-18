@@ -12,7 +12,7 @@
  inhibit-startup-echo-area-message t
  frame-inhibit-implied-resize t
  initial-scratch-message ""
- hl-line-sticky-flag nil
+ hl-line-sticky-flag t
  ;; prefer horizental split
  split-height-threshold nil
  split-width-threshold 120
@@ -55,7 +55,7 @@
  ;; some major modes will override this
  tab-width 4
  ;; don't show cursor in non selected window.
- cursor-in-non-selected-windows nil
+ cursor-in-non-selected-windows t
  comment-empty-lines t
  visible-cursor t
  ;; improve long line display performance

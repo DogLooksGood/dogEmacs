@@ -5,7 +5,8 @@
 (+pdump-packages 'treemacs)
 
 (defun +treemacs-scale-font-size ()
-  (face-remap-add-relative 'default :height 0.8))
+  (face-remap-add-relative 'default :height 0.8)
+  (face-remap-add-relative 'hl-line :box '(:line-width (-1 . -1))))
 
 (setq
  treemacs-no-png-images t
