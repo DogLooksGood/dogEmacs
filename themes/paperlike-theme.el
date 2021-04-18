@@ -115,11 +115,11 @@
    `(meow-normal-cursor             ((t ())))
    `(meow-motion-cursor             ((t ())))
    `(meow-position-highlight-number-1 ((t (:box (:line-width (-1 . -1))))))
-   `(meow-position-highlight-number-2 ((t (:box (:line-width (-1 . -1))))))
-   `(meow-position-highlight-number-3 ((t (:box (:line-width (-1 . -1))))))
+   `(meow-position-highlight-number-2 ((t (:foreground ,cm :box (:line-width (-1 . -1))))))
+   `(meow-position-highlight-number-3 ((t (:foreground ,hl :box (:line-width (-1 . -1))))))
    `(meow-position-highlight-reverse-number-1 ((t (:box (:line-width (-1 . -1))))))
-   `(meow-position-highlight-reverse-number-2 ((t (:box (:line-width (-1 . -1))))))
-   `(meow-position-highlight-reverse-number-3 ((t (:box (:line-width (-1 . -1))))))
+   `(meow-position-highlight-reverse-number-2 ((t (:foreground ,cm :box (:line-width (-1 . -1))))))
+   `(meow-position-highlight-reverse-number-3 ((t (:foreground ,hl :box (:line-width (-1 . -1))))))
 
    ;; Cider
    `(cider-result-overlay-face      ((t (:inverse-video t))))
