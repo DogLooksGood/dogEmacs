@@ -34,7 +34,7 @@
 
 (let ((bg "#FFFFFF")
       (fg "#000000")
-      (cm "#999999")
+      (cm "#888888")
       (hl "#CCCCCC"))
   (custom-theme-set-faces
    `paperlike
@@ -70,10 +70,10 @@
    `(isearch-fail                   ((t (:inverse-video t))))
 
    ;; Font Locks
-   `(font-lock-comment-face         ((t (:foreground ,cm))))
-   `(font-lock-comment-delimiter-face         ((t (:foreground ,cm))))
-   `(font-lock-string-face          ((t (:foreground ,cm))))
-   `(font-lock-doc-face             ((t (:foreground ,cm))))
+   `(font-lock-comment-face         ((t (:foreground ,cm :italic t))))
+   `(font-lock-comment-delimiter-face         ((t (:foreground ,cm :italic t))))
+   `(font-lock-string-face          ((t (:foreground ,cm :italic t))))
+   `(font-lock-doc-face             ((t (:foreground ,cm :italic t))))
    `(font-lock-builtin-face         ((t ())))
    `(font-lock-type-face            ((t ())))
    `(font-lock-variable-name-face   ((t ())))
