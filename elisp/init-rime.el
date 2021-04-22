@@ -2,10 +2,15 @@
 
 (straight-use-package '(rime :type git :host github :repo "DogLooksGood/emacs-rime"))
 
+(defun +rime-predicate-org-syntax-punc-p ()
+  (when (eq major-mode 'org-mode)
+    (member rime--current-input-key '(91 93 42))))
+
 (setq
  rime-disable-predicates '(meow-normal-mode-p
                            meow-motion-mode-p
-                           meow-keypad-mode-p)
+                           meow-keypad-mode-p
+                           +rime-predicate-org-syntax-punc-p)
  rime-inline-predicates '(rime-predicate-space-after-cc-p
                           rime-predicate-current-uppercase-letter-p)
  rime-translate-keybindings '("C-f" "C-b" "C-n" "C-p" "C-g")

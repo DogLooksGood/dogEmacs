@@ -32,6 +32,9 @@
 
 (deftheme paperlike "A minimal light theme.")
 
+(defvar paperlike-theme-header-scales '(2.2 1.8 1.6 1.4 1.2 1.2 1.2)
+  "Scales for headers.")
+
 (let ((bg "#FFFFFF")
       (fg "#000000")
       (cm "#888888")
@@ -186,13 +189,13 @@
    ;; `(css-selector                   ((t (:foreground ,purple))))
    ;;
    ;; ;; Markdown
-   ;; `(markdown-header-face-1         ((t (:bold t :height ,(nth 0 joker-theme-header-scales)))))
-   ;; `(markdown-header-face-2         ((t (:bold t :height ,(nth 1 joker-theme-header-scales)))))
-   ;; `(markdown-header-face-3         ((t (:bold t :height ,(nth 2 joker-theme-header-scales)))))
-   ;; `(markdown-header-face-4         ((t (:bold t :height ,(nth 3 joker-theme-header-scales)))))
-   ;; `(markdown-header-face-5         ((t (:bold t :height ,(nth 4 joker-theme-header-scales)))))
-   ;; `(markdown-header-face-6         ((t (:bold t :height ,(nth 5 joker-theme-header-scales)))))
-   ;; `(markdown-header-face-7         ((t (:bold t :height ,(nth 6 joker-theme-header-scales)))))
+   ;; `(markdown-header-face-1         ((t (:bold t :height ,(nth 0 paperlike-theme-header-scales)))))
+   ;; `(markdown-header-face-2         ((t (:bold t :height ,(nth 1 paperlike-theme-header-scales)))))
+   ;; `(markdown-header-face-3         ((t (:bold t :height ,(nth 2 paperlike-theme-header-scales)))))
+   ;; `(markdown-header-face-4         ((t (:bold t :height ,(nth 3 paperlike-theme-header-scales)))))
+   ;; `(markdown-header-face-5         ((t (:bold t :height ,(nth 4 paperlike-theme-header-scales)))))
+   ;; `(markdown-header-face-6         ((t (:bold t :height ,(nth 5 paperlike-theme-header-scales)))))
+   ;; `(markdown-header-face-7         ((t (:bold t :height ,(nth 6 paperlike-theme-header-scales)))))
    ;;
    ;; ;; Telega
    `(telega-entity-type-code        ((t ())))
@@ -200,9 +203,17 @@
    `(telega-unmuted-count           ((t ())))
    ;;
    ;; ;; Org-mode
+   `(org-document-title             ((t (:bold t :height ,(nth 0 paperlike-theme-header-scales)))))
    `(org-link                       ((t (:underline t))))
    `(org-document-title             ((t ())))
    `(org-code                       ((t (:inherit font-lock-constant-face))))
+   `(org-level-1                    ((t (:bold t :height ,(nth 0 paperlike-theme-header-scales)))))
+   `(org-level-2                    ((t (:bold t :height ,(nth 1 paperlike-theme-header-scales)))))
+   `(org-level-3                    ((t (:bold t :height ,(nth 2 paperlike-theme-header-scales)))))
+   `(org-level-4                    ((t (:bold t :height ,(nth 3 paperlike-theme-header-scales)))))
+   `(org-level-5                    ((t (:bold t :height ,(nth 4 paperlike-theme-header-scales)))))
+   `(org-level-6                    ((t (:bold t :height ,(nth 5 paperlike-theme-header-scales)))))
+   `(org-level-7                    ((t (:bold t :height ,(nth 6 paperlike-theme-header-scales)))))
    ;;
    ;; ;; Treemacs
    ;; `(treemacs-root-face             ((t (:inherit font-lock-function-name-face :height 1.4 :underline t))))

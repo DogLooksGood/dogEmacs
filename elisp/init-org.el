@@ -85,7 +85,8 @@
   (define-key org-mode-map (kbd "<f8>") 'org-latex-auto-toggle)
   (require 'org-tempo)
   (+org-babel-setup)
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 4.0))
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 4.0)
+        org-agenda-files '("~/Org"))
   (custom-set-faces
    '(org-table ((t :inherit 'fixed-pitch)))
    '(org-code ((t :inherit 'fixed-pitch)))

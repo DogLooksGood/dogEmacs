@@ -51,6 +51,7 @@
    '("L" . display-line-numbers-mode)
    '("T" . telega)
    '("R" . org-roam-mode)
+   '("A" . org-agenda)
    '("D" . writeroom-mode))
   (meow-motion-overwrite-define-key
    '("'" . repeat))
@@ -147,16 +148,13 @@
  meow-keypad-describe-delay 0.5
  meow-select-on-change t
  meow-extend-syntax "^-><()"
- meow-selection-command-fallback '((meow-replace . meow-replace-char)
+ meow-selection-command-fallback '((meow-replace . meow-page-up)
                                    (meow-change . meow-change-char)
                                    (meow-save . meow-save-empty)
                                    (meow-kill . meow-C-k)
-                                   (meow-cancel . meow-keyboard-quit)
-                                   (meow-cancel-selection . meow-keyboard-quit)
+                                   (meow-cancel . meow-page-down)
                                    (meow-pop . meow-pop-grab)
-                                   (meow-reverse . meow-page-down)
-                                   (meow-delete . meow-C-d)
-                                   (meow-kmacro . meow-start-kmacro)))
+                                   (meow-delete . meow-C-d)))
 
 (require 'meow)
 

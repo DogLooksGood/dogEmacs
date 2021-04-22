@@ -1,6 +1,8 @@
 (straight-use-package 'writeroom-mode)
+(straight-use-package 'dumb-jump)
 
 (+pdump-packages 'writeroom-mode)
+(+pdump-packages 'dumb-jump)
 
 ;; (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
 
@@ -10,5 +12,9 @@
         writeroom-fullscreen-effect 'fullboth))
 
 (autoload #'writeroom-mode "writeroom-mode" nil t)
+
+(require 'dumb-jump)
+
+(add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
 (provide 'init-misc)
