@@ -114,12 +114,15 @@
  (let ((p (expand-file-name "~/Org")))
    (unless (file-directory-p p) (make-directory p))
    p)
+
  org-roam-capture-templates
  '(("d" "default" plain (function org-roam--capture-get-point)
     "%?"
     :file-name "%<%Y%m%d%H%M%S>-${slug}"
     :head "#+title: ${title}\n"
-    :unnarrowed t)))
+    :unnarrowed t))
+
+ org-roam-buffer-window-parameters '((no-delete-other-windows . t)))
 
 (with-eval-after-load "org-roam"
   (define-key org-roam-mode-map (kbd "C-x C-r l") 'org-roam)
