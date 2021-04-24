@@ -32,7 +32,7 @@
 
 (deftheme paperlike "A minimal light theme.")
 
-(defvar paperlike-theme-header-scales '(2.2 1.8 1.6 1.4 1.2 1.2 1.2)
+(defvar paperlike-theme-header-scales '(1.2 1.2 1.2 1.0 1.0 1.0 1.0)
   "Scales for headers.")
 
 (let ((bg "#FFFFFF")
