@@ -91,7 +91,13 @@
 (selectrum-mode t)
 (selectrum-prescient-mode t)
 
+(defun +backward-delete-word ()
+  (interactive)
+  (delete-region (save-mark-and-excursion (backward-word) (point))
+                 (point)))
+
 (with-eval-after-load "selectrum"
+  (define-key selectrum-minibuffer-map (kbd "M-DEL") #'+backward-delete-word)
   (define-key selectrum-minibuffer-map (kbd "{") #'selectrum-previous-candidate)
   (define-key selectrum-minibuffer-map (kbd "}") #'selectrum-next-candidate)
   (define-key selectrum-minibuffer-map (kbd "[") #'previous-history-element)
