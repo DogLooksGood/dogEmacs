@@ -15,6 +15,9 @@
   ;; Programmer Dvorak layout on ansi keyboard
   (setq meow-cheatsheet-physical-layout meow-cheatsheet-physical-layout-ansi
         meow-cheatsheet-layout meow-cheatsheet-layout-dvp)
+  (meow-motion-overwrite-define-key
+   '("n" . meow-next)
+   '("p" . meow-prev))
   ;; it's not a good idea to have a complex leader keymap
   ;; here we create bindings for necessary, high frequency commands
   (meow-leader-define-key
@@ -50,6 +53,7 @@
    '("t" . treemacs-select-window)
    '("L" . display-line-numbers-mode)
    '("T" . telega)
+   '("P" . pass)
    '("R" . org-roam-mode)
    '("A" . org-agenda)
    '("D" . writeroom-mode))
@@ -166,6 +170,7 @@
   (add-to-list 'meow-normal-state-mode-list 'inf-iex-mode)
   (add-to-list 'meow-normal-state-mode-list 'authinfo-mode)
   (add-to-list 'meow-grab-fill-commands 'eval-expression)
+
   ;; use << and >> to select to bol/eol
   (add-to-list 'meow-char-thing-table '(?> . line))
   (add-to-list 'meow-char-thing-table '(?< . line))
