@@ -75,7 +75,7 @@
    ;; Font Locks
    `(font-lock-comment-face         ((t (:foreground ,cm :italic t))))
    `(font-lock-comment-delimiter-face         ((t (:foreground ,cm :italic t))))
-   `(font-lock-string-face          ((t (:foreground ,cm :italic t))))
+   `(font-lock-string-face          ((t (:foreground ,cm))))
    `(font-lock-doc-face             ((t (:foreground ,cm :italic t))))
    `(font-lock-builtin-face         ((t ())))
    `(font-lock-type-face            ((t ())))
