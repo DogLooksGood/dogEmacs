@@ -100,7 +100,6 @@
    '("i" . meow-insert)
    '("I" . meow-open-above)
    '("j" . meow-join)
-   '("J" . meow-extend)
    '("k" . meow-kill)
    '("K" . meow-kill-append)
    '("l" . meow-till)
@@ -146,7 +145,6 @@
  meow-esc-delay 0.001
  meow-keypad-describe-delay 0.5
  meow-select-on-change t
- meow-extend-syntax "^-><()"
  meow-selection-command-fallback '((meow-replace . meow-page-up)
                                    (meow-change . meow-change-char)
                                    (meow-save . meow-save-empty)
