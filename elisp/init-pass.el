@@ -4,6 +4,7 @@
 
 (+pdump-packages 'pass)
 
+(setq pass-username-fallback-on-filename t)
 (autoload #'pass "pass" nil t)
 
 (provide 'init-pass)

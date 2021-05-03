@@ -59,14 +59,16 @@
   (when-let* ((code (thing-at-point 'symbol))
               (dict (cider-nrepl-sync-request:eval
                      code
-                     (car (cider-connections))
+                     (--find (eq (cider-connection-type-for-buffer)
+                                 (cider-connection-type-for-buffer it))
+                             (cider-connections))
                      (cider-ns-from-form (cider-ns-form))))
               (spec (-last-item dict)))
     (cider-browse-spec spec)))
 
 (setq
- cider-font-lock-dynamically nil
- cider-font-lock-reader-conditionals nil
+ cider-font-lock-dynamically t
+ cider-font-lock-reader-conditionals t
  cider-use-fringe-indicators t
  cider-prompt-for-symbol nil
  cider-save-file-on-load t

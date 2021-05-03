@@ -15,9 +15,6 @@
   ;; Programmer Dvorak layout on ansi keyboard
   (setq meow-cheatsheet-physical-layout meow-cheatsheet-physical-layout-ansi
         meow-cheatsheet-layout meow-cheatsheet-layout-dvp)
-  (meow-motion-overwrite-define-key
-   '("n" . meow-next)
-   '("p" . meow-prev))
   ;; it's not a good idea to have a complex leader keymap
   ;; here we create bindings for necessary, high frequency commands
   (meow-leader-define-key
@@ -143,9 +140,7 @@
    '("@" . recenter-top-bottom)
    '("'" . repeat)
    '("<escape>" . meow-last-buffer)
-   '("\\" . quoted-insert)
-   '("<f3>" . meow-start-kmacro)
-   '("<f4>" . meow-end-or-call-kmacro)))
+   '("\\" . quoted-insert)))
 
 (setq
  meow-esc-delay 0.001

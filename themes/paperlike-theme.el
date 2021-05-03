@@ -65,7 +65,7 @@
    `(compilation-warning            ((t ())))
    `(warning                        ((t ())))
    `(match                          ((t (:inverse-video t))))
-   `(secondary-selection            ((t (:inverse-video t))))
+   `(secondary-selection            ((t (:inverse-video t :foreground ,cm))))
    `(help-key-binding               ((t ())))
 
    ;; ISearch
@@ -97,7 +97,7 @@
    ;; Company
    `(company-tooltip-common         ((t ())))
    `(company-tooltip-common-selection ((t (:bold t))))
-   `(company-tooltip                ((t ())))
+   `(company-tooltip                ((t (:background ,hl))))
    `(company-tooltip-search         ((t ())))
    `(company-tooltip-selection      ((t (:inverse-video t))))
    `(company-tooltip-annotation     ((t ())))
@@ -154,6 +154,8 @@
    `(diff-hl-insert                 ((t (:foreground ,cm :background ,cm))))
    `(diff-hl-change                 ((t (:foreground ,hl :background ,hl))))
    `(diff-hl-delete                 ((t (:foreground ,fg :background ,fg))))
+
+   `(eshell-prompt                  ((t (:bold t))))
    ;;
    ;; ;; Term
    ;; `(term-color-blue                ((t (:foreground ,blue :background ,blue))))
