@@ -142,6 +142,7 @@
    '("\\" . quoted-insert)))
 
 (setq
+ meow-visit-sanitize-completion nil
  meow-esc-delay 0.001
  meow-keypad-describe-delay 0.5
  meow-select-on-change t
@@ -159,9 +160,10 @@
 
 (with-eval-after-load "meow"
   ;; make Meow usable in TUI Emacs
-  (add-hook 'meow-mode-hook 'meow-esc-mode)
-  (add-to-list 'meow-normal-state-mode-list 'inf-iex-mode)
-  (add-to-list 'meow-normal-state-mode-list 'authinfo-mode)
+  (meow-esc-mode 1)
+  ;; (add-hook 'meow-mode-hook 'meow-esc-mode)
+  (add-to-list 'meow-mode-state-list '(inf-iex-mode . normal))
+  (add-to-list 'meow-mode-state-list '(authinfo-mode . normal))
   (add-to-list 'meow-grab-fill-commands 'eval-expression)
 
   ;; use << and >> to select to bol/eol
