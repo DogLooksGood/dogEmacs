@@ -1,5 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 (setq straight-vc-git-default-clone-depth 1)
+(setq straight-disable-native-compile (not (native-comp-available-p)))
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
