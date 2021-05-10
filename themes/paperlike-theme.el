@@ -86,13 +86,16 @@
    `(font-lock-warning-face         ((t ())))
    `(font-lock-preprocessor-face    ((t ())))
 
+   ;; shell
+   `(sh-quoted-exec                 ((t ())))
+
    ;; IMenu
    `(imenu-list-entry-face-0          ((t ())))
    `(imenu-list-entry-subalist-face-0 ((t (:bold t))))
 
    ;; Mode Line
    `(mode-line                      ((t (:inverse-video t))))
-   `(mode-line-inactive             ((t (:inverse-video t))))
+   `(mode-line-inactive             ((t (:background ,hl))))
 
    ;; Company
    `(company-tooltip-common         ((t ())))
@@ -117,12 +120,6 @@
    `(meow-insert-cursor             ((t ())))
    `(meow-normal-cursor             ((t ())))
    `(meow-motion-cursor             ((t ())))
-   `(meow-position-highlight-number-1 ((t (:box (:line-width (-1 . -1))))))
-   `(meow-position-highlight-number-2 ((t (:foreground ,cm :box (:line-width (-1 . -1))))))
-   `(meow-position-highlight-number-3 ((t (:foreground ,hl :box (:line-width (-1 . -1))))))
-   `(meow-position-highlight-reverse-number-1 ((t (:box (:line-width (-1 . -1))))))
-   `(meow-position-highlight-reverse-number-2 ((t (:foreground ,cm :box (:line-width (-1 . -1))))))
-   `(meow-position-highlight-reverse-number-3 ((t (:foreground ,hl :box (:line-width (-1 . -1))))))
 
    ;; Cider
    `(cider-result-overlay-face      ((t (:inverse-video t))))
