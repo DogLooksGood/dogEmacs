@@ -55,7 +55,8 @@
    '("A" . org-agenda)
    '("D" . writeroom-mode))
   (meow-motion-overwrite-define-key
-   '("'" . repeat))
+   '("'" . repeat)
+   '("q" . delete-window))
   (meow-normal-define-key
    '("*" . meow-expand-0)
    '("=" . meow-expand-9)
@@ -112,7 +113,7 @@
    '("O" . meow-block-expand)
    '("p" . meow-prev)
    '("P" . meow-prev-expand)
-   '("q" . meow-quit)
+   '("q" . delete-window)
    '("Q" . meow-goto-line)
    '("r" . meow-replace)
    '("R" . meow-swap-grab)

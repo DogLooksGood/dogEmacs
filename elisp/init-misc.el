@@ -19,6 +19,6 @@
 
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
-;; (frames-only-mode 1)
+(frames-only-mode 1)
 
 (provide 'init-misc)
