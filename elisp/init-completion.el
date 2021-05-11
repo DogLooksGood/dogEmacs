@@ -3,7 +3,8 @@
 (straight-use-package 'selectrum)
 (straight-use-package 'selectrum-prescient)
 (straight-use-package 'company)
-(straight-use-package 'deadgrep)
+;; (straight-use-package 'deadgrep)
+(straight-use-package 'rg)
 (straight-use-package 'prescient)
 (straight-use-package 'yasnippet)
 
@@ -111,10 +112,15 @@
 
 ;;; deadgrep
 
-(autoload #'deadgrep "deadgrep" nil t)
+;; (autoload #'deadgrep "deadgrep" nil t)
+;;
+;; (with-eval-after-load "deadgrep"
+;;   (define-key deadgrep-mode-map (kbd "w") 'deadgrep-edit-mode)
+;;   (define-key deadgrep-edit-mode-map (kbd "C-x C-s") 'deadgrep-mode))
 
-(with-eval-after-load "deadgrep"
-  (define-key deadgrep-mode-map (kbd "w") 'deadgrep-edit-mode)
-  (define-key deadgrep-edit-mode-map (kbd "C-x C-s") 'deadgrep-mode))
+(autoload #'rg-project "rg" nil t)
+
+(with-eval-after-load "wgrep"
+  (define-key wgrep-mode-map (kbd "C-c C-c") #'wgrep-finish-edit))
 
 (provide 'init-completion)

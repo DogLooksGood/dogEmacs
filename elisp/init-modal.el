@@ -41,7 +41,7 @@
    '("j" . project-switch-to-buffer)
    '("d" . dired)
    '("b" . switch-to-buffer)
-   '("r" . deadgrep)
+   '("r" . rg-project)
    '("f" . find-file)
    '("i" . imenu)
    '("a" . "M-x")
@@ -55,8 +55,7 @@
    '("A" . org-agenda)
    '("D" . writeroom-mode))
   (meow-motion-overwrite-define-key
-   '("'" . repeat)
-   '("q" . delete-frame))
+   '("'" . repeat))
   (meow-normal-define-key
    '("*" . meow-expand-0)
    '("=" . meow-expand-9)
@@ -113,7 +112,7 @@
    '("O" . meow-block-expand)
    '("p" . meow-prev)
    '("P" . meow-prev-expand)
-   '("q" . delete-frame)
+   '("q" . meow-quit)
    '("Q" . meow-goto-line)
    '("r" . meow-replace)
    '("R" . meow-swap-grab)
