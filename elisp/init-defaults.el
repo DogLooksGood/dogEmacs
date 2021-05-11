@@ -8,6 +8,8 @@
  ;; no welcome screen
  inhibit-splash-screen t
  inhibit-startup-screen t
+ ;; no client startup messages
+ server-client-instructions nil
  ;; no startup messages
  inhibit-startup-echo-area-message t
  frame-inhibit-implied-resize t
