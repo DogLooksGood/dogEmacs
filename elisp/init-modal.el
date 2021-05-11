@@ -56,7 +56,7 @@
    '("D" . writeroom-mode))
   (meow-motion-overwrite-define-key
    '("'" . repeat)
-   '("q" . delete-window))
+   '("q" . delete-frame))
   (meow-normal-define-key
    '("*" . meow-expand-0)
    '("=" . meow-expand-9)
@@ -113,7 +113,7 @@
    '("O" . meow-block-expand)
    '("p" . meow-prev)
    '("P" . meow-prev-expand)
-   '("q" . delete-window)
+   '("q" . delete-frame)
    '("Q" . meow-goto-line)
    '("r" . meow-replace)
    '("R" . meow-swap-grab)
