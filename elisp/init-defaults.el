@@ -95,13 +95,15 @@
  ;; move cursor to top/bottom before signaling a scroll error
  scroll-error-top-bottom t
  ;; pinentry
- epa-pinentry-mode 'loopback)
+ epa-pinentry-mode 'loopback
+ ;; disable input method in pgtk
+ pgtk-use-im-context-on-new-connection nil)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (add-hook 'prog-mode-hook 'visual-line-mode)
-(add-hook 'prog-mode-hook 'hl-line-mode)
-(add-hook 'conf-mode-hook 'hl-line-mode)
+;; (add-hook 'prog-mode-hook 'hl-line-mode)
+;; (add-hook 'conf-mode-hook 'hl-line-mode)
 (add-hook 'prog-mode-hook 'subword-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
