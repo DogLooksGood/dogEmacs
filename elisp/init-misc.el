@@ -21,6 +21,10 @@
 
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 
+;;; ~/.gnupg/gpg-agent.conf
+;; allow-emacs-pinentry
+;; allow-loopback-pinentry
+
 (pinentry-start)
 
 (provide 'init-misc)
