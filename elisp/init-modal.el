@@ -50,6 +50,7 @@
    '("t" . treemacs-select-window)
    '("L" . display-line-numbers-mode)
    '("T" . telega)
+   '("#" . vterm-other-window)
    '("P" . pass)
    '("R" . org-roam-mode)
    '("A" . org-agenda)

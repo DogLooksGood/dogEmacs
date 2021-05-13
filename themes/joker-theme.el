@@ -261,7 +261,9 @@ You may want to set this to window's border color.")
    ;; Treemacs
    `(treemacs-root-face             ((t (:inherit font-lock-function-name-face :height 1.4 :underline t))))
 
-   `(fill-column-indicator          ((t (:foreground ,bg+2))))))
+   `(fill-column-indicator          ((t (:foreground ,bg+2))))
+
+   `(scroll-bar                     ((t (:foreground ,fg-1))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

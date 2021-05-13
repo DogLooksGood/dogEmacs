@@ -1,6 +1,8 @@
 (straight-use-package 'writeroom-mode)
 (straight-use-package 'dumb-jump)
 (straight-use-package 'frames-only-mode)
+(straight-use-package 'vterm)
+(straight-use-package 'pinentry)
 
 (+pdump-packages 'writeroom-mode)
 (+pdump-packages 'dumb-jump)
@@ -18,5 +20,7 @@
 (require 'dumb-jump)
 
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
+
+(pinentry-start)
 
 (provide 'init-misc)

@@ -93,7 +93,11 @@
  ;; use short answer
  read-answer-short t
  ;; move cursor to top/bottom before signaling a scroll error
- scroll-error-top-bottom t)
+ scroll-error-top-bottom t
+ ;; pinentry
+ epa-pinentry-mode 'loopback)
+
+(fset 'yes-or-no-p 'y-or-n-p)
 
 (add-hook 'prog-mode-hook 'visual-line-mode)
 (add-hook 'prog-mode-hook 'hl-line-mode)

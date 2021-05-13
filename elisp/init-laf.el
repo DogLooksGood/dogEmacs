@@ -45,7 +45,7 @@
 
 ;;; No window decoration
 
-(add-to-list 'default-frame-alist (cons 'undecorated t))
+;; (add-to-list 'default-frame-alist (cons 'undecorated t))
 
 ;;; Theme
 
