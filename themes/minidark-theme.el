@@ -36,8 +36,8 @@
   "Scales for headers.")
 
 (let ((bg "#000000")
-      (fg "#CCCCCC")
-      (cm "#999999")
+      (fg "#AAAAAA")
+      (cm "#8F8F8F")
       (hl "#3F3F3F"))
   (custom-theme-set-faces
    `minidark

@@ -4,7 +4,9 @@
 
 (+pdump-packages 'pass)
 
-(setq pass-username-fallback-on-filename t)
+(setq pass-username-fallback-on-filename t
+      pass-show-keybindings nil)
+
 (autoload #'pass "pass" nil t)
 
 (provide 'init-pass)

@@ -247,6 +247,10 @@ You may want to set this to window's border color.")
    `(telega-unmuted-count           ((t (:inherit font-lock-function-name-face))))
 
    ;; Org-mode
+   `(org-todo                      ((t (:foreground ,yellow))))
+   `(org-done                      ((t (:foreground ,blue))))
+   `(org-headline-todo             ((t (:foreground ,fg+1))))
+   `(org-headline-done             ((t (:foreground ,fg-1 :strike-through t))))
    `(org-table                      ((t (:foreground ,fg+1))))
    `(org-level-1                    ((t (:bold t :height ,(nth 0 joker-theme-header-scales)))))
    `(org-level-2                    ((t (:bold t :height ,(nth 1 joker-theme-header-scales)))))
