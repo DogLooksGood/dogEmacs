@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: let
-# key: l
-# --
-(let [$0]
-  `yas-selected-text`)

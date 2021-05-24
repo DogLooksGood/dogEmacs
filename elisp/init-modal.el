@@ -53,7 +53,8 @@
    '("P" . pass)
    '("R" . org-roam-mode)
    '("A" . org-agenda)
-   '("D" . writeroom-mode))
+   '("D" . docker)
+   '("W" . writeroom-mode))
   (meow-motion-overwrite-define-key
    '("'" . repeat))
   (meow-normal-define-key
