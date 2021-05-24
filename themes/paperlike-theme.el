@@ -217,7 +217,9 @@
    ;; ;; Treemacs
    ;; `(treemacs-root-face             ((t (:inherit font-lock-function-name-face :height 1.4 :underline t))))
    `(fill-column-indicator          ((t (:foreground ,cm))))
-   `(scroll-bar                     ((t (:foreground ,fg))))))
+   `(scroll-bar                     ((t (:foreground ,fg))))
+   `(sp-pair-overlay-face           ((t (:background ,hl))))
+   `(sp-wrap-overlay-face           ((t (:background ,hl))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)
