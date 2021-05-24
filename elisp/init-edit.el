@@ -22,6 +22,8 @@ otherwise will insert a colon."
   (define-key smartparens-mode-map (kbd "C-)") #'sp-forward-slurp-sexp)
   (define-key smartparens-mode-map (kbd "C-}") #'sp-forward-barf-sexp)
 
+  (require 'smartparens-config)
+
   (sp-with-modes '(lisp-mode emacs-lisp-mode clojure-mode lisp-interaction-mode)
     (sp-local-pair "'" nil :actions nil)))
 
