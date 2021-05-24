@@ -1,7 +1,10 @@
 ;;; -*- lexical-binding: t -*-
 (setq comp-deferred-compilation-deny-list ())
 (setq straight-vc-git-default-clone-depth 1)
-(setq straight-disable-native-compile (not (native-comp-available-p)))
+
+(setq straight-disable-native-compile
+      (when (fboundp 'native-comp-available-p)
+	(not (native-comp-available-p))))
 
 (defvar bootstrap-version)
 (let ((bootstrap-file

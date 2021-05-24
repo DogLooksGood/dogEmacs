@@ -20,14 +20,15 @@
 (autoload #'clojure-mode "clojure-mode")
 
 (with-eval-after-load "clojure-mode"
+  (require 'smartparens-clojure)
   (modify-syntax-entry ?: "w" clojure-mode-syntax-table)
   (require 'init-clojure-highlight-fix)
-  (add-hook 'clojure-mode-hook 'paredit-mode)
   (add-hook 'clojure-mode-hook 'clj-refactor-mode)
   (add-hook 'clojure-mode-hook 'flycheck-mode)
   ;; (add-hook 'clojure-mode-hook 'lsp)
 
   (define-key clojure-mode-map (kbd "C-c C-i") 'cider-inspect-last-result)
+  (define-key clojure-mode-map (kbd ";") '+lisp-semicolon)
 
   (require 'flycheck-clj-kondo)
   ;;
@@ -67,7 +68,7 @@
     (cider-browse-spec spec)))
 
 (setq
- cider-font-lock-dynamically t
+ cider-font-lock-dynamically nil
  cider-font-lock-reader-conditionals t
  cider-use-fringe-indicators t
  cider-prompt-for-symbol nil

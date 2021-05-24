@@ -4,7 +4,7 @@
 (require 'storybook-theme)
 
 ;;; No scroll bar
-(scroll-bar-mode -1)
+(scroll-bar-mode 1)
 
 ;;; No tool bar
 (tool-bar-mode -1)

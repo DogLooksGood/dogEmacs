@@ -4,7 +4,6 @@
 (require 'init-dired)
 (require 'init-lsp)
 (require 'init-web)
-(require 'init-lisp)
 (require 'init-clojure)
 (require 'init-elixir)
 (require 'init-python)
