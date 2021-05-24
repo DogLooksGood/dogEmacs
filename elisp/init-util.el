@@ -22,6 +22,8 @@ Result depends on syntax table's comment character."
   (interactive)
   (nth 4 (syntax-ppss)))
 
+(defvar +smart-file-name-cache nil)
+
 (defun +smart-file-name ()
   "Get current file name, if we are in project, the return relative path to the project root, otherwise return absolute file path.
 This function is slow, so we have to use cache."
@@ -32,6 +34,17 @@ This function is slow, so we have to use cache."
       (file-relative-name bfn vc-dir))
      (bfn bfn)
      (t (buffer-name)))))
+
+(defun +smart-file-name-cached ()
+  (if (eq (buffer-name) (car +smart-file-name-cache))
+      (cdr +smart-file-name-cache)
+    (let ((file-name (+smart-file-name)))
+      (setq +smart-file-name-cache
+            (cons (buffer-name) file-name))
+      file-name)))
+
+(defun +vc-branch-name ()
+  (car (vc-git-branches)))
 
 (defmacro +measure-time-1 (&rest body)
   "Measure the time it takes to evaluate BODY."
@@ -54,55 +67,6 @@ This function is slow, so we have to use cache."
     (((class color) (background light))
      (:foreground "grey50")))
   "Dim face in mode-line")
-
-(defvar-local +smart-file-name-with-propertize-cache nil
-  "Cache for performance, is a cons of (buffer-name . cached-value).")
-
-(defun +smart-file-name-cached ()
-  (when +smart-file-name-with-propertize-cache
-    (-let (((buf-name p f) +smart-file-name-with-propertize-cache))
-      (when (string-equal buf-name (buffer-file-name))
-        (let ((face (cond
-                     ((buffer-modified-p) 'font-lock-string-face)
-                     (buffer-read-only 'font-lock-comment-face)
-                     (t nil))))
-          (concat (if p (propertize p 'face '+modeline-dim-face) "")
-                  (propertize f 'face face)))))))
-
-(defun +smart-file-name-with-propertize ()
-  (if-let ((bfn (buffer-file-name)))
-      (if-let ((cached (+smart-file-name-cached)))
-          cached
-        (let ((vc-dir (vc-root-dir)))
-          (if vc-dir
-              (let* ((fname (file-relative-name bfn vc-dir))
-                     (p (file-name-directory fname))
-                     (f (file-name-nondirectory fname)))
-                (setq-local +smart-file-name-with-propertize-cache (list (buffer-file-name) p f))
-                (+smart-file-name-cached))
-            (let* ((p (file-name-directory bfn))
-                   (f (file-name-nondirectory bfn)))
-              (setq-local +smart-file-name-with-propertize-cache (list (buffer-file-name) p f))
-              (+smart-file-name-cached)))))
-    (buffer-name)))
-
-(defun +file-vc-state-with-propertize ()
-  (when-let ((sym (vc-state (buffer-file-name (current-buffer)))))
-    (format "%s" sym)))
-
-(defun +vc-branch ()
-  (car (vc-git-branches)))
-
-(defun +project-name ()
-  "Get project name, which is used in title format."
-  (cond
-   (+project-name-cache +project-name-cache)
-   ((project-current)
-    (setq-local +project-name-cache
-                (-> (project-root (project-current))
-                    (string-trim-right "/")
-                    (file-name-base))))
-   (t (setq-local +project-name-cache ""))))
 
 (defun +make-silent (func &rest args)
   (cl-letf (((symbol-function 'message)

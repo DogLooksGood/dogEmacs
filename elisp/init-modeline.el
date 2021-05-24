@@ -1,7 +1,12 @@
 ;; Mode Line  -*- lexical-binding: t; -*-
 
-;; (straight-use-package 'doom-modeline)
-;;
-;; (doom-modeline-mode 1)
+(setq-default mode-line-format
+              '((:eval (meow-indicator))
+                (:eval (rime-lighter))
+                " %l:%C  "
+                (:eval (+smart-file-name-cached))
+                "  "
+                mode-name
+                (vc-mode vc-mode)))
 
 (provide 'init-modeline)
