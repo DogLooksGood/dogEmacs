@@ -45,7 +45,7 @@
 
 ;;; No window decoration
 
-(add-to-list 'default-frame-alist (cons 'undecorated t))
+;; (add-to-list 'default-frame-alist (cons 'undecorated t))
 
 ;;; Theme
 
@@ -57,8 +57,9 @@
 (defun +change-theme ()
   (interactive)
   (let ((enabled-themes custom-enabled-themes)
-	(theme (car +theme-list)))
-    (load-theme theme t)
+	    (theme (car +theme-list)))
+    (when theme
+      (load-theme theme t))
     (mapc #'disable-theme (remove theme enabled-themes))
     (setq +theme-list (append (cdr +theme-list) (list (car +theme-list))))
     (+load-font)
@@ -66,7 +67,8 @@
     (run-hook-with-args '+after-change-theme-hook theme)))
 
 ;; Load the first theme in `+theme-list'.
-(load-theme (car +theme-list) t)
+(when-let ((theme (car +theme-list)))
+  (load-theme theme t))
 
 ;; icons
 
