@@ -3,6 +3,8 @@
 (straight-use-package 'frames-only-mode)
 (straight-use-package 'vterm)
 (straight-use-package 'pinentry)
+(straight-use-package 'highlight-numbers)
+(straight-use-package 'paren-face)
 
 (+pdump-packages 'writeroom-mode)
 (+pdump-packages 'dumb-jump)
@@ -18,6 +20,8 @@
 (autoload #'writeroom-mode "writeroom-mode" nil t)
 
 (require 'dumb-jump)
+
+(add-hook 'prog-mode-hook 'highlight-numbers-mode)
 
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 

@@ -137,24 +137,6 @@
   ;; https://www.orgroam.com/manual.html#Roam-Protocol
   (require 'org-roam-protocol))
 
-;;; org-superstar
-
-(autoload #'org-superstar-mode "org-superstar")
-
-(add-hook 'org-mode-hook 'org-superstar-mode)
-
-(with-eval-after-load "org-superstar"
-  (setq org-superstar-headline-bullets-list
-        '("☰"
-          "☱"
-          "☲"
-          "☳"
-          "☴"
-          "☵"
-          "☶"
-          "☷")))
-
-
 ;;; org-html-themify
 
 (setq

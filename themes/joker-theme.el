@@ -35,7 +35,8 @@
 (defvar joker-theme-use-italic t
   "Non-nil means use italic for comment and docstring.")
 
-(defvar joker-theme-header-scales '(2.2 1.8 1.6 1.4 1.2 1.2 1.2)
+(defvar joker-theme-header-scales
+  '(1.6 1.4 1.2 1.2 1.2 1.1 1.0)
   "Scales for headers.")
 
 (defvar joker-theme-main-color "#00AAAA"

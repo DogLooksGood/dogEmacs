@@ -86,7 +86,7 @@
  ;; always follow link
  vc-follow-symlinks t
  ;; disable visual line move
- line-move-visual nil
+ line-move-visual t
  ;; case insensitive completion
  read-buffer-completion-ignore-case t
  read-file-name-completion-ignore-case t
