@@ -35,15 +35,16 @@
 (defvar minidark-theme-header-scales '(1.2 1.2 1.2 1.0 1.0 1.0 1.0)
   "Scales for headers.")
 
-(let ((bg "#171717")
-      (fg "#C0C0C0")
+(let ((bg "#101010")
+      (fg "#A2A2A2")
       (cm "#707070")
       (hl "#303030")
-      (kw "#C0C0C0")
+      (kw "#A2A2A2")
+      (fn "#F0F0F0")
       (st "#5bd98b")
       (str "#4490bd")
       (doc "#cc6666")
-      (cur "#00FFFF"))
+      (cur "#FFFFFF"))
   (custom-theme-set-faces
    `minidark
    ;; We don't specify default foreground/background in TTY.
@@ -86,7 +87,7 @@
    `(font-lock-variable-name-face   ((t ())))
    `(font-lock-keyword-face         ((t (:foreground ,kw))))
    `(font-lock-constant-face        ((t (:foreground ,st))))
-   `(font-lock-function-name-face   ((t (:bold t))))
+   `(font-lock-function-name-face   ((t (:foreground ,fn))))
    `(font-lock-warning-face         ((t ())))
    `(font-lock-preprocessor-face    ((t ())))
 

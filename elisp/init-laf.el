@@ -15,8 +15,9 @@
 ;;; Use window divider
 (window-divider-mode 1)
 
-;;; No cursor blink
-(add-hook 'after-init-hook (lambda () (blink-cursor-mode -1)))
+;;; Cursor blink
+(setq blink-cursor-interval 0.2
+      blink-cursor-delay 0.2)
 
 ;;; Nice window divider
 

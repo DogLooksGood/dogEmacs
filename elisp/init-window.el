@@ -5,7 +5,7 @@
 
 If the window is wide enough, split at right, otherwise split at below."
   (interactive)
-  (if (> (window-width) 100)
+  (if (> (window-width) 160)
       (split-window-right)
     (split-window-below)))
 

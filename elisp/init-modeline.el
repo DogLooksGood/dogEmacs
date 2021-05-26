@@ -1,11 +1,12 @@
 ;; Mode Line  -*- lexical-binding: t; -*-
 
+(setq-default header-line-format nil)
+
 (setq-default mode-line-format
               '((:eval (meow-indicator))
                 (:eval (rime-lighter))
-                " %l:%C  "
                 (:eval (+smart-file-name-cached))
-                "  "
+                " Ln %l Col %C "
                 mode-name
                 (vc-mode vc-mode)))
 

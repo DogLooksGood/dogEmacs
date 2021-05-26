@@ -23,6 +23,8 @@ otherwise will insert a colon."
   (define-key smartparens-mode-map (kbd "C-}") #'sp-forward-barf-sexp)
 
   (require 'smartparens-config)
+  (setq sp-highlight-pair-overlay nil
+        sp-highlight-wrap-overlay nil)
 
   (sp-with-modes '(lisp-mode emacs-lisp-mode clojure-mode lisp-interaction-mode)
     (sp-local-pair "'" nil :actions nil)))
