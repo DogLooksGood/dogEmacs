@@ -64,6 +64,8 @@
 (add-hook 'conf-mode-hook 'company-mode)
 (add-hook 'eshell-mode-hook 'company-mode)
 
+(setq company-format-margin-function 'company-text-icons-margin)
+
 (with-eval-after-load "company"
   (require 'company-tng)
   (require 'company-template)

@@ -24,7 +24,7 @@
  default-input-method "rime"
  rime-cursor "|"
  rime-show-candidate 'minibuffer
- rime-title "ㄓ")
+ rime-title "ㄓ ")
 
 (autoload #'toggle-input-method "rime" nil t)
 
