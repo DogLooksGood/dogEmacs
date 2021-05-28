@@ -30,9 +30,10 @@
    '("," . "M-,")
    ;; window management
    '("w" . other-window)
-   '("W" . +rotate-window)
+   '("W" . window-swap-states)
    '("o" . delete-other-windows)
-   '("s" . +split-window-dwim)
+   '("s" . split-window-right)
+   '("-" . split-window-below)
    ;; high frequency commands
    '("$" . +change-theme)
    '(";" . comment-dwim)
