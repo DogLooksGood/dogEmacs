@@ -56,15 +56,14 @@
  company-abort-manual-when-too-short t
  company-require-match nil
  company-global-modes '(not dired-mode dired-sidebar-mode)
- company-tooltip-margin 0)
+ company-tooltip-margin 0
+ company-format-margin-function nil)
 
 (autoload #'company-mode "company")
 
 (add-hook 'prog-mode-hook 'company-mode)
 (add-hook 'conf-mode-hook 'company-mode)
 (add-hook 'eshell-mode-hook 'company-mode)
-
-(setq company-format-margin-function 'company-text-icons-margin)
 
 (with-eval-after-load "company"
   (require 'company-tng)
