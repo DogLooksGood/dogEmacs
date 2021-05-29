@@ -12,7 +12,13 @@
 ;;; magit
 
 (with-eval-after-load "magit"
-  (define-key transient-base-map (kbd "<escape>") #'transient-quit-one))
+  (define-key transient-base-map (kbd "<escape>") #'transient-quit-one)
+
+  (global-unset-key (kbd "C-x g"))
+  (global-set-key (kbd "C-x g s") 'magit-status)
+  (global-set-key (kbd "C-x g b") 'magit-blame)
+  (global-set-key (kbd "C-x g l") 'magit-log)
+  (global-set-key (kbd "C-x g d") 'magit-diff))
 
 (autoload #'magit-status "magit" nil t)
 (autoload #'magit-diff "magit" nil t)
@@ -41,12 +47,14 @@
 
 (autoload #'smerge-mode "smerge-mode" nil t)
 
-(defun +try-smerge ()
-  (save-excursion
-  	(goto-char (point-min))
-  	(when (re-search-forward "^<<<<<<< " nil t)
-  	  (smerge-mode 1))))
+;; (defun +try-smerge ()
+;;   (save-excursion
+;;   	(goto-char (point-min))
+;;   	(when (re-search-forward "^<<<<<<< " nil t)
+;;   	  (smerge-mode 1))))
 
-(add-hook 'find-file-hook '+try-smerge t)
+;; (add-hook 'find-file-hook '+try-smerge t)
+
+(add-hook 'find-file-hook 'smerge-mode)
 
 (provide 'init-git)

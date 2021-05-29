@@ -7,8 +7,6 @@
 (setq
  markdown-fontify-code-blocks-natively t)
 
-
-
 (with-eval-after-load "markdown-mode"
   (custom-set-faces
    '(markdown-table-face ((t :inherit 'fixed-pitch)))

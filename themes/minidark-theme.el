@@ -101,6 +101,8 @@
    ;; Mode Line
    `(mode-line                      ((t (:inverse-video t))))
    `(mode-line-inactive             ((t (:background ,hl))))
+   `(header-line                    ((t (:inverse-video t))))
+   `(header-line-inactive           ((t (:background ,hl))))
 
    ;; Company
    `(company-tooltip-common         ((t ())))
