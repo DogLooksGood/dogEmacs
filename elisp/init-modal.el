@@ -157,11 +157,10 @@
 (with-eval-after-load "meow"
   ;; make Meow usable in TUI Emacs
   (meow-esc-mode 1)
-  ;; (add-hook 'meow-mode-hook 'meow-esc-mode)
   (add-to-list 'meow-mode-state-list '(inf-iex-mode . normal))
   (add-to-list 'meow-mode-state-list '(authinfo-mode . normal))
   (add-to-list 'meow-grab-fill-commands 'eval-expression)
-
+  (setq meow-cursor-type-normal-selection '(bar . 4))
   ;; use << and >> to select to bol/eol
   (add-to-list 'meow-char-thing-table '(?> . line))
   (add-to-list 'meow-char-thing-table '(?< . line))

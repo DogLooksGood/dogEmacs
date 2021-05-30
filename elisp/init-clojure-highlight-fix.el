@@ -59,7 +59,7 @@
       ;; Character literals - \1, \a, \newline, \u0000
       ("\\\\\\([[:punct:]]\\|[a-z0-9]+\\>\\)" 0 'clojure-character-face)
 
-      (,(concat "\\(:\\{1,2\\}\\)\\(" clojure--sym-regexp "\\)")
+      (,(format "\\(:\\{1,2\\}\\)\\([^%s]+\\)" clojure--sym-forbidden-rest-chars)
        (1 'clojure-keyword-face)
        (2 'clojure-keyword-face))
 

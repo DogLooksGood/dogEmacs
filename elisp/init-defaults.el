@@ -102,6 +102,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (add-hook 'prog-mode-hook 'visual-line-mode)
+(add-hook 'conf-mode-hook 'visual-line-mode)
 ;; (add-hook 'prog-mode-hook 'hl-line-mode)
 ;; (add-hook 'conf-mode-hook 'hl-line-mode)
 (add-hook 'prog-mode-hook 'subword-mode)

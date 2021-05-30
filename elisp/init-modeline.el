@@ -4,6 +4,7 @@
 
 (defun +format-mode-line ()
   (let* ((lhs '((:eval (meow-indicator))
+                " "
                 (:eval (rime-lighter))
                 (:eval (+smart-file-name-cached))
                 " Ln %l Col %C"))
