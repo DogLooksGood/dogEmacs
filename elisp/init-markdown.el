@@ -7,7 +7,11 @@
 (setq
  markdown-fontify-code-blocks-natively t)
 
+(defun +md-init ()
+  (variable-pitch-mode 1)
+  (setq line-spacing 5))
 
+(add-hook 'markdown-mode-hook #'+md-init)
 
 (with-eval-after-load "markdown-mode"
   (custom-set-faces

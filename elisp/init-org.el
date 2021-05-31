@@ -81,6 +81,10 @@
 
 (setq org-html-checkbox-type 'unicode)
 
+(defun +org-init ()
+  (variable-pitch-mode 1)
+  (setq line-spacing 5))
+
 (with-eval-after-load  "org"
   (define-key org-mode-map (kbd "<f8>") 'org-latex-auto-toggle)
   (require 'org-tempo)
@@ -93,7 +97,7 @@
    '(org-block ((t :inherit 'fixed-pitch)))
    '(org-checkbox ((t :inherit 'fixed-pitch))))
 
-  (add-hook 'org-mode-hook 'variable-pitch-mode)
+  (add-hook 'org-mode-hook #'+org-init)
   (require 'ob)
   (require 'ob-dot)
   (require 'ob-restclient)
