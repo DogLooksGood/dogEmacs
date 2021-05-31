@@ -4,7 +4,7 @@
 (require 'storybook-theme)
 
 ;;; No scroll bar
-(scroll-bar-mode 1)
+(scroll-bar-mode -1)
 
 ;;; No tool bar
 (tool-bar-mode -1)
@@ -15,9 +15,8 @@
 ;;; Use window divider
 (window-divider-mode 1)
 
-;;; Cursor blink
-(setq blink-cursor-interval 0.2
-      blink-cursor-delay 0.2)
+;;; No blink cursor
+(blink-cursor-mode -1)
 
 ;;; Nice window divider
 

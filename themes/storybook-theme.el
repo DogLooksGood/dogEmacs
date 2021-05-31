@@ -74,7 +74,7 @@
    `(rime-candidate-num-face        ((t ())))
    `(rime-highlight-candidate-face  ((t (:background "#ede4d1"))))
    `(rime-comment-face              ((t ())))
-   `(telega-msg-heading             ((t (:overline "#a8a296"))))
+   `(telega-msg-heading             ((t (:background "#ede4d1"))))
    `(telega-entity-type-code        ((t (:inherit fixed-pitch))))
    `(telega-entity-type-pre         ((t (:inherit fixed-pitch))))
    `(cider-fringe-good-face         ((t (:foreground "#006666"))))

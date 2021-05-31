@@ -4,13 +4,6 @@
 
 (+pdump-packages 'meow)
 
-(defvar +magit-keymap
-  (let ((keymap (make-sparse-keymap)))
-    (define-key keymap (kbd "s") #'magit-status)
-    (define-key keymap (kbd "b") #'magit-blame)
-    (define-key keymap (kbd "d") #'magit-diff)
-    keymap))
-
 (defun meow-setup ()
   ;; Programmer Dvorak layout on ansi keyboard
   (setq meow-cheatsheet-physical-layout meow-cheatsheet-physical-layout-ansi
@@ -46,7 +39,7 @@
    '("f" . find-file)
    '("i" . imenu)
    '("a" . "M-x")
-   (cons "v" +magit-keymap)
+   '("v" . "C-x g")
    ;; toggles
    '("t" . treemacs-select-window)
    '("L" . display-line-numbers-mode)
@@ -164,11 +157,10 @@
 (with-eval-after-load "meow"
   ;; make Meow usable in TUI Emacs
   (meow-esc-mode 1)
-  ;; (add-hook 'meow-mode-hook 'meow-esc-mode)
   (add-to-list 'meow-mode-state-list '(inf-iex-mode . normal))
   (add-to-list 'meow-mode-state-list '(authinfo-mode . normal))
   (add-to-list 'meow-grab-fill-commands 'eval-expression)
-
+  (setq meow-cursor-type-keypad 'box)
   ;; use << and >> to select to bol/eol
   (add-to-list 'meow-char-thing-table '(?> . line))
   (add-to-list 'meow-char-thing-table '(?< . line))

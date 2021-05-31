@@ -101,6 +101,8 @@
    ;; Mode Line
    `(mode-line                      ((t (:inverse-video t))))
    `(mode-line-inactive             ((t (:background ,hl))))
+   `(header-line                    ((t (:inverse-video t))))
+   `(header-line-inactive           ((t (:background ,hl))))
 
    ;; Company
    `(company-tooltip-common         ((t ())))
@@ -121,8 +123,8 @@
    `(meow-insert-indicator          ((t ())))
    `(meow-normal-indicator          ((t ())))
    `(meow-motion-indicator          ((t ())))
-   `(meow-keypad-cursor             ((t (:background ,cur))))
-   `(meow-insert-cursor             ((t (:background ,cur))))
+   `(meow-keypad-cursor             ((t (:background "red"))))
+   `(meow-insert-cursor             ((t (:background "green"))))
    `(meow-normal-cursor             ((t (:background ,cur))))
    `(meow-motion-cursor             ((t (:background ,cur))))
 
