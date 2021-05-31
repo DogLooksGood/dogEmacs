@@ -2,4 +2,4 @@
 # name: ins
 # key: ins
 # --
-IO.inspect $1, label: "$1", limit: 1000
+IO.puts("$1: #{IO.ANSI.format([:default_background, :yellow, inspect($1, pretty: true)])}")
