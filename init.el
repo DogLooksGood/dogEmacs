@@ -13,7 +13,6 @@
 (require 'init-git)
 (require 'init-org)
 (require 'init-completion)
-(require 'init-sidebar)
 (require 'init-pass)
 (require 'init-rime)
 (require 'init-conf)

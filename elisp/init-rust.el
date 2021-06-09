@@ -70,7 +70,8 @@
   (define-key rust-mode-map (kbd "SPC") #'+rust-whitespace)
   (define-key rust-mode-map (kbd ";") #'+rust-semicolon)
   (require 'smartparens-rust)
-  (add-hook 'rust-mode-hook 'smartparens-mode))
+  (add-hook 'rust-mode-hook 'smartparens-mode)
+  (add-hook 'rust-mode-hook 'eglot-ensure))
 
 ;;; cargo
 

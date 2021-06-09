@@ -27,6 +27,8 @@
   (add-to-list 'eglot-server-programs
 			   '(elixir-mode "/home/tianshu/source/elixir-ls/release/language_server.sh"))
   (add-to-list 'eglot-server-programs
-			   '(rust-mode "rust-analyzer")))
+			   '(rust-mode "rust-analyzer"))
+  (add-to-list 'eglot-server-programs
+			   '(clojure-mode "/usr/bin/clojure-lsp")))
 
 (provide 'init-lsp)

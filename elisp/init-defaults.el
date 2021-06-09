@@ -57,7 +57,7 @@
  ;; some major modes will override this
  tab-width 4
  ;; don't show cursor in non selected window.
- cursor-in-non-selected-windows t
+ cursor-in-non-selected-windows nil
  comment-empty-lines t
  visible-cursor t
  ;; improve long line display performance

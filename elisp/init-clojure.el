@@ -23,18 +23,14 @@
   (require 'smartparens-clojure)
   (modify-syntax-entry ?: "w" clojure-mode-syntax-table)
   (require 'init-clojure-highlight-fix)
-  (add-hook 'clojure-mode-hook 'clj-refactor-mode)
-  (add-hook 'clojure-mode-hook 'flycheck-mode)
-  ;; (add-hook 'clojure-mode-hook 'lsp)
+
+  (dolist (f '(clj-refactor-mode flycheck-mode smartparens-mode smartparens-strict-mode))
+    (add-hook 'clojure-mode-hook f))
 
   (define-key clojure-mode-map (kbd "C-c C-i") 'cider-inspect-last-result)
   (define-key clojure-mode-map (kbd ";") '+lisp-semicolon)
 
-  (require 'flycheck-clj-kondo)
-  ;;
-  ;; (setq lsp-clojure-custom-server-command '("bash" "-c" "/usr/bin/clojure-lsp"))
-  ;; (setq lsp-lens-enable t)
-  )
+  (require 'flycheck-clj-kondo))
 
 (with-eval-after-load "flycheck"
   (define-key flycheck-mode-map (kbd "M-n") 'flycheck-next-error)

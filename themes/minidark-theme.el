@@ -35,7 +35,7 @@
 (defvar minidark-theme-header-scales '(1.2 1.2 1.2 1.0 1.0 1.0 1.0)
   "Scales for headers.")
 
-(let ((bg "#101010")
+(let ((bg "#000000")
       (fg "#A2A2A2")
       (cm "#707070")
       (hl "#303030")
@@ -44,7 +44,8 @@
       (st "#5bd98b")
       (str "#4490bd")
       (doc "#cc6666")
-      (cur "#FFFFFF"))
+      (cur "#FFFFFF")
+      (pop "#202020"))
   (custom-theme-set-faces
    `minidark
    ;; We don't specify default foreground/background in TTY.
@@ -79,7 +80,7 @@
 
    ;; Font Locks
    `(font-lock-comment-face         ((t (:foreground ,doc))))
-   `(font-lock-comment-delimiter-face  ((t (:foreground ,doc))))
+   `(font-lock-comment-delimiter-face  ((t (:inherit font-lock-comment-face))))
    `(font-lock-string-face          ((t (:foreground ,str))))
    `(font-lock-doc-face             ((t (:foreground ,doc))))
    `(font-lock-builtin-face         ((t ())))
@@ -106,7 +107,7 @@
 
    ;; Company
    `(company-tooltip-common         ((t ())))
-   `(company-tooltip-common-selection ((t (:bold t))))
+   `(company-tooltip-common-selection ((t ())))
    `(company-tooltip                ((t (:background ,hl))))
    `(company-tooltip-search         ((t ())))
    `(company-tooltip-selection      ((t (:inverse-video t))))
@@ -124,7 +125,7 @@
    `(meow-normal-indicator          ((t ())))
    `(meow-motion-indicator          ((t ())))
    `(meow-keypad-cursor             ((t (:background "red"))))
-   `(meow-insert-cursor             ((t (:background "green"))))
+   `(meow-insert-cursor             ((t (:background "cyan"))))
    `(meow-normal-cursor             ((t (:background ,cur))))
    `(meow-motion-cursor             ((t (:background ,cur))))
 
@@ -224,7 +225,9 @@
    ;; ;; Treemacs
    ;; `(treemacs-root-face             ((t (:inherit font-lock-function-name-face :height 1.4 :underline t))))
    `(fill-column-indicator          ((t (:foreground ,cm))))
-   `(scroll-bar                     ((t (:foreground ,fg))))))
+   `(scroll-bar                     ((t (:foreground ,fg))))
+   `(parenthesis                    ((t (:foreground ,cm))))
+   `(eldoc-box-body                 ((t (:background ,pop :inherit variable-pitch))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

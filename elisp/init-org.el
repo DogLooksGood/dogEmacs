@@ -101,7 +101,8 @@
   (require 'ob)
   (require 'ob-dot)
   (require 'ob-restclient)
-  (require 'ob-clojure))
+  (require 'ob-clojure)
+  (require 'ob-js))
 
 (with-eval-after-load "ob"
   (org-babel-do-load-languages

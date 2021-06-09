@@ -41,15 +41,13 @@
    '("a" . "M-x")
    '("v" . "C-x g")
    ;; toggles
-   '("t" . treemacs-select-window)
    '("L" . display-line-numbers-mode)
-   '("T" . telega)
-   '("#" . vterm-other-window)
+   '("S" . smartparens-strict-mode)
+   '("t" . telega)
    '("P" . pass)
    '("R" . org-roam-mode)
    '("A" . org-agenda)
-   '("D" . docker)
-   '("M" . writeroom-mode))
+   '("D" . docker))
   (meow-motion-overwrite-define-key
    '("'" . repeat))
   (meow-normal-define-key
@@ -142,11 +140,13 @@
  meow-esc-delay 0.001
  meow-keypad-describe-delay 0.5
  meow-select-on-change t
+ meow-cursor-type-normal 'box
+ meow-cursor-type-insert '(bar . 4)
  meow-selection-command-fallback '((meow-replace . meow-page-up)
                                    (meow-change . meow-change-char)
                                    (meow-save . meow-save-empty)
                                    (meow-kill . meow-C-k)
-                                   (meow-cancel . meow-page-down)
+                                   (meow-cancel . keyboard-quit)
                                    (meow-pop . meow-pop-grab)
                                    (meow-delete . meow-C-d)))
 
@@ -159,8 +159,10 @@
   (meow-esc-mode 1)
   (add-to-list 'meow-mode-state-list '(inf-iex-mode . normal))
   (add-to-list 'meow-mode-state-list '(authinfo-mode . normal))
+  (add-to-list 'meow-mode-state-list '(Custom-mode . normal))
   (add-to-list 'meow-grab-fill-commands 'eval-expression)
   (setq meow-cursor-type-keypad 'box)
+  (setq meow-cursor-type-insert '(bar . 2))
   ;; use << and >> to select to bol/eol
   (add-to-list 'meow-char-thing-table '(?> . line))
   (add-to-list 'meow-char-thing-table '(?< . line))
