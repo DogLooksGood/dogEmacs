@@ -64,4 +64,10 @@
 ;; So we use `after-init-hook' here.
 (add-hook 'after-init-hook '+load-ext-font)
 
+;; Helper function to enable fixed pitch in buffer
+(defun +use-fixed-pitch ()
+  (interactive)
+  (setq buffer-face-mode-face `(:family ,+fixed-pitch-family))
+  (buffer-face-mode +1))
+
 (provide 'init-font)

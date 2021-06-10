@@ -13,6 +13,7 @@
   (setcdr (assq t org-file-apps-gnu) 'browse-url-xdg-open)
   (custom-set-faces
    '(telega-entity-type-pre ((t :inherit 'fixed-pitch :family nil))))
+  (add-hook 'telega-root-mode-hook '+use-fixed-pitch)
   (add-hook 'telega-root-mode-hook '+load-font))
 
 (provide 'init-telega)
