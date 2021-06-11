@@ -5,9 +5,9 @@
 (defun +format-mode-line ()
   (let* ((lhs '((:eval (meow-indicator))
                 (:eval (rime-lighter))
-                (:eval (+smart-file-name-cached))
-                " Ln %l Col %C"))
-         (rhs '("%m"
+                "Ln %l Col %C"))
+         (rhs '((:eval (+smart-file-name-cached))
+                " %m"
                 (vc-mode vc-mode)))
          (ww (window-width))
          (lhs-str (format-mode-line lhs))
