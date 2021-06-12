@@ -92,6 +92,9 @@
    `(font-lock-warning-face         ((t ())))
    `(font-lock-preprocessor-face    ((t ())))
 
+   `(selectrum-current-candidate    ((t (:foreground ,st))))
+   `(selectrum-prescient-primary-highlight ((t (:underline t))))
+
    ;; shell
    `(sh-quoted-exec                 ((t ())))
 
