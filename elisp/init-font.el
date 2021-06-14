@@ -26,14 +26,19 @@
 ;;; Fonts
 ;; Custom fonts can be set in ~/.emacs.d/private.el
 
-(defvar +font-family "Fira Code")
+(defvar +font-wide-family "Fira Code")
+(defvar +font-tall-family "JetBrains Mono")
 (defvar +ufont-family "LXGW WenKai")
 (defvar +fixed-pitch-family "Sarasa Mono SC")
 (defvar +variable-pitch-family "Sarasa Gothic SC")
+(defvar +font-wide-or-tall 'tall)
 (defvar +font-size 11)
 
+(defun +get-base-font ()
+  (if (eq 'tall +font-wide-or-tall) +font-tall-family +font-wide-family))
+
 (defun +load-base-font ()
-  (let* ((font-spec (format "%s-%d" +font-family +font-size))
+  (let* ((font-spec (format "%s-%d" (+get-base-font) +font-size))
          (variable-pitch-font-spec (format "%s-%d" +variable-pitch-family +font-size))
          (fixed-pitch-font-spec (format "%s-%d" +fixed-pitch-family +font-size)))
     (add-to-list 'default-frame-alist `(font . ,font-spec))
@@ -49,7 +54,7 @@
        (font-spec :family +ufont-family)))))
 
 (defun +load-font ()
-  (let* ((font-spec (format "%s-%d" +font-family +font-size))
+  (let* ((font-spec (format "%s-%d" (+get-base-font) +font-size))
          (variable-pitch-font-spec (format "%s-%d" +variable-pitch-family +font-size))
          (fixed-pitch-font-spec (format "%s-%d" +fixed-pitch-family +font-size)))
     (set-frame-font font-spec)
@@ -69,5 +74,12 @@
   (interactive)
   (setq buffer-face-mode-face `(:family ,+fixed-pitch-family))
   (buffer-face-mode +1))
+
+(defun +toggle-wide-tall-font ()
+  (interactive)
+  (if (eq +font-wide-or-tall 'tall)
+      (setq +font-wide-or-tall 'wide)
+    (setq +font-wide-or-tall 'tall))
+  (+load-font))
 
 (provide 'init-font)

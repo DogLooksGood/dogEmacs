@@ -142,11 +142,11 @@
 
    ;; Magit
    ;; `(magit-diff-file-heading-highlight ((t (:background ,bg+1))))
-   `(magit-header-line                 ((t (:bold t))))
+   `(magit-header-line                 ((t ())))
    `(magit-head                        ((t ())))
    `(magit-section-highlight           ((t (:background ,hl))))
-   `(magit-section-heading             ((t (:bold t))))
-   `(magit-section-selection           ((t (:bold t))))
+   `(magit-section-heading             ((t ())))
+   `(magit-section-selection           ((t ())))
    ;; `(magit-diff-removed             ((t (:inherit font-lock-string-face))))
    ;; `(magit-diff-added               ((t (:inherit font-lock-comment-face))))
    ;; `(magit-diff-removed-highlight   ((t (:inherit font-lock-string-face :background ,bg+2))))
@@ -230,7 +230,9 @@
    `(fill-column-indicator          ((t (:foreground ,cm))))
    `(scroll-bar                     ((t (:foreground ,fg))))
    `(parenthesis                    ((t (:foreground ,cm))))
-   `(eldoc-box-body                 ((t (:background ,pop :inherit variable-pitch))))))
+   `(eldoc-box-body                 ((t (:background ,pop :inherit variable-pitch))))
+
+   `(wgrep-face                     ((t (:underline ,st))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

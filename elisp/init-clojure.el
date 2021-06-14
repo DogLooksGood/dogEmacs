@@ -5,6 +5,7 @@
 (straight-use-package 'clj-refactor)
 (straight-use-package 'flycheck)
 (straight-use-package 'flycheck-clj-kondo)
+(straight-use-package '(zprint :host github :repo "DogLooksGood/zprint.el"))
 
 (+pdump-packages 'clojure-mode
                  'cider
@@ -24,13 +25,14 @@
   (modify-syntax-entry ?: "w" clojure-mode-syntax-table)
   (require 'init-clojure-highlight-fix)
 
-  (dolist (f '(clj-refactor-mode flycheck-mode smartparens-mode smartparens-strict-mode))
+  (require 'zprint)
+  (require 'flycheck-clj-kondo)
+
+  (dolist (f '(clj-refactor-mode flycheck-mode smartparens-mode smartparens-strict-mode zprint-mode))
     (add-hook 'clojure-mode-hook f))
 
   (define-key clojure-mode-map (kbd ";") '+lisp-semicolon)
-  (define-key clojure-mode-map (kbd "C-c C-f") 'zprint)
-
-  (require 'flycheck-clj-kondo))
+  (define-key clojure-mode-map (kbd "C-c C-f") 'zprint))
 
 (with-eval-after-load "flycheck"
   (define-key flycheck-mode-map (kbd "M-n") 'flycheck-next-error)
@@ -80,36 +82,7 @@
 (with-eval-after-load "cider"
   (define-key cider-mode-map (kbd "C-c M-s") #'+clojure-describe-spec)
   (define-key cider-mode-map (kbd "C-c f") #'cider-pprint-eval-defun-at-point)
+  (define-key cider-mode-map (kbd "C-c C-f") 'nil)
   (define-key clojure-mode-map (kbd "C-c C-i") 'cider-inspect-last-result))
-
-;; zprint
-
-(defun zprint (&optional is-interactive)
-  "Reformat code using zprint.
-If region is active, reformat it; otherwise reformat entire buffer.
-When called interactively, or with prefix argument IS-INTERACTIVE,
-show a buffer if the formatting fails"
-  (interactive)
-  (let* ((contents (buffer-string))
-         (ln (line-number-at-pos (point) t))
-         (col (- (point) (line-beginning-position)))
-         (formatted-contents
-          (with-temp-buffer
-            (insert contents)
-            (let ((retcode (call-process-region
-                            (point-min)
-                            (point-max)
-                            "zprint"
-                            t
-                            (current-buffer)
-                            nil)))
-              (if (zerop retcode)
-                  (buffer-string)
-                (error "zprint failed: %s" (string-trim-right (buffer-string))))))))
-    (erase-buffer)
-    (insert formatted-contents)
-    (goto-char (point-min))
-    (forward-line (1- ln))
-    (forward-char col)))
 
 (provide 'init-clojure)

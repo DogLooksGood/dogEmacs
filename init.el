@@ -25,3 +25,7 @@
 (require 'init-direnv)
 (require 'init-restclient)
 (require 'init-server)
+
+(let ((private-conf (expand-file-name "private.el" user-emacs-directory)))
+  (when (file-exists-p private-conf)
+    (load-file private-conf)))

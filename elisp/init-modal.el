@@ -12,7 +12,6 @@
   ;; here we create bindings for necessary, high frequency commands
   (meow-leader-define-key
    ;; reverse command query
-   '("^" . meow-keypad-describe-key)
    ;; cheatsheet
    '("?" . meow-cheatsheet)
    ;; high frequency keybindings
@@ -29,6 +28,7 @@
    '("-" . split-window-below)
    ;; high frequency commands
    '("$" . +change-theme)
+   '("&" . +toggle-wide-tall-font)
    '(";" . comment-dwim)
    '("k" . kill-this-buffer)
    '("p" . project-find-file)
@@ -133,7 +133,8 @@
    '("@" . recenter-top-bottom)
    '("'" . repeat)
    '("<escape>" . meow-last-buffer)
-   '("\\" . quoted-insert)))
+   '("\\" . quoted-insert)
+   '("?" . meow-keypad-describe-key)))
 
 (setq
  meow-visit-sanitize-completion nil
@@ -163,6 +164,7 @@
   (add-to-list 'meow-mode-state-list '(cider-test-report-mode . normal))
   (add-to-list 'meow-grab-fill-commands 'eval-expression)
   (setq meow-cursor-type-keypad 'box)
+  (setq meow-cursor-type-normal 'box)
   (setq meow-cursor-type-insert '(bar . 2))
   ;; use << and >> to select to bol/eol
   (add-to-list 'meow-char-thing-table '(?> . line))

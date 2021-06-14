@@ -2,6 +2,45 @@
 
 (straight-use-package '(meow :type git :host github :repo "DogLooksGood/meow"))
 
+(meow-leader-define-key
+   ;; reverse command query
+   '("^" . meow-keypad-describe-key)
+   ;; cheatsheet
+   '("?" . meow-cheatsheet)
+   ;; high frequency keybindings
+   '("e" . "C-x C-e")
+   '(")" . "C-)")
+   '("}" . "C-}")
+   '("." . "M-.")
+   '("," . "M-,")
+   ;; window management
+   '("w" . other-window)
+   '("W" . window-swap-states)
+   '("o" . delete-other-windows)
+   '("s" . split-window-right)
+   '("-" . split-window-below)
+   ;; high frequency commands
+   '("$" . +change-theme)
+   '(";" . comment-dwim)
+   '("k" . kill-this-buffer)
+   '("p" . project-find-file)
+   '("j" . project-switch-to-buffer)
+   '("d" . dired)
+   '("b" . switch-to-buffer)
+   '("r" . rg-project)
+   '("f" . find-file)
+   '("i" . imenu)
+   '("a" . "M-x")
+   '("v" . "C-x g")
+   ;; toggles
+   '("L" . display-line-numbers-mode)
+   '("S" . smartparens-strict-mode)
+   '("t" . telega)
+   '("P" . pass)
+   '("R" . org-roam-mode)
+   '("A" . org-agenda)
+   '("D" . docker))
+
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (meow-motion-overwrite-define-key
@@ -22,8 +61,41 @@
    '("8" . meow-digit-argument)
    '("9" . meow-digit-argument)
    '("0" . meow-digit-argument)
-   '("/" . meow-keypad-describe-key)
-   '("?" . meow-cheatsheet))
+   ;; cheatsheet
+   '("?" . meow-cheatsheet)
+   ;; high frequency keybindings
+   '("e" . "C-x C-e")
+   '(")" . "C-)")
+   '("}" . "C-}")
+   '("." . "M-.")
+   '("," . "M-,")
+   ;; window management
+   '("w" . other-window)
+   '("W" . window-swap-states)
+   '("o" . delete-other-windows)
+   '("s" . split-window-right)
+   '("-" . split-window-below)
+   ;; high frequency commands
+   '("$" . +change-theme)
+   '(";" . comment-dwim)
+   '("k" . kill-this-buffer)
+   '("p" . project-find-file)
+   '("j" . project-switch-to-buffer)
+   '("d" . dired)
+   '("b" . switch-to-buffer)
+   '("r" . rg-project)
+   '("f" . find-file)
+   '("i" . imenu)
+   '("a" . "M-x")
+   '("v" . "C-x g")
+   ;; toggles
+   '("L" . display-line-numbers-mode)
+   '("S" . smartparens-strict-mode)
+   '("t" . telega)
+   '("P" . pass)
+   '("R" . org-roam-mode)
+   '("A" . org-agenda)
+   '("D" . docker))
   (meow-normal-define-key
    '("0" . meow-expand-0)
    '("9" . meow-expand-9)

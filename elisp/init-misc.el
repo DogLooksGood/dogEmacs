@@ -2,6 +2,7 @@
 (straight-use-package 'pinentry)
 (straight-use-package 'highlight-numbers)
 (straight-use-package 'eldoc-box)
+(straight-use-package 'rainbow-mode)
 
 (require 'dumb-jump)
 
