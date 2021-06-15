@@ -79,7 +79,7 @@
   (add-hook 'elixir-mode-hook #'poly-elixir-mode)
 
   (define-key elixir-mode-map (kbd "C-c C-z") #'inf-iex-start)
-  (define-key elixir-mode-map (kbd "C-c C-f") 'elixir-format)
+  (define-key elixir-mode-map (kbd "C-c C-f") 'eglot-format)
   (define-key elixir-mode-map (kbd "C-c C-t t") 'mix-test)
   (define-key elixir-mode-map (kbd "C-c C-t b") 'mix-test-current-buffer)
   (define-key elixir-mode-map (kbd "C-c C-t c") 'mix-test-current-test))
