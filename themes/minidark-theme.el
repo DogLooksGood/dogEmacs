@@ -134,7 +134,7 @@
 
    ;; Cider
    `(cider-result-overlay-face      ((t (:inverse-video t))))
-   `(cider-repl-stderr-face         ((t (:bold t))))
+   `(cider-repl-stderr-face         ((t (:foreground "red"))))
    `(cider-repl-stdout-face         ((t ())))
 
    ;; Clojure

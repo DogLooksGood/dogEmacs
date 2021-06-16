@@ -32,7 +32,8 @@
 (defvar +fixed-pitch-family "Sarasa Mono SC")
 (defvar +variable-pitch-family "Sarasa Gothic SC")
 (defvar +font-wide-or-tall 'tall)
-(defvar +font-size 11)
+(defvar +font-size-list '(10 12 13 14 16 18))
+(defvar +font-size 12)
 
 (defun +get-base-font ()
   (if (eq 'tall +font-wide-or-tall) +font-tall-family +font-wide-family))
@@ -61,6 +62,23 @@
     (set-face-attribute 'variable-pitch nil :font variable-pitch-font-spec)
     (set-face-attribute 'fixed-pitch nil :font fixed-pitch-font-spec))
   (+load-ext-font))
+
+(defun +larger-font ()
+  (interactive)
+  (if-let ((size (--find (> it +font-size) +font-size-list)))
+      (progn (setq +font-size size)
+             (+load-font))
+    (message "Already largest font")))
+
+(defun +smaller-font ()
+  (interactive)
+  (if-let ((size (--find (< it +font-size) (reverse +font-size-list))))
+      (progn (setq +font-size size)
+             (+load-font))
+    (message "Already smallest font")))
+
+(global-set-key (kbd "M-+") #'+larger-font)
+(global-set-key (kbd "M--") #'+smaller-font)
 
 ;; Setup basic fonts
 (+load-base-font)
