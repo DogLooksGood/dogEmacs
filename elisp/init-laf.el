@@ -62,7 +62,6 @@
       (load-theme theme t))
     (mapc #'disable-theme (remove theme enabled-themes))
     (setq +theme-list (append (cdr +theme-list) (list (car +theme-list))))
-    (+load-font)
     (message "Load theme: %s" theme)
     (run-hook-with-args '+after-change-theme-hook theme)))
 

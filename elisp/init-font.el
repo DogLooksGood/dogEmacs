@@ -26,11 +26,11 @@
 ;;; Fonts
 ;; Custom fonts can be set in ~/.emacs.d/private.el
 
-(defvar +font-wide-family "Fira Code")
-(defvar +font-tall-family "JetBrains Mono")
-(defvar +ufont-family "LXGW WenKai")
-(defvar +fixed-pitch-family "Sarasa Mono SC")
-(defvar +variable-pitch-family "Sarasa Gothic SC")
+(defvar +font-wide-family "PxPlus IBM VGA 8x16")
+(defvar +font-tall-family "PxPlus IBM VGA 9x14")
+(defvar +ufont-family "Unifont")
+(defvar +fixed-pitch-family "Unifont")
+(defvar +variable-pitch-family "Unifont")
 (defvar +font-wide-or-tall 'tall)
 (defvar +font-size-list '(10 12 13 14 16 18))
 (defvar +font-size 12)
@@ -68,14 +68,14 @@
   (if-let ((size (--find (> it +font-size) +font-size-list)))
       (progn (setq +font-size size)
              (+load-font))
-    (message "Already largest font")))
+    (message "Using largest font")))
 
 (defun +smaller-font ()
   (interactive)
   (if-let ((size (--find (< it +font-size) (reverse +font-size-list))))
       (progn (setq +font-size size)
              (+load-font))
-    (message "Already smallest font")))
+    (message "Using smallest font")))
 
 (global-set-key (kbd "M-+") #'+larger-font)
 (global-set-key (kbd "M--") #'+smaller-font)
@@ -85,7 +85,7 @@
 
 ;; `+load-ext-font' must run after frame created.
 ;; So we use `after-init-hook' here.
-(add-hook 'after-init-hook '+load-ext-font)
+(add-hook 'after-init-hook '+load-font)
 
 ;; Helper function to enable fixed pitch in buffer
 (defun +use-fixed-pitch ()
@@ -99,5 +99,7 @@
       (setq +font-wide-or-tall 'wide)
     (setq +font-wide-or-tall 'tall))
   (+load-font))
+
+(+change-theme)
 
 (provide 'init-font)

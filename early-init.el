@@ -18,6 +18,10 @@
 ;;       +font-size 9
 ;;       +theme-list '(atom-one-dark joker))
 
+(let ((private-conf (expand-file-name "private.el" user-emacs-directory)))
+  (when (file-exists-p private-conf)
+    (load-file private-conf)))
+
 (require 'init-defaults)
 (require 'init-laf)
 (require 'init-font)
