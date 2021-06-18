@@ -59,7 +59,7 @@
  ;; don't show cursor in non selected window.
  cursor-in-non-selected-windows nil
  comment-empty-lines t
- visible-cursor t
+ visible-cursor nil
  ;; improve long line display performance
  bidi-inhibit-bpa t
  bidi-paragraph-direction 'left-to-right

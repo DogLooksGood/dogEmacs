@@ -43,6 +43,7 @@
       (fn "#F0F0F0")
       (st "#54c757")
       (str "#4490bd")
+      (num "#9a5bc7")
       (doc "#cc6666")
       (cur "#FFFFFF")
       (pop "#202020"))
@@ -93,6 +94,8 @@
    `(font-lock-warning-face         ((t ())))
    `(font-lock-preprocessor-face    ((t ())))
 
+   `(highlight-numbers-number       ((t (:foreground ,num))))
+
    `(selectrum-current-candidate    ((t (:foreground ,doc))))
    `(selectrum-prescient-primary-highlight ((t (:underline t))))
 
@@ -132,6 +135,11 @@
    `(meow-insert-cursor             ((t (:background "cyan"))))
    `(meow-normal-cursor             ((t (:background ,cur))))
    `(meow-motion-cursor             ((t (:background ,cur))))
+
+   ;; colorful paren
+   `(colorful-paren-round           ((t ())))
+   `(colorful-paren-square          ((t (:foreground "#3167ad"))))
+   `(colorful-paren-curly           ((t (:foreground "#2eab3d"))))
 
    ;; Cider
    `(cider-result-overlay-face      ((t (:inverse-video t))))

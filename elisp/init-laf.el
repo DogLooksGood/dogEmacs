@@ -69,6 +69,4 @@
 (when-let ((theme (car +theme-list)))
   (load-theme theme t))
 
-;; icons
-
 (provide 'init-laf)
