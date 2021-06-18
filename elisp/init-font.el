@@ -48,7 +48,7 @@
 
 (defun +load-ext-font ()
   (when window-system
-    (dolist (charset '(kana han cjk-misc bopomofo))
+    (dolist (charset '(kana han hangul cjk-misc bopomofo symbol))
       (set-fontset-font
        (frame-parameter nil 'font)
        charset
@@ -67,13 +67,15 @@
   (interactive)
   (if-let ((size (--find (> it +font-size) +font-size-list)))
       (progn (setq +font-size size)
-             (+load-font))
+             (+load-font)
+             (message "Font size: %s" +font-size))
     (message "Using largest font")))
 
 (defun +smaller-font ()
   (interactive)
   (if-let ((size (--find (< it +font-size) (reverse +font-size-list))))
       (progn (setq +font-size size)
+             (message "Font size: %s" +font-size)
              (+load-font))
     (message "Using smallest font")))
 

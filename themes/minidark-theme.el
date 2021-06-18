@@ -1,4 +1,4 @@
-;;; minidark-theme.el --- A minimal light theme  -*- lexical-binding: t; -*-
+;;; minidark-theme.el --- A minimal dark theme  -*- lexical-binding: t; -*-
 
 ;; Author: Shi Tianshu
 ;; Keywords: theme
@@ -32,16 +32,16 @@
 
 (deftheme minidark "A minimal light theme.")
 
-(defvar minidark-theme-header-scales '(1.2 1.2 1.2 1.0 1.0 1.0 1.0)
+(defvar minidark-theme-header-scales '(1.2 1.0 1.0 1.0 1.0 1.0 1.0)
   "Scales for headers.")
 
 (let ((bg "#000000")
-      (fg "#A2A2A2")
+      (fg "#AAAAAA")
       (cm "#707070")
       (hl "#303030")
       (kw "#A2A2A2")
       (fn "#F0F0F0")
-      (st "#5bd98b")
+      (st "#54c757")
       (str "#4490bd")
       (doc "#cc6666")
       (cur "#FFFFFF")
@@ -49,7 +49,8 @@
   (custom-theme-set-faces
    `minidark
    ;; We don't specify default foreground/background in TTY.
-   `(default                        ((t :background ,bg :foreground ,fg)))
+   `(default                        ((((type tty)))
+                                     (((type graphic)) :background ,bg :foreground ,fg)))
    ;; Basics
    `(cursor                         ((t (:background ,cur))))
    `(region                         ((t (:background ,hl))))
@@ -63,7 +64,7 @@
    `(window-divider-first-pixel     ((t (:foreground ,cm))))
    `(window-divider-last-pixel      ((t (:foreground ,cm))))
    `(line-number                    ((t (:foreground ,cm))))
-   `(line-number-current-line       ((t (:foreground ,fg))))
+   `(line-number-current-line       ((t (:foreground ,fn))))
    `(completions-common-part        ((t ())))
    `(minibuffer-prompt              ((t ())))
    `(lazy-highlight                 ((t (:background ,hl))))
@@ -92,7 +93,7 @@
    `(font-lock-warning-face         ((t ())))
    `(font-lock-preprocessor-face    ((t ())))
 
-   `(selectrum-current-candidate    ((t (:foreground ,st))))
+   `(selectrum-current-candidate    ((t (:foreground ,doc))))
    `(selectrum-prescient-primary-highlight ((t (:underline t))))
 
    ;; shell
@@ -198,18 +199,19 @@
    ;; `(web-mode-symbol-face           ((t (:foreground ,purple))))
    ;; `(css-selector                   ((t (:foreground ,purple))))
    ;;
-   ;; ;; Markdown
-   ;; `(markdown-header-face-1         ((t (:bold t :height ,(nth 0 minidark-theme-header-scales)))))
-   ;; `(markdown-header-face-2         ((t (:bold t :height ,(nth 1 minidark-theme-header-scales)))))
-   ;; `(markdown-header-face-3         ((t (:bold t :height ,(nth 2 minidark-theme-header-scales)))))
-   ;; `(markdown-header-face-4         ((t (:bold t :height ,(nth 3 minidark-theme-header-scales)))))
-   ;; `(markdown-header-face-5         ((t (:bold t :height ,(nth 4 minidark-theme-header-scales)))))
-   ;; `(markdown-header-face-6         ((t (:bold t :height ,(nth 5 minidark-theme-header-scales)))))
-   ;; `(markdown-header-face-7         ((t (:bold t :height ,(nth 6 minidark-theme-header-scales)))))
+   ;; Markdown
+   `(markdown-header-face-1         ((t (:underline t :height ,(nth 0 minidark-theme-header-scales)))))
+   `(markdown-header-face-2         ((t (:underline t :height ,(nth 1 minidark-theme-header-scales)))))
+   `(markdown-header-face-3         ((t (:underline t :height ,(nth 2 minidark-theme-header-scales)))))
+   `(markdown-header-face-4         ((t (:underline t :height ,(nth 3 minidark-theme-header-scales)))))
+   `(markdown-header-face-5         ((t (:underline t :height ,(nth 4 minidark-theme-header-scales)))))
+   `(markdown-header-face-6         ((t (:underline t :height ,(nth 5 minidark-theme-header-scales)))))
+   `(markdown-header-face-7         ((t (:underline t :height ,(nth 6 minidark-theme-header-scales)))))
    ;;
    ;; ;; Telega
    `(telega-entity-type-code        ((t ())))
    `(telega-msg-heading             ((t ())))
+   `(telega-msg-self-title          ((t (:foreground ,fn))))
    `(telega-unmuted-count           ((t ())))
    ;;
    ;; ;; Org-mode
@@ -217,13 +219,13 @@
    `(org-link                       ((t (:underline t))))
    `(org-document-title             ((t ())))
    `(org-code                       ((t (:inherit font-lock-constant-face))))
-   `(org-level-1                    ((t (:bold t :height ,(nth 0 minidark-theme-header-scales)))))
-   `(org-level-2                    ((t (:bold t :height ,(nth 1 minidark-theme-header-scales)))))
-   `(org-level-3                    ((t (:bold t :height ,(nth 2 minidark-theme-header-scales)))))
-   `(org-level-4                    ((t (:bold t :height ,(nth 3 minidark-theme-header-scales)))))
-   `(org-level-5                    ((t (:bold t :height ,(nth 4 minidark-theme-header-scales)))))
-   `(org-level-6                    ((t (:bold t :height ,(nth 5 minidark-theme-header-scales)))))
-   `(org-level-7                    ((t (:bold t :height ,(nth 6 minidark-theme-header-scales)))))
+   `(org-level-1                    ((t (:underline t :height ,(nth 0 minidark-theme-header-scales)))))
+   `(org-level-2                    ((t (:underline t :height ,(nth 1 minidark-theme-header-scales)))))
+   `(org-level-3                    ((t (:underline t :height ,(nth 2 minidark-theme-header-scales)))))
+   `(org-level-4                    ((t (:underline t :height ,(nth 3 minidark-theme-header-scales)))))
+   `(org-level-5                    ((t (:underline t :height ,(nth 4 minidark-theme-header-scales)))))
+   `(org-level-6                    ((t (:underline t :height ,(nth 5 minidark-theme-header-scales)))))
+   `(org-level-7                    ((t (:underline t :height ,(nth 6 minidark-theme-header-scales)))))
    ;;
    ;; ;; Treemacs
    ;; `(treemacs-root-face             ((t (:inherit font-lock-function-name-face :height 1.4 :underline t))))

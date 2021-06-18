@@ -41,7 +41,7 @@
    '("a" . "M-x")
    '("v" . "C-x g")
    ;; toggles
-   '("L" . display-line-numbers-mode)
+   '("l" . display-line-numbers-mode)
    '("S" . smartparens-strict-mode)
    '("t" . telega)
    '("P" . pass)

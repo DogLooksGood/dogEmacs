@@ -1,6 +1,5 @@
 ;; -*- lexical-binding: t; -*-
 
-
 (straight-use-package 'gcmh)
 
 (+pdump-packages 'gcmh)

@@ -19,7 +19,8 @@
       (red-bg "#FAECE1")
       (purple-bg "#E9DEFA")
       (red-fg "#5E1477")
-      (hl2 "#cbd8b6"))
+      (hl2 "#cbd8b6")
+      (sec-sel "#CABAE0"))
   (custom-theme-set-faces
    `storybook
    `(default                        ((((type tty)) :background ,bg)
@@ -130,6 +131,7 @@
    `(org-level-5         ((t (:bold t :height 1.2))))
    `(org-level-6         ((t (:bold t :height 1.2))))
    `(org-level-7         ((t (:bold t :height 1.2))))
+   `(secondary-selection ((t (:background ,sec-sel))))
    `(header-line         ((t (:background "#ede4d1" :foreground "#442c09" :underline "#a8a296"))))))
 
 (and load-file-name

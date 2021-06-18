@@ -28,7 +28,7 @@
   (require 'zprint)
   (require 'flycheck-clj-kondo)
 
-  (dolist (f '(clj-refactor-mode flycheck-mode smartparens-mode smartparens-strict-mode zprint-mode))
+  (dolist (f '(clj-refactor-mode flycheck-mode smartparens-mode smartparens-strict-mode))
     (add-hook 'clojure-mode-hook f))
 
   (define-key clojure-mode-map (kbd ";") '+lisp-semicolon)

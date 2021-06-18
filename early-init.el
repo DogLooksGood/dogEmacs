@@ -3,7 +3,7 @@
 
 (require 'init-straight)
 (require 'init-packages)
-(require 'init-gc)
+;; (require 'init-gc)
 
 ;; Load private config files if exist.
 ;; You can override variables in file.
