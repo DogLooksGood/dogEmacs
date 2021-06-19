@@ -35,12 +35,12 @@
 (defvar minidark-theme-header-scales '(1.2 1.0 1.0 1.0 1.0 1.0 1.0)
   "Scales for headers.")
 
-(let ((bg "#000000")
+(let ((bg "#0A0A0A")
       (fg "#AAAAAA")
       (cm "#707070")
       (hl "#303030")
-      (kw "#A2A2A2")
-      (fn "#F0F0F0")
+      (kw "#8A8A8A")
+      (fn "#CCCCCC")
       (st "#54c757")
       (str "#4490bd")
       (num "#9a5bc7")
@@ -138,7 +138,7 @@
 
    ;; colorful paren
    `(colorful-paren-round           ((t ())))
-   `(colorful-paren-square          ((t (:foreground "#3167ad"))))
+   `(colorful-paren-square          ((t (:foreground "#1d90c2"))))
    `(colorful-paren-curly           ((t (:foreground "#2eab3d"))))
 
    ;; Cider

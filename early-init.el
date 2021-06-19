@@ -12,7 +12,7 @@
 ;; (straight-use-package 'atom-one-dark-theme)
 ;;
 ;; (setq +font-family "Fira Code"
-;;       +ufont-family "WenQuanYi Micro Hei Mono"
+;;       +font-unicode-family "WenQuanYi Micro Hei Mono"
 ;;       +variable-pitch-family "Inter"
 ;;       +fixed-pitch-family "Sarasa Mono SC"
 ;;       +font-size 9

@@ -28,7 +28,7 @@
 
 (defvar +font-wide-family "PxPlus IBM VGA 8x16")
 (defvar +font-tall-family "PxPlus IBM VGA 9x14")
-(defvar +ufont-family "Unifont")
+(defvar +font-unicode-family "Unifont")
 (defvar +fixed-pitch-family "Unifont")
 (defvar +variable-pitch-family "Unifont")
 (defvar +font-wide-or-tall 'tall)
@@ -42,6 +42,7 @@
   (let* ((font-spec (format "%s-%d" (+get-base-font) +font-size))
          (variable-pitch-font-spec (format "%s-%d" +variable-pitch-family +font-size))
          (fixed-pitch-font-spec (format "%s-%d" +fixed-pitch-family +font-size)))
+    (set-frame-font font-spec)
     (add-to-list 'default-frame-alist `(font . ,font-spec))
     (set-face-attribute 'variable-pitch nil :font variable-pitch-font-spec)
     (set-face-attribute 'fixed-pitch nil :font fixed-pitch-font-spec)))
@@ -52,15 +53,10 @@
       (set-fontset-font
        (frame-parameter nil 'font)
        charset
-       (font-spec :family +ufont-family)))))
+       (font-spec :family +font-unicode-family)))))
 
 (defun +load-font ()
-  (let* ((font-spec (format "%s-%d" (+get-base-font) +font-size))
-         (variable-pitch-font-spec (format "%s-%d" +variable-pitch-family +font-size))
-         (fixed-pitch-font-spec (format "%s-%d" +fixed-pitch-family +font-size)))
-    (set-frame-font font-spec)
-    (set-face-attribute 'variable-pitch nil :font variable-pitch-font-spec)
-    (set-face-attribute 'fixed-pitch nil :font fixed-pitch-font-spec))
+  (+load-base-font)
   (+load-ext-font))
 
 (defun +larger-font ()
