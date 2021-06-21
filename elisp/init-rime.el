@@ -23,7 +23,8 @@
  rime-inline-ascii-holder ?a
  default-input-method "rime"
  rime-cursor "|"
- rime-show-candidate 'minibuffer
+ rime-show-candidate 'sidewindow
+ window-min-height 1
  rime-title " ㄓ")
 
 (autoload #'toggle-input-method "rime" nil t)

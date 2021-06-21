@@ -40,6 +40,7 @@
    '("i" . imenu)
    '("a" . "M-x")
    '("v" . "C-x g")
+   '("y" . "C-x p")
    ;; toggles
    '("l" . display-line-numbers-mode)
    '("S" . smartparens-strict-mode)
