@@ -108,11 +108,9 @@
 (add-hook 'prog-mode-hook 'subword-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; unbind some useless keybindings
-(global-unset-key (kbd "C-x C-p"))
-(global-unset-key (kbd "C-x C-n"))
-(global-unset-key (kbd "C-x C-b"))
-(global-set-key (kbd "C-x C-d") #'dired)
+;; kmacro keys
+(global-set-key (kbd "C-,") 'kmacro-start-macro-or-insert-counter)
+(global-set-key (kbd "C-.") 'kmacro-end-or-call-macro)
 
 (defun +reopen-file-with-sudo ()
   (interactive)
