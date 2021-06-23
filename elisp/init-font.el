@@ -4,7 +4,7 @@
 
 (+pdump-packages 'ligature)
 
-(defvar +font-ligature t
+(defvar +font-ligature (not (null window-system))
   "If ligature is supported by current font.")
 
 (when +font-ligature
@@ -32,7 +32,7 @@
 (defvar +fixed-pitch-family "Unifont")
 (defvar +variable-pitch-family "Unifont")
 (defvar +font-wide-or-tall 'tall)
-(defvar +font-size-list '(10 12 13 14 16 18))
+(defvar +font-size-list '(12 13 14 15 16 17 18))
 (defvar +font-size 12)
 
 (defun +get-base-font ()

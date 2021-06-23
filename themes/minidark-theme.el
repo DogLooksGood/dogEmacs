@@ -45,7 +45,7 @@
       (str "#4490bd")
       (num "#9a5bc7")
       (doc "#cc6666")
-      (cur "#FFFFFF")
+      (cur "#EFEFEF")
       (pop "#202020"))
   (custom-theme-set-faces
    `minidark
@@ -96,7 +96,7 @@
 
    `(highlight-numbers-number       ((t (:foreground ,num))))
 
-   `(selectrum-current-candidate    ((t (:foreground ,doc))))
+   `(selectrum-current-candidate    ((t (:foreground ,fn :background ,hl))))
    `(selectrum-prescient-primary-highlight ((t (:underline t))))
 
    ;; shell
@@ -131,10 +131,17 @@
    `(meow-insert-indicator          ((t ())))
    `(meow-normal-indicator          ((t ())))
    `(meow-motion-indicator          ((t ())))
-   `(meow-keypad-cursor             ((t (:background "red"))))
-   `(meow-insert-cursor             ((t (:background "cyan"))))
-   `(meow-normal-cursor             ((t (:background ,cur))))
+   `(meow-keypad-cursor             ((t (:background "gold"))))
+   `(meow-insert-cursor             ((t (:background ,cur))))
+   `(meow-normal-cursor             ((t (:background "spring green"))))
    `(meow-motion-cursor             ((t (:background ,cur))))
+   `(meow-unknown-cursor            ((t (:background ,cur))))
+   `(meow-position-highlight-number-1 ((t (:background "gray30" :foreground "gray90"))))
+   `(meow-position-highlight-number-2 ((t (:background "gray20" :foreground "gray80"))))
+   `(meow-position-highlight-number-3 ((t (:background "gray10" :foreground "gray60"))))
+   `(meow-position-highlight-reverse-number-1 ((t (:background "gray30" :foreground "gray90"))))
+   `(meow-position-highlight-reverse-number-2 ((t (:background "gray20" :foreground "gray80"))))
+   `(meow-position-highlight-reverse-number-3 ((t (:background "gray10" :foreground "gray60"))))
 
    ;; colorful paren
    `(colorful-paren-round           ((t ())))
@@ -201,11 +208,11 @@
 
    ;;
    ;; ;; Web Mode
-   ;; `(web-mode-function-call-face    ((t ())))
-   ;; `(web-mode-function-name-face    ((t ())))
-   ;; `(web-mode-html-tag-bracket-face ((t (:inherit parenthesis))))
-   ;; `(web-mode-symbol-face           ((t (:foreground ,purple))))
-   ;; `(css-selector                   ((t (:foreground ,purple))))
+   `(web-mode-function-call-face    ((t ())))
+   `(web-mode-function-name-face    ((t ())))
+   `(web-mode-html-tag-bracket-face ((t (:inherit parenthesis))))
+   `(web-mode-symbol-face           ((t ())))
+   `(css-selector                   ((t ())))
    ;;
    ;; Markdown
    `(markdown-header-face-1         ((t (:underline t :height ,(nth 0 minidark-theme-header-scales)))))

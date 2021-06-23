@@ -111,11 +111,17 @@
 ;; kmacro keys
 (global-set-key (kbd "C-,") 'kmacro-start-macro-or-insert-counter)
 (global-set-key (kbd "C-.") 'kmacro-end-or-call-macro)
+(global-set-key (kbd "<mouse-4>") 'scroll-down-line)
+(global-set-key (kbd "<mouse-5>") 'scroll-up-line)
 
 (defun +reopen-file-with-sudo ()
   (interactive)
   (find-alternate-file (format "/sudo::%s" (buffer-file-name))))
 
 (global-set-key (kbd "C-x C-z") #'+reopen-file-with-sudo)
+(setq-default max-mini-window-height 0.1)
+
+(unless window-system
+  (xterm-mouse-mode 1))
 
 (provide 'init-defaults)

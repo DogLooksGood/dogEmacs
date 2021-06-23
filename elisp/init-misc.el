@@ -7,7 +7,7 @@
 (require 'dumb-jump)
 
 (add-hook 'prog-mode-hook 'highlight-numbers-mode)
-(add-hook 'prog-mode-hook 'eldoc-box-hover-mode)
+;; (add-hook 'prog-mode-hook 'eldoc-box-hover-mode)
 
 (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
 

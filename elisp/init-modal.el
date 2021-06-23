@@ -164,15 +164,13 @@
   (add-to-list 'meow-mode-state-list '(Custom-mode . normal))
   (add-to-list 'meow-mode-state-list '(cider-test-report-mode . normal))
   (add-to-list 'meow-grab-fill-commands 'eval-expression)
-  (setq meow-cursor-type-keypad 'box)
-  (setq meow-cursor-type-normal 'box)
-  (setq meow-cursor-type-insert '(bar . 2))
+  (setq meow-cursor-type-keypad 'box
+        meow-cursor-type-normal 'box
+        meow-cursor-type-insert 'box)
   ;; use << and >> to select to bol/eol
   (add-to-list 'meow-char-thing-table '(?> . line))
   (add-to-list 'meow-char-thing-table '(?< . line))
   ;; define our command layout
-  (meow-setup)
-  ;; add indicator to modeline
-  (meow-setup-indicator))
+  (meow-setup))
 
 (provide 'init-modal)
