@@ -150,7 +150,11 @@
                                    (meow-kill . meow-C-k)
                                    (meow-cancel . keyboard-quit)
                                    (meow-pop . meow-pop-grab)
-                                   (meow-delete . meow-C-d)))
+                                   (meow-delete . meow-C-d))
+ meow-replace-state-name-list '((normal . "N")
+                                (motion . "M")
+                                (keypad . "K")
+                                (insert . "I")))
 
 (require 'meow)
 
@@ -164,9 +168,6 @@
   (add-to-list 'meow-mode-state-list '(Custom-mode . normal))
   (add-to-list 'meow-mode-state-list '(cider-test-report-mode . normal))
   (add-to-list 'meow-grab-fill-commands 'eval-expression)
-  (setq meow-cursor-type-keypad 'box
-        meow-cursor-type-normal 'box
-        meow-cursor-type-insert 'box)
   ;; use << and >> to select to bol/eol
   (add-to-list 'meow-char-thing-table '(?> . line))
   (add-to-list 'meow-char-thing-table '(?< . line))

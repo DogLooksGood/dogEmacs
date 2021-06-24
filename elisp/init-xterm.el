@@ -1,19 +1,21 @@
+(defvar wl-copy-process nil)
+
 (defun wl-copy (text)
-  (let ((wl-copy-process (make-process :name "wl-copy"
-                                       :buffer nil
-                                       :command '("wl-copy" "-f" "-n")
-                                       :connection-type 'pipe)))
-    (process-send-string wl-copy-process text)
-    (process-send-eof wl-copy-process)))
+  (setq wl-copy-process (make-process :name "wl-copy"
+                                     :buffer nil
+                                     :command '("wl-copy" "-f" "-n")
+                                     :connection-type 'pipe))
+  (process-send-string wl-copy-process text)
+  (process-send-eof wl-copy-process))
 
 (defun wl-copy-primary ()
   (when (use-region-p)
-    (let ((wl-copy-process (make-process :name "wl-copy"
-                                         :buffer nil
-                                         :command '("wl-copy" "-p" "-f" "-n")
-                                         :connection-type 'pipe)))
-      (process-send-string wl-copy-process (buffer-substring-no-properties (region-beginning) (region-end)))
-      (process-send-eof wl-copy-process))))
+    (setq wl-copy-process (make-process :name "wl-copy"
+                                        :buffer nil
+                                        :command '("wl-copy" "-p" "-f" "-n")
+                                        :connection-type 'pipe))
+    (process-send-string wl-copy-process (buffer-substring-no-properties (region-beginning) (region-end)))
+    (process-send-eof wl-copy-process)))
 
 (defun wl-paste ()
   (if (and wl-copy-process (process-live-p wl-copy-process))
