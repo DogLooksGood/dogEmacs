@@ -121,7 +121,4 @@
 (global-set-key (kbd "C-x C-z") #'+reopen-file-with-sudo)
 (setq-default max-mini-window-height 0.1)
 
-(unless window-system
-  (xterm-mouse-mode 1))
-
 (provide 'init-defaults)
