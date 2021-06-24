@@ -150,8 +150,8 @@
 
    ;; Cider
    `(cider-result-overlay-face      ((t (:inverse-video t))))
-   `(cider-repl-stderr-face         ((t (:foreground "red"))))
-   `(cider-repl-stdout-face         ((t ())))
+   `(cider-repl-stderr-face         ((t ())))
+   `(cider-repl-stdout-face         ((t (:foreground "gray60"))))
 
    ;; Clojure
    `(clojure-character-face         ((t ())))
