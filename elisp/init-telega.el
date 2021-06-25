@@ -9,8 +9,19 @@
 
 (autoload #'telega "telega")
 
+(defun +telega-open-file (file)
+  (cond
+   ((member (downcase (file-name-extension file)) '("png" "jpg" "gif" "jpeg"))
+    (start-process "telega-open-photo" nil "/sbin/imv" file))
+   ((member (downcase (file-name-extension file)) '("mp4"))
+    (start-process "telega-open-video" nil "/sbin/mpv" file))
+   (t
+    (find-file file))))
+
 (with-eval-after-load "telega"
-  (setcdr (assq t org-file-apps-gnu) 'browse-url-xdg-open)
+  (unless window-system
+    (setq telega-open-message-as-file '(photo video)
+          telega-open-file-function '+telega-open-file))
   (custom-set-faces
    '(telega-entity-type-pre ((t :inherit 'fixed-pitch :family nil))))
   (add-hook 'telega-root-mode-hook '+use-fixed-pitch)

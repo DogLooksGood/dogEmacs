@@ -25,6 +25,9 @@
 (add-to-list 'auto-mode-alist '("\\.leex\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.sface\\'" . web-mode))
 
+(with-eval-after-load "web-mode"
+  (define-key web-mode-map (kbd "C-c C-q") '+toggle-ex-leex))
+
 ;;; emmet-mode
 
 (autoload #'emmet-mode "emmet-mode" nil t)

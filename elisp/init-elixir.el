@@ -60,6 +60,23 @@
 
 ;;; elixir-mode
 
+(defun +toggle-ex-leex ()
+  (interactive)
+  (cond
+   ((string-suffix-p ".ex" (buffer-file-name))
+    (find-file (string-replace ".ex" ".html.leex" (buffer-file-name))))
+   ((string-suffix-p ".html.leex" (buffer-file-name))
+    (let ((sym (thing-at-point 'symbol)))
+      (find-file (string-replace ".html.leex" ".ex" (buffer-file-name)))
+      (when sym
+        (let (pos)
+          (save-mark-and-excursion
+            (goto-char (point-min))
+            (setq pos (re-search-forward (format "\"%s\"" (regexp-quote sym)) nil t)))
+          (when pos (goto-char pos) (recenter))))))
+   (t
+    (error "File extension is neither .ex nor .html.leex"))))
+
 (autoload #'elixir-mode "elixir-mode")
 
 (with-eval-after-load "elixir-mode"
@@ -82,7 +99,8 @@
   (define-key elixir-mode-map (kbd "C-c C-f") 'eglot-format)
   (define-key elixir-mode-map (kbd "C-c C-t t") 'mix-test)
   (define-key elixir-mode-map (kbd "C-c C-t b") 'mix-test-current-buffer)
-  (define-key elixir-mode-map (kbd "C-c C-t c") 'mix-test-current-test))
+  (define-key elixir-mode-map (kbd "C-c C-t c") 'mix-test-current-test)
+  (define-key elixir-mode-map (kbd "C-c C-q") '+toggle-ex-leex))
 
 ;;; mix
 

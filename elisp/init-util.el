@@ -31,7 +31,8 @@ This function is slow, so we have to use cache."
         (bfn (buffer-file-name (current-buffer))))
     (cond
      ((and bfn vc-dir)
-      (file-relative-name bfn vc-dir))
+      (concat
+       (file-name-base (string-trim-right vc-dir "/")) "/" (file-relative-name bfn vc-dir)))
      (bfn bfn)
      (t (buffer-name)))))
 
