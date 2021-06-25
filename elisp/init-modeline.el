@@ -2,9 +2,6 @@
 
 (setq-default header-line-format nil)
 
-(+measure-time
- (window-width))
-
 (defun +format-mode-line ()
   (let* ((lhs '((:eval (meow-indicator))
                 (:eval (rime-lighter))
