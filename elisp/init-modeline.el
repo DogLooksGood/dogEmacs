@@ -5,7 +5,7 @@
 (defun +format-mode-line ()
   (let* ((lhs '((:eval (meow-indicator))
                 (:eval (rime-lighter))
-                "Row %l Col %C"
+                " Row %l Col %C"
                 (:eval (when (bound-and-true-p flycheck-mode) flycheck-mode-line))
                 (:eval (when (bound-and-true-p flymake-mode)
                          flymake-mode-line-format))))
