@@ -27,6 +27,7 @@
    '("s" . split-window-right)
    '("-" . split-window-below)
    ;; high frequency commands
+   '("l" . recenter-top-bottom)
    '("$" . +change-theme)
    '("&" . +toggle-wide-tall-font)
    '(";" . comment-dwim)
@@ -43,7 +44,7 @@
    '("=" . "C-c ^")
    '("y" . "C-x p")
    ;; toggles
-   '("l" . display-line-numbers-mode)
+   '("L" . display-line-numbers-mode)
    '("S" . smartparens-strict-mode)
    '("t" . telega)
    '("P" . pass)
@@ -143,7 +144,7 @@
  meow-keypad-describe-delay 0.5
  meow-select-on-change t
  meow-cursor-type-normal 'box
- meow-cursor-type-insert '(bar . 4)
+ meow-cursor-type-insert '(bar . 1)
  meow-selection-command-fallback '((meow-replace . meow-page-up)
                                    (meow-change . meow-change-char)
                                    (meow-save . meow-save-empty)

@@ -93,6 +93,7 @@
    `(font-lock-function-name-face   ((t (:foreground ,fn))))
    `(font-lock-warning-face         ((t ())))
    `(font-lock-preprocessor-face    ((t ())))
+   `(error                          ((t (:background "red" :foreground ,fn))))
 
    `(highlight-numbers-number       ((t (:foreground ,num))))
 
@@ -107,10 +108,10 @@
    `(imenu-list-entry-subalist-face-0 ((t (:bold t))))
 
    ;; Mode Line
-   `(mode-line                      ((t (:inverse-video t))))
-   `(mode-line-inactive             ((t (:background ,hl))))
-   `(header-line                    ((t (:inverse-video t))))
-   `(header-line-inactive           ((t (:background ,hl))))
+   `(mode-line                      ((t (:background ,fg :foreground ,hl))))
+   `(mode-line-inactive             ((t (:background ,cm :foreground ,hl))))
+   `(header-line                    ((t (:background ,hl :foreground ,fg))))
+   `(header-line-inactive           ((t (:background ,hl :foreground ,cm))))
 
    ;; Company
    `(company-tooltip-common         ((t ())))
@@ -131,9 +132,9 @@
    `(meow-insert-indicator          ((t ())))
    `(meow-normal-indicator          ((t ())))
    `(meow-motion-indicator          ((t ())))
-   `(meow-keypad-cursor             ((t (:background "gold"))))
+   `(meow-keypad-cursor             ((t (:background ,cur))))
    `(meow-insert-cursor             ((t (:background ,cur))))
-   `(meow-normal-cursor             ((t (:background "spring green"))))
+   `(meow-normal-cursor             ((t (:background ,cur))))
    `(meow-motion-cursor             ((t (:background ,cur))))
    `(meow-unknown-cursor            ((t (:background ,cur))))
    `(meow-position-highlight-number-1 ((t (:background "gray30" :foreground "gray90"))))

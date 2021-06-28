@@ -3,6 +3,7 @@
 (straight-use-package '(telega :type git :host github :branch "releases"))
 
 (setq
+ telega-chat-fill-column 50
  telega-use-images t
  telega-open-file-function 'org-open-file
  telega-proxies '((:server "localhost" :port 1089 :enable t :type (:@type "proxyTypeSocks5"))))
@@ -19,9 +20,8 @@
     (find-file file))))
 
 (with-eval-after-load "telega"
-  (unless window-system
-    (setq telega-open-message-as-file '(photo video)
-          telega-open-file-function '+telega-open-file))
+  (setq telega-open-message-as-file '(photo video)
+        telega-open-file-function '+telega-open-file)
   (custom-set-faces
    '(telega-entity-type-pre ((t :inherit 'fixed-pitch :family nil))))
   (add-hook 'telega-root-mode-hook '+use-fixed-pitch)
