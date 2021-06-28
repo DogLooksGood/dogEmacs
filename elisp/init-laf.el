@@ -21,7 +21,7 @@
 ;;; No window divider
 (set-display-table-slot standard-display-table
                         'vertical-border
-                        (make-glyph-code ? ))
+                        (make-glyph-code ?|))
 
 ;;; No fringe in minibuffer
 
