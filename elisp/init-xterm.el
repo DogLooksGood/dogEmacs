@@ -23,8 +23,14 @@
     (shell-command-to-string "wl-paste -n | tr -d \r")))
 
 (unless window-system
+  (put 'scroll-left 'disabled nil)
+  (put 'scroll-right 'disabled nil)
   (xterm-mouse-mode 1)
   (advice-add 'secondary-selection-from-region :after 'wl-copy-primary)
+  (global-set-key (kbd "<mouse-6>")
+                  (lambda () (interactive) (scroll-right 1)))
+  (global-set-key (kbd "<mouse-7>")
+                  (lambda () (interactive) (scroll-left 1)))
   (setq interprogram-cut-function 'wl-copy)
   (setq interprogram-paste-function 'wl-paste))
 

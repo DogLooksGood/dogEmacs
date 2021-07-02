@@ -39,12 +39,12 @@
       (fg "#9C9C9C")
       (cm "#707070")
       (hl "#303030")
-      (kw "#808080")
-      (fn "#CFCFCF")
-      (st "#54c757")
-      (str "#4490bd")
-      (num "#9a5bc7")
-      (doc "#cc6666")
+      (kw "#CFCFCF")
+      (fn "#c6a131")
+      (st "#58bc7f")
+      (str "#4594d1")
+      (num "#9445d1")
+      (doc "#d16145")
       (cur "#EFEFEF")
       (pop "#202020"))
   (custom-theme-set-faces
@@ -146,13 +146,14 @@
 
    ;; colorful paren
    `(colorful-paren-round           ((t ())))
-   `(colorful-paren-square          ((t (:foreground "#1d90c2"))))
-   `(colorful-paren-curly           ((t (:foreground "#2eab3d"))))
+   `(colorful-paren-square          ((t (:foreground "#07a2c1"))))
+   `(colorful-paren-curly           ((t (:foreground "#40d119"))))
 
    ;; Cider
    `(cider-result-overlay-face      ((t (:inverse-video t))))
    `(cider-repl-stderr-face         ((t ())))
    `(cider-repl-stdout-face         ((t (:foreground "gray60"))))
+   `(cider-test-error-face          ((t (:foreground "yellow" :inverse-video t))))
 
    ;; Clojure
    `(clojure-character-face         ((t ())))
