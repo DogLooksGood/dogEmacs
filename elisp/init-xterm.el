@@ -22,7 +22,7 @@
     (process-send-string wl-copy-process (buffer-substring-no-properties (region-beginning) (region-end)))
     (process-send-eof wl-copy-process)))
 
-(defun waylancd-paste ()
+(defun wayland-paste ()
   (if (and wl-copy-process (process-live-p wl-copy-process))
       nil ; should return nil if we're the current paste owner
     (shell-command-to-string "wl-paste -n | tr -d \r")))
