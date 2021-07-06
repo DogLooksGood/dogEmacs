@@ -5,12 +5,14 @@
   :group 'font-lock-extra-types
   :group 'faces)
 
-(defface colorful-paren-square '((t (:inherit shadow)))
+(defface colorful-paren-square
+  '((t (:inherit font-lock-keyword-face)))
   "Face for square paren."
   :group 'font-lock-extra-types
   :group 'faces)
 
-(defface colorful-paren-curly '((t (:inherit shadow)))
+(defface colorful-paren-curly '
+  ((t (:inherit font-lock-constant-face)))
   "Face for curly paren."
   :group 'font-lock-extra-types
   :group 'faces)
