@@ -28,7 +28,6 @@
     (shell-command-to-string "wl-paste -n | tr -d \r")))
 
 (defun x11-copy-clipboard (text)
-  (message "copy: %s" text)
   (setq xclip-process (make-process :name "xclip"
                                     :buffer nil
                                     :command '("xclip" "-sel" "clip")
@@ -38,7 +37,6 @@
 
 (defun x11-copy-primary ()
   (when (use-region-p)
-    (message "copy primary")
     (setq xclip-process (make-process :name "xclip"
                                       :buffer nil
                                       :command '("xclip" "-sel" "primary")
