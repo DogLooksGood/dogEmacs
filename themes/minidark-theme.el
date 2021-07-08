@@ -39,11 +39,12 @@
       (fg "#9C9C9C")
       (cm "#707070")
       (hl "#303030")
-      (kw "#CFCFCF")
+      ;; (kw "#CFCFCF")
       (fn "#c6a131")
       (st "#58bc7f")
+      (kw "#9C9C9C")
       (str "#4594d1")
-      (num "#9445d1")
+      (num "#58bc7f")
       (doc "#d16145")
       (cur "#EFEFEF")
       (pop "#202020"))
@@ -75,6 +76,7 @@
    `(match                          ((t (:inverse-video t))))
    `(secondary-selection            ((t (:inverse-video t :foreground ,cm))))
    `(help-key-binding               ((t ())))
+   `(shadow                         ((t ())))
 
    ;; ISearch
    `(isearch                        ((t (:inverse-video t))))
@@ -110,8 +112,8 @@
    ;; Mode Line
    `(mode-line                      ((t (:background ,fg :foreground ,hl))))
    `(mode-line-inactive             ((t (:background ,cm :foreground ,hl))))
-   `(header-line                    ((t (:background ,hl :foreground ,fg))))
-   `(header-line-inactive           ((t (:background ,hl :foreground ,cm))))
+   `(header-line                    ((t ())))
+   `(header-line-inactive           ((t ())))
 
    ;; Company
    `(company-tooltip-common         ((t ())))
@@ -145,7 +147,7 @@
    `(meow-position-highlight-reverse-number-3 ((t (:background "gray10" :foreground "gray60"))))
 
    ;; colorful paren
-   `(colorful-paren-round           ((t ())))
+   `(colorful-paren-round           ((t (:foreground "gray60"))))
    `(colorful-paren-square          ((t (:foreground "#07a2c1"))))
    `(colorful-paren-curly           ((t (:foreground "#40d119"))))
 
