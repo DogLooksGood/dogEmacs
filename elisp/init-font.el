@@ -31,6 +31,7 @@
 (defvar +font-unicode-family "Unifont")
 (defvar +fixed-pitch-family "Unifont")
 (defvar +variable-pitch-family "Unifont")
+(defvar +font-rescale '((tall . 0.9) (wide . 0.8)))
 (defvar +font-wide-or-tall 'tall)
 (defvar +font-size-list '(12 13 14 15 16 17 18))
 (defvar +font-size 12)
@@ -48,6 +49,9 @@
     (set-face-attribute 'fixed-pitch nil :font fixed-pitch-font-spec)))
 
 (defun +load-ext-font ()
+  (let ((rescale (alist-get +font-wide-or-tall +font-rescale)))
+    (setq face-font-rescale-alist
+          `((,+font-unicode-family . ,rescale))))
   (when window-system
     (dolist (charset '(kana han hangul cjk-misc bopomofo symbol))
       (set-fontset-font

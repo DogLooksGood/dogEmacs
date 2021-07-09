@@ -97,8 +97,9 @@
    '("i" . meow-insert)
    '("I" . meow-open-above)
    '("j" . meow-join)
+   '("J" . meow-end-or-call-kmacro)
    '("k" . meow-kill)
-   '("K" . meow-kill-append)
+   '("K" . meow-start-kmacro-or-insert-counter)
    '("l" . recenter-top-bottom)
    '("m" . meow-mark-word)
    '("M" . meow-mark-symbol)
@@ -144,7 +145,7 @@
  meow-keypad-describe-delay 0.5
  meow-select-on-change t
  meow-cursor-type-normal 'box
- meow-cursor-type-insert '(bar . 1)
+ meow-cursor-type-insert 'box
  meow-selection-command-fallback '((meow-replace . meow-page-up)
                                    (meow-change . meow-change-char)
                                    (meow-save . meow-save-empty)

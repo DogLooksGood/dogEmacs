@@ -16,7 +16,8 @@
 ;;; clojure-mode
 
 (setq
- clojure-toplevel-inside-comment-form t)
+ clojure-toplevel-inside-comment-form t
+ clojure-indent-style 'always-indent)
 
 (autoload #'clojure-mode "clojure-mode")
 
