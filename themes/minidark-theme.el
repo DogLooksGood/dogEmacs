@@ -166,13 +166,12 @@
    `(magit-section-highlight           ((t (:background ,hl))))
    `(magit-section-heading             ((t ())))
    `(magit-section-selection           ((t ())))
-   ;; `(magit-diff-removed             ((t (:inherit font-lock-string-face))))
-   ;; `(magit-diff-added               ((t (:inherit font-lock-comment-face))))
-   ;; `(magit-diff-removed-highlight   ((t (:inherit font-lock-string-face :background ,bg+2))))
-   ;; `(magit-diff-added-highlight     ((t (:inherit font-lock-comment-face :background ,bg+2))))
-   ;; `(magit-diff-highlight           ((t (:background ,bg+1))))
-   ;; `(magit-diff-context-highlight   ((t (:background ,bg+1))))
-   ;;
+   `(magit-diff-removed                ((t (:background "#311"))))
+   `(magit-diff-removed-highlight      ((t (:background "#311"))))
+   `(magit-diff-added                  ((t (:background "#131"))))
+   `(magit-diff-added-highlight        ((t (:background "#131"))))
+   `(magit-diff-context-highlight      ((t (:background ,hl :foreground ,fg))))
+
    ;; ;; SMerge
    ;; `(smerge-refined-added           ((t (:background "#253325"))))
    ;; `(smerge-lower                   ((t (:background "#173017"))))
