@@ -32,7 +32,6 @@
    '("&" . +toggle-wide-tall-font)
    '(";" . comment-dwim)
    '("k" . kill-this-buffer)
-   '("p" . project-find-file)
    '("j" . project-switch-to-buffer)
    '("d" . dired)
    '("b" . switch-to-buffer)
@@ -42,7 +41,7 @@
    '("a" . "M-x")
    '("v" . "C-x g")
    '("=" . "C-c ^")
-   '("y" . "C-x p")
+   '("p" . "C-x p")
    ;; toggles
    '("L" . display-line-numbers-mode)
    '("S" . smartparens-strict-mode)
