@@ -54,7 +54,7 @@
                                      (((type graphic)) :background ,bg :foreground ,fg)))
    ;; Basics
    `(cursor                         ((t (:background ,cur))))
-   `(region                         ((t (:background ,hl))))
+   `(region                         ((t (:inverse-video t))))
    `(hl-line                        ((t)))
    `(fringe                         ((t (:background ,bg))))
    `(show-paren-match               ((t (:box (:line-width (-1 . -1))))))
@@ -73,7 +73,7 @@
    `(compilation-warning            ((t ())))
    `(warning                        ((t ())))
    `(match                          ((t (:inverse-video t))))
-   `(secondary-selection            ((t (:inverse-video t :foreground ,cm))))
+   `(secondary-selection            ((t (:inverse-video t :bold t))))
    `(help-key-binding               ((t ())))
    `(shadow                         ((t ())))
 
