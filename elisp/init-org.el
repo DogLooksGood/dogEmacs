@@ -115,41 +115,18 @@
 ;;; org-roam
 
 (setq
+ org-roam-v2-ack t
+
  org-roam-directory
  (let ((p (expand-file-name "~/Org")))
    (unless (file-directory-p p) (make-directory p))
-   p)
-
- org-roam-capture-templates
- '(("d" "default" plain (function org-roam--capture-get-point)
-    "%?"
-    :file-name "%<%Y%m%d%H%M%S>-${slug}"
-    :head "#+title: ${title}\n"
-    :unnarrowed t))
-
- org-roam-buffer-window-parameters '((no-delete-other-windows . t)))
+   p))
 
 (with-eval-after-load "org-roam"
-  (define-key org-roam-mode-map (kbd "C-x C-r l") 'org-roam)
-  (define-key org-roam-mode-map (kbd "C-x C-r f") 'org-roam-find-file)
-  (define-key org-roam-mode-map (kbd "C-x C-r g") 'org-roam-graph)
-  (define-key org-roam-mode-map (kbd "C-x C-r c") 'org-roam-db-build-cache)
-
-  (define-key org-mode-map (kbd "<f7>") 'org-roam-insert)
-  (define-key org-mode-map (kbd "C-x C-r i") 'org-roam-insert)
-  (define-key org-mode-map (kbd "C-x C-r I") 'org-roam-insert-immediate)
-
   ;; https://www.orgroam.com/manual.html#Roam-Protocol
+  (org-roam-setup)
   (require 'org-roam-protocol))
 
-;;; org-html-themify
-
-(setq
- org-html-themify-themes '((dark . tao-yin)
-                           (light . tao-yang)))
-
-(autoload #'org-html-themify-mode "org-html-themify")
-
-(add-hook 'org-mode-hook 'org-html-themify-mode)
+(require 'org-roam)
 
 (provide 'init-org)

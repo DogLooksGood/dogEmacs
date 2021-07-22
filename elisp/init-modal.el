@@ -43,7 +43,14 @@
    '("=" . "C-c ^")
    '("p" . project-find-file)
    '("t" . project-switch-to-buffer)
-   '("l" . "C-x p")
+   '("l" . "C-x p p")
+   ;; org-roam
+   '("' l" . org-roam-buffer-toggle)
+   '("' f" . org-roam-node-find)
+   '("' g" . org-roam-graph)
+   '("' i" . org-roam-node-insert)
+   '("' c" . org-roam-capture)
+   '("' s" . org-roam-db-sync)
    ;; toggles
    '("L" . display-line-numbers-mode)
    '("S" . smartparens-strict-mode)
@@ -51,7 +58,8 @@
    '("P" . pass)
    '("R" . org-roam-mode)
    '("A" . org-agenda)
-   '("D" . docker))
+   '("D" . docker)
+   '("E" . elfeed))
   (meow-motion-overwrite-define-key
    '("'" . repeat))
   (meow-normal-define-key
@@ -146,7 +154,7 @@
  meow-keypad-describe-delay 0.5
  meow-select-on-change t
  meow-cursor-type-normal 'box
- meow-cursor-type-insert 'box
+ meow-cursor-type-insert '(bar . 2)
  meow-selection-command-fallback '((meow-replace . meow-page-up)
                                    (meow-change . meow-change-char)
                                    (meow-save . meow-save-empty)

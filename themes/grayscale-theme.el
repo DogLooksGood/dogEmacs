@@ -181,10 +181,10 @@
 
    ;;
    ;; ;; Web Mode
-   ;; `(web-mode-function-call-face    ((t ())))
-   ;; `(web-mode-function-name-face    ((t ())))
-   ;; `(web-mode-html-tag-bracket-face ((t (:inherit parenthesis))))
-   ;; `(web-mode-symbol-face           ((t (:foreground ,purple))))
+   `(web-mode-function-call-face    ((t ())))
+   `(web-mode-function-name-face    ((t ())))
+   `(web-mode-html-tag-bracket-face ((t (:inherit parenthesis))))
+   `(web-mode-symbol-face           ((t (:inherit font-lock-constant-face))))
    ;; `(css-selector                   ((t (:foreground ,purple))))
    ;;
    ;; ;; Markdown
