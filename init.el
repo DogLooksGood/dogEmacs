@@ -24,4 +24,5 @@
 (require 'init-direnv)
 (require 'init-restclient)
 (require 'init-xterm)
+(require 'init-rss)
 (require 'init-server)
