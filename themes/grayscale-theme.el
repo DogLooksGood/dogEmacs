@@ -38,7 +38,9 @@
 (let ((bg "#c4cdd3")
       (fg "#4c5256")
       (cm "#616b72")
-      (hl "#a9b5bd"))
+      (hl "#a9b5bd")
+      (red "#B2CDD3")
+      (green "#C4B2D3"))
   (custom-theme-set-faces
    `grayscale
    ;; We don't specify default foreground/background in TTY.
@@ -136,12 +138,14 @@
    `(magit-section-highlight           ((t (:background ,hl))))
    `(magit-section-heading             ((t (:bold t))))
    `(magit-section-selection           ((t (:bold t))))
-   ;; `(magit-diff-removed             ((t (:inherit font-lock-string-face))))
-   ;; `(magit-diff-added               ((t (:inherit font-lock-comment-face))))
-   ;; `(magit-diff-removed-highlight   ((t (:inherit font-lock-string-face :background ,bg+2))))
-   ;; `(magit-diff-added-highlight     ((t (:inherit font-lock-comment-face :background ,bg+2))))
-   ;; `(magit-diff-highlight           ((t (:background ,bg+1))))
-   ;; `(magit-diff-context-highlight   ((t (:background ,bg+1))))
+   `(magit-diff-hunk-heading-highlight ((t (:inverse-video t))))
+   `(magit-diff-hunk-heading ((t (:foreground ,cm))))
+   `(magit-diff-removed             ((t ())))
+   `(magit-diff-added               ((t ())))
+   `(magit-diff-removed-highlight   ((t (:background ,hl))))
+   `(magit-diff-added-highlight     ((t (:background ,cm :foreground ,bg))))
+   `(magit-diff-highlight           ((t ())))
+   `(magit-diff-context-highlight   ((t ())))
    ;;
    ;; ;; SMerge
    ;; `(smerge-refined-added           ((t (:background "#253325"))))
