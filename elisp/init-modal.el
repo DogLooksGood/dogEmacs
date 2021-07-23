@@ -56,7 +56,8 @@
    '("P" . pass)
    '("A" . org-agenda)
    '("D" . docker)
-   '("E" . elfeed))
+   '("E" . elfeed)
+   '("\\" . dired-sidebar-toggle-sidebar))
   (meow-motion-overwrite-define-key
    '("'" . repeat))
   (meow-normal-define-key
