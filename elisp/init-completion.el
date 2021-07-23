@@ -3,7 +3,7 @@
 (straight-use-package 'selectrum)
 (straight-use-package 'selectrum-prescient)
 (straight-use-package 'company)
-;; (straight-use-package 'deadgrep)
+(straight-use-package 'corfu)
 (straight-use-package 'rg)
 (straight-use-package 'prescient)
 (straight-use-package 'yasnippet)
@@ -86,7 +86,6 @@
   (define-key company-template-nav-map [return] 'company-template-forward-field)
   (define-key company-template-nav-map (kbd "TAB") nil)
   (define-key company-template-nav-map [tab] nil))
-
 
 (require 'selectrum)
 (require 'selectrum-prescient)
