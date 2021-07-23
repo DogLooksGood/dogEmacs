@@ -39,14 +39,13 @@
       (fg "#4c5256")
       (cm "#616b72")
       (hl "#a9b5bd")
-      (red "#B2CDD3")
-      (green "#C4B2D3"))
+      (cur "#202020"))
   (custom-theme-set-faces
    `grayscale
    ;; We don't specify default foreground/background in TTY.
    `(default                        ((t :background ,bg :foreground ,fg)))
    ;; Basics
-   `(cursor                         ((t (:background ,fg))))
+   `(cursor                         ((t (:background ,cur))))
    `(region                         ((t (:background ,hl))))
    `(hl-line                        ((t)))
    `(fringe                         ((t (:background ,bg))))
@@ -75,15 +74,15 @@
    `(isearch-fail                   ((t (:inverse-video t))))
 
    ;; Font Locks
-   `(font-lock-comment-face         ((t (:foreground ,cm :italic t))))
-   `(font-lock-comment-delimiter-face         ((t (:foreground ,cm :italic t))))
-   `(font-lock-string-face          ((t (:foreground ,cm))))
-   `(font-lock-doc-face             ((t (:foreground ,cm :italic t))))
+   `(font-lock-comment-face         ((t (:foreground ,cm))))
+   `(font-lock-comment-delimiter-face         ((t (:foreground ,cm))))
+   `(font-lock-string-face          ((t (:foreground ,cm :italic t))))
+   `(font-lock-doc-face             ((t (:foreground ,cm))))
    `(font-lock-builtin-face         ((t ())))
    `(font-lock-type-face            ((t ())))
    `(font-lock-variable-name-face   ((t ())))
    `(font-lock-keyword-face         ((t ())))
-   `(font-lock-constant-face        ((t ())))
+   `(font-lock-constant-face        ((t (:italic t))))
    `(font-lock-function-name-face   ((t (:bold t))))
    `(font-lock-warning-face         ((t ())))
    `(font-lock-preprocessor-face    ((t ())))
@@ -123,6 +122,11 @@
    `(meow-normal-cursor             ((t ())))
    `(meow-motion-cursor             ((t ())))
 
+   ;; colorful paren
+   `(colorful-paren-round           ((t (:foreground ,cm))))
+   `(colorful-paren-square          ((t ())))
+   `(colorful-paren-curly           ((t ())))
+
    ;; Cider
    `(cider-result-overlay-face      ((t (:inverse-video t))))
    `(cider-repl-stderr-face         ((t (:bold t))))
@@ -133,6 +137,10 @@
 
    ;; Magit
    ;; `(magit-diff-file-heading-highlight ((t (:background ,bg+1))))
+   `(magit-branch-current              ((t (:box t :background ,hl))))
+   `(magit-branch-local                ((t (:background ,hl))))
+   `(magit-branch-remote               ((t (:background ,cm :foreground ,bg))))
+   `(magit-branch-remote-head          ((t (:box t :background ,cm :foreground ,bg))))
    `(magit-header-line                 ((t (:bold t))))
    `(magit-head                        ((t ())))
    `(magit-section-highlight           ((t (:background ,hl))))

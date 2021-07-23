@@ -176,7 +176,7 @@
   (add-to-list 'meow-mode-state-list '(authinfo-mode . normal))
   (add-to-list 'meow-mode-state-list '(Custom-mode . normal))
   (add-to-list 'meow-mode-state-list '(cider-test-report-mode . normal))
-  (add-to-list 'meow-grab-fill-commands 'eval-expression)
+  (setq meow-grab-fill-commands nil)
   ;; use << and >> to select to bol/eol
   (add-to-list 'meow-char-thing-table '(?> . line))
   (add-to-list 'meow-char-thing-table '(?< . line))
