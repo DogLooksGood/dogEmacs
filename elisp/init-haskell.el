@@ -3,9 +3,6 @@
 (straight-use-package 'dante)
 (straight-use-package 'haskell-mode)
 
-(+pdump-packages 'haskell-mode
-                 'dante)
-
 ;;; haskell-mode
 
 (with-eval-after-load "haskell-mode"

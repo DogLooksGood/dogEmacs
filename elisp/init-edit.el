@@ -1,7 +1,5 @@
 (straight-use-package 'smartparens)
 
-(+pdump-packages 'smartparens)
-
 (setq sp-autowrap-region nil)
 
 (autoload #'smartparens-mode "smartparens" nil t)

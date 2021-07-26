@@ -2,8 +2,6 @@
 
 (straight-use-package 'conda)
 
-(+pdump-packages 'conda)
-
 (defun +python-semicolon ()
   (interactive)
   (if (or (+in-comment-p) (+in-string-p))

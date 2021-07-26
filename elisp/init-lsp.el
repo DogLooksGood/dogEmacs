@@ -3,9 +3,6 @@
 (straight-use-package 'flymake)
 (straight-use-package 'eglot)
 
-(+pdump-packages 'flymake
-                 'eglot)
-
 ;;; flymake
 
 (autoload #'flymake-mode "flymake" nil t)

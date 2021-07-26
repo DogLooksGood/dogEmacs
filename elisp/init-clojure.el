@@ -7,12 +7,6 @@
 (straight-use-package 'flycheck-clj-kondo)
 (straight-use-package '(zprint :host github :repo "DogLooksGood/zprint.el"))
 
-(+pdump-packages 'clojure-mode
-                 'cider
-                 'clj-refactor
-                 'flycheck
-                 'flycheck-clj-kondo)
-
 ;;; clojure-mode
 
 (setq

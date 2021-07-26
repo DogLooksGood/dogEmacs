@@ -8,13 +8,6 @@
 (straight-use-package 'prescient)
 (straight-use-package 'yasnippet)
 
-(+pdump-packages 'selectrum
-                 'selectrum-prescient
-                 'company
-                 'deadgrep
-                 'prescient
-                 'yasnippet)
-
 (defun +complete ()
   (interactive)
   (or (yas/expand)

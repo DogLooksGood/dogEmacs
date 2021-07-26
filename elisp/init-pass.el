@@ -2,8 +2,6 @@
 
 (straight-use-package 'pass)
 
-(+pdump-packages 'pass)
-
 (setq pass-username-fallback-on-filename t
       pass-show-keybindings nil)
 

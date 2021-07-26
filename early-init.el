@@ -2,7 +2,6 @@
 (add-to-list 'load-path (expand-file-name "themes" user-emacs-directory))
 
 (require 'init-straight)
-(require 'init-packages)
 (require 'init-gc)
 
 ;; Load private config files if exist.

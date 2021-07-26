@@ -11,14 +11,6 @@
                         :repo "DogLooksGood/org-html-themify"
                         :files ("*.el" "*.js" "*.css")))
 
-(+pdump-packages 'htmlize
-                 'org
-                 'org-roam
-                 'org-roam-server
-                 'org-superstar
-                 'ob-restclient
-                 'org-html-themify)
-
 ;;; Latex support
 ;;; install latex with
 ;;; pacman -S texlive-bin texlive-most

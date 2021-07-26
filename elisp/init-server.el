@@ -1,7 +1,7 @@
-
 (require 'server)
 
-(unless (server-running-p)
-  (server-start))
+(unless window-system
+  (unless (server-running-p)
+    (server-start)))
 
 (provide 'init-server)

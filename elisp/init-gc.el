@@ -2,8 +2,6 @@
 
 (straight-use-package 'gcmh)
 
-(+pdump-packages 'gcmh)
-
 (require 'gcmh)
 
 (gcmh-mode 1)

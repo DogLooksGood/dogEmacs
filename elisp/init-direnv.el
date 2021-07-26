@@ -2,9 +2,6 @@
 
 (straight-use-package 'direnv)
 
-(+pdump-packages 'direnv)
-
-
 (setq direnv-use-faces-in-summary nil
       direnv-show-paths-in-summary nil)
 

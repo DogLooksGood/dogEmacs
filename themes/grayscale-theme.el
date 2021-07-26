@@ -32,7 +32,7 @@
 
 (deftheme grayscale "A minimal light theme.")
 
-(defvar grayscale-theme-header-scales '(1.2 1.2 1.2 1.0 1.0 1.0 1.0)
+(defvar grayscale-theme-header-scales '(1.4 1.4 1.2 1.0 1.0 1.0 1.0)
   "Scales for headers.")
 
 (let ((bg "#c4cdd3")
@@ -200,13 +200,13 @@
    ;; `(css-selector                   ((t (:foreground ,purple))))
    ;;
    ;; ;; Markdown
-   ;; `(markdown-header-face-1         ((t (:bold t :height ,(nth 0 grayscale-theme-header-scales)))))
-   ;; `(markdown-header-face-2         ((t (:bold t :height ,(nth 1 grayscale-theme-header-scales)))))
-   ;; `(markdown-header-face-3         ((t (:bold t :height ,(nth 2 grayscale-theme-header-scales)))))
-   ;; `(markdown-header-face-4         ((t (:bold t :height ,(nth 3 grayscale-theme-header-scales)))))
-   ;; `(markdown-header-face-5         ((t (:bold t :height ,(nth 4 grayscale-theme-header-scales)))))
-   ;; `(markdown-header-face-6         ((t (:bold t :height ,(nth 5 grayscale-theme-header-scales)))))
-   ;; `(markdown-header-face-7         ((t (:bold t :height ,(nth 6 grayscale-theme-header-scales)))))
+   `(markdown-header-face-1         ((t (:bold t :height ,(nth 0 grayscale-theme-header-scales)))))
+   `(markdown-header-face-2         ((t (:bold t :height ,(nth 1 grayscale-theme-header-scales)))))
+   `(markdown-header-face-3         ((t (:bold t :height ,(nth 2 grayscale-theme-header-scales)))))
+   `(markdown-header-face-4         ((t (:bold t :height ,(nth 3 grayscale-theme-header-scales)))))
+   `(markdown-header-face-5         ((t (:bold t :height ,(nth 4 grayscale-theme-header-scales)))))
+   `(markdown-header-face-6         ((t (:bold t :height ,(nth 5 grayscale-theme-header-scales)))))
+   `(markdown-header-face-7         ((t (:bold t :height ,(nth 6 grayscale-theme-header-scales)))))
    ;;
    ;; ;; Telega
    `(telega-entity-type-code        ((t ())))

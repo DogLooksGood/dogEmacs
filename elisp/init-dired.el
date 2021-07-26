@@ -3,8 +3,6 @@
 (straight-use-package 'dired-git-info)
 (straight-use-package 'dired-sidebar)
 
-(+pdump-packages 'dired-git-info)
-
 ;; dired
 
 (setq dired-dwim-target t)

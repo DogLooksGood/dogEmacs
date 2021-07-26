@@ -2,8 +2,6 @@
 
 (straight-use-package '(ligature :type git :host github :repo "mickeynp/ligature.el"))
 
-(+pdump-packages 'ligature)
-
 (defvar +font-ligature (not (null window-system))
   "If ligature is supported by current font.")
 

@@ -5,11 +5,6 @@
 (straight-use-package 'mix)
 (straight-use-package 'polymode)
 
-(+pdump-packages 'elixir-mode
-                 'inf-iex
-                 'mix
-                 'polymode)
-
 ;;; Custom functions
 
 (defun +elixir-auto-module-name ()

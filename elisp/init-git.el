@@ -4,8 +4,6 @@
 (straight-use-package 'magit)
 (straight-use-package 'smerge-mode)
 
-(+pdump-packages 'diff-hl 'magit)
-
 ;;; magit
 
 (with-eval-after-load "magit"

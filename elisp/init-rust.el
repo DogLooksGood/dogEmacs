@@ -3,9 +3,6 @@
 (straight-use-package 'rust-mode)
 (straight-use-package 'cargo)
 
-(+pdump-packages 'cargo
-                 'rust-mode)
-
 (defun +rust-whitespace ()
   (interactive)
   (if (or (+in-string-p)

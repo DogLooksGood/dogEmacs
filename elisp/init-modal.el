@@ -2,8 +2,6 @@
 
 (straight-use-package '(meow :type git :host github :repo "DogLooksGood/meow"))
 
-(+pdump-packages 'meow)
-
 (defun meow-setup ()
   ;; Programmer Dvorak layout on ansi keyboard
   (setq meow-cheatsheet-physical-layout meow-cheatsheet-physical-layout-ansi
