@@ -6,7 +6,9 @@
  telega-chat-fill-column 50
  telega-use-images t
  telega-open-file-function 'org-open-file
- telega-proxies '((:server "10.5.129.94" :port 42391 :enable t :type (:@type "proxyTypeHttp"))))
+ telega-proxies
+ `((:server ,+proxy-host :port ,+proxy-port
+            :enable t :type (:@type "proxyTypeSocks5"))))
 
 (autoload #'telega "telega")
 

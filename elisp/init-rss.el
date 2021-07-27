@@ -4,8 +4,10 @@
 
 (autoload #'elfeed "elfeed" nil t)
 
-(setq elfeed-feeds '("https://www.solidot.org/"
-                     "http://feeds.feedburner.com/google/RzFQ?format=xml")
-      elfeed-curl-extra-arguments nil)
+(setq elfeed-curl-extra-arguments `("--socks5-hostname" ,(concat +proxy-host ":" (number-to-string +proxy-port))))
+
+(setq elfeed-feeds '("https://reddit.com/r/clojure.rss"
+                     "https://reddit.com/r/rust.rss"
+                     "https://www.solidot.org/index.rss"))
 
 (provide 'init-rss)

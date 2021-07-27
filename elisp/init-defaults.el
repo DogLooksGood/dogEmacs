@@ -111,6 +111,8 @@
 (add-hook 'prog-mode-hook 'subword-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+(global-hl-line-mode)
+
 ;; kmacro keys
 (global-set-key (kbd "C-,") 'kmacro-start-macro-or-insert-counter)
 (global-set-key (kbd "C-.") 'kmacro-end-or-call-macro)
@@ -123,5 +125,9 @@
 
 (global-set-key (kbd "C-x C-z") #'+reopen-file-with-sudo)
 (setq-default max-mini-window-height 0.1)
+
+(defvar +proxy-host "localhost")
+(defvar +proxy-port 1089)
+
 
 (provide 'init-defaults)

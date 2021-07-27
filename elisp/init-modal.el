@@ -105,7 +105,7 @@
    '("J" . meow-end-or-call-kmacro)
    '("k" . meow-kill)
    '("K" . meow-start-kmacro-or-insert-counter)
-   '("l" . recenter-top-bottom)
+   '("l" . recenter)
    '("m" . meow-mark-word)
    '("M" . meow-mark-symbol)
    '("n" . meow-next)
@@ -150,7 +150,7 @@
  meow-keypad-describe-delay 0.5
  meow-select-on-change t
  meow-cursor-type-normal 'box
- meow-cursor-type-insert '(bar . 2)
+ meow-cursor-type-insert 'box
  meow-selection-command-fallback '((meow-replace . meow-page-up)
                                    (meow-change . meow-change-char)
                                    (meow-save . meow-save-empty)

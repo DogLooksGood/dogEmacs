@@ -75,6 +75,9 @@
 (autoload #'cider "cider" nil t)
 
 (with-eval-after-load "cider"
+  (define-key cider-stacktrace-mode-map (kbd "n") #'next-line)
+  (define-key cider-stacktrace-mode-map (kbd "p") #'previous-line)
+  (define-key cider-stacktrace-mode-map (kbd "P") #'cider-stacktrace-show-only-project)
   (define-key cider-mode-map (kbd "C-c M-s") #'+clojure-describe-spec)
   (define-key cider-mode-map (kbd "C-c f") #'cider-pprint-eval-defun-at-point)
   (define-key cider-mode-map (kbd "C-c C-f") 'nil)
