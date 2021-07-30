@@ -123,9 +123,9 @@
    `(meow-motion-cursor             ((t ())))
 
    ;; colorful paren
-   `(colorful-paren-round           ((t (:foreground ,cm))))
-   `(colorful-paren-square          ((t ())))
-   `(colorful-paren-curly           ((t ())))
+   `(colorful-round           ((t (:foreground ,cm))))
+   `(colorful-square          ((t ())))
+   `(colorful-curly           ((t ())))
 
    ;; Cider
    `(cider-result-overlay-face      ((t (:inverse-video t))))

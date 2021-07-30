@@ -17,7 +17,7 @@
 
 (pinentry-start)
 
-(require 'colorful-paren)
-(add-hook 'prog-mode-hook 'colorful-paren-mode)
+(require 'colorful)
+(add-hook 'prog-mode-hook 'colorful-mode)
 
 (provide 'init-misc)

@@ -146,9 +146,10 @@
    `(meow-position-highlight-reverse-number-3 ((t (:background "gray10" :foreground "gray60"))))
 
    ;; colorful paren
-   `(colorful-paren-round           ((t (:foreground "gray60"))))
-   `(colorful-paren-square          ((t (:foreground "#07a2c1"))))
-   `(colorful-paren-curly           ((t (:foreground "#40d119"))))
+   `(colorful-round           ((t (:foreground "gray60"))))
+   `(colorful-square          ((t (:foreground "#07a2c1"))))
+   `(colorful-curly           ((t (:foreground "#40d119"))))
+   `(colorful-semicolon       ((t (:foreground "#40d119"))))
 
    ;; Cider
    `(cider-result-overlay-face      ((t (:inverse-video t))))

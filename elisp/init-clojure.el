@@ -11,7 +11,7 @@
 
 (setq
  clojure-toplevel-inside-comment-form t
- clojure-indent-style 'always-indent)
+ clojure-indent-style 'align-arguments)
 
 (autoload #'clojure-mode "clojure-mode")
 
