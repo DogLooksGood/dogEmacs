@@ -9,9 +9,7 @@
 
 ;;; clojure-mode
 
-(setq
- clojure-toplevel-inside-comment-form t
- clojure-indent-style 'align-arguments)
+(setq clojure-toplevel-inside-comment-form t)
 
 (autoload #'clojure-mode "clojure-mode")
 
