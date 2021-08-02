@@ -35,10 +35,11 @@
 (defvar grayscale-theme-header-scales '(1.4 1.4 1.2 1.0 1.0 1.0 1.0)
   "Scales for headers.")
 
-(let ((bg "#c4cdd3")
-      (fg "#4c5256")
-      (cm "#616b72")
-      (hl "#a9b5bd")
+(let ((bg "#c4d3cd")
+      ;; (fg "#4c5256")
+      (fg "#353535")
+      (cm "#61726b")
+      (hl "#a9bdb5")
       (cur "#202020"))
   (custom-theme-set-faces
    `grayscale
