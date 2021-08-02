@@ -24,11 +24,11 @@
 ;;; Fonts
 ;; Custom fonts can be set in ~/.emacs.d/private.el
 
-(defvar +font-wide-family "PxPlus IBM VGA 8x16")
-(defvar +font-tall-family "PxPlus IBM VGA 9x14")
-(defvar +font-unicode-family "Unifont")
-(defvar +fixed-pitch-family "Unifont")
-(defvar +variable-pitch-family "Unifont")
+(defvar +font-wide-family "Fira Code")
+(defvar +font-tall-family "Fira Code")
+(defvar +font-unicode-family "LXGW WenKai")
+(defvar +fixed-pitch-family "LXGW WenKai")
+(defvar +variable-pitch-family "LXGW WenKai")
 (defvar +font-rescale '((tall . 0.9) (wide . 0.8)))
 (defvar +font-wide-or-tall 'tall)
 (defvar +font-size-list '(12 13 14 15 16 17 18))

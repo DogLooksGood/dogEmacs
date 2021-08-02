@@ -52,7 +52,7 @@
 (defvar +after-change-theme-hook nil
   "Hooks called after theme is changed.")
 
-(defvar +theme-list '(joker printed storybook))
+(defvar +theme-list '(minidark grayscale joker printed storybook))
 
 (defun +change-theme ()
   (interactive)
