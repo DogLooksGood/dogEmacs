@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
-(straight-use-package '(telega :type git :host github :branch "releases"))
+;; (straight-use-package '(telega :type git :host github :branch "releases"))
+(straight-use-package 'telega)
 
 (setq
  telega-chat-fill-column 50

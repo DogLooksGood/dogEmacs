@@ -2,7 +2,6 @@
 
 (straight-use-package 'htmlize)
 (straight-use-package 'org-roam)
-(straight-use-package 'org-roam-server)
 (straight-use-package 'org-superstar)
 (straight-use-package 'ob-restclient)
 (straight-use-package '(org-html-themify

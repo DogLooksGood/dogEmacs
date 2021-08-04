@@ -23,6 +23,7 @@
 (require 'init-misc)
 (require 'init-direnv)
 (require 'init-restclient)
-(require 'init-xterm)
+(unless window-system
+  (require 'init-xterm))
 (require 'init-rss)
 (require 'init-server)

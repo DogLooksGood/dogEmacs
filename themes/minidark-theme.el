@@ -35,7 +35,7 @@
 (defvar minidark-theme-header-scales '(1.2 1.0 1.0 1.0 1.0 1.0 1.0)
   "Scales for headers.")
 
-(let ((bg "#0A0A0A")
+(let ((bg "#202020")
       (fg "#9C9C9C")
       (cm "#707070")
       (hl "#303030")
@@ -55,7 +55,7 @@
    ;; Basics
    `(cursor                         ((t (:background ,cur))))
    `(region                         ((t (:inverse-video t))))
-   `(hl-line                        ((t)))
+   `(hl-line                        ((t ())))
    `(fringe                         ((t (:background ,bg))))
    `(show-paren-match               ((t (:box (:line-width (-1 . -1))))))
    `(highlight                      ((t (:inverse-video t))))
