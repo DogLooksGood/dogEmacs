@@ -73,8 +73,7 @@
 (setq org-html-checkbox-type 'unicode)
 
 (defun +org-init ()
-  (variable-pitch-mode 1)
-  (setq line-spacing 5))
+  (variable-pitch-mode 1))
 
 (with-eval-after-load  "org"
   (define-key org-mode-map (kbd "<f8>") 'org-latex-auto-toggle)
