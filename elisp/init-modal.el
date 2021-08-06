@@ -40,13 +40,7 @@
    '("t" . project-switch-to-buffer)
    '("l" . "C-x p p")
    '("y" . "C-x g")
-   ;; org-roam
-   '("' l" . org-roam-buffer-toggle)
-   '("' f" . org-roam-node-find)
-   '("' g" . org-roam-graph)
-   '("' i" . org-roam-node-insert)
-   '("' c" . org-roam-capture)
-   '("' s" . org-roam-db-sync)
+   '("n" . "C-x M-n")
    ;; toggles
    '("L" . display-line-numbers-mode)
    '("S" . smartparens-strict-mode)
