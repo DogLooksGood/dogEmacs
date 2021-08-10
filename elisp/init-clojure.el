@@ -21,6 +21,12 @@
   (require 'zprint)
   (require 'flycheck-clj-kondo)
 
+  (define-clojure-indent
+    (re-frame/reg-event-fx :defn)
+    (re-frame/reg-event-db :defn)
+    (re-frame/reg-sub :defn)
+    (re-frame/reg-fx :defn))
+
   (dolist (f '(clj-refactor-mode flycheck-mode smartparens-mode smartparens-strict-mode))
     (add-hook 'clojure-mode-hook f))
 

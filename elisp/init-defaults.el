@@ -97,7 +97,9 @@
  ;; pinentry
  epa-pinentry-mode 'loopback
  ;; disable input method in pgtk
- pgtk-use-im-context-on-new-connection nil)
+ pgtk-use-im-context-on-new-connection nil
+ ;; disable bell completely
+ ring-bell-function 'ignore)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 

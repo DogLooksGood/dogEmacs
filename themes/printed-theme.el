@@ -9,7 +9,8 @@
                                     :foreground "#333333")))
  `(hl-line                        ((((type graphic))
                                     :background "#eeeeee"
-                                    :overline "#9999cc" :underline "#9999cc")
+                                    ;; :overline "#9999cc" :underline "#9999cc"
+                                    )
                                    (((type tty))
                                     :background "#ffffff")))
  `(cursor                         ((t (:background "black"))))
@@ -57,13 +58,10 @@
  '(cider-fringe-good-face         ((t (:foreground "#006666"))))
  '(web-mode-html-attr-name-face   ((t ())))
  '(web-mode-html-tag-face         ((t ())))
- `(line-number-current-line       ((((type graphic))
-                                    :inherit default
-                                    :background "#eeeeee"
-                                    :overline "#9999cc"
-                                    :underline "#9999cc"
-                                    :bold t)
-                                   (t (:bold t :inherit default :background "#ffffff"))))
+ `(line-number-current-line       ((t (:bold t :background "#eeeeee"))))
+ `(line-number                    ((t (:background "#eeeeee"))))
+ `(selectrum-current-candidate    ((t (:background "#b6e3fa"))))
+ `(selectrum-prescient-primary-highlight ((t (:underline t))))
  '(mc/cursor-bar-face             ((t (:background "grey50" :height 1))))
  '(dired-subtree-depth-1-face     ((t (:background "grey90"))))
  '(dired-subtree-depth-2-face     ((t (:background "grey80"))))
