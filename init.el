@@ -1,5 +1,6 @@
 (require 'init-util)
 (require 'init-modal)
+(require 'init-project)
 (require 'init-edit)
 (require 'init-dired)
 (require 'init-lsp)

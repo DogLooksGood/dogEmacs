@@ -36,10 +36,10 @@
   "Scales for headers.")
 
 (let ((bg "#c4d3cd")
-      ;; (fg "#4c5256")
       (fg "#353535")
       (cm "#61726b")
       (hl "#a9bdb5")
+      (fn "#b6c6c0")
       (cur "#202020"))
   (custom-theme-set-faces
    `grayscale
@@ -82,9 +82,9 @@
    `(font-lock-builtin-face         ((t ())))
    `(font-lock-type-face            ((t ())))
    `(font-lock-variable-name-face   ((t ())))
-   `(font-lock-keyword-face         ((t ())))
+   `(font-lock-keyword-face         ((t (:bold t))))
    `(font-lock-constant-face        ((t (:italic t))))
-   `(font-lock-function-name-face   ((t (:bold t))))
+   `(font-lock-function-name-face   ((t (:background ,fn))))
    `(font-lock-warning-face         ((t ())))
    `(font-lock-preprocessor-face    ((t ())))
 
