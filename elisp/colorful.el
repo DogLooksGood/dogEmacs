@@ -23,10 +23,17 @@
   :group 'font-lock-extra-types
   :group 'faces)
 
+(defface colorful-question
+  '((t (:inherit font-lock-function-name-face :bold t)))
+  "Face for semicolon."
+  :group 'font-lock-extra-types
+  :group 'faces)
+
 (defconst colorful-round-regexp "[()]")
 (defconst colorful-square-regexp "[][]")
 (defconst colorful-curly-regexp "[{}]")
 (defconst colorful-semicolon-regexp "\\(;\\)$")
+(defconst colorful-question-regexp "\\?")
 
 (defvar colorful--rules nil)
 
@@ -34,13 +41,14 @@
 (add-to-list 'colorful--rules (cons 'square `(,colorful-square-regexp 0 'colorful-square)))
 (add-to-list 'colorful--rules (cons 'curly `(,colorful-curly-regexp 0 'colorful-curly)))
 (add-to-list 'colorful--rules (cons 'semicolon `(,colorful-semicolon-regexp 1 'colorful-semicolon)))
+(add-to-list 'colorful--rules (cons 'question `(,colorful-question-regexp 0 'colorful-question)))
 
 (defcustom colorful-mode-rules
   '((clojure-mode round square curly)
     (clojurec-mode round square curly)
     (clojurescript-mode round square curly)
     (emacs-lisp-mode round square)
-    (rust-mode semicolon))
+    (rust-mode semicolon question))
   "Mode to rule mappings")
 
 (defun colorful--get-rules (mode)
