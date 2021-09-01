@@ -252,6 +252,12 @@
    `(parenthesis                    ((t (:foreground ,cm))))
    `(eldoc-box-body                 ((t (:background ,pop :inherit variable-pitch))))
 
+   `(flycheck-warning               ((t (:underline (:style wave :color "#4A4A30")))))
+   `(flycheck-error               ((t (:underline (:style wave :color "#4F3030")))))
+   `(flymake-warning               ((t (:underline (:style wave :color "#4A4A30")))))
+   `(flymake-error               ((t (:underline (:style wave :color "#4F3030")))))
+   `(flymake-note                ((t (:underline (:style wave :color "#304F30")))))
+
    `(wgrep-face                     ((t (:underline ,st))))))
 
 (and load-file-name
