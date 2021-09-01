@@ -99,7 +99,9 @@
  ;; disable input method in pgtk
  pgtk-use-im-context-on-new-connection nil
  ;; disable bell completely
- ring-bell-function 'ignore)
+ ring-bell-function 'ignore
+ ;; eldoc idle delay
+ eldoc-idle-delay 1)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 

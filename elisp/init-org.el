@@ -101,7 +101,8 @@
      (restclient . t)
      (python . t)
      (clojure . t)
-     (R . t))))
+     (R . t)
+     (shell . t))))
 
 ;;; org-roam
 

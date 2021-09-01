@@ -63,12 +63,12 @@
 
 (with-eval-after-load "rust-mode"
   (define-key rust-mode-map (kbd "-") #'+rust-minus)
-  (define-key rust-mode-map (kbd "<") #'+rust-lessthan)
-  (define-key rust-mode-map (kbd "SPC") #'+rust-whitespace)
-  (define-key rust-mode-map (kbd ";") #'+rust-semicolon)
+  ;; (define-key rust-mode-map (kbd "<") #'+rust-lessthan)
+  ;; (define-key rust-mode-map (kbd "SPC") #'+rust-whitespace)
+  ;; (define-key rust-mode-map (kbd ";") #'+rust-semicolon)
   (require 'smartparens-rust)
   (add-hook 'rust-mode-hook 'smartparens-mode)
-  (add-hook 'rust-mode-hook 'eglot-ensure))
+  (add-hook 'rust-mode-hook '+lsp-start))
 
 ;;; cargo
 

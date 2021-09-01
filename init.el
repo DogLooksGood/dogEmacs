@@ -10,6 +10,7 @@
 (require 'init-python)
 (require 'init-haskell)
 (require 'init-rust)
+(require 'init-typescript)
 (require 'init-markdown)
 (require 'init-git)
 (require 'init-org)

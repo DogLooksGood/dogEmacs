@@ -79,7 +79,7 @@
 
   (add-hook 'elixir-mode-hook #'+elixir-post-self-insert-hook-setup)
   (add-hook 'elixir-mode-hook #'smartparens-mode)
-  (add-hook 'elixir-mode-hook #'eglot-ensure)
+  (add-hook 'elixir-mode-hook #'+lsp-start)
   (add-hook 'elixir-mode-hook #'inf-iex-minor-mode)
   ;; (add-hook 'elixir-mode-hook #'poly-elixir-mode)
 

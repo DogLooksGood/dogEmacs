@@ -25,7 +25,8 @@
     (re-frame/reg-event-fx :defn)
     (re-frame/reg-event-db :defn)
     (re-frame/reg-sub :defn)
-    (re-frame/reg-fx :defn))
+    (re-frame/reg-fx :defn)
+    (defclass '(1 :defn)))
 
   (dolist (f '(clj-refactor-mode flycheck-mode smartparens-mode smartparens-strict-mode))
     (add-hook 'clojure-mode-hook f))
@@ -70,7 +71,7 @@
  cider-use-fringe-indicators t
  cider-prompt-for-symbol nil
  cider-save-file-on-load t
- cider-enhanced-cljs-completion-p nil
+ cider-enhanced-cljs-completion-p t
  cider-offer-to-open-cljs-app-in-browser nil)
 
 (autoload #'cider-jack-in "cider" nil t)
