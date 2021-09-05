@@ -134,6 +134,7 @@
    '("%" . meow-query-replace-regexp)
    '("@" . recenter-top-bottom)
    '("'" . repeat)
+   '("=" . align-regexp)
    '("<escape>" . meow-last-buffer)
    '("\\" . quoted-insert)
    '("?" . meow-keypad-describe-key)))
@@ -169,6 +170,7 @@
   (add-to-list 'meow-mode-state-list '(authinfo-mode . normal))
   (add-to-list 'meow-mode-state-list '(Custom-mode . normal))
   (add-to-list 'meow-mode-state-list '(cider-test-report-mode . normal))
+  (add-to-list 'meow-mode-state-list '(cargo-process-mode . normal))
   (setq meow-grab-fill-commands nil)
   ;; use << and >> to select to bol/eol
   (add-to-list 'meow-char-thing-table '(?> . line))

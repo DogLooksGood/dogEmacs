@@ -83,7 +83,7 @@
    `(font-lock-builtin-face         ((t ())))
    `(font-lock-type-face            ((t ())))
    `(font-lock-variable-name-face   ((t ())))
-   `(font-lock-keyword-face         ((t (:foreground ,kw))))
+   `(font-lock-keyword-face         ((t (:bold t))))
    `(font-lock-constant-face        ((t (:italic t))))
    `(font-lock-function-name-face   ((t (:background ,fn))))
    `(font-lock-warning-face         ((t ())))
@@ -233,7 +233,13 @@
    `(fill-column-indicator          ((t (:foreground ,cm))))
    `(scroll-bar                     ((t (:foreground ,fg))))
    `(sp-pair-overlay-face           ((t (:background ,hl))))
-   `(sp-wrap-overlay-face           ((t (:background ,hl))))))
+   `(sp-wrap-overlay-face           ((t (:background ,hl))))
+
+   `(flycheck-warning ((t (:underline (:style wave :color ,cm)))))
+   `(flycheck-error   ((t (:underline (:style wave :color ,fg)))))
+   `(flymake-warning  ((t (:underline (:style wave :color ,cm)))))
+   `(flymake-error    ((t (:underline (:style wave :color ,fg)))))
+   `(flymake-note     ((t (:underline (:style wave :color ,hl)))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

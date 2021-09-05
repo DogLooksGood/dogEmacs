@@ -24,6 +24,7 @@
 (autoload #'+lsp-start "eglot" nil t)
 
 (with-eval-after-load "eglot"
+  (define-key eglot-mode-map (kbd "M-RET") 'eglot-code-actions)
   (add-to-list 'eglot-server-programs
                '(elixir-mode "/usr/lib/elixir-ls/language_server.sh"))
   (add-to-list 'eglot-server-programs

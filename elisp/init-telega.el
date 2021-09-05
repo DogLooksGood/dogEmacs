@@ -23,6 +23,7 @@
     (find-file file))))
 
 (with-eval-after-load "telega"
+  (define-key telega-msg-button-map (kbd "SPC") nil)
   (setq telega-open-message-as-file '(photo video)
         telega-open-file-function '+telega-open-file)
   (custom-set-faces
