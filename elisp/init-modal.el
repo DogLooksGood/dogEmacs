@@ -49,6 +49,7 @@
    '("A" . org-agenda)
    '("D" . docker)
    '("E" . elfeed)
+   '("F" . flymake-mode)
    '("\\" . dired-sidebar-toggle-sidebar))
   (meow-motion-overwrite-define-key
    '("'" . repeat))

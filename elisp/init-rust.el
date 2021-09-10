@@ -78,7 +78,7 @@
 (autoload #'cargo-process-test "cargo" nil t)
 (autoload #'cargo-process-check "cargo" nil t)
 
-(with-eval-after-load "cargo"
+(with-eval-after-load "rust-mode"
   (define-key rust-mode-map (kbd "C-c C-c") #'cargo-process-run)
   (define-key rust-mode-map (kbd "C-c C-t t") #'cargo-process-current-test)
   (define-key rust-mode-map (kbd "C-c C-t f") #'cargo-process-current-file-tests)
