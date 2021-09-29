@@ -72,6 +72,8 @@
   (define-key company-active-map (kbd "RET") nil)
   (define-key company-active-map (kbd "SPC") nil)
   (define-key company-active-map (kbd "SPC") nil)
+  (define-key company-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-active-map (kbd "C-p") 'company-select-previous)
 
   (define-key company-template-nav-map (kbd "RET") 'company-template-forward-field)
   (define-key company-template-nav-map [return] 'company-template-forward-field)
