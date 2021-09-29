@@ -15,7 +15,6 @@
 
 (with-eval-after-load "clojure-mode"
   (require 'smartparens-clojure)
-  (modify-syntax-entry ?: "w" clojure-mode-syntax-table)
   (require 'init-clojure-highlight-fix)
 
   (require 'zprint)
@@ -26,6 +25,7 @@
     (re-frame/reg-event-db :defn)
     (re-frame/reg-sub :defn)
     (re-frame/reg-fx :defn)
+    (t/async :defn)
     (defclass '(1 :defn)))
 
   (dolist (f '(clj-refactor-mode flycheck-mode smartparens-mode smartparens-strict-mode))
@@ -68,7 +68,7 @@
 (setq
  cider-font-lock-dynamically nil
  cider-font-lock-reader-conditionals t
- cider-use-fringe-indicators t
+ cider-use-fringe-indicators nil
  cider-prompt-for-symbol nil
  cider-save-file-on-load t
  cider-enhanced-cljs-completion-p t

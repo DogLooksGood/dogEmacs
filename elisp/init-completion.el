@@ -72,8 +72,6 @@
   (define-key company-active-map (kbd "RET") nil)
   (define-key company-active-map (kbd "SPC") nil)
   (define-key company-active-map (kbd "SPC") nil)
-  (define-key company-active-map (kbd "{") #'company-select-previous)
-  (define-key company-active-map (kbd "}") #'company-select-next)
 
   (define-key company-template-nav-map (kbd "RET") 'company-template-forward-field)
   (define-key company-template-nav-map [return] 'company-template-forward-field)
@@ -97,11 +95,7 @@
    (point)))
 
 (with-eval-after-load "selectrum"
-  (define-key selectrum-minibuffer-map (kbd "M-DEL") #'+minibuffer-backward-delete)
-  (define-key selectrum-minibuffer-map (kbd "{") #'selectrum-previous-candidate)
-  (define-key selectrum-minibuffer-map (kbd "}") #'selectrum-next-candidate)
-  (define-key selectrum-minibuffer-map (kbd "[") #'previous-history-element)
-  (define-key selectrum-minibuffer-map (kbd "]") #'next-history-element))
+  (define-key selectrum-minibuffer-map (kbd "M-DEL") #'+minibuffer-backward-delete))
 
 ;;; deadgrep
 

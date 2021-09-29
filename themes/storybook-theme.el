@@ -177,7 +177,12 @@
    `(header-line         ((t (:background "#ede4d1" :foreground "#442c09" :underline "#a8a296"))))
    `(help-key-binding    ((t (:background ,bg-2))))
    `(selectrum-current-candidate    ((t (:background ,bg-2))))
-   `(selectrum-prescient-primary-highlight ((t (:underline t))))))
+   `(selectrum-prescient-primary-highlight ((t (:underline t))))
+   ;; colorful paren
+   `(colorful-round           ((t (:foreground ,fg+1))))
+   `(colorful-square          ((t (:foreground ,green-fg))))
+   `(colorful-curly           ((t (:foreground ,red-fg))))
+   `(colorful-semicolon       ((t (:foreground ,green-fg))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)
