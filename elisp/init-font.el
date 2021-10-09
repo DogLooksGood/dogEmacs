@@ -24,8 +24,8 @@
 ;;; Fonts
 ;; Custom fonts can be set in ~/.emacs.d/private.el
 
-(defvar +font-wide-family "Fira Code")
-(defvar +font-tall-family "Fira Code")
+(defvar +font-wide-family "Source Code Pro")
+(defvar +font-tall-family "Source Code Pro")
 (defvar +font-unicode-family "LXGW WenKai")
 (defvar +fixed-pitch-family "Sarasa Mono SC")
 (defvar +variable-pitch-family "LXGW WenKai")
