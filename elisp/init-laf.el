@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
-(require 'joker-theme)
-(require 'storybook-theme)
+(require 'printed-theme)
+(require 'minidark-theme)
 
 ;;; No scroll bar
 (setq-default scroll-bar-width 10)
@@ -52,7 +52,7 @@
 (defvar +after-change-theme-hook nil
   "Hooks called after theme is changed.")
 
-(defvar +theme-list '(minidark grayscale joker printed storybook))
+(defvar +theme-list '(printed minidark ))
 
 (defun +change-theme ()
   (interactive)

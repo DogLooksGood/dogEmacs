@@ -42,7 +42,7 @@
  ;; mouse yank at point instead of click position.
  mouse-yank-at-point t
  ;; this fix the cursor movement lag
- auto-window-vscroll nil
+ auto-window-vscroll t
  ;; window divider setup
  window-divider-default-right-width 1
  window-divider-default-bottom-width 1
