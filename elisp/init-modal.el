@@ -145,9 +145,6 @@
  meow-esc-delay 0.001
  meow-keypad-describe-delay 0.5
  meow-select-on-change t
- meow-cursor-type-normal 'box
- meow-cursor-type-insert '(bar . 2)
- meow-cursor-type-keypad 'hbox
  meow-selection-command-fallback '((meow-replace . meow-page-up)
                                    (meow-change . meow-change-char)
                                    (meow-save . meow-save-empty)

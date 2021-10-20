@@ -31,8 +31,8 @@
 (defvar +variable-pitch-family "LXGW WenKai")
 (defvar +font-rescale '((tall . 1.0) (wide . 1.0)))
 (defvar +font-wide-or-tall 'tall)
-(defvar +font-size-list '(12 13 14 15 16 17 18))
-(defvar +font-size 12)
+(defvar +font-size-list '(10 11 12 13 14 15 16 17 18))
+(defvar +font-size 10)
 
 (defun +get-base-font ()
   (if (eq 'tall +font-wide-or-tall) +font-tall-family +font-wide-family))

@@ -32,13 +32,14 @@
 
 (deftheme minidark "A minimal light theme.")
 
-(defvar minidark-theme-header-scales '(1.2 1.0 1.0 1.0 1.0 1.0 1.0)
+(defvar minidark-theme-header-scales '(1.0 1.0 1.0 1.0 1.0 1.0 1.0)
   "Scales for headers.")
 
 (let ((bg "#202020")
       (fg "#9C9C9C")
       (cm "#707070")
       (hl "#303030")
+      (rg "#505050")
       (kw "#CFCFCF")
       (fn "#c6a131")
       (st "#58bc7f")
@@ -54,7 +55,7 @@
                                      (((type graphic)) :background ,bg :foreground ,fg)))
    ;; Basics
    `(cursor                         ((t (:background ,cur))))
-   `(region                         ((t (:inverse-video t))))
+   `(region                         ((t (:background ,rg))))
    `(hl-line                        ((t (:background ,hl))))
    `(fringe                         ((t (:background ,bg))))
    `(show-paren-match               ((t (:box (:line-width (-1 . -1))))))
@@ -237,9 +238,9 @@
    `(org-link                       ((t (:underline t))))
    `(org-document-title             ((t ())))
    `(org-code                       ((t (:inherit font-lock-constant-face))))
-   `(org-level-1                    ((t (:height ,(nth 0 minidark-theme-header-scales)))))
-   `(org-level-2                    ((t (:height ,(nth 1 minidark-theme-header-scales)))))
-   `(org-level-3                    ((t (:height ,(nth 2 minidark-theme-header-scales)))))
+   `(org-level-1                    ((t (:inherit font-lock-string-face :height ,(nth 0 minidark-theme-header-scales)))))
+   `(org-level-2                    ((t (:inherit font-lock-function-name-face :height ,(nth 1 minidark-theme-header-scales)))))
+   `(org-level-3                    ((t (:inherit font-lock-keyword-face :height ,(nth 2 minidark-theme-header-scales)))))
    `(org-level-4                    ((t (:height ,(nth 3 minidark-theme-header-scales)))))
    `(org-level-5                    ((t (:height ,(nth 4 minidark-theme-header-scales)))))
    `(org-level-6                    ((t (:height ,(nth 5 minidark-theme-header-scales)))))
@@ -252,10 +253,10 @@
    `(parenthesis                    ((t (:foreground ,cm))))
    `(eldoc-box-body                 ((t (:background ,pop :inherit variable-pitch))))
 
-   `(flycheck-warning               ((t (:underline (:style wave :color "#4A4A30")))))
-   `(flycheck-error               ((t (:underline (:style wave :color "#4F3030")))))
-   `(flymake-warning               ((t (:underline (:style wave :color "#4A4A30")))))
-   `(flymake-error               ((t (:underline (:style wave :color "#4F3030")))))
+   `(flycheck-warning               ((t (:underline (:style wave :color "#6A6A30")))))
+   `(flycheck-error               ((t (:underline (:style wave :color "#6F3030")))))
+   `(flymake-warning               ((t (:underline (:style wave :color "#6A6A30")))))
+   `(flymake-error               ((t (:underline (:style wave :color "#6F3030")))))
    `(flymake-note                ((t (:underline (:style wave :color "#304F30")))))
 
    `(wgrep-face                     ((t (:underline ,st))))))
