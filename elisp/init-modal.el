@@ -161,6 +161,8 @@
 
 (meow-global-mode 1)
 
+(setq meow-cursor-type-keypad 'box)
+
 (with-eval-after-load "meow"
   ;; make Meow usable in TUI Emacs
   (meow-esc-mode 1)

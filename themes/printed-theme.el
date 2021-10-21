@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (deftheme printed "A simple medium contrast light theme.")
 
 (custom-theme-set-faces
@@ -38,10 +40,10 @@
  '(meow-position-highlight-reverse-number-1 ((t (:background "#1c7eb8" :foreground "white"))))
  '(meow-position-highlight-reverse-number-2 ((t (:background "#3c9dd6" :foreground "white"))))
  '(meow-position-highlight-reverse-number-3 ((t (:background "#5ab2e6" :foreground "white"))))
- '(meow-keypad-cursor             ((t (:background "#7c2902"))))
+ '(meow-keypad-cursor             ((t (:background "#f59842"))))
  '(meow-insert-cursor             ((t (:background "#bf3b1d"))))
  '(meow-normal-cursor             ((t (:background "#1d6ebf"))))
- '(meow-motion-cursor             ((t (:background "#035063"))))
+ '(meow-motion-cursor             ((t (:background "#b22ac7"))))
  '(dired-directory                ((t (:inherit font-lock-keyword-face))))
  '(mode-line                      ((((type tty)) (:background "grey70"))
                                    (((type graphic)) (:overline "#aaa":foreground "#303030"))))
