@@ -162,6 +162,7 @@
 (meow-global-mode 1)
 
 (setq meow-cursor-type-keypad 'box)
+(setq meow-cursor-type-insert '(bar . 3))
 
 (with-eval-after-load "meow"
   ;; make Meow usable in TUI Emacs
