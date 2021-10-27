@@ -11,6 +11,8 @@
 (with-eval-after-load "dired"
   (define-key dired-mode-map "w" #'wdired-change-to-wdired-mode))
 
+(add-hook 'dired-mode-hook 'hl-line-mode)
+
 ;;; dired-git-info
 
 (setq

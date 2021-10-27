@@ -107,6 +107,8 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(show-paren-mode -1)
+
 (add-hook 'prog-mode-hook 'visual-line-mode)
 (add-hook 'conf-mode-hook 'visual-line-mode)
 (add-hook 'prog-mode-hook 'hl-line-mode)

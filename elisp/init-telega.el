@@ -29,6 +29,7 @@
   (custom-set-faces
    '(telega-entity-type-pre ((t :inherit 'fixed-pitch :family nil))))
   (add-hook 'telega-root-mode-hook '+use-fixed-pitch)
-  (add-hook 'telega-root-mode-hook '+load-font))
+  (add-hook 'telega-root-mode-hook '+load-font)
+  (add-hook 'telega-root-mode-hook 'hl-line-mode))
 
 (provide 'init-telega)
