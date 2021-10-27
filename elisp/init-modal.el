@@ -145,6 +145,7 @@
  meow-esc-delay 0.001
  meow-keypad-describe-delay 0.5
  meow-select-on-change t
+ meow-region-cursor 'insert
  meow-selection-command-fallback '((meow-replace . meow-page-up)
                                    (meow-change . meow-change-char)
                                    (meow-save . meow-save-empty)

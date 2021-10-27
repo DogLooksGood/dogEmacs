@@ -36,11 +36,11 @@
   "Scales for headers.")
 
 (let ((bg "#202020")
-      (fg "#9C9C9C")
+      (fg "#A0A0A0")
       (cm "#707070")
-      (hl "#303060")
-      (rg "#306030")
-      (ss "#603030")
+      (hl "#303030")
+      (rg "#206020")
+      (ss "#602020")
       (kw "#CFCFCF")
       (fn "#c6a131")
       (st "#58bc7f")
@@ -111,7 +111,7 @@
    `(imenu-list-entry-subalist-face-0 ((t (:bold t))))
 
    ;; Mode Line
-   `(mode-line                      ((t (:background ,fg :foreground ,hl))))
+   `(mode-line                      ((t (:background ,fg :foreground ,bg))))
    `(mode-line-inactive             ((t (:background ,cm :foreground ,hl))))
    `(header-line                    ((t ())))
    `(header-line-inactive           ((t ())))
