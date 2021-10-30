@@ -3,8 +3,10 @@
 (setq-default header-line-format nil)
 
 (defun +format-mode-line ()
-  (let* ((lhs '((:eval (meow-indicator))
-                (:eval (rime-lighter))
+  (let* ((lhs '((:eval (when (fboundp 'meow-indicator)
+                         (meow-indicator)))
+                (:eval (when (fboundp 'rime-lighter)
+                         (rime-lighter)))
                 " Row %l Col %C"
                 (:eval (when (bound-and-true-p flycheck-mode) flycheck-mode-line))
                 (:eval (when (bound-and-true-p flymake-mode)
