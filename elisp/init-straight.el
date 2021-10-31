@@ -19,11 +19,17 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-(global-set-key (kbd "C-x M-s p") 'straight-pull-package)
-(global-set-key (kbd "C-x M-s P") 'straight-pull-all)
-(global-set-key (kbd "C-x M-s c") 'straight-check-package)
-(global-set-key (kbd "C-x M-s C") 'straight-check-all)
-(global-set-key (kbd "C-x M-s b") 'straight-rebuild-package)
-(global-set-key (kbd "C-x M-s B") 'straight-rebuild-all)
+(defvar straight-keymap
+  (let ((m (make-keymap)))
+    (define-key m (kbd "p") 'straight-pull-package)
+    (define-key m (kbd "P") 'straight-pull-all)
+    (define-key m (kbd "c") 'straight-check-package)
+    (define-key m (kbd "C") 'straight-check-all)
+    (define-key m (kbd "b") 'straight-rebuild-package)
+    (define-key m (kbd "B") 'straight-rebuild-all)
+    m))
+
+(defalias 'straight-keymap straight-keymap)
+(global-set-key (kbd "C-x M-s") 'straight-keymap)
 
 (provide 'init-straight)
