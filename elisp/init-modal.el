@@ -127,7 +127,7 @@
    '("X" . meow-sync-grab)
    '("y" . meow-yank)
    '("Y" . meow-yank-pop)
-   '("z" . meow-pop)
+   '("z" . meow-pop-selection)
    '("Z" . meow-pop-all-selection)
    '("<" . meow-beginning-of-thing)
    '(">" . meow-end-of-thing)
@@ -145,13 +145,12 @@
  meow-esc-delay 0.001
  meow-keypad-describe-delay 0.5
  meow-select-on-change t
- meow-region-cursor 'insert
  meow-selection-command-fallback '((meow-replace . meow-page-up)
                                    (meow-change . meow-change-char)
                                    (meow-save . meow-save-empty)
                                    (meow-kill . meow-C-k)
                                    (meow-cancel . keyboard-quit)
-                                   (meow-pop . meow-pop-grab)
+                                   (meow-pop-selection . meow-pop-grab)
                                    (meow-delete . meow-C-d))
  meow-replace-state-name-list '((normal . "N")
                                 (motion . "M")
