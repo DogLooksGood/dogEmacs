@@ -140,12 +140,6 @@
    `(meow-normal-cursor             ((t (:background ,cur))))
    `(meow-motion-cursor             ((t (:background ,cur))))
    `(meow-unknown-cursor            ((t (:background ,cur))))
-   `(meow-position-highlight-number-1 ((t (:background "gray30" :foreground "gray90"))))
-   `(meow-position-highlight-number-2 ((t (:background "gray20" :foreground "gray80"))))
-   `(meow-position-highlight-number-3 ((t (:background "gray10" :foreground "gray60"))))
-   `(meow-position-highlight-reverse-number-1 ((t (:background "gray30" :foreground "gray90"))))
-   `(meow-position-highlight-reverse-number-2 ((t (:background "gray20" :foreground "gray80"))))
-   `(meow-position-highlight-reverse-number-3 ((t (:background "gray10" :foreground "gray60"))))
 
    ;; colorful paren
    `(colorful-round           ((t (:foreground "gray60"))))
