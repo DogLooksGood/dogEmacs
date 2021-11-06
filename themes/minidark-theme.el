@@ -100,9 +100,6 @@
 
    `(highlight-numbers-number       ((t (:foreground ,num))))
 
-   `(selectrum-current-candidate    ((t (:foreground ,fn :background ,hl))))
-   `(selectrum-prescient-primary-highlight ((t (:underline t))))
-
    ;; shell
    `(sh-quoted-exec                 ((t ())))
 

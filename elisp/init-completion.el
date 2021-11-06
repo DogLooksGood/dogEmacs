@@ -3,7 +3,6 @@
 (straight-use-package 'selectrum)
 (straight-use-package 'selectrum-prescient)
 (straight-use-package 'company)
-(straight-use-package 'corfu)
 (straight-use-package 'rg)
 (straight-use-package 'prescient)
 (straight-use-package 'yasnippet)
@@ -80,32 +79,27 @@
   (define-key company-template-nav-map (kbd "TAB") nil)
   (define-key company-template-nav-map [tab] nil))
 
+;; selectrum
+
 (require 'selectrum)
 (require 'selectrum-prescient)
 (selectrum-mode t)
 (selectrum-prescient-mode t)
 
-(defun +minibuffer-backward-delete ()
+(defun +selectrum-backward-delete-sexp ()
   (interactive)
-  (delete-region
-   (or
-    (save-mark-and-excursion
-      (while (equal ?/ (char-before)) (backward-char))
-      (when-let ((p (re-search-backward "/" (line-beginning-position) t)))
-        (1+ p)))
-    (save-mark-and-excursion (backward-word) (point)))
-   (point)))
+  (save-restriction
+    (narrow-to-region (minibuffer-prompt-end) (point-max))
+    (delete-region
+     (save-mark-and-excursion
+       (backward-sexp)
+       (point))
+     (point))))
 
 (with-eval-after-load "selectrum"
-  (define-key selectrum-minibuffer-map (kbd "M-DEL") #'+minibuffer-backward-delete))
+  (define-key selectrum-minibuffer-map (kbd "M-DEL") #'+selectrum-backward-delete-sexp))
 
-;;; deadgrep
-
-;; (autoload #'deadgrep "deadgrep" nil t)
-;;
-;; (with-eval-after-load "deadgrep"
-;;   (define-key deadgrep-mode-map (kbd "w") 'deadgrep-edit-mode)
-;;   (define-key deadgrep-edit-mode-map (kbd "C-x C-s") 'deadgrep-mode))
+;;; rg
 
 (autoload #'rg-project "rg" nil t)
 
