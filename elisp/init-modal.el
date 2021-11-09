@@ -154,7 +154,8 @@
  meow-replace-state-name-list '((normal . "N")
                                 (motion . "M")
                                 (keypad . "K")
-                                (insert . "I")))
+                                (insert . "I")
+                                (bmacro . "B")))
 
 (require 'meow)
 

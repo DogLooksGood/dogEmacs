@@ -44,6 +44,8 @@
  '(meow-insert-cursor             ((t (:background "#bf3b1d"))))
  '(meow-normal-cursor             ((t (:background "#1d6ebf"))))
  '(meow-motion-cursor             ((t (:background "#b22ac7"))))
+ '(meow-bmacro-cursor             ((t (:background "#20a167"))))
+ '(meow-multi-cursor              ((t (:background "#83c7b0"))))
  '(meow-region-cursor             ((t (:background "#3c9dd6" :foreground "white"))))
  '(dired-directory                ((t (:inherit font-lock-keyword-face))))
  `(mode-line                      ((((type tty)) (:background "grey70"))
