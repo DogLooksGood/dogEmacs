@@ -103,9 +103,7 @@
  ;; eldoc idle delay
  eldoc-idle-delay 1
  ;; disable copy region blink
- copy-region-blink-delay 0
- ;; don't translate upper case key bindings
- translate-upper-case-key-bindings nil)
+ copy-region-blink-delay 0)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 

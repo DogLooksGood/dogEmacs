@@ -140,6 +140,10 @@
    '("?" . meow-keypad-describe-key)))
 
 (setq
+ meow-cursor-type-keypad 'box
+ meow-cursor-type-insert 'bar
+ meow-use-cursor-position-hack nil
+ meow-use-enhanced-selection-effect nil
  meow-visit-sanitize-completion nil
  meow-esc-delay 0.001
  meow-keypad-describe-delay 0.5
@@ -160,9 +164,6 @@
 (require 'meow)
 
 (meow-global-mode 1)
-
-(setq meow-cursor-type-keypad 'box)
-(setq meow-cursor-type-insert '(bar . 3))
 
 (with-eval-after-load "meow"
   ;; make Meow usable in TUI Emacs
