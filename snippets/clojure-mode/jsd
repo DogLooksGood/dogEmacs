@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: jsd
+# key: jsd
+# --
+(.debug js/console $1)

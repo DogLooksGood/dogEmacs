@@ -1,7 +1,5 @@
 ;; Mode Line  -*- lexical-binding: t; -*-
 
-(setq-default header-line-format nil)
-
 (defun +format-mode-line ()
   (let* ((lhs '((:eval (when (fboundp 'meow-indicator)
                          (meow-indicator)))
@@ -14,7 +12,7 @@
          (rhs '((:eval (+smart-file-name-cached))
                 " "
                 (:eval mode-name)
-                (vc-mode vc-mode)))
+                (:eval (+vc-branch-name))))
          (ww (window-width))
          (lhs-str (format-mode-line lhs))
          (rhs-str (format-mode-line rhs))

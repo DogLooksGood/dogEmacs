@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: jse
+# key: jse
+# --
+(.error js/console $1)

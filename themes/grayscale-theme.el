@@ -39,6 +39,7 @@
       (fg "#353535")
       (kw "#000000")
       (cm "#61726b")
+      (ss "#96b0a5")
       (hl "#a9bdb5")
       (fn "#b6c6c0")
       (cur "#202020"))
@@ -63,12 +64,12 @@
    `(parenthesis                    ((t (:foreground ,fg))))
    `(completions-common-part        ((t ())))
    `(minibuffer-prompt              ((t ())))
-   `(lazy-highlight                 ((t (:background ,hl))))
+   `(lazy-highlight                 ((t (:foreground ,fg :box (:line-width (-1 . -1))))))
    `(compilation-info               ((t ())))
    `(compilation-warning            ((t ())))
    `(warning                        ((t ())))
-   `(match                          ((t (:inverse-video t))))
-   `(secondary-selection            ((t (:inverse-video t :foreground ,cm))))
+   `(match                          ((t (:foreground ,fg :box (:line-width (-1 . -1))))))
+   `(secondary-selection            ((t (:background ,ss))))
    `(help-key-binding               ((t ())))
 
    ;; ISearch

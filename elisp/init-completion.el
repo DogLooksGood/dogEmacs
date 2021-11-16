@@ -60,6 +60,7 @@
 (with-eval-after-load "company"
   (require 'company-tng)
   (require 'company-template)
+
   (add-hook 'company-mode-hook 'company-tng-mode)
 
   (define-key company-mode-map [tab] '+complete)

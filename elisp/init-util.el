@@ -32,7 +32,14 @@ This function is slow, so we have to use cache."
     (cond
      ((and bfn vc-dir)
       (concat
-       (file-name-base (string-trim-right vc-dir "/")) "/" (file-relative-name bfn vc-dir)))
+       (propertize
+        (car
+         (reverse
+          (split-string (string-trim-right vc-dir "/") "/")))
+        'face
+        'bold)
+       "/"
+       (file-relative-name bfn vc-dir)))
      (bfn bfn)
      (t (buffer-name)))))
 
@@ -45,7 +52,13 @@ This function is slow, so we have to use cache."
       file-name)))
 
 (defun +vc-branch-name ()
-  (car (vc-git-branches)))
+  (propertize
+   (replace-regexp-in-string
+    "Git[-:]"
+    ""
+    (substring-no-properties vc-mode))
+   'face
+   'bold))
 
 (defmacro +measure-time-1 (&rest body)
   "Measure the time it takes to evaluate BODY."

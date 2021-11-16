@@ -38,15 +38,18 @@
 (let ((bg "#4c5256")
       (fg "#c4cdd3")
       (cm "#a9b5bd")
-      (hl "#616b72")
-      (cur "#00FFFF"))
+      (ss "#646a6e")
+      (hl "#5a6873")
+      (lh "#536978")
+      (fn "#464b4f")
+      (cur "#00AAAA"))
   (custom-theme-set-faces
    `graverse
    ;; We don't specify default foreground/background in TTY.
    `(default                        ((t :background ,bg :foreground ,fg)))
    ;; Basics
    `(cursor                         ((t (:background ,cur))))
-   `(region                         ((t (:background ,hl))))
+   `(region                         ((t (:background ,lh))))
    `(hl-line                        ((t)))
    `(fringe                         ((t (:background ,bg))))
    `(show-paren-match               ((t (:box (:line-width (-1 . -1))))))
@@ -61,12 +64,12 @@
    `(parenthesis                    ((t (:foreground ,fg))))
    `(completions-common-part        ((t ())))
    `(minibuffer-prompt              ((t ())))
-   `(lazy-highlight                 ((t (:background ,hl))))
+   `(lazy-highlight                 ((t (:background ,lh))))
    `(compilation-info               ((t ())))
    `(compilation-warning            ((t ())))
    `(warning                        ((t ())))
    `(match                          ((t (:inverse-video t))))
-   `(secondary-selection            ((t (:inverse-video t :foreground ,cm))))
+   `(secondary-selection            ((t (:background ,ss))))
    `(help-key-binding               ((t ())))
 
    ;; ISearch
@@ -81,9 +84,9 @@
    `(font-lock-builtin-face         ((t ())))
    `(font-lock-type-face            ((t ())))
    `(font-lock-variable-name-face   ((t ())))
-   `(font-lock-keyword-face         ((t ())))
+   `(font-lock-keyword-face         ((t (:bold t))))
    `(font-lock-constant-face        ((t (:italic t))))
-   `(font-lock-function-name-face   ((t (:bold t))))
+   `(font-lock-function-name-face   ((t (:background ,fn))))
    `(font-lock-warning-face         ((t ())))
    `(font-lock-preprocessor-face    ((t ())))
 
@@ -95,8 +98,8 @@
    `(imenu-list-entry-subalist-face-0 ((t (:bold t))))
 
    ;; Mode Line
-   `(mode-line                      ((t (:inverse-video t))))
-   `(mode-line-inactive             ((t (:background ,hl))))
+   `(mode-line                      ((t (:background ,hl))))
+   `(mode-line-inactive             ((t (:background ,ss))))
 
    ;; Company
    `(company-tooltip-common         ((t ())))
@@ -105,7 +108,7 @@
    `(company-tooltip-search         ((t ())))
    `(company-tooltip-selection      ((t (:inverse-video t))))
    `(company-tooltip-annotation     ((t ())))
-   `(company-scrollbar-bg           ((t (:background ,bg))))
+   `(company-scrollbar-bg           ((t (:background ,hl))))
    `(company-scrollbar-fg           ((t (:background ,fg))))
    `(company-template-field         ((t (:inherit yas-field-highlight-face))))
 
@@ -113,10 +116,11 @@
    `(yas-field-highlight-face       ((t (:background ,hl))))
 
    ;; Meow
-   `(meow-keypad-indicator          ((t ())))
-   `(meow-insert-indicator          ((t ())))
-   `(meow-normal-indicator          ((t ())))
-   `(meow-motion-indicator          ((t ())))
+   `(meow-keypad-indicator          ((t (:bold t))))
+   `(meow-insert-indicator          ((t (:bold t))))
+   `(meow-normal-indicator          ((t (:bold t))))
+   `(meow-motion-indicator          ((t (:bold t))))
+   `(meow-bmacro-indicator          ((t (:bold t))))
    `(meow-keypad-cursor             ((t (:background ,cur))))
    `(meow-insert-cursor             ((t (:background ,cur))))
    `(meow-normal-cursor             ((t (:background ,cur))))
@@ -190,6 +194,11 @@
    `(rime-code-face                 ((t (:bold t))))
    `(rime-default-face              ((t ())))
    `(rime-highlight-candidate-face  ((t ())))
+
+   ;; sort tab
+   `(sort-tab-separator-face        ((t (:foreground ,cm))))
+   `(sort-tab-current-tab-face      ((t (:foreground ,fg :background ,hl))))
+   `(sort-tab-other-tab-face        ((t (:foreground ,fg))))
 
    ;;
    ;; ;; Web Mode
