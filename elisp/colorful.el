@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;; parentheses
 
 (defface colorful-round '((t (:inherit shadow)))

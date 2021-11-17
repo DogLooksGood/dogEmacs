@@ -38,6 +38,8 @@
    '("=" . "C-c ^")
    '("p" . project-find-file)
    '("t" . project-switch-to-buffer)
+   '("q" . mbuf-prev-buffer)
+   '("j" . mbuf-next-buffer)
    '("l" . "C-x p p")
    '("y" . "C-x g")
    '("n" . "C-x M-n")

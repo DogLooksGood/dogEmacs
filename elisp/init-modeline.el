@@ -3,9 +3,9 @@
 (defun +format-mode-line ()
   (let* ((lhs '((:eval (when (fboundp 'meow-indicator)
                          (meow-indicator)))
+                " L%l C%C "
                 (:eval (when (fboundp 'rime-lighter)
                          (rime-lighter)))
-                " Row %l Col %C"
                 (:eval (when (bound-and-true-p flycheck-mode) flycheck-mode-line))
                 (:eval (when (bound-and-true-p flymake-mode)
                          flymake-mode-line-format))))
@@ -22,6 +22,7 @@
             (propertize " " 'display `((space :align-to (- (+ right right-fringe right-margin) (+ 1 ,rhs-w)))))
             rhs-str)))
 
+(setq-default header-line-format '((:eval (mbuf-mode-line-section))))
 (setq-default mode-line-format '((:eval (+format-mode-line))))
 
 (provide 'init-modeline)

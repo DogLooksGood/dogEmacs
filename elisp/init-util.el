@@ -52,13 +52,14 @@ This function is slow, so we have to use cache."
       file-name)))
 
 (defun +vc-branch-name ()
-  (propertize
-   (replace-regexp-in-string
-    "Git[-:]"
-    ""
-    (substring-no-properties vc-mode))
-   'face
-   'bold))
+  (when vc-mode
+    (propertize
+     (replace-regexp-in-string
+      "Git[-:]"
+      ""
+      (substring-no-properties vc-mode))
+     'face
+     'bold)))
 
 (defmacro +measure-time-1 (&rest body)
   "Measure the time it takes to evaluate BODY."

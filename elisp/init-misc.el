@@ -19,4 +19,8 @@
 (require 'colorful)
 (add-hook 'prog-mode-hook 'colorful-mode)
 
+(require 'mbuf)
+(global-set-key (kbd "<XF86Forward>") #'mbuf-next-buffer)
+(global-set-key (kbd "<XF86Back>") #'mbuf-prev-buffer)
+
 (provide 'init-misc)

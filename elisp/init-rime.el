@@ -23,7 +23,7 @@
  rime-inline-ascii-holder ?a
  default-input-method "rime"
  rime-cursor "|"
- rime-show-candidate 'posframe
+ rime-show-candidate 'minibuffer
  window-min-height 1
  rime-title " ㄓ")
 

@@ -56,9 +56,9 @@
    `(highlight                      ((t (:inverse-video t))))
    `(button                         ((t (:box (:line-width (-1 . -1))))))
    `(vertical-border                ((t ())))
-   `(window-divider                 ((t (:foreground ,cm))))
-   `(window-divider-first-pixel     ((t (:foreground ,cm))))
-   `(window-divider-last-pixel      ((t (:foreground ,cm))))
+   `(window-divider                 ((t (:foreground "black"))))
+   `(window-divider-first-pixel     ((t (:foreground ,ss))))
+   `(window-divider-last-pixel      ((t (:foreground ,ss))))
    `(line-number                    ((t (:foreground ,cm))))
    `(line-number-current-line       ((t (:foreground ,fg))))
    `(parenthesis                    ((t (:foreground ,fg))))
@@ -98,8 +98,10 @@
    `(imenu-list-entry-subalist-face-0 ((t (:bold t))))
 
    ;; Mode Line
-   `(mode-line                      ((t (:background ,hl))))
-   `(mode-line-inactive             ((t (:background ,ss))))
+   `(mode-line                      ((t (:foreground ,bg :background ,fg))))
+   `(mode-line-inactive             ((t (:foreground ,bg :background ,cm))))
+   `(header-line                      ((t (:background ,hl))))
+   `(header-line-inactive             ((t (:background ,hl))))
 
    ;; Company
    `(company-tooltip-common         ((t ())))
