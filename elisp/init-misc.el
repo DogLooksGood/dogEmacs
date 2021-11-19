@@ -21,7 +21,7 @@
 
 (require 'htab)
 (htab-mode 1)
-(setq-default header-line-format '((:eval (htab-indicator))))
+(setq-default tab-line-format '((:eval (htab-indicator))))
 (add-to-list 'htab-ignore-commands 'meow-minibuffer-quit)
 (global-set-key (kbd "<XF86Forward>") #'htab-next-buffer)
 (global-set-key (kbd "<XF86Back>") #'htab-prev-buffer)

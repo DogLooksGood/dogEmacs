@@ -37,6 +37,7 @@
  '(meow-motion-cursor             ((t (:background "#b22ac7"))))
  '(meow-multi-cursor              ((t (:background "#83c7b0"))))
  '(dired-directory                ((t (:inherit font-lock-keyword-face))))
+ `(tab-line                       ((t ())))
  `(mode-line                      ((((type tty)) (:background "grey70"))
                                    (((type graphic)) (:overline "#aaa" :underline "#aaa" :background "#EEE" :foreground "#303030"))))
  `(mode-line-inactive             ((((type tty)) (:background "grey80"))

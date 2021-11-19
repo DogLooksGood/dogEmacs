@@ -99,6 +99,7 @@
    `(imenu-list-entry-subalist-face-0 ((t (:bold t))))
 
    ;; Mode Line
+   `(tab-line                       ((t ())))
    `(mode-line                      ((t (:inverse-video t))))
    `(mode-line-inactive             ((t (:background ,hl))))
    `(header-line                    ((t ())))

@@ -99,6 +99,7 @@
    `(imenu-list-entry-subalist-face-0 ((t (:bold t))))
 
    ;; Mode Line
+   `(tab-line                       ((t ())))
    `(mode-line                      ((t (:foreground ,bg :background ,fg))))
    `(mode-line-inactive             ((t (:foreground ,bg :background ,cm))))
    `(header-line                      ((t ())))

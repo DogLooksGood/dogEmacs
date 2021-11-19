@@ -2,14 +2,13 @@
 
 (require 'dash)
 
-(defcustom htab--tabs-num 4
+(defcustom htab--tabs-num 5
   "The number of tabs."
   :group 'htab
   :type 'number)
 
 (defcustom htab-ignore-commands
   '(other-window
-    meow-quit
     quit-window
     mouse-set-point
     mouse-drag-region
@@ -18,7 +17,7 @@
   "Commands to ignored when buffer list changed.")
 
 (defface htab-face
-  '((t (:height 0.7)))
+  '((t (:height 0.85)))
   "Face for all htab tabs.")
 
 (defvar htab--window-states nil
@@ -81,6 +80,7 @@ The structure should be: ((window index buffers) ...)")
   (let ((keymap (make-keymap)))
     (define-key keymap [header-line mouse-1] (lambda () (interactive) (htab--switch-to-buffer-at-index w idx)))
     (define-key keymap [mode-line mouse-1] (lambda () (interactive) (htab--switch-to-buffer-at-index w idx)))
+    (define-key keymap [tab-line mouse-1] (lambda () (interactive) (htab--switch-to-buffer-at-index w idx)))
     keymap))
 
 (defun htab-indicator ()
