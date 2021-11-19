@@ -19,8 +19,11 @@
 (require 'colorful)
 (add-hook 'prog-mode-hook 'colorful-mode)
 
-(require 'mbuf)
-(global-set-key (kbd "<XF86Forward>") #'mbuf-next-buffer)
-(global-set-key (kbd "<XF86Back>") #'mbuf-prev-buffer)
+(require 'htab)
+(htab-mode 1)
+(setq-default header-line-format '((:eval (htab-indicator))))
+(add-to-list 'htab-ignore-commands 'meow-minibuffer-quit)
+(global-set-key (kbd "<XF86Forward>") #'htab-next-buffer)
+(global-set-key (kbd "<XF86Back>") #'htab-prev-buffer)
 
 (provide 'init-misc)

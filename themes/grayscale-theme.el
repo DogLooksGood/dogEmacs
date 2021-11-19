@@ -71,6 +71,7 @@
    `(match                          ((t (:foreground ,fg :box (:line-width (-1 . -1))))))
    `(secondary-selection            ((t (:background ,ss))))
    `(help-key-binding               ((t ())))
+   `(shadow                         ((t (:foreground ,cm))))
 
    ;; ISearch
    `(isearch                        ((t (:inverse-video t))))
@@ -100,6 +101,8 @@
    ;; Mode Line
    `(mode-line                      ((t (:inverse-video t))))
    `(mode-line-inactive             ((t (:background ,hl))))
+   `(header-line                    ((t ())))
+   `(header-line-inactive           ((t ())))
 
    ;; Company
    `(company-tooltip-common         ((t ())))

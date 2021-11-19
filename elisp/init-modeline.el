@@ -22,7 +22,6 @@
             (propertize " " 'display `((space :align-to (- (+ right right-fringe right-margin) (+ 1 ,rhs-w)))))
             rhs-str)))
 
-(setq-default header-line-format '((:eval (mbuf-mode-line-section))))
 (setq-default mode-line-format '((:eval (+format-mode-line))))
 
 (provide 'init-modeline)

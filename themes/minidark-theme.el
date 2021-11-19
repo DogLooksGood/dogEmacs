@@ -78,7 +78,7 @@
    `(match                          ((t (:inverse-video t))))
    `(secondary-selection            ((t (:background ,ss :extend nil))))
    `(help-key-binding               ((t ())))
-   `(shadow                         ((t ())))
+   `(shadow                         ((t (:foreground "#909090"))))
 
    ;; ISearch
    `(isearch                        ((t (:inverse-video t))))

@@ -128,4 +128,9 @@
 
 (require 'org-roam)
 
+(require 'org-html-themify)
+(add-hook 'org-mode-hook 'org-html-themify-mode)
+(setq org-html-themify-themes '((dark . graverse)
+                                (light . grayscale)))
+
 (provide 'init-org)

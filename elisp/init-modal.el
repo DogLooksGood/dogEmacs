@@ -157,11 +157,11 @@
                                    (meow-cancel . keyboard-quit)
                                    (meow-pop-selection . meow-pop-grab)
                                    (meow-delete . meow-C-d))
- meow-replace-state-name-list '((normal . "😺")
-                                (motion . "😼")
-                                (keypad . "😽")
-                                (insert . "😻")
-                                (bmacro . "🙀")))
+ meow-replace-state-name-list '((normal . "NORMAL")
+                                (motion . "MOTION")
+                                (keypad . "KEYPAD")
+                                (insert . "INSERT")
+                                (bmacro . "BMACRO")))
 
 (require 'meow)
 

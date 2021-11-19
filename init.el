@@ -28,4 +28,4 @@
 (unless window-system
   (require 'init-xterm))
 (require 'init-rss)
-(require 'init-server)
+;; (require 'init-server)
