@@ -34,7 +34,7 @@
    '("r" . rg-project)
    '("f" . find-file)
    '("i" . imenu)
-   '("a" . "M-x")
+   '("a" . execute-extended-command)
    '("=" . "C-c ^")
    '("p" . project-find-file)
    '("t" . project-switch-to-buffer)

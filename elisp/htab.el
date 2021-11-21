@@ -2,10 +2,13 @@
 
 (require 'dash)
 
-(defcustom htab--tabs-num 5
+(defcustom htab--tabs-num 4
   "The number of tabs."
   :group 'htab
   :type 'number)
+
+(defvar htab-ignore-major-modes
+  '(dired-sidebar-mode))
 
 (defcustom htab-ignore-commands
   '(other-window
@@ -85,72 +88,82 @@ The structure should be: ((window index buffers) ...)")
 
 (defun htab-indicator ()
   "Indicator used in header-line-format."
-  (if-let ((state (assoc (selected-window) htab--window-states)))
-      (-let (((w idx bufs) state))
-        (format " %s "
-                (string-join
-                 (--map-indexed
-                  (let ((s (buffer-name it))
-                        (keymap (make-keymap)))
-                    (define-key keymap
-                                [header-line mouse-1]
-                                (lambda ()
-                                  (interactive)
-                                  (switch-to-buffer it)))
-                    (if (= idx it-index)
+  (unless (memq major-mode htab-ignore-major-modes)
+    (if-let ((state (assoc (selected-window) htab--window-states)))
+        (-let (((w idx bufs) state))
+          (format " %s "
+                  (string-join
+                   (--map-indexed
+                    (let ((s (buffer-name it))
+                          (keymap (make-keymap)))
+                      (define-key keymap
+                                  [header-line mouse-1]
+                                  (lambda ()
+                                    (interactive)
+                                    (switch-to-buffer it)))
+                      (if (= idx it-index)
+                          (propertize (format " %s " s)
+                                      'face '(htab-face font-lock-keyword-face))
                         (propertize (format " %s " s)
-                                    'face '(htab-face font-lock-keyword-face))
-                      (propertize (format " %s " s)
-                                  'face '(htab-face shadow)
-                                  'keymap (htab--make-keymap-for-index w it-index))))
-                  bufs)
-                 (propertize (format "%c" #x10f55) 'face 'shadow))))
-    " ... "))
+                                    'face '(htab-face shadow)
+                                    'keymap (htab--make-keymap-for-index w it-index))))
+                    bufs)
+                   (propertize (format "%c" #x10f55) 'face 'shadow))))
+      " ... ")))
 
 (defun htab-next-buffer ()
   "Switch to buffer at next tab."
   (interactive)
-  (when-let ((state (assoc (selected-window) htab--window-states)))
-    (-let (((_ idx bufs) state))
-      (when bufs
-        (if (= idx (1- (length bufs)))
-            (let ((buf (car bufs)))
+  (unless (memq major-mode htab-ignore-major-modes)
+    (when-let ((state (assoc (selected-window) htab--window-states)))
+      (-let (((_ idx bufs) state))
+        (when bufs
+          (if (= idx (1- (length bufs)))
+              (let ((buf (car bufs)))
+                (switch-to-buffer buf)
+                (setf (alist-get (selected-window) htab--window-states)
+                      (list 0 bufs)))
+            (let ((buf (nth (1+ idx) bufs)))
               (switch-to-buffer buf)
               (setf (alist-get (selected-window) htab--window-states)
-                    (list 0 bufs)))
-          (let ((buf (nth (1+ idx) bufs)))
-            (switch-to-buffer buf)
-            (setf (alist-get (selected-window) htab--window-states)
-                  (list (1+ idx) bufs))))))))
+                    (list (1+ idx) bufs)))))))))
 
 (defun htab-prev-buffer ()
   "Switch to buffer at previous tab."
   (interactive)
-  (when-let ((state (assoc (selected-window) htab--window-states)))
-    (-let (((_ idx bufs) state))
-      (when bufs
-        (if (zerop idx)
-            (let ((buf (-last-item bufs)))
+  (unless (memq major-mode htab-ignore-major-modes)
+    (when-let ((state (assoc (selected-window) htab--window-states)))
+      (-let (((_ idx bufs) state))
+        (when bufs
+          (if (zerop idx)
+              (let ((buf (-last-item bufs)))
+                (switch-to-buffer buf)
+                (setf (alist-get (selected-window) htab--window-states)
+                      (list (1- (length bufs)) bufs)))
+            (let ((buf (nth (1- idx) bufs)))
               (switch-to-buffer buf)
               (setf (alist-get (selected-window) htab--window-states)
-                    (list (1- (length bufs)) bufs)))
-          (let ((buf (nth (1- idx) bufs)))
-            (switch-to-buffer buf)
-            (setf (alist-get (selected-window) htab--window-states)
-                  (list (1- idx) bufs))))))))
+                    (list (1- idx) bufs)))))))))
 
 (defun htab-mode--init ()
-  (if (not htab-mode)
+  (if (not htab-global-mode)
       (progn
         (remove-hook 'kill-buffer-hook 'htab--on-buffer-killed)
-        (remove-hook 'buffer-list-update-hook 'htab--on-buffer-list-updated))
+        (remove-hook 'buffer-list-update-hook 'htab--on-buffer-list-updated)
+        (setq-default tab-line-format nil))
     (add-hook 'buffer-list-update-hook 'htab--on-buffer-list-updated)
     (add-hook 'kill-buffer-hook 'htab--on-buffer-killed)
-    (htab--update-window-buffers)))
+    (setq-default tab-line-format '((:eval (htab-indicator))))))
 
 (define-minor-mode htab-mode
   "Display independent tabs for each buffer."
   :init-value nil
+  (htab--update-window-buffers))
+
+(define-global-minor-mode
+  htab-global-mode
+  htab-mode
+  htab-mode
   (htab-mode--init))
 
 (provide 'htab)
