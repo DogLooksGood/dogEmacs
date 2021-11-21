@@ -1,15 +1,11 @@
 ;;; -*- lexical-binding: t -*-
 
+(straight-use-package 'selectrum)
+(straight-use-package 'selectrum-prescient)
 (straight-use-package 'company)
-(straight-use-package 'company-posframe)
 (straight-use-package 'rg)
 (straight-use-package 'prescient)
 (straight-use-package 'yasnippet)
-(straight-use-package 'vertico)
-(straight-use-package 'orderless)
-(straight-use-package '(vertico-posframe :repo "tumashu/vertico-posframe"
-                                         :host github
-                                         :type git))
 
 (defun +complete ()
   (interactive)
@@ -64,8 +60,6 @@
 (with-eval-after-load "company"
   (require 'company-tng)
   (require 'company-template)
-  (require 'company-posframe)
-  (company-posframe-mode 1)
 
   (add-hook 'company-mode-hook 'company-tng-mode)
 
@@ -86,17 +80,25 @@
   (define-key company-template-nav-map (kbd "TAB") nil)
   (define-key company-template-nav-map [tab] nil))
 
-(with-eval-after-load "company-posframe"
-  (setq company-posframe-show-indicator nil))
+;; selectrum
 
-;; vertico
+(require 'selectrum)
+(require 'selectrum-prescient)
+(selectrum-mode t)
+(selectrum-prescient-mode t)
 
-(require 'vertico)
-(require 'orderless)
-(require 'vertico-posframe)
-(setq completion-styles '(orderless))
-(vertico-mode 1)
-(vertico-posframe-mode 1)
+(defun +selectrum-backward-delete-sexp ()
+  (interactive)
+  (save-restriction
+    (narrow-to-region (minibuffer-prompt-end) (point-max))
+    (delete-region
+     (save-mark-and-excursion
+       (backward-sexp)
+       (point))
+     (point))))
+
+(with-eval-after-load "selectrum"
+  (define-key selectrum-minibuffer-map (kbd "M-DEL") #'+selectrum-backward-delete-sexp))
 
 ;;; rg
 
