@@ -23,5 +23,6 @@
             rhs-str)))
 
 (setq-default mode-line-format '((:eval (+format-mode-line))))
+(setq-default header-line-format nil)
 
 (provide 'init-modeline)

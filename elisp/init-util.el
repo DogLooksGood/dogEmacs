@@ -24,6 +24,19 @@ Result depends on syntax table's comment character."
 
 (defvar +smart-file-name-cache nil)
 
+(defun +shorten-long-path (path)
+  (let ((paths (split-string path "/")))
+    (if (< (length paths) 3)
+        path
+      (string-join (reverse (let ((rpaths (reverse paths)))
+                                (-concat
+                                 (-take 2 rpaths)
+                                 (->> (-drop 2 rpaths)
+                                      (--map (if (> (length it) 1)
+                                                 (substring it 0 1)
+                                               it))))))
+                     "/"))))
+
 (defun +smart-file-name ()
   "Get current file name, if we are in project, the return relative path to the project root, otherwise return absolute file path.
 This function is slow, so we have to use cache."
@@ -39,7 +52,7 @@ This function is slow, so we have to use cache."
         'face
         'bold)
        "/"
-       (file-relative-name bfn vc-dir)))
+       (+shorten-long-path (file-relative-name bfn vc-dir))))
      (bfn bfn)
      (t (buffer-name)))))
 

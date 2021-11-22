@@ -3,6 +3,7 @@
 (straight-use-package 'selectrum)
 (straight-use-package 'selectrum-prescient)
 (straight-use-package 'company)
+(straight-use-package 'company-posframe)
 (straight-use-package 'rg)
 (straight-use-package 'prescient)
 (straight-use-package 'yasnippet)
@@ -60,8 +61,10 @@
 (with-eval-after-load "company"
   (require 'company-tng)
   (require 'company-template)
+  (require 'company-posframe)
 
   (add-hook 'company-mode-hook 'company-tng-mode)
+  ;; (company-posframe-mode 1)
 
   (define-key company-mode-map [tab] '+complete)
   (define-key company-mode-map (kbd "TAB") '+complete)
@@ -79,6 +82,11 @@
   (define-key company-template-nav-map [return] 'company-template-forward-field)
   (define-key company-template-nav-map (kbd "TAB") nil)
   (define-key company-template-nav-map [tab] nil))
+
+(with-eval-after-load "company-posframe"
+  (setq company-posframe-show-indicator nil
+        company-posframe-quickhelp-delay nil
+        company-posframe-show-metadata nil))
 
 ;; selectrum
 

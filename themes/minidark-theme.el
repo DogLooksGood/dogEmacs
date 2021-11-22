@@ -36,20 +36,20 @@
   "Scales for headers.")
 
 (let ((bg "#202020")
-      (fg "#C0C0C0")
+      (fg "#A0A0A0")
       (cm "#707070")
-      (hl "#303030")
-      (lh "#303060")
-      (rg "#306050")
-      (ss "#602020")
-      (kw "#CFCFCF")
-      (fn "#c6a131")
-      (st "#58bc7f")
-      (str "#4594d1")
-      (num "#58bc7f")
-      (doc "#d16145")
+      (rg "#353535")
+      (hl "#2A2A2A")
+      (lh "#0DA59B")
+      (ss "#004938")
+      (kw "#BEBEBE")
+      (fn "#bfaa6b")
+      (st "#4b9e6b")
+      (str "#4a95b5")
+      (num "#9466a5")
+      (doc "#cc725b")
       (cur "#EFEFEF")
-      (pop "#202020"))
+      (pop "#272727"))
   (custom-theme-set-faces
    `minidark
    ;; We don't specify default foreground/background in TTY.
@@ -57,10 +57,10 @@
                                      (((type graphic)) :background ,bg :foreground ,fg)))
    ;; Basics
    `(cursor                         ((t (:background ,cur))))
-   `(region                         ((t (:background ,rg :extend nil))))
+   `(region                         ((t (:background ,rg))))
    `(hl-line                        ((t (:background ,hl))))
    `(fringe                         ((t (:background ,bg))))
-   `(show-paren-match               ((t (:box (:line-width (-1 . -1))))))
+   `(show-paren-match               ((t (:background ,hl :box (:line-width (-1 . -1) :style nil)))))
    `(highlight                      ((t (:inverse-video t))))
    `(button                         ((t (:box (:line-width (-1 . -1))))))
    `(vertical-border                ((t ())))
@@ -68,17 +68,17 @@
    `(window-divider-first-pixel     ((t (:foreground ,cm))))
    `(window-divider-last-pixel      ((t (:foreground ,cm))))
    `(line-number                    ((t (:foreground ,cm))))
-   `(line-number-current-line       ((t (:foreground ,fn))))
+   `(line-number-current-line       ((t (:foreground ,fn :background ,hl))))
    `(completions-common-part        ((t ())))
    `(minibuffer-prompt              ((t ())))
-   `(lazy-highlight                 ((t (:background ,lh))))
+   `(lazy-highlight                 ((t (:foreground ,lh))))
    `(compilation-info               ((t ())))
    `(compilation-warning            ((t ())))
    `(warning                        ((t ())))
    `(match                          ((t (:inverse-video t))))
-   `(secondary-selection            ((t (:background ,ss :extend nil))))
+   `(secondary-selection            ((t (:background ,ss))))
    `(help-key-binding               ((t ())))
-   `(shadow                         ((t (:foreground "#909090"))))
+   `(shadow                         ((t (:foreground ,cm))))
 
    ;; ISearch
    `(isearch                        ((t (:inverse-video t))))
@@ -118,11 +118,11 @@
    ;; Company
    `(company-tooltip-common         ((t ())))
    `(company-tooltip-common-selection ((t ())))
-   `(company-tooltip                ((t (:background ,hl))))
+   `(company-tooltip                ((t (:background ,pop))))
    `(company-tooltip-search         ((t ())))
    `(company-tooltip-selection      ((t (:inverse-video t))))
    `(company-tooltip-annotation     ((t ())))
-   `(company-scrollbar-bg           ((t (:background ,bg))))
+   `(company-scrollbar-bg           ((t (:background ,cm))))
    `(company-scrollbar-fg           ((t (:background ,fg))))
    `(company-template-field         ((t (:inherit yas-field-highlight-face))))
 
@@ -130,10 +130,10 @@
    `(yas-field-highlight-face       ((t (:background ,hl))))
 
    ;; Meow
-   `(meow-keypad-indicator          ((t ())))
-   `(meow-insert-indicator          ((t ())))
-   `(meow-normal-indicator          ((t ())))
-   `(meow-motion-indicator          ((t ())))
+   `(meow-keypad-indicator          ((t (:bold t))))
+   `(meow-insert-indicator          ((t (:bold t))))
+   `(meow-normal-indicator          ((t (:bold t))))
+   `(meow-motion-indicator          ((t (:bold t))))
    `(meow-keypad-cursor             ((t (:background ,cur))))
    `(meow-insert-cursor             ((t (:background ,cur))))
    `(meow-normal-cursor             ((t (:background ,cur))))
@@ -141,10 +141,10 @@
    `(meow-unknown-cursor            ((t (:background ,cur))))
 
    ;; colorful paren
-   `(colorful-round           ((t (:foreground "gray60"))))
-   `(colorful-square          ((t (:foreground "#07a2c1"))))
-   `(colorful-curly           ((t (:foreground "#40d119"))))
-   `(colorful-semicolon       ((t (:foreground "#40d119"))))
+   `(colorful-round           ((t ())))
+   `(colorful-square          ((t (:foreground ,str))))
+   `(colorful-curly           ((t (:foreground ,st))))
+   `(colorful-semicolon       ((t (:foreground ,fn))))
 
    ;; Cider
    `(cider-result-overlay-face      ((t (:inverse-video t))))
@@ -247,11 +247,11 @@
    `(parenthesis                    ((t (:foreground ,cm))))
    `(eldoc-box-body                 ((t (:background ,pop :inherit variable-pitch))))
 
-   `(flycheck-warning               ((t (:underline (:style wave :color "#6A6A30")))))
-   `(flycheck-error               ((t (:underline (:style wave :color "#6F3030")))))
-   `(flymake-warning               ((t (:underline (:style wave :color "#6A6A30")))))
-   `(flymake-error               ((t (:underline (:style wave :color "#6F3030")))))
-   `(flymake-note                ((t (:underline (:style wave :color "#304F30")))))
+   `(flycheck-warning               ((t (:underline (:style wave :color ,cm)))))
+   `(flycheck-error                 ((t (:underline (:style wave :color ,st)))))
+   `(flymake-warning                ((t (:underline (:style wave :color ,st)))))
+   `(flymake-error                  ((t (:underline (:style wave :color ,st)))))
+   `(flymake-note                   ((t (:underline (:style wave :color ,cm)))))
 
    `(wgrep-face                     ((t (:underline ,st))))))
 

@@ -35,7 +35,7 @@
 
 ;;; Margin
 
-;; (let ((margin 0))
+;; (let ((margin 10))
 ;;   (add-to-list 'default-frame-alist (cons 'internal-border-width margin)))
 
 ;;; Transparency

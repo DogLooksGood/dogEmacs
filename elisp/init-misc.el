@@ -19,10 +19,10 @@
 (require 'colorful)
 (add-hook 'prog-mode-hook 'colorful-mode)
 
-(require 'htab)
-(htab-global-mode 1)
-(add-to-list 'htab-ignore-commands 'meow-minibuffer-quit)
-(global-set-key (kbd "<XF86Forward>") #'htab-next-buffer)
-(global-set-key (kbd "<XF86Back>") #'htab-prev-buffer)
+;; (require 'htab)
+;; (htab-global-mode 1)
+;; (add-to-list 'htab-ignore-commands 'meow-minibuffer-quit)
+;; (global-set-key (kbd "<XF86Forward>") #'htab-next-buffer)
+;; (global-set-key (kbd "<XF86Back>") #'htab-prev-buffer)
 
 (provide 'init-misc)

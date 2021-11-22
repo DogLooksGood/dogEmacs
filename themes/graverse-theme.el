@@ -162,6 +162,7 @@
    `(magit-diff-added-highlight     ((t (:background ,cm :foreground ,bg))))
    `(magit-diff-highlight           ((t ())))
    `(magit-diff-context-highlight   ((t ())))
+   `(magit-hash                     ((t (:foreground ,cm))))
    ;;
    ;; ;; SMerge
    ;; `(smerge-refined-added           ((t (:background "#253325"))))
