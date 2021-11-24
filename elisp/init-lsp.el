@@ -1,10 +1,12 @@
 ;; -*- lexical-binding: t -*-
 
-(straight-use-package 'flymake)
-(straight-use-package 'eglot)
-(straight-use-package 'lsp-mode)
-
 (defvar +lsp 'lsp)
+
+(when (eq 'eglot +lsp)
+  (straight-use-package 'flymake)
+  (straight-use-package 'eglot))
+(when (eq 'lsp +lsp)
+  (straight-use-package 'lsp-mode))
 
 ;;; flymake
 

@@ -122,6 +122,8 @@
 (add-hook 'prog-mode-hook 'subword-mode)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+(global-unset-key (kbd "C-x C-n"))
+
 ;; kmacro keys
 (global-set-key (kbd "C-,") 'kmacro-start-macro-or-insert-counter)
 (global-set-key (kbd "C-.") 'kmacro-end-or-call-macro)
