@@ -57,7 +57,7 @@
                                      (((type graphic)) :background ,bg :foreground ,fg)))
    ;; Basics
    `(cursor                         ((t (:background ,cur))))
-   `(region                         ((t (:background ,rg))))
+   `(region                         ((t (:background ,rg :extend nil))))
    `(hl-line                        ((t (:background ,hl))))
    `(fringe                         ((t (:background ,bg))))
    `(show-paren-match               ((t (:background ,hl :box (:line-width (-1 . -1) :style nil)))))
@@ -76,7 +76,7 @@
    `(compilation-warning            ((t ())))
    `(warning                        ((t ())))
    `(match                          ((t (:inverse-video t))))
-   `(secondary-selection            ((t (:background ,ss))))
+   `(secondary-selection            ((t (:background ,ss :extend nil))))
    `(help-key-binding               ((t ())))
    `(shadow                         ((t (:foreground ,cm))))
 
@@ -156,7 +156,8 @@
    `(clojure-character-face         ((t ())))
 
    ;; Magit
-   ;; `(magit-diff-file-heading-highlight ((t (:background ,bg+1))))
+   `(magit-branch-local                ((t (:foreground ,st))))
+   `(magit-branch-remote               ((t (:foreground ,fn))))
    `(magit-header-line                 ((t ())))
    `(magit-head                        ((t ())))
    `(magit-section-highlight           ((t (:background ,hl))))
