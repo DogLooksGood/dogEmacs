@@ -43,7 +43,9 @@
          (fixed-pitch-font-spec (format "%s-%d" +fixed-pitch-family +font-size)))
     (set-frame-font font-spec)
     (add-to-list 'default-frame-alist `(font . ,font-spec))
-    (set-face-attribute 'variable-pitch nil :font variable-pitch-font-spec)
+    (set-face-attribute 'variable-pitch nil
+                        :font variable-pitch-font-spec
+                        :height 1.2)
     (set-face-attribute 'fixed-pitch nil :font fixed-pitch-font-spec)))
 
 (defun +load-ext-font ()

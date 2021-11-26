@@ -32,7 +32,7 @@
 
 (deftheme minidark "A minimal light theme.")
 
-(defvar minidark-theme-header-scales '(1.0 1.0 1.0 1.0 1.0 1.0 1.0)
+(defvar minidark-theme-header-scales '(1.6 1.4 1.2 1.0 1.0 1.0 1.0)
   "Scales for headers.")
 
 (let ((bg "#202020")
@@ -232,7 +232,7 @@
    `(org-document-title             ((t (:bold t :height ,(nth 0 minidark-theme-header-scales)))))
    `(org-link                       ((t (:underline t))))
    `(org-document-title             ((t ())))
-   `(org-code                       ((t (:inherit font-lock-constant-face))))
+   `(org-code                       ((t (:inherit font-lock-keyword-face))))
    `(org-level-1                    ((t (:inherit font-lock-string-face :height ,(nth 0 minidark-theme-header-scales)))))
    `(org-level-2                    ((t (:inherit font-lock-function-name-face :height ,(nth 1 minidark-theme-header-scales)))))
    `(org-level-3                    ((t (:inherit font-lock-keyword-face :height ,(nth 2 minidark-theme-header-scales)))))

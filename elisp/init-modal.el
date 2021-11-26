@@ -101,7 +101,6 @@
    '("j" . meow-join)
    '("J" . meow-end-or-call-kmacro)
    '("k" . meow-kill)
-   '("K" . meow-start-kmacro-or-insert-counter)
    '("l" . recenter-top-bottom)
    '("m" . meow-mark-word)
    '("M" . meow-mark-symbol)
@@ -143,7 +142,7 @@
 
 (setq
  meow-cursor-type-keypad 'box
- meow-cursor-type-insert 'bar
+ meow-cursor-type-insert '(bar . 3)
  meow-use-cursor-position-hack nil
  meow-use-enhanced-selection-effect nil
  meow-visit-sanitize-completion nil
@@ -180,5 +179,9 @@
   (add-to-list 'meow-char-thing-table '(?< . line))
   ;; define our command layout
   (meow-setup))
+
+(global-set-key (kbd "<f3>") 'meow-start-kmacro-or-insert-counter)
+(global-set-key (kbd "<f4>") 'meow-end-or-call-kmacro)
+
 
 (provide 'init-modal)
