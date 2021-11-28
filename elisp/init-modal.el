@@ -180,8 +180,4 @@
   ;; define our command layout
   (meow-setup))
 
-(global-set-key (kbd "<f3>") 'meow-start-kmacro-or-insert-counter)
-(global-set-key (kbd "<f4>") 'meow-end-or-call-kmacro)
-
-
 (provide 'init-modal)
