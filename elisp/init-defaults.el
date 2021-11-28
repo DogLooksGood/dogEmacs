@@ -124,12 +124,6 @@
 
 (global-unset-key (kbd "C-x C-n"))
 
-;; kmacro keys
-(global-set-key (kbd "C-,") 'kmacro-start-macro-or-insert-counter)
-(global-set-key (kbd "C-.") 'kmacro-end-or-call-macro)
-(global-set-key (kbd "<mouse-4>") 'scroll-down-line)
-(global-set-key (kbd "<mouse-5>") 'scroll-up-line)
-
 (defun +reopen-file-with-sudo ()
   (interactive)
   (find-alternate-file (format "/sudo::%s" (buffer-file-name))))
