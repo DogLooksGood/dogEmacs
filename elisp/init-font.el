@@ -46,7 +46,9 @@
     (set-face-attribute 'variable-pitch nil
                         :font variable-pitch-font-spec
                         :height 1.2)
-    (set-face-attribute 'fixed-pitch nil :font fixed-pitch-font-spec)))
+    (set-face-attribute 'fixed-pitch nil :font fixed-pitch-font-spec)
+    (set-face-attribute 'mode-line nil :font font-spec)
+    (set-face-attribute 'mode-line-inactive nil :font font-spec)))
 
 (defun +load-ext-font ()
   (let ((rescale (alist-get +font-wide-or-tall +font-rescale)))
