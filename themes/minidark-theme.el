@@ -130,6 +130,7 @@
    `(yas-field-highlight-face       ((t (:background ,hl))))
 
    ;; Meow
+   `(meow-bmacro-indicator          ((t (:bold t))))
    `(meow-keypad-indicator          ((t (:bold t))))
    `(meow-insert-indicator          ((t (:bold t))))
    `(meow-normal-indicator          ((t (:bold t))))
@@ -139,6 +140,7 @@
    `(meow-normal-cursor             ((t (:background ,cur))))
    `(meow-motion-cursor             ((t (:background ,cur))))
    `(meow-unknown-cursor            ((t (:background ,cur))))
+   `(meow-bmacro-cursor            ((t (:background ,cur))))
 
    ;; colorful paren
    `(colorful-round           ((t ())))
