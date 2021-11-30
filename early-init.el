@@ -24,5 +24,4 @@
 (require 'init-util)
 (require 'init-defaults)
 (require 'init-modeline)
-(require 'init-font)
 (require 'init-laf)

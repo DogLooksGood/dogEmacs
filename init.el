@@ -1,3 +1,4 @@
+(require 'init-font)
 (require 'init-modal)
 (require 'init-project)
 (require 'init-edit)

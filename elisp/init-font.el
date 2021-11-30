@@ -72,20 +72,15 @@
              (+load-font))
     (message "Using smallest font")))
 
-(global-set-key (kbd "M-+") #'+larger-font)
-(global-set-key (kbd "M--") #'+smaller-font)
-
-;; Setup basic fonts
-;; (+load-base-font)
-
-;; `+load-ext-font' must run after frame created.
-;; So we use `after-init-hook' here.
-(add-hook 'after-init-hook '+load-font)
 
 ;; Helper function to enable fixed pitch in buffer
 (defun +use-fixed-pitch ()
   (interactive)
   (setq buffer-face-mode-face `(:family ,+fixed-pitch-family))
   (buffer-face-mode +1))
+
+(global-set-key (kbd "M-+") #'+larger-font)
+(global-set-key (kbd "M--") #'+smaller-font)
+(+load-font)
 
 (provide 'init-font)
