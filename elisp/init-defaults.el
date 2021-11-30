@@ -1,5 +1,4 @@
 ;;; -*- lexical-binding: t -*-
-
 (setq-default
  ;; no start messages
  inhibit-startup-message t
@@ -11,7 +10,6 @@
  ;; no client startup messages
  server-client-instructions nil
  ;; no startup messages
- inhibit-startup-echo-area-message t
  frame-inhibit-implied-resize t
  initial-scratch-message ""
  hl-line-sticky-flag t
@@ -133,6 +131,5 @@
 
 (defvar +proxy-host "localhost")
 (defvar +proxy-port 1089)
-
 
 (provide 'init-defaults)

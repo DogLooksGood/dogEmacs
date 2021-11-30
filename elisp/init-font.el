@@ -31,11 +31,14 @@
 (defvar +font-size 10)
 
 (defun +load-base-font ()
-  (let* ((font-spec (format "%s-%d" +font-family +font-size))
-         (variable-pitch-font-spec (format "%s-%d" +variable-pitch-family +font-size))
-         (fixed-pitch-font-spec (format "%s-%d" +fixed-pitch-family +font-size)))
+  (let* ((font-spec (format "%s-%d" +font-family +font-size)))
     (set-frame-parameter nil 'font font-spec)
-    (add-to-list 'default-frame-alist `(font . ,font-spec))
+    (add-to-list 'default-frame-alist `(font . ,font-spec))))
+
+(defun +load-face-font ()
+  (let ((font-spec (format "%s-%d" +font-family +font-size))
+        (variable-pitch-font-spec (format "%s-%d" +variable-pitch-family +font-size))
+        (fixed-pitch-font-spec (format "%s-%d" +fixed-pitch-family +font-size)))
     (set-face-attribute 'variable-pitch nil
                         :font variable-pitch-font-spec
                         :height 1.2)
@@ -45,14 +48,14 @@
 
 (defun +load-ext-font ()
   (when window-system
-    (dolist (charset '(kana han hangul cjk-misc bopomofo symbol))
-      (set-fontset-font
-       (frame-parameter nil 'font)
-       charset
-       (font-spec :family +font-unicode-family)))))
+    (let ((font (frame-parameter nil 'font))
+          (font-spec (font-spec :family +font-unicode-family)))
+      (dolist (charset '(kana han hangul cjk-misc bopomofo symbol))
+        (set-fontset-font font charset font-spec)))))
 
 (defun +load-font ()
   (+load-base-font)
+  (+load-face-font)
   (+load-ext-font))
 
 (defun +larger-font ()
@@ -70,7 +73,6 @@
              (message "Font size: %s" +font-size)
              (+load-font))
     (message "Using smallest font")))
-
 
 ;; Helper function to enable fixed pitch in buffer
 (defun +use-fixed-pitch ()
