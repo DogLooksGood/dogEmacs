@@ -1,4 +1,4 @@
-;;; graverse-theme.el --- A gray light theme  -*- lexical-binding: t; -*-
+;;; matrix-theme.el --- A minimal Dark/Green theme  -*- lexical-binding: t; -*-
 
 ;; Author: Shi Tianshu
 ;; Keywords: theme
@@ -26,25 +26,25 @@
 
 ;;; Commentary:
 
-;;; This is a minimal gray light theme.
+;;; This is a minimal A Dark/Green theme
 
 ;;; Code:
 
-(deftheme graverse "A minimal light theme.")
+(deftheme matrix "A minimal light theme.")
 
-(defvar graverse-theme-header-scales '(1.4 1.4 1.2 1.0 1.0 1.0 1.0)
+(defvar matrix-theme-header-scales '(1.4 1.4 1.2 1.0 1.0 1.0 1.0)
   "Scales for headers.")
 
-(let ((bg "#3c4246")
-      (fg "#c4cdd3")
-      (cm "#a9b5bd")
-      (ss "#646a6e")
+(let ((bg "#101010")
+      (fg "#02a1f7")
+      (cm "#1e79aa")
+      (ss "#2f4177")
       (hl "#5a6873")
-      (lh "#536978")
-      (fn "#464b4f")
-      (cur "#00AAAA"))
+      (lh "#14275e")
+      (fn "#283438")
+      (cur "#d6e0ff"))
   (custom-theme-set-faces
-   `graverse
+   `matrix
    ;; We don't specify default foreground/background in TTY.
    `(default                        ((t :background ,bg :foreground ,fg)))
    ;; Basics
@@ -163,6 +163,7 @@
    `(magit-diff-highlight           ((t ())))
    `(magit-diff-context-highlight   ((t ())))
    `(magit-hash                     ((t (:foreground ,cm))))
+
    ;;
    ;; ;; SMerge
    ;; `(smerge-refined-added           ((t (:background "#253325"))))
@@ -214,13 +215,13 @@
    ;; `(css-selector                   ((t (:foreground ,purple))))
    ;;
    ;; ;; Markdown
-   `(markdown-header-face-1         ((t (:bold t :height ,(nth 0 graverse-theme-header-scales)))))
-   `(markdown-header-face-2         ((t (:bold t :height ,(nth 1 graverse-theme-header-scales)))))
-   `(markdown-header-face-3         ((t (:bold t :height ,(nth 2 graverse-theme-header-scales)))))
-   `(markdown-header-face-4         ((t (:bold t :height ,(nth 3 graverse-theme-header-scales)))))
-   `(markdown-header-face-5         ((t (:bold t :height ,(nth 4 graverse-theme-header-scales)))))
-   `(markdown-header-face-6         ((t (:bold t :height ,(nth 5 graverse-theme-header-scales)))))
-   `(markdown-header-face-7         ((t (:bold t :height ,(nth 6 graverse-theme-header-scales)))))
+   `(markdown-header-face-1         ((t (:bold t :height ,(nth 0 matrix-theme-header-scales)))))
+   `(markdown-header-face-2         ((t (:bold t :height ,(nth 1 matrix-theme-header-scales)))))
+   `(markdown-header-face-3         ((t (:bold t :height ,(nth 2 matrix-theme-header-scales)))))
+   `(markdown-header-face-4         ((t (:bold t :height ,(nth 3 matrix-theme-header-scales)))))
+   `(markdown-header-face-5         ((t (:bold t :height ,(nth 4 matrix-theme-header-scales)))))
+   `(markdown-header-face-6         ((t (:bold t :height ,(nth 5 matrix-theme-header-scales)))))
+   `(markdown-header-face-7         ((t (:bold t :height ,(nth 6 matrix-theme-header-scales)))))
    ;;
    ;; ;; Telega
    `(telega-entity-type-code        ((t ())))
@@ -228,17 +229,17 @@
    `(telega-unmuted-count           ((t ())))
    ;;
    ;; ;; Org-mode
-   `(org-document-title             ((t (:bold t :height ,(nth 0 graverse-theme-header-scales)))))
+   `(org-document-title             ((t (:bold t :height ,(nth 0 matrix-theme-header-scales)))))
    `(org-link                       ((t (:underline t))))
    `(org-document-title             ((t ())))
    `(org-code                       ((t (:inherit font-lock-constant-face))))
-   `(org-level-1                    ((t (:bold t :height ,(nth 0 graverse-theme-header-scales)))))
-   `(org-level-2                    ((t (:bold t :height ,(nth 1 graverse-theme-header-scales)))))
-   `(org-level-3                    ((t (:bold t :height ,(nth 2 graverse-theme-header-scales)))))
-   `(org-level-4                    ((t (:bold t :height ,(nth 3 graverse-theme-header-scales)))))
-   `(org-level-5                    ((t (:bold t :height ,(nth 4 graverse-theme-header-scales)))))
-   `(org-level-6                    ((t (:bold t :height ,(nth 5 graverse-theme-header-scales)))))
-   `(org-level-7                    ((t (:bold t :height ,(nth 6 graverse-theme-header-scales)))))
+   `(org-level-1                    ((t (:bold t :height ,(nth 0 matrix-theme-header-scales)))))
+   `(org-level-2                    ((t (:bold t :height ,(nth 1 matrix-theme-header-scales)))))
+   `(org-level-3                    ((t (:bold t :height ,(nth 2 matrix-theme-header-scales)))))
+   `(org-level-4                    ((t (:bold t :height ,(nth 3 matrix-theme-header-scales)))))
+   `(org-level-5                    ((t (:bold t :height ,(nth 4 matrix-theme-header-scales)))))
+   `(org-level-6                    ((t (:bold t :height ,(nth 5 matrix-theme-header-scales)))))
+   `(org-level-7                    ((t (:bold t :height ,(nth 6 matrix-theme-header-scales)))))
    ;;
    ;; ;; Treemacs
    ;; `(treemacs-root-face             ((t (:inherit font-lock-function-name-face :height 1.4 :underline t))))
@@ -253,6 +254,6 @@
                   (file-name-as-directory
                    (file-name-directory load-file-name))))
 
-(provide-theme 'graverse)
+(provide-theme 'matrix)
 
-;;; graverse-theme.el ends here
+;;; matrix-theme.el ends here

@@ -1,45 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
-(straight-use-package '(meow :type git :host github :repo "DogLooksGood/meow"))
-
-(meow-leader-define-key
-   ;; reverse command query
-   '("^" . meow-keypad-describe-key)
-   ;; cheatsheet
-   '("?" . meow-cheatsheet)
-   ;; high frequency keybindings
-   '("e" . "C-x C-e")
-   '(")" . "C-)")
-   '("}" . "C-}")
-   '("." . "M-.")
-   '("," . "M-,")
-   ;; window management
-   '("w" . other-window)
-   '("W" . window-swap-states)
-   '("o" . delete-other-windows)
-   '("s" . split-window-right)
-   '("-" . split-window-below)
-   ;; high frequency commands
-   '("$" . +change-theme)
-   '(";" . comment-dwim)
-   '("k" . kill-this-buffer)
-   '("p" . project-find-file)
-   '("j" . project-switch-to-buffer)
-   '("d" . dired)
-   '("b" . switch-to-buffer)
-   '("r" . rg-project)
-   '("f" . find-file)
-   '("i" . imenu)
-   '("a" . "M-x")
-   '("v" . "C-x g")
-   ;; toggles
-   '("L" . display-line-numbers-mode)
-   '("S" . smartparens-strict-mode)
-   '("t" . telega)
-   '("P" . pass)
-   '("R" . org-roam-mode)
-   '("A" . org-agenda)
-   '("D" . docker))
+(straight-use-package 'meow)
 
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
@@ -48,8 +9,8 @@
    '("k" . meow-prev))
   (meow-leader-define-key
    ;; SPC j/k will run the original command in MOTION state.
-   '("j" . meow-motion-origin-command)
-   '("k" . meow-motion-origin-command)
+   '("j" . "H-j")
+   '("k" . "H-k")
    ;; Use SPC (0-9) for digit arguments.
    '("1" . meow-digit-argument)
    '("2" . meow-digit-argument)
@@ -61,41 +22,8 @@
    '("8" . meow-digit-argument)
    '("9" . meow-digit-argument)
    '("0" . meow-digit-argument)
-   ;; cheatsheet
-   '("?" . meow-cheatsheet)
-   ;; high frequency keybindings
-   '("e" . "C-x C-e")
-   '(")" . "C-)")
-   '("}" . "C-}")
-   '("." . "M-.")
-   '("," . "M-,")
-   ;; window management
-   '("w" . other-window)
-   '("W" . window-swap-states)
-   '("o" . delete-other-windows)
-   '("s" . split-window-right)
-   '("-" . split-window-below)
-   ;; high frequency commands
-   '("$" . +change-theme)
-   '(";" . comment-dwim)
-   '("k" . kill-this-buffer)
-   '("p" . project-find-file)
-   '("j" . project-switch-to-buffer)
-   '("d" . dired)
-   '("b" . switch-to-buffer)
-   '("r" . rg-project)
-   '("f" . find-file)
-   '("i" . imenu)
-   '("a" . "M-x")
-   '("v" . "C-x g")
-   ;; toggles
-   '("L" . display-line-numbers-mode)
-   '("S" . smartparens-strict-mode)
-   '("t" . telega)
-   '("P" . pass)
-   '("R" . org-roam-mode)
-   '("A" . org-agenda)
-   '("D" . docker))
+   '("/" . meow-keypad-describe-key)
+   '("?" . meow-cheatsheet))
   (meow-normal-define-key
    '("0" . meow-expand-0)
    '("9" . meow-expand-9)
@@ -118,14 +46,12 @@
    '("b" . meow-back-word)
    '("B" . meow-back-symbol)
    '("c" . meow-change)
-   '("C" . meow-change-save)
-   '("d" . meow-C-d)
+   '("d" . meow-delete)
    '("D" . meow-backward-delete)
    '("e" . meow-next-word)
    '("E" . meow-next-symbol)
    '("f" . meow-find)
-   '("F" . meow-find-expand)
-   '("g" . meow-cancel)
+   '("g" . meow-cancel-selection)
    '("G" . meow-grab)
    '("h" . meow-left)
    '("H" . meow-left-expand)
@@ -139,71 +65,31 @@
    '("L" . meow-right-expand)
    '("m" . meow-join)
    '("n" . meow-search)
-   '("N" . meow-pop-search)
    '("o" . meow-block)
-   '("O" . meow-block-expand)
+   '("O" . meow-to-block)
    '("p" . meow-yank)
-   '("P" . meow-yank-pop)
    '("q" . meow-quit)
    '("Q" . meow-goto-line)
    '("r" . meow-replace)
    '("R" . meow-swap-grab)
    '("s" . meow-kill)
    '("t" . meow-till)
-   '("T" . meow-till-expand)
    '("u" . meow-undo)
    '("U" . meow-undo-in-selection)
    '("v" . meow-visit)
-   '("V" . meow-kmacro-matches)
    '("w" . meow-mark-word)
    '("W" . meow-mark-symbol)
    '("x" . meow-line)
-   '("X" . meow-kmacro-lines)
+   '("X" . meow-goto-line)
    '("y" . meow-save)
    '("Y" . meow-sync-grab)
    '("z" . meow-pop-selection)
-   '("Z" . meow-pop-all-selection)
-   '("&" . meow-query-replace)
-   '("%" . meow-query-replace-regexp)
    '("'" . repeat)
-   '("\\" . quoted-insert)
-   '("<escape>" . meow-last-buffer)))
-
-(setq
- meow-visit-sanitize-completion nil
- meow-esc-delay 0.001
- meow-keypad-describe-delay 0.5
- meow-select-on-change t
- meow-cursor-type-normal 'box
- meow-cursor-type-insert '(bar . 4)
- meow-selection-command-fallback '((meow-replace . meow-page-up)
-                                   (meow-change . meow-change-char)
-                                   (meow-save . meow-save-empty)
-                                   (meow-kill . meow-C-k)
-                                   (meow-cancel . keyboard-quit)
-                                   (meow-pop . meow-pop-grab)
-                                   (meow-delete . meow-C-d)))
+   '("<escape>" . mode-line-other-buffer)))
 
 (require 'meow)
-
+(meow-setup)
 (meow-global-mode 1)
-
-(with-eval-after-load "meow"
-  ;; make Meow usable in TUI Emacs
-  (meow-esc-mode 1)
-  (add-to-list 'meow-mode-state-list '(inf-iex-mode . normal))
-  (add-to-list 'meow-mode-state-list '(authinfo-mode . normal))
-  (add-to-list 'meow-mode-state-list '(Custom-mode . normal))
-  (add-to-list 'meow-mode-state-list '(cider-test-report-mode . normal))
-  (add-to-list 'meow-grab-fill-commands 'eval-expression)
-  (setq meow-cursor-type-keypad 'box)
-  (setq meow-cursor-type-insert '(bar . 2))
-  ;; use << and >> to select to bol/eol
-  (add-to-list 'meow-char-thing-table '(?> . line))
-  (add-to-list 'meow-char-thing-table '(?< . line))
-  ;; define our command layout
-  (meow-setup)
-  ;; add indicator to modeline
-  (meow-setup-indicator))
+(meow-setup-indicator)
 
 (provide 'init-modal-qwerty)

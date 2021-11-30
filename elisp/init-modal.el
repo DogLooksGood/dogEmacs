@@ -92,7 +92,7 @@
    '("D" . meow-backward-delete)
    '("e" . meow-line)
    '("E" . meow-goto-line)
-   '("f" . meow-till)
+   '("f" . meow-find)
    '("g" . meow-cancel-selection)
    '("G" . meow-grab)
    '("h" . meow-left)
