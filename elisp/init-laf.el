@@ -35,7 +35,7 @@
 
 ;;; Margin
 
-;; (let ((margin 10))
+;; (let ((margin 40))
 ;;   (add-to-list 'default-frame-alist (cons 'internal-border-width margin)))
 
 ;;; Transparency
@@ -68,6 +68,7 @@
 
 ;; Load the first theme in `+theme-list'.
 (when-let ((theme (car +theme-list)))
-  (load-theme theme t))
+  (load-theme theme t)
+  (setq +theme-list (append (cdr +theme-list) (list (car +theme-list)))))
 
 (provide 'init-laf)

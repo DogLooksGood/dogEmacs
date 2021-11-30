@@ -1,4 +1,3 @@
-(require 'init-util)
 (require 'init-modal)
 (require 'init-project)
 (require 'init-edit)
@@ -20,7 +19,6 @@
 (require 'init-conf)
 (require 'init-window)
 (require 'init-docker)
-(require 'init-modeline)
 (require 'init-telega)
 (require 'init-misc)
 (require 'init-direnv)

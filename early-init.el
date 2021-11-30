@@ -21,6 +21,8 @@
   (when (file-exists-p private-conf)
     (load-file private-conf)))
 
+(require 'init-util)
 (require 'init-defaults)
-(require 'init-laf)
+(require 'init-modeline)
 (require 'init-font)
+(require 'init-laf)

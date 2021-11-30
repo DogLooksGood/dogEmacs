@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
-(straight-use-package '(meow :type git :host github :repo "DogLooksGood/meow"))
+(straight-use-package 'meow)
 
 (defun meow-setup ()
   ;; Programmer Dvorak layout on ansi keyboard
@@ -134,11 +134,12 @@
  meow-esc-delay 0.001
  meow-keypad-describe-delay 0.5
  meow-select-on-change t
- meow-replace-state-name-list '((normal . "N")
-                                (motion . "M")
-                                (keypad . "K")
-                                (insert . "I")
-                                (bmacro . "B")))
+ ;; meow-replace-state-name-list '((normal . "N")
+ ;;                                (motion . "M")
+ ;;                                (keypad . "K")
+ ;;                                (insert . "I")
+ ;;                                (bmacro . "B"))
+ )
 
 (require 'meow)
 
@@ -146,7 +147,6 @@
 
 (with-eval-after-load "meow"
   ;; make Meow usable in TUI Emacs
-  (meow-esc-mode 1)
   (add-to-list 'meow-mode-state-list '(inf-iex-mode . normal))
   (add-to-list 'meow-mode-state-list '(authinfo-mode . normal))
   (add-to-list 'meow-mode-state-list '(Custom-mode . normal))

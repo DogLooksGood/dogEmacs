@@ -24,24 +24,18 @@
 ;;; Fonts
 ;; Custom fonts can be set in ~/.emacs.d/private.el
 
-(defvar +font-wide-family "Source Code Pro")
-(defvar +font-tall-family "Source Code Pro")
+(defvar +font-family "Source Code Pro")
 (defvar +font-unicode-family "LXGW WenKai")
 (defvar +fixed-pitch-family "Sarasa Mono SC")
 (defvar +variable-pitch-family "LXGW WenKai")
-(defvar +font-rescale '((tall . 1.0) (wide . 1.0)))
-(defvar +font-wide-or-tall 'tall)
 (defvar +font-size-list '(10 11 12 13 14 15 16 17 18))
 (defvar +font-size 10)
 
-(defun +get-base-font ()
-  (if (eq 'tall +font-wide-or-tall) +font-tall-family +font-wide-family))
-
 (defun +load-base-font ()
-  (let* ((font-spec (format "%s-%d" (+get-base-font) +font-size))
+  (let* ((font-spec (format "%s-%d" +font-family +font-size))
          (variable-pitch-font-spec (format "%s-%d" +variable-pitch-family +font-size))
          (fixed-pitch-font-spec (format "%s-%d" +fixed-pitch-family +font-size)))
-    (set-frame-font font-spec)
+    (set-frame-parameter nil 'font font-spec)
     (add-to-list 'default-frame-alist `(font . ,font-spec))
     (set-face-attribute 'variable-pitch nil
                         :font variable-pitch-font-spec
@@ -51,9 +45,6 @@
     (set-face-attribute 'mode-line-inactive nil :font font-spec)))
 
 (defun +load-ext-font ()
-  (let ((rescale (alist-get +font-wide-or-tall +font-rescale)))
-    (setq face-font-rescale-alist
-          `((,+font-unicode-family . ,rescale))))
   (when window-system
     (dolist (charset '(kana han hangul cjk-misc bopomofo symbol))
       (set-fontset-font
@@ -85,7 +76,7 @@
 (global-set-key (kbd "M--") #'+smaller-font)
 
 ;; Setup basic fonts
-(+load-base-font)
+;; (+load-base-font)
 
 ;; `+load-ext-font' must run after frame created.
 ;; So we use `after-init-hook' here.
@@ -96,14 +87,5 @@
   (interactive)
   (setq buffer-face-mode-face `(:family ,+fixed-pitch-family))
   (buffer-face-mode +1))
-
-(defun +toggle-wide-tall-font ()
-  (interactive)
-  (if (eq +font-wide-or-tall 'tall)
-      (setq +font-wide-or-tall 'wide)
-    (setq +font-wide-or-tall 'tall))
-  (+load-font))
-
-(+change-theme)
 
 (provide 'init-font)
