@@ -1,8 +1,9 @@
 ;;; -*- lexical-binding: t -*-
 
-(straight-use-package 'vertico)
-(straight-use-package 'orderless)
+(straight-use-package 'selectrum)
+(straight-use-package 'selectrum-prescient)
 (straight-use-package 'company)
+(straight-use-package 'company-posframe)
 (straight-use-package 'rg)
 (straight-use-package 'prescient)
 (straight-use-package 'yasnippet)
@@ -58,16 +59,12 @@
 (add-hook 'eshell-mode-hook 'company-mode)
 
 (with-eval-after-load "company"
-
   (require 'company-tng)
   (require 'company-template)
+  (require 'company-posframe)
 
   (add-hook 'company-mode-hook 'company-tng-mode)
-
-  (define-advice company-capf--candidates (:around (func &rest args))
-    "Completion styles setup for company"
-    (let ((completion-styles '(basic partial-completion)))
-      (apply func args)))
+  ;; (company-posframe-mode 1)
 
   (define-key company-mode-map [tab] '+complete)
   (define-key company-mode-map (kbd "TAB") '+complete)
@@ -86,17 +83,30 @@
   (define-key company-template-nav-map (kbd "TAB") nil)
   (define-key company-template-nav-map [tab] nil))
 
-;; vertico
+(with-eval-after-load "company-posframe"
+  (setq company-posframe-show-indicator nil
+        company-posframe-quickhelp-delay nil
+        company-posframe-show-metadata nil))
 
-(require 'vertico)
-(vertico-mode t)
+;; selectrum
 
-;; orderless
+(require 'selectrum)
+(require 'selectrum-prescient)
+(selectrum-mode t)
+(selectrum-prescient-mode t)
 
-(require 'orderless)
+(defun +selectrum-backward-delete-sexp ()
+  (interactive)
+  (save-restriction
+    (narrow-to-region (minibuffer-prompt-end) (point-max))
+    (delete-region
+     (save-mark-and-excursion
+       (backward-sexp)
+       (point))
+     (point))))
 
-(setq completion-styles '(orderless)
-      completion-category-defaults nil)
+(with-eval-after-load "selectrum"
+  (define-key selectrum-minibuffer-map (kbd "M-DEL") #'+selectrum-backward-delete-sexp))
 
 ;;; rg
 

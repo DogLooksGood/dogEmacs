@@ -35,16 +35,16 @@
     (set-frame-parameter nil 'font font-spec)
     (add-to-list 'default-frame-alist `(font . ,font-spec))))
 
-(defun +load-face-font ()
+(defun +load-face-font (&optional frame)
   (let ((font-spec (format "%s-%d" +font-family +font-size))
         (variable-pitch-font-spec (format "%s-%d" +variable-pitch-family +font-size))
         (fixed-pitch-font-spec (format "%s-%d" +fixed-pitch-family +font-size)))
-    (set-face-attribute 'variable-pitch nil
+    (set-face-attribute 'variable-pitch frame
                         :font variable-pitch-font-spec
                         :height 1.2)
-    (set-face-attribute 'fixed-pitch nil :font fixed-pitch-font-spec)
-    (set-face-attribute 'mode-line nil :font font-spec)
-    (set-face-attribute 'mode-line-inactive nil :font font-spec)))
+    (set-face-attribute 'fixed-pitch frame :font fixed-pitch-font-spec)
+    (set-face-attribute 'mode-line frame :font font-spec)
+    (set-face-attribute 'mode-line-inactive frame :font font-spec)))
 
 (defun +load-ext-font ()
   (when window-system
@@ -84,5 +84,10 @@
 (global-set-key (kbd "M--") #'+smaller-font)
 
 (+load-font)
+
+(add-hook 'after-make-frame-functions
+          (lambda (f)
+            (+load-face-font f)
+            (+load-ext-font)))
 
 (provide 'init-font)
