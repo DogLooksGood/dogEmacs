@@ -147,11 +147,6 @@
 (with-eval-after-load "meow"
   ;; make Meow usable in TUI Emacs
   (add-to-list 'meow-mode-state-list '(inf-iex-mode . normal))
-  (add-to-list 'meow-mode-state-list '(authinfo-mode . normal))
-  (add-to-list 'meow-mode-state-list '(Custom-mode . normal))
-  (add-to-list 'meow-mode-state-list '(cider-test-report-mode . normal))
-  (add-to-list 'meow-mode-state-list '(cargo-process-mode . normal))
-  (add-to-list 'meow-mode-state-list '(shell-mode . normal))
   (setq meow-grab-fill-commands nil)
   ;; use << and >> to select to bol/eol
   (add-to-list 'meow-char-thing-table '(?> . line))
