@@ -1,11 +1,10 @@
 ;;; -*- lexical-binding: t; -*-
 
-(straight-use-package '(ligature :type git :host github :repo "mickeynp/ligature.el"))
-
 (defvar +font-ligature (not (null window-system))
   "If ligature is supported by current font.")
 
 (when +font-ligature
+  (straight-use-package '(ligature :type git :host github :repo "mickeynp/ligature.el"))
 
   (require 'ligature)
 
@@ -81,6 +80,7 @@
 
 (global-set-key (kbd "M-+") #'+larger-font)
 (global-set-key (kbd "M--") #'+smaller-font)
+
 (+load-font)
 
 (provide 'init-font)

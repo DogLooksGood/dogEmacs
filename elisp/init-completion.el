@@ -3,7 +3,6 @@
 (straight-use-package 'vertico)
 (straight-use-package 'orderless)
 (straight-use-package 'company)
-(straight-use-package 'company-posframe)
 (straight-use-package 'rg)
 (straight-use-package 'prescient)
 (straight-use-package 'yasnippet)
@@ -62,12 +61,13 @@
 
   (require 'company-tng)
   (require 'company-template)
-  (require 'company-posframe)
 
   (add-hook 'company-mode-hook 'company-tng-mode)
 
-  (when window-system
-    (company-posframe-mode 1))
+  (define-advice company-capf--candidates (:around (func &rest args))
+    "Completion styles setup for company"
+    (let ((completion-styles '(basic partial-completion)))
+      (apply func args)))
 
   (define-key company-mode-map [tab] '+complete)
   (define-key company-mode-map (kbd "TAB") '+complete)
@@ -86,11 +86,6 @@
   (define-key company-template-nav-map (kbd "TAB") nil)
   (define-key company-template-nav-map [tab] nil))
 
-(with-eval-after-load "company-posframe"
-  (setq company-posframe-show-indicator nil
-        company-posframe-quickhelp-delay nil
-        company-posframe-show-metadata nil))
-
 ;; vertico
 
 (require 'vertico)
@@ -100,11 +95,8 @@
 
 (require 'orderless)
 
-(setq completion-styles '(basic substring partial-completion)
-      completion-category-defaults
-      '((file (styles . (basic orderless)))
-        (buffer (styles . (basic orderless)))
-        (project-files (styles . (basic orderless)))))
+(setq completion-styles '(orderless)
+      completion-category-defaults nil)
 
 ;;; rg
 

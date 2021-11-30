@@ -19,7 +19,6 @@
 (require 'init-rime)
 (require 'init-conf)
 (require 'init-window)
-(require 'init-docker)
 (require 'init-telega)
 (require 'init-misc)
 (require 'init-direnv)
@@ -27,4 +26,5 @@
 (unless window-system
   (require 'init-xterm))
 (require 'init-rss)
+;; (require 'init-docker)
 ;; (require 'init-server)

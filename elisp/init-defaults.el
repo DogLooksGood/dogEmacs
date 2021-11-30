@@ -122,6 +122,7 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (global-unset-key (kbd "C-x C-n"))
+(global-set-key (kbd "<home>") 'recenter)
 
 (defun +reopen-file-with-sudo ()
   (interactive)
