@@ -19,6 +19,8 @@
 (require 'colorful)
 (add-hook 'prog-mode-hook 'colorful-mode)
 
+(require 'demo-player)
+
 ;; (require 'htab)
 ;; (htab-global-mode 1)
 ;; (add-to-list 'htab-ignore-commands 'meow-minibuffer-quit)

@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
-(straight-use-package 'selectrum)
-(straight-use-package 'selectrum-prescient)
+(straight-use-package 'vertico)
+(straight-use-package 'orderless)
 (straight-use-package 'company)
 (straight-use-package 'company-posframe)
 (straight-use-package 'rg)
@@ -59,12 +59,15 @@
 (add-hook 'eshell-mode-hook 'company-mode)
 
 (with-eval-after-load "company"
+
   (require 'company-tng)
   (require 'company-template)
   (require 'company-posframe)
 
   (add-hook 'company-mode-hook 'company-tng-mode)
-  ;; (company-posframe-mode 1)
+
+  (when window-system
+    (company-posframe-mode 1))
 
   (define-key company-mode-map [tab] '+complete)
   (define-key company-mode-map (kbd "TAB") '+complete)
@@ -88,25 +91,20 @@
         company-posframe-quickhelp-delay nil
         company-posframe-show-metadata nil))
 
-;; selectrum
+;; vertico
 
-(require 'selectrum)
-(require 'selectrum-prescient)
-(selectrum-mode t)
-(selectrum-prescient-mode t)
+(require 'vertico)
+(vertico-mode t)
 
-(defun +selectrum-backward-delete-sexp ()
-  (interactive)
-  (save-restriction
-    (narrow-to-region (minibuffer-prompt-end) (point-max))
-    (delete-region
-     (save-mark-and-excursion
-       (backward-sexp)
-       (point))
-     (point))))
+;; orderless
 
-(with-eval-after-load "selectrum"
-  (define-key selectrum-minibuffer-map (kbd "M-DEL") #'+selectrum-backward-delete-sexp))
+(require 'orderless)
+
+(setq completion-styles '(basic substring partial-completion)
+      completion-category-defaults
+      '((file (styles . (basic orderless)))
+        (buffer (styles . (basic orderless)))
+        (project-files (styles . (basic orderless)))))
 
 ;;; rg
 

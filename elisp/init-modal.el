@@ -134,12 +134,11 @@
  meow-esc-delay 0.001
  meow-keypad-describe-delay 0.5
  meow-select-on-change t
- ;; meow-replace-state-name-list '((normal . "N")
- ;;                                (motion . "M")
- ;;                                (keypad . "K")
- ;;                                (insert . "I")
- ;;                                (bmacro . "B"))
- )
+ meow-replace-state-name-list '((normal . "N")
+                                (motion . "M")
+                                (keypad . "K")
+                                (insert . "I")
+                                (bmacro . "B")))
 
 (require 'meow)
 
