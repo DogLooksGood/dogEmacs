@@ -125,7 +125,9 @@
    '("y" . meow-yank)
    '("z" . meow-pop-selection)
    '("'" . repeat)
-   '("<escape>" . mode-line-other-buffer)))
+   '("&" . meow-query-replace-regexp)
+   '("%" . meow-query-replace)
+   '("<regexp>" . mode-line-other-buffer)))
 
 (setq
  meow-cursor-type-keypad 'box

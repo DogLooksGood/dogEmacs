@@ -256,7 +256,9 @@
    `(flymake-error                  ((t (:underline (:style wave :color ,st)))))
    `(flymake-note                   ((t (:underline (:style wave :color ,cm)))))
 
-   `(wgrep-face                     ((t (:underline ,st))))))
+   `(wgrep-face                     ((t (:underline ,st))))
+
+   `(anzu-mode-line                 ((t (:foreground ,bg :background ,fg))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

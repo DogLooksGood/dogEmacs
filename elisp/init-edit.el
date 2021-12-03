@@ -1,4 +1,11 @@
 (straight-use-package 'smartparens)
+(straight-use-package 'anzu)
+
+(autoload #'anzu-query-replace "anzu" nil t)
+(autoload #'anzu-query-replace-regexp "anzu" nil t)
+
+(global-set-key [remap query-replace] 'anzu-query-replace)
+(global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
 
 (setq sp-autowrap-region nil)
 
