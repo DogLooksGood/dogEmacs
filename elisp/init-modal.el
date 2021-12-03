@@ -129,7 +129,7 @@
    '("'" . repeat)
    '("&" . meow-query-replace-regexp)
    '("%" . meow-query-replace)
-   '("<regexp>" . mode-line-other-buffer)))
+   '("<escape>" . mode-line-other-buffer)))
 
 (setq
  meow-cursor-type-keypad 'box
