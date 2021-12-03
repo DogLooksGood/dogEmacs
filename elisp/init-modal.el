@@ -2,6 +2,8 @@
 
 (straight-use-package 'meow)
 
+
+
 (defun meow-setup ()
   ;; Programmer Dvorak layout on ansi keyboard
   (setq meow-cheatsheet-physical-layout meow-cheatsheet-physical-layout-ansi
@@ -146,6 +148,7 @@
 (with-eval-after-load "meow"
   ;; make Meow usable in TUI Emacs
   (add-to-list 'meow-mode-state-list '(inf-iex-mode . normal))
+  (add-to-list 'meow-mode-state-list '(erc-mode . normal))
   (setq meow-grab-fill-commands nil)
   ;; use << and >> to select to bol/eol
   (add-to-list 'meow-char-thing-table '(?> . line))

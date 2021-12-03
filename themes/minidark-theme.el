@@ -38,10 +38,10 @@
 (let ((bg "#202020")
       (fg "#A0A0A0")
       (cm "#707070")
-      (rg "#353535")
+      (rg "#024347")
       (hl "#2A2A2A")
       (lh "#0DA59B")
-      (ss "#004938")
+      (ss "#353535")
       (kw "#BEBEBE")
       (fn "#bfaa6b")
       (st "#4b9e6b")
@@ -140,7 +140,7 @@
    `(meow-normal-cursor             ((t (:background ,cur))))
    `(meow-motion-cursor             ((t (:background ,cur))))
    `(meow-unknown-cursor            ((t (:background ,cur))))
-   `(meow-bmacro-cursor            ((t (:background ,cur))))
+   `(meow-bmacro-cursor             ((t (:background ,cur))))
 
    ;; colorful paren
    `(colorful-round           ((t ())))
@@ -256,7 +256,12 @@
    `(flymake-error                  ((t (:underline (:style wave :color ,st)))))
    `(flymake-note                   ((t (:underline (:style wave :color ,cm)))))
 
-   `(wgrep-face                     ((t (:underline ,st))))))
+   `(wgrep-face                     ((t (:underline ,st))))
+
+   `(erc-nick-default-face          ((t (:inherit font-lock-keyword-face))))
+   `(erc-input-face                 ((t (:inherit font-lock-function-name-face))))
+   `(erc-timestamp-face             ((t (:inherit font-lock-constant-face))))
+   `(erc-notice-face                ((t (:inherit font-lock-comment-face))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

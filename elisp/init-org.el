@@ -3,6 +3,7 @@
 (straight-use-package 'htmlize)
 (straight-use-package 'org-roam)
 (straight-use-package 'ob-restclient)
+(straight-use-package 'ox-gfm)
 
 ;;; Latex support
 ;;; install latex with
@@ -42,6 +43,7 @@
 (with-eval-after-load  "org"
   ;; (define-key org-mode-map (kbd "<f8>") 'org-latex-auto-toggle)
   (define-key org-mode-map (kbd "<f5>") 'visible-mode)
+  (require 'ox-gfm nil t)
 
   (require 'org-tempo)
   (+org-babel-setup)

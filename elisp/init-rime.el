@@ -1,6 +1,6 @@
 ;;; -*- lexical-binding: t -*-
 
-(straight-use-package '(rime :type git :host github :repo "DogLooksGood/emacs-rime"))
+(straight-use-package 'rime)
 
 (defun +rime-predicate-org-syntax-punc-p ()
   (when (eq major-mode 'org-mode)

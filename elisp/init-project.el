@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t -*-
+
 (setq project-switch-commands '((project-find-file "Find file")
                            (project-find-regexp "Find regexp")
                            (project-dired "Dired")

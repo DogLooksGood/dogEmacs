@@ -32,13 +32,11 @@
 
     (when res
       ;; executing commands or insert texts
-      (if (string-equal "<minibuf>" res)
-          (add-hook 'minibuffer-setup-hook 'demo-player-delay-run)
-        (if-let ((cmd (key-binding res)))
-            (progn
-              (setq this-command cmd)
-              (call-interactively cmd))
-          (insert res)))
+      (if-let ((cmd (key-binding res)))
+          (progn
+            (setq this-command cmd)
+            (call-interactively cmd))
+        (insert res))
       ;; schedule next
       (run-at-time demo-player-command-interval nil #'demo-player-run))))
 
