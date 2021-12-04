@@ -43,6 +43,7 @@
                         :font variable-pitch-font-spec
                         :height 1.2)
     (set-face-attribute 'fixed-pitch frame :font fixed-pitch-font-spec)
+    (set-face-attribute 'fixed-pitch-serif frame :font fixed-pitch-font-spec)
     (set-face-attribute 'mode-line frame :font font-spec)
     (set-face-attribute 'mode-line-inactive frame :font font-spec)))
 

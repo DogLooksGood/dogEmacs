@@ -10,6 +10,8 @@
 
 (add-hook 'markdown-mode-hook #'+md-init)
 
+(setq markdown-list-item-bullets '("•" "·"))
+
 (with-eval-after-load "markdown-mode"
   (custom-set-faces
    '(markdown-table-face ((t :inherit 'fixed-pitch)))

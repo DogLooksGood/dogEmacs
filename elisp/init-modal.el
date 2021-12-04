@@ -2,8 +2,6 @@
 
 (straight-use-package 'meow)
 
-
-
 (defun meow-setup ()
   ;; Programmer Dvorak layout on ansi keyboard
   (setq meow-cheatsheet-physical-layout meow-cheatsheet-physical-layout-ansi
@@ -39,8 +37,8 @@
    '("a" . execute-extended-command)
    '("=" . "C-c ^")
    '("p" . project-find-file)
+   '("j" . project-switch-to-buffer)
    '("t" . ibuffer)
-   '("j" . execute-extended-command)
    '("l" . "C-x p p")
    '("y" . "C-x g")
    '("n" . "C-x M-n")
@@ -57,7 +55,7 @@
   (meow-motion-overwrite-define-key
    '("'" . repeat))
   (meow-normal-define-key
-   '("?" . meow-cheatsheet)
+   '("?" . meow-keypad-describe-key)
    '("*" . meow-expand-0)
    '("=" . meow-expand-9)
    '("!" . meow-expand-8)
@@ -132,16 +130,12 @@
    '("<escape>" . mode-line-other-buffer)))
 
 (setq
- meow-cursor-type-keypad 'box
- meow-cursor-type-insert '(bar . 3)
- meow-esc-delay 0.001
- meow-keypad-describe-delay 0.5
- meow-select-on-change t
- meow-replace-state-name-list '((normal . "N")
-                                (motion . "M")
-                                (keypad . "K")
-                                (insert . "I")
-                                (bmacro . "B")))
+ meow-keypad-describe-delay 1.0
+ meow-replace-state-name-list '((normal . "NORMAL")
+                                (motion . "MOTION")
+                                (keypad . "KEYPAD")
+                                (insert . "INSERT")
+                                (beacon . "BEACON")))
 
 (require 'meow)
 
@@ -156,6 +150,7 @@
   (add-to-list 'meow-char-thing-table '(?> . line))
   (add-to-list 'meow-char-thing-table '(?< . line))
   ;; define our command layout
-  (meow-setup))
+  (meow-setup)
+  (meow-setup-indicator))
 
 (provide 'init-modal)

@@ -1,8 +1,8 @@
 ;; Mode Line  -*- lexical-binding: t; -*-
 
 (defun +format-mode-line ()
-  (let* ((lhs '((:eval (when (fboundp 'meow-indicator)
-                         (meow-indicator)))
+  (let* ((lhs '(;; (:eval (when (fboundp 'meow-indicator)
+                ;;          (meow-indicator)))
                 " L%l C%C "
                 (:eval (when (fboundp 'rime-lighter)
                          (rime-lighter)))

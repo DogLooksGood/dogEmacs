@@ -130,7 +130,7 @@
    `(yas-field-highlight-face       ((t (:background ,hl))))
 
    ;; Meow
-   `(meow-bmacro-indicator          ((t (:bold t))))
+   `(meow-beacon-indicator          ((t (:bold t))))
    `(meow-keypad-indicator          ((t (:bold t))))
    `(meow-insert-indicator          ((t (:bold t))))
    `(meow-normal-indicator          ((t (:bold t))))
@@ -140,7 +140,7 @@
    `(meow-normal-cursor             ((t (:background ,cur))))
    `(meow-motion-cursor             ((t (:background ,cur))))
    `(meow-unknown-cursor            ((t (:background ,cur))))
-   `(meow-bmacro-cursor             ((t (:background ,cur))))
+   `(meow-beacon-cursor             ((t (:background ,cur))))
 
    ;; colorful paren
    `(colorful-round           ((t ())))
@@ -234,7 +234,7 @@
    `(org-document-title             ((t (:bold t :height ,(nth 0 minidark-theme-header-scales)))))
    `(org-link                       ((t (:underline t))))
    `(org-document-title             ((t ())))
-   `(org-code                       ((t (:inherit font-lock-keyword-face))))
+   `(org-code                       ((t (:inherit font-lock-constant-face))))
    `(org-level-1                    ((t (:inherit font-lock-string-face :height ,(nth 0 minidark-theme-header-scales)))))
    `(org-level-2                    ((t (:inherit font-lock-function-name-face :height ,(nth 1 minidark-theme-header-scales)))))
    `(org-level-3                    ((t (:inherit font-lock-keyword-face :height ,(nth 2 minidark-theme-header-scales)))))
