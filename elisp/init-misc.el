@@ -1,6 +1,5 @@
 (straight-use-package 'dumb-jump)
 (straight-use-package 'highlight-numbers)
-(straight-use-package 'rainbow-mode)
 
 (add-hook 'prog-mode-hook 'highlight-numbers-mode)
 

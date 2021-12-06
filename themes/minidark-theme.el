@@ -77,7 +77,7 @@
    `(warning                        ((t ())))
    `(match                          ((t (:inverse-video t))))
    `(secondary-selection            ((t (:background ,ss :extend nil))))
-   `(help-key-binding               ((t ())))
+   `(help-key-binding               ((t (:bold t))))
    `(shadow                         ((t (:foreground ,cm))))
 
    ;; ISearch
@@ -92,7 +92,8 @@
    `(font-lock-builtin-face         ((t ())))
    `(font-lock-type-face            ((t ())))
    `(font-lock-variable-name-face   ((t ())))
-   `(font-lock-keyword-face         ((t (:foreground ,kw))))
+   `(font-lock-keyword-face         ((((type tty)) (:bold t))
+                                     (((type graphic)) (:foreground ,kw))))
    `(font-lock-constant-face        ((t (:foreground ,st))))
    `(font-lock-function-name-face   ((t (:foreground ,fn))))
    `(font-lock-warning-face         ((t ())))
@@ -262,7 +263,13 @@
    `(erc-nick-default-face          ((t (:inherit font-lock-keyword-face))))
    `(erc-input-face                 ((t (:inherit font-lock-function-name-face))))
    `(erc-timestamp-face             ((t (:inherit font-lock-constant-face))))
-   `(erc-notice-face                ((t (:inherit font-lock-comment-face))))))
+   `(erc-notice-face                ((t (:inherit font-lock-comment-face))))
+
+   `(tab-bar                        ((t (:background ,hl :height 0.8))))
+   `(tab-bar-tab-group-current      ((t ())))
+   `(tab-bar-tab                    ((t (:inverse-video t :bold t))))
+   `(tab-bar-tab-group-inactive     ((t ())))
+   `(tab-bar-tab-inactive           ((t (:inherit shadow))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

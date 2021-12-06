@@ -24,9 +24,10 @@
    '("o" . delete-other-windows)
    '("s" . split-window-right)
    '("-" . split-window-below)
+   ;; overwrited motion key
+   '("$" . "H-$")
    ;; high frequency commands
-   '("$" . +change-theme)
-   '("&" . +toggle-wide-tall-font)
+   '("&" . +change-theme)
    '(";" . comment-dwim)
    '("k" . kill-this-buffer)
    '("d" . dired)
@@ -38,7 +39,7 @@
    '("=" . "C-c ^")
    '("p" . project-find-file)
    '("j" . project-switch-to-buffer)
-   '("t" . ibuffer)
+   '("t" . tab-bar-switch-to-tab)
    '("l" . "C-x p p")
    '("y" . "C-x g")
    '("n" . "C-x M-n")
@@ -53,6 +54,7 @@
    '("F" . flymake-mode)
    '("\\" . dired-sidebar-toggle-sidebar))
   (meow-motion-overwrite-define-key
+   '("$" . repeat)
    '("'" . repeat))
   (meow-normal-define-key
    '("?" . meow-keypad-describe-key)
@@ -124,6 +126,7 @@
    '("X" . meow-sync-grab)
    '("y" . meow-yank)
    '("z" . meow-pop-selection)
+   '("$" . repeat)
    '("'" . repeat)
    '("&" . meow-query-replace-regexp)
    '("%" . meow-query-replace)
@@ -149,6 +152,7 @@
   ;; use << and >> to select to bol/eol
   (add-to-list 'meow-char-thing-table '(?> . line))
   (add-to-list 'meow-char-thing-table '(?< . line))
+  (setq meow-esc-delay 0.001)
   ;; define our command layout
   (meow-setup)
   (meow-setup-indicator))

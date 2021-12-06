@@ -43,6 +43,9 @@
 (with-eval-after-load  "org"
   ;; (define-key org-mode-map (kbd "<f8>") 'org-latex-auto-toggle)
   (define-key org-mode-map (kbd "<f5>") 'visible-mode)
+
+  (add-hook 'org-mode-hook 'flyspell-mode)
+  (add-hook 'org-mode-hook 'org-indent-mode)
   (require 'ox-gfm nil t)
 
   (require 'org-tempo)

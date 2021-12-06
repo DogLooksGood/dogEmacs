@@ -13,6 +13,8 @@
 (setq markdown-list-item-bullets '("•" "·"))
 
 (with-eval-after-load "markdown-mode"
+  (add-hook 'org-mode-hook 'flyspell-mode)
+
   (custom-set-faces
    '(markdown-table-face ((t :inherit 'fixed-pitch)))
    '(markdown-code-face ((t :inherit 'fixed-pitch))))

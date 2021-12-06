@@ -58,6 +58,7 @@
  '(rime-indicator-face            ((t (:foreground "#713da6"))))
  '(telega-entity-type-code        ((t (:inherit fixed-pitch))))
  '(telega-entity-type-pre         ((t (:inherit fixed-pitch))))
+ '(telega-msg-heading             ((t (:inherit hl-line :extend t))))
  '(cider-fringe-good-face         ((t (:foreground "#006666"))))
  '(cider-repl-stdout-face         ((t (:foreground "grey20"))))
  '(cider-repl-stderr-face         ((t (:inherit font-lock-string-face))))
@@ -111,7 +112,14 @@
  `(diff-hl-insert                 ((t (:foreground "#69F" :background "#69F"))))
  `(diff-hl-change                 ((t (:foreground "#4A4" :background "#4A4"))))
  `(diff-hl-delete                 ((t (:foreground "#FAA" :background "#FAA"))))
- `(secondary-selection            ((t (:background "#b6fae3")))))
+
+ `(secondary-selection            ((t (:background "#b6fae3"))))
+
+ `(tab-bar                        ((t (:background "#F3F3F3" :height 0.8))))
+ `(tab-bar-tab-group-current      ((t ())))
+ `(tab-bar-tab                    ((t (:bold t :foreground "#1d6ebf"))))
+ `(tab-bar-tab-group-inactive     ((t ())))
+ `(tab-bar-tab-inactive           ((t (:bold nil)))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

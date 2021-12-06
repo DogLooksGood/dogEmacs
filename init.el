@@ -21,10 +21,12 @@
 (require 'init-window)
 (require 'init-telega)
 (require 'init-misc)
+(require 'init-tab-bar)
 (require 'init-direnv)
 (require 'init-restclient)
 (unless window-system
   (require 'init-xterm))
 (require 'init-rss)
+(require 'init-tab-bar)
 ;; (require 'init-docker)
 (require 'init-server)

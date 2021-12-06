@@ -244,7 +244,14 @@
    `(flycheck-error   ((t (:underline (:style wave :color ,fg)))))
    `(flymake-warning  ((t (:underline (:style wave :color ,cm)))))
    `(flymake-error    ((t (:underline (:style wave :color ,fg)))))
-   `(flymake-note     ((t (:underline (:style wave :color ,hl)))))))
+   `(flymake-note     ((t (:underline (:style wave :color ,hl)))))
+
+
+   `(tab-bar                        ((t (:bold t :background ,hl))))
+   `(tab-bar-tab-group-current      ((t ())))
+   `(tab-bar-tab                    ((t ())))
+   `(tab-bar-tab-group-inactive     ((t ())))
+   `(tab-bar-tab-inactive           ((t (:bold nil :inherit shadow))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)
