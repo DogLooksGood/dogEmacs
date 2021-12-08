@@ -71,7 +71,7 @@
    `(line-number-current-line       ((t (:foreground ,fn :background ,hl))))
    `(completions-common-part        ((t ())))
    `(minibuffer-prompt              ((t ())))
-   `(lazy-highlight                 ((t (:foreground ,lh :box (:line-width (-1 . -1))))))
+   `(lazy-highlight                 ((t (:foreground ,lh :underline t))))
    `(compilation-info               ((t ())))
    `(compilation-warning            ((t ())))
    `(warning                        ((t ())))
