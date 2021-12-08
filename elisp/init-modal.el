@@ -39,7 +39,7 @@
    '("=" . "C-c ^")
    '("p" . project-find-file)
    '("j" . project-switch-to-buffer)
-   '("t" . tab-bar-switch-to-tab)
+   '("t" . "C-x t")
    '("l" . "C-x p p")
    '("y" . "C-x g")
    '("n" . "C-x M-n")

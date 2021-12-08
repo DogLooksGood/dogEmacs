@@ -7,7 +7,10 @@
       tab-bar-format '(tab-bar-format-tabs)
       tab-bar-tab-name-format-function '+tab-bar-tab-format-function)
 
-(defun +switch-project-in-new-tab ()
+(defun +tab-bar-switch-project ()
+  "Switch to project in a new tab, project name will be used as tab name.
+
+No tab will created if the command is cancelled."
   (interactive)
   (let (succ)
     (unwind-protect
@@ -31,7 +34,8 @@
                  (funcall tab-bar-tab-face-function tab))
      " ")))
 
-(global-set-key [remap project-switch-project] #'+switch-project-in-new-tab)
+(global-set-key (kbd "C-x t .") #'tab-bar-rename-tab)
+(global-set-key (kbd "C-x t p") #'+tab-bar-switch-project)
 
 (tab-bar-mode 1)
 
