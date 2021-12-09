@@ -35,7 +35,7 @@ No tab will created if the command is cancelled."
      " ")))
 
 (global-set-key (kbd "C-x t .") #'tab-bar-rename-tab)
-(global-set-key (kbd "C-x t p") #'+tab-bar-switch-project)
+(global-set-key (kbd "C-x t l") #'+tab-bar-switch-project)
 
 (tab-bar-mode 1)
 

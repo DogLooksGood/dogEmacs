@@ -149,6 +149,7 @@ You may want to set this to window's border color.")
    `(meow-insert-indicator          ((t (:foreground "black" :background ,green))))
    `(meow-normal-indicator          ((t (:foreground "black" :background ,yellow))))
    `(meow-motion-indicator          ((t (:foreground "black" :background ,blue))))
+   `(meow-beacon-indicator          ((t (:foreground "black" :background ,purple))))
    `(meow-keypad-cursor             ((t ())))
    `(meow-insert-cursor             ((t ())))
    `(meow-normal-cursor             ((t ())))
@@ -268,7 +269,13 @@ You may want to set this to window's border color.")
 
    `(fill-column-indicator          ((t (:foreground ,bg+2))))
 
-   `(scroll-bar                     ((t (:foreground ,fg-1))))))
+   `(scroll-bar                     ((t (:foreground ,fg-1))))
+
+   `(tab-bar                        ((t (:background ,bg+2))))
+   `(tab-bar-tab-group-current      ((t ())))
+   `(tab-bar-tab                    ((t (:inverse-video t :bold t))))
+   `(tab-bar-tab-group-inactive     ((t ())))
+   `(tab-bar-tab-inactive           ((t (:inherit shadow))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)
