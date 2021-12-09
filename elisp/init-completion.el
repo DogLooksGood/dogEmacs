@@ -7,6 +7,7 @@
 (straight-use-package 'rg)
 (straight-use-package 'prescient)
 (straight-use-package 'yasnippet)
+(straight-use-package 'embark)
 
 (defun +complete ()
   (interactive)
@@ -114,5 +115,14 @@
 
 (with-eval-after-load "wgrep"
   (define-key wgrep-mode-map (kbd "C-c C-c") #'wgrep-finish-edit))
+
+;;; embark
+
+(autoload 'embark-act "embark" nil t)
+
+(global-set-key (kbd "<f2>") #'embark-act)
+
+(with-eval-after-load "embark"
+  (define-key embark-meta-map (kbd "<escape>") #'keyboard-escape-quit))
 
 (provide 'init-completion)
