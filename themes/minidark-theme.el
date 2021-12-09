@@ -112,7 +112,6 @@
    ;; Mode Line
    `(tab-line                       ((t ())))
    `(mode-line                      ((t (:background ,fg :foreground ,bg))))
-   `(mode-line-active               ((t (:background ,fg :foreground ,bg))))
    `(mode-line-inactive             ((t (:background ,cm :foreground ,hl))))
    `(header-line                    ((t ())))
    `(header-line-inactive           ((t ())))
@@ -273,7 +272,9 @@
    `(tab-bar-tab-inactive           ((t (:inherit shadow))))
 
    `(ansi-color-blue                ((t (:foreground "#169edd"))))
-   `(ansi-color-bright-blue         ((t (:foreground "#169edd"))))))
+   `(ansi-color-bright-blue         ((t (:foreground "#169edd"))))
+   `(yascroll:thumb-fringe          ((t (:foreground ,cm :background ,cm))))
+   `(yascroll:thumb-text-area       ((t (:foreground ,cm :background ,cm))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

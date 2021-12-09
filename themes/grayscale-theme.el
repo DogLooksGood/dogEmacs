@@ -254,7 +254,10 @@
    `(tab-bar-tab-group-current      ((t ())))
    `(tab-bar-tab                    ((t ())))
    `(tab-bar-tab-group-inactive     ((t ())))
-   `(tab-bar-tab-inactive           ((t (:bold nil :inherit shadow))))))
+   `(tab-bar-tab-inactive           ((t (:bold nil :inherit shadow))))
+
+   `(yascroll:thumb-fringe          ((t (:foreground ,cm :background ,cm))))
+   `(yascroll:thumb-text-area       ((t (:foreground ,cm :background ,cm))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

@@ -11,11 +11,11 @@
 (let ((fg "#442C09")
       (fg+1 "#806040")
       (hl "#dca485")
-      (bg "#e8e8b6")
-      (bg-1 "#dadaae")
-      (bg-2 "#cfcfa5")
+      (bg "#f9f9e3")
+      (bg-1 "#eaeac7")
+      (bg-2 "#ddddb1")
       (err "#8E1316")
-      (green-bg "#dde8b5")
+      (green-bg "#e6efd2")
       (green-fg "#0A3A45")
       (red-bg "#e8dcb5")
       (gray-bg "#bdbd95")
@@ -66,13 +66,6 @@
    `(meow-insert-cursor             ((t ())))
    `(meow-normal-cursor             ((t ())))
    `(meow-motion-cursor             ((t ())))
-
-   `(meow-position-highlight-number-1 ((t (:background ,bg-2))))
-   `(meow-position-highlight-number-2 ((t (:foreground ,fg+1 :background ,bg-1))))
-   `(meow-position-highlight-number-3 ((t (:foreground ,fg+1 :background ,bg-1))))
-   `(meow-position-highlight-reverse-number-1 ((t (:background ,bg-2))))
-   `(meow-position-highlight-reverse-number-2 ((t (:foreground ,fg+1 :background ,bg-1))))
-   `(meow-position-highlight-reverse-number-3 ((t (:foreground ,fg+1 :background ,bg-1))))
 
    ;; Diff-hl
    `(diff-hl-insert                 ((t (:foreground ,green-bg :background ,green-bg))))
@@ -183,7 +176,13 @@
    `(colorful-round           ((t (:foreground ,fg+1))))
    `(colorful-square          ((t (:foreground ,green-fg))))
    `(colorful-curly           ((t (:foreground ,red-fg))))
-   `(colorful-semicolon       ((t (:foreground ,green-fg))))))
+   `(colorful-semicolon       ((t (:foreground ,green-fg))))
+
+   `(tab-bar                        ((t ())))
+   `(tab-bar-tab-group-current      ((t ())))
+   `(tab-bar-tab                    ((t (:inherit mode-line))))
+   `(tab-bar-tab-group-inactive     ((t ())))
+   `(tab-bar-tab-inactive           ((t (:inherit shadow))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)

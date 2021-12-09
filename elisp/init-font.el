@@ -47,7 +47,7 @@
     (set-face-attribute 'fixed-pitch frame :font fixed-pitch-font-spec)
     (set-face-attribute 'fixed-pitch-serif frame :font fixed-pitch-font-spec)
     (set-face-attribute 'tab-bar frame :font line-font-spce :height 0.8)
-    (set-face-attribute 'mode-line-active frame :font line-font-spce)
+    (set-face-attribute 'mode-line frame :font line-font-spce)
     (set-face-attribute 'mode-line-inactive frame :font line-font-spce)))
 
 (defun +load-ext-font ()

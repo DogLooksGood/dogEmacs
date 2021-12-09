@@ -13,12 +13,6 @@
 (require 'colorful)
 (add-hook 'prog-mode-hook 'colorful-mode)
 
-;; (require 'htab)
-;; (htab-global-mode 1)
-;; (add-to-list 'htab-ignore-commands 'meow-minibuffer-quit)
-;; (global-set-key (kbd "<XF86Forward>") #'htab-next-buffer)
-;; (global-set-key (kbd "<XF86Back>") #'htab-prev-buffer)
-
 (defun +project-previous-buffer (arg)
   "Toggle to the previous buffer that belongs to current project
 and don't shown in any window."
@@ -31,5 +25,11 @@ and don't shown in any window."
                             (get-buffer-window-list it)))
               (car)))
       (mode-line-other-buffer))))
+
+;; info
+(require 'view)
+(define-key Info-mode-map [remap scroll-up-command] #'View-scroll-half-page-forward)
+(define-key Info-mode-map [remap scroll-down-command] #'View-scroll-half-page-backward)
+(fringe-mode 8)
 
 (provide 'init-misc)

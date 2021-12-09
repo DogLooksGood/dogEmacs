@@ -47,6 +47,7 @@
   (add-hook 'org-mode-hook 'flyspell-mode)
   (add-hook 'org-mode-hook 'org-indent-mode)
   (require 'ox-gfm nil t)
+  (require 'ox-texinfo)
 
   (require 'org-tempo)
   (+org-babel-setup)
