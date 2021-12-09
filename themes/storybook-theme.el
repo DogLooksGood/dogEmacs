@@ -162,6 +162,7 @@
    `(markdown-header-face-6         ((t (:bold t :height 1.2))))
    `(markdown-header-face-7         ((t (:bold t :height 1.2))))
    `(org-document-title  ((t (:foreground ,fg :height 2.2))))
+   `(org-headline-done   ((t (:inherit shadow))))
    `(org-block           ((t (:background "#f2ecd7" :extend t))))
    `(org-meta-line       ((t (:background "#e5dfc9" :extend t))))
    `(org-table           ((t (:foreground "grey40"))))

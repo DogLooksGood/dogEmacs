@@ -182,11 +182,11 @@
    ;; `(popup-tip-face                 ((t (:background ,bg+4 :foreground ,fg))))
    ;; `(popup-isearch-match            ((t (:background "#CFA300" :foreground "black"))))
    ;;
-   ;; `(tooltip                        ((t ())))
-   ;; `(dired-directory                ((t (:foreground ,light-purple))))
-   ;; `(web-mode-html-attr-name-face   ((t ())))
-   ;; `(web-mode-html-tag-face         ((t ())))
-   ;;
+   `(tooltip                        ((t ())))
+   `(dired-directory                ((t (:bold t))))
+   `(web-mode-html-attr-name-face   ((t ())))
+   `(web-mode-html-tag-face         ((t ())))
+
    ;; Emacs Rime
    `(rime-preedit-face              ((t (:underline t))))
    `(rime-cursor-face               ((t (:inherit font-lock-constant-face))))
@@ -232,9 +232,12 @@
    `(org-level-5                    ((t (:bold t :height ,(nth 4 grayscale-theme-header-scales)))))
    `(org-level-6                    ((t (:bold t :height ,(nth 5 grayscale-theme-header-scales)))))
    `(org-level-7                    ((t (:bold t :height ,(nth 6 grayscale-theme-header-scales)))))
-   ;;
+   `(org-todo                       ((t (:bold t))))
+   `(org-done                       ((t (:bold t :inherit shadow))))
+   `(org-headline-done              ((t (:inherit shadow))))
+   `(org-drawer                     ((t (:foreground ,cm))))
+
    ;; ;; Treemacs
-   ;; `(treemacs-root-face             ((t (:inherit font-lock-function-name-face :height 1.4 :underline t))))
    `(fill-column-indicator          ((t (:foreground ,cm))))
    `(scroll-bar                     ((t (:foreground ,fg))))
    `(sp-pair-overlay-face           ((t (:background ,hl))))

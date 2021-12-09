@@ -9,6 +9,7 @@
   (add-hook 'markdown-mode-hook 'flyspell-mode)
   (add-hook 'markdown-mode-hook #'markdown-toggle-markup-hiding)
   (add-hook 'markdown-mode-hook #'variable-pitch-mode)
+  (define-key markdown-mode-map (kbd "<f5>") #'markdown-toggle-markup-hiding)
 
   (custom-set-faces
    '(markdown-table-face ((t :inherit 'fixed-pitch)))

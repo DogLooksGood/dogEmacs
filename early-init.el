@@ -32,3 +32,4 @@
 (require 'init-defaults)
 (require 'init-modeline)
 (require 'init-laf)
+(require 'init-tab-bar)

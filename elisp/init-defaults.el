@@ -90,8 +90,6 @@
  read-file-name-completion-ignore-case t
  ;; use short answer
  read-answer-short t
- ;; move cursor to top/bottom before signaling a scroll error
- scroll-error-top-bottom t
  ;; pinentry
  epa-pinentry-mode 'loopback
  ;; disable input method in pgtk

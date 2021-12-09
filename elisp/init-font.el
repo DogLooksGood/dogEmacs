@@ -24,6 +24,7 @@
 ;; Custom fonts can be set in ~/.emacs.d/private.el
 
 (defvar +font-family "Source Code Pro")
+(defvar +line-font-family "Source Code Pro")
 (defvar +font-unicode-family "LXGW WenKai")
 (defvar +fixed-pitch-family "Sarasa Mono SC")
 (defvar +variable-pitch-family "LXGW WenKai")
@@ -37,6 +38,7 @@
 
 (defun +load-face-font (&optional frame)
   (let ((font-spec (format "%s-%d" +font-family +font-size))
+        (line-font-spce (format "%s-%d" +modeline-font-family +font-size))
         (variable-pitch-font-spec (format "%s-%d" +variable-pitch-family +font-size))
         (fixed-pitch-font-spec (format "%s-%d" +fixed-pitch-family +font-size)))
     (set-face-attribute 'variable-pitch frame
@@ -44,8 +46,9 @@
                         :height 1.2)
     (set-face-attribute 'fixed-pitch frame :font fixed-pitch-font-spec)
     (set-face-attribute 'fixed-pitch-serif frame :font fixed-pitch-font-spec)
-    (set-face-attribute 'mode-line frame :font font-spec)
-    (set-face-attribute 'mode-line-inactive frame :font font-spec)))
+    (set-face-attribute 'tab-bar frame :font line-font-spce :height 0.8)
+    (set-face-attribute 'mode-line-active frame :font line-font-spce)
+    (set-face-attribute 'mode-line-inactive frame :font line-font-spce)))
 
 (defun +load-ext-font ()
   (when window-system

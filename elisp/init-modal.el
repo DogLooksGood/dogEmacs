@@ -55,7 +55,8 @@
    '("\\" . dired-sidebar-toggle-sidebar))
   (meow-motion-overwrite-define-key
    '("$" . repeat)
-   '("'" . repeat))
+   '("'" . repeat)
+   '("<escape>" . +project-previous-buffer))
   (meow-normal-define-key
    '("?" . meow-keypad-describe-key)
    '("*" . meow-expand-0)
@@ -130,7 +131,7 @@
    '("'" . repeat)
    '("&" . meow-query-replace-regexp)
    '("%" . meow-query-replace)
-   '("<escape>" . mode-line-other-buffer)))
+   '("<escape>" . +project-previous-buffer)))
 
 (setq
  meow-keypad-describe-delay 1.0

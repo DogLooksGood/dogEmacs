@@ -112,6 +112,7 @@
    ;; Mode Line
    `(tab-line                       ((t ())))
    `(mode-line                      ((t (:background ,fg :foreground ,bg))))
+   `(mode-line-active               ((t (:background ,fg :foreground ,bg))))
    `(mode-line-inactive             ((t (:background ,cm :foreground ,hl))))
    `(header-line                    ((t ())))
    `(header-line-inactive           ((t ())))
@@ -265,11 +266,14 @@
    `(erc-timestamp-face             ((t (:inherit font-lock-constant-face))))
    `(erc-notice-face                ((t (:inherit font-lock-comment-face))))
 
-   `(tab-bar                        ((t (:background ,hl :height 0.8))))
+   `(tab-bar                        ((t (:background ,hl))))
    `(tab-bar-tab-group-current      ((t ())))
    `(tab-bar-tab                    ((t (:inverse-video t :bold t))))
    `(tab-bar-tab-group-inactive     ((t ())))
-   `(tab-bar-tab-inactive           ((t (:inherit shadow))))))
+   `(tab-bar-tab-inactive           ((t (:inherit shadow))))
+
+   `(ansi-color-blue                ((t (:foreground "#169edd"))))
+   `(ansi-color-bright-blue         ((t (:foreground "#169edd"))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)
