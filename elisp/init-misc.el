@@ -18,13 +18,12 @@
 and don't shown in any window."
   (interactive "P")
   (unless arg
-    (if-let ((pr (project-current)))
-        (switch-to-buffer
-         (->> (project--buffer-list pr)
-              (--remove (or (minibufferp it)
-                            (get-buffer-window-list it)))
-              (car)))
-      (mode-line-other-buffer))))
+    (when-let ((pr (project-current)))
+      (switch-to-buffer
+       (->> (project--buffer-list pr)
+         (--remove (or (minibufferp it)
+                       (get-buffer-window-list it)))
+         (car))))))
 
 ;; info
 (require 'view)

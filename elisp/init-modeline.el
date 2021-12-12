@@ -1,7 +1,8 @@
 ;; Mode Line  -*- lexical-binding: t; -*-
 
 (defun +format-mode-line ()
-  (let* ((lhs '((:eval mode-line-position)
+  (let* ((lhs '((:eval (meow-indicator))
+                (:eval mode-line-position)
                 (:eval (when (fboundp 'rime-lighter)
                          (rime-lighter)))
                 (:eval (when (bound-and-true-p flycheck-mode) flycheck-mode-line))

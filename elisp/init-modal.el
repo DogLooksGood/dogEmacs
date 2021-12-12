@@ -52,7 +52,8 @@
    '("D" . docker)
    '("E" . elfeed)
    '("F" . flymake-mode)
-   '("\\" . dired-sidebar-toggle-sidebar))
+   '("\\" . dired-sidebar-toggle-sidebar)
+   '("#" . +project-previous-buffer))
   (meow-motion-overwrite-define-key
    '("$" . repeat)
    '("'" . repeat)
@@ -60,7 +61,7 @@
    '("p" . previous-line)
    '("M-n" . "H-n")
    '("M-p" . "H-p")
-   '("<escape>" . +project-previous-buffer))
+   '("<escape>" . ignore))
   (meow-normal-define-key
    '("?" . meow-keypad-describe-key)
    '("*" . meow-expand-0)
@@ -135,9 +136,10 @@
    '("'" . repeat)
    '("&" . meow-query-replace-regexp)
    '("%" . meow-query-replace)
-   '("<escape>" . +project-previous-buffer)))
+   '("<escape>" . ignore)))
 
 (setq
+ meow-visit-sanitize-completion nil
  meow-keypad-describe-delay 1.0
  meow-replace-state-name-list '((normal . "NORMAL")
                                 (motion . "MOTION")
@@ -152,14 +154,21 @@
 (with-eval-after-load "meow"
   ;; make Meow usable in TUI Emacs
   (add-to-list 'meow-mode-state-list '(inf-iex-mode . normal))
+  (add-to-list 'meow-mode-state-list '(haskell-interactive-mode . normal))
   (add-to-list 'meow-mode-state-list '(erc-mode . normal))
   (setq meow-grab-fill-commands nil)
   ;; use << and >> to select to bol/eol
   (add-to-list 'meow-char-thing-table '(?> . line))
   (add-to-list 'meow-char-thing-table '(?< . line))
+  (add-to-list 'meow-char-thing-table '(?o . do/end))
+  (meow-thing-register 'do/end
+                       '(pair ("do" "fn") ("end"))
+                       '(pair ("do" "fn") ("end")))
+  (meow-thing-register 'quoted
+                       '(regexp "`" "`\\|'")
+                       '(regexp "`" "`\\|'"))
   (setq meow-esc-delay 0.001)
   ;; define our command layout
-  (meow-setup)
-  (meow-setup-indicator))
+  (meow-setup))
 
 (provide 'init-modal)

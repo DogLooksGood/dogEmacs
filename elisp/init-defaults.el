@@ -125,7 +125,7 @@
   (find-alternate-file (format "/sudo::%s" (buffer-file-name))))
 
 (global-set-key (kbd "C-x C-z") #'+reopen-file-with-sudo)
-(setq-default max-mini-window-height 0.1)
+(setq-default max-mini-window-height 0.3)
 
 (defvar +proxy-host "localhost")
 (defvar +proxy-port 1089)
