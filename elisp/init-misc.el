@@ -37,6 +37,6 @@ and don't shown in any window."
 
 (with-eval-after-load "embark"
   (setq embark-mixed-indicator-delay 0)
-  (define-key embark-meta-map (kbd "<escape>") #'keyboard-escape-quit))
+  (define-key embark-meta-map (kbd "<escape>") #'keyboard-quit))
 
 (provide 'init-misc)

@@ -252,7 +252,7 @@
 
    `(tab-bar                        ((t (:bold t :background ,hl))))
    `(tab-bar-tab-group-current      ((t ())))
-   `(tab-bar-tab                    ((t ())))
+   `(tab-bar-tab                    ((t (:inverse-video t))))
    `(tab-bar-tab-group-inactive     ((t ())))
    `(tab-bar-tab-inactive           ((t (:bold nil :inherit shadow))))
 

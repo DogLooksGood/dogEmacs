@@ -101,7 +101,9 @@
  ;; disable copy region blink
  copy-region-blink-delay 0
  ;; hscroll only for current line
- auto-hscroll-mode 'current-line)
+ auto-hscroll-mode 'current-line
+ ;; set fill column indicator to 80
+ display-fill-column-indicator-column 80)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
