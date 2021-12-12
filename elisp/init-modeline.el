@@ -1,10 +1,9 @@
 ;; Mode Line  -*- lexical-binding: t; -*-
 
 (defun +format-mode-line ()
-  (let* ((lhs '((:eval (meow-indicator))
-                (:eval mode-line-position)
-                (:eval (when (fboundp 'rime-lighter)
-                         (rime-lighter)))
+  (let* ((lhs '((:eval (when (fboundp 'rime-lighter) (rime-lighter)))
+                (:eval (meow-indicator))
+                (:eval "L%l C%C")
                 (:eval (when (bound-and-true-p flycheck-mode) flycheck-mode-line))
                 (:eval (when (bound-and-true-p flymake-mode) flymake-mode-line-format))))
          (rhs '((:eval (+smart-file-name-cached))

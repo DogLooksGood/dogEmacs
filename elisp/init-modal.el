@@ -141,11 +141,11 @@
 (setq
  meow-visit-sanitize-completion nil
  meow-keypad-describe-delay 1.0
- meow-replace-state-name-list '((normal . "NORMAL")
-                                (motion . "MOTION")
-                                (keypad . "KEYPAD")
-                                (insert . "INSERT")
-                                (beacon . "BEACON")))
+ meow-replace-state-name-list '((normal . "N")
+                                (motion . "M")
+                                (keypad . "K")
+                                (insert . "I")
+                                (beacon . "B")))
 
 (require 'meow)
 
