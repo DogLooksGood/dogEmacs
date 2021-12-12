@@ -44,15 +44,7 @@ This function is slow, so we have to use cache."
         (bfn (buffer-file-name (current-buffer))))
     (cond
      ((and bfn vc-dir)
-      (concat
-       (propertize
-        (car
-         (reverse
-          (split-string (string-trim-right vc-dir "/") "/")))
-        'face
-        'bold)
-       "/"
-       (+shorten-long-path (file-relative-name bfn vc-dir))))
+      (+shorten-long-path (file-relative-name bfn vc-dir)))
      (bfn bfn)
      (t (buffer-name)))))
 

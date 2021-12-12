@@ -49,7 +49,8 @@
       (num "#9466a5")
       (doc "#cc725b")
       (cur "#EFEFEF")
-      (pop "#272727"))
+      (pop "#272727")
+      (tb "#000000"))
   (custom-theme-set-faces
    `minidark
    ;; We don't specify default foreground/background in TTY.
@@ -265,11 +266,9 @@
    `(erc-timestamp-face             ((t (:inherit font-lock-constant-face))))
    `(erc-notice-face                ((t (:inherit font-lock-comment-face))))
 
-   `(tab-bar                        ((t (:background ,hl))))
-   `(tab-bar-tab-group-current      ((t ())))
+   `(tab-bar                        ((t (:background ,tb))))
    `(tab-bar-tab                    ((t (:inverse-video t :bold t))))
-   `(tab-bar-tab-group-inactive     ((t ())))
-   `(tab-bar-tab-inactive           ((t (:inherit shadow))))
+   `(tab-bar-tab-inactive           ((t ())))
 
    `(ansi-color-blue                ((t (:foreground "#169edd"))))
    `(ansi-color-bright-blue         ((t (:foreground "#169edd"))))

@@ -8,8 +8,7 @@
                 (:eval (when (bound-and-true-p flymake-mode) flymake-mode-line-format))))
          (rhs '((:eval (+smart-file-name-cached))
                 " "
-                (:eval mode-name)
-                (:eval (+vc-branch-name))))
+                (:eval mode-name)))
          (ww (window-width))
          (lhs-str (format-mode-line lhs))
          (rhs-str (format-mode-line rhs))

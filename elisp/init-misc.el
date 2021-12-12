@@ -13,18 +13,6 @@
 (require 'colorful)
 (add-hook 'prog-mode-hook 'colorful-mode)
 
-(defun +project-previous-buffer (arg)
-  "Toggle to the previous buffer that belongs to current project
-and don't shown in any window."
-  (interactive "P")
-  (unless arg
-    (when-let ((pr (project-current)))
-      (switch-to-buffer
-       (->> (project--buffer-list pr)
-         (--remove (or (minibufferp it)
-                       (get-buffer-window-list it)))
-         (car))))))
-
 ;; info
 (require 'view)
 (define-key Info-mode-map [remap scroll-up-command] #'View-scroll-half-page-forward)
