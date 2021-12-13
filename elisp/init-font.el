@@ -38,7 +38,7 @@
 
 (defun +load-face-font (&optional frame)
   (let ((font-spec (format "%s-%d" +font-family +font-size))
-        (line-font-spce (format "%s-%d" +modeline-font-family +font-size))
+        (line-font-spec (format "%s-%d" +modeline-font-family +font-size))
         (variable-pitch-font-spec (format "%s-%d" +variable-pitch-family +font-size))
         (fixed-pitch-font-spec (format "%s-%d" +fixed-pitch-family +font-size)))
     (set-face-attribute 'variable-pitch frame
@@ -46,9 +46,9 @@
                         :height 1.2)
     (set-face-attribute 'fixed-pitch frame :font fixed-pitch-font-spec)
     (set-face-attribute 'fixed-pitch-serif frame :font fixed-pitch-font-spec)
-    (set-face-attribute 'tab-bar frame :font line-font-spce :height 1.0)
-    (set-face-attribute 'mode-line frame :font line-font-spce)
-    (set-face-attribute 'mode-line-inactive frame :font line-font-spce)))
+    (set-face-attribute 'tab-bar frame :font line-font-spec :height 1.0)
+    (set-face-attribute 'mode-line frame :font line-font-spec)
+    (set-face-attribute 'mode-line-inactive frame :font line-font-spec)))
 
 (defun +load-ext-font ()
   (when window-system
