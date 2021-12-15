@@ -1,7 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 
-(straight-use-package 'selectrum)
-(straight-use-package 'selectrum-prescient)
+(straight-use-package 'vertico)
+(straight-use-package 'orderless)
 (straight-use-package 'company)
 (straight-use-package 'company-posframe)
 (straight-use-package 'rg)
@@ -89,14 +89,15 @@
         company-posframe-quickhelp-delay nil
         company-posframe-show-metadata nil))
 
-;; selectrum
+;;; vertico
 
-(require 'selectrum)
-(require 'selectrum-prescient)
-(selectrum-mode t)
-(selectrum-prescient-mode t)
+(require 'vertico)
+(vertico-mode 1)
 
-(defun +selectrum-backward-delete-sexp ()
+(defun +vertico-init-minibuffer ()
+  (setq-local completion-styles '(basic orderless)))
+
+(defun +backward-delete-sexp ()
   (interactive)
   (save-restriction
     (narrow-to-region (minibuffer-prompt-end) (point-max))
@@ -106,13 +107,17 @@
        (point))
      (point))))
 
-(with-eval-after-load "selectrum"
-  (define-key selectrum-minibuffer-map (kbd "M-DEL") #'+selectrum-backward-delete-sexp))
+(with-eval-after-load "vertico"
+  (require 'orderless)
+  (setq orderless-skip-highlighting t)
+  (add-hook 'minibuffer-setup-hook '+vertico-init-minibuffer)
+  (define-key minibuffer-mode-map (kbd "M-DEL") #'+backward-delete-sexp))
 
 ;;; rg
 
 (autoload #'rg-project "rg" nil t)
 
+(require 'wgrep)
 (with-eval-after-load "wgrep"
   (define-key wgrep-mode-map (kbd "C-c C-c") #'wgrep-finish-edit))
 
