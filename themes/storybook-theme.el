@@ -7,8 +7,8 @@
  :fg "#515144"
  :bg "#e8e8be"
  :ff "#88896a"
- :hb "#add1a5"
- :sb "#c6dd9f")
+ :hb "#bfd1a5"
+ :sb "#dadbb8")
 
 (provide-theme 'storybook)
 ;;; storybook-theme.el ends here
