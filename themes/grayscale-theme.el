@@ -120,14 +120,16 @@
    `(yas-field-highlight-face       ((t (:background ,hl))))
 
    ;; Meow
-   `(meow-keypad-indicator          ((t ())))
-   `(meow-insert-indicator          ((t ())))
-   `(meow-normal-indicator          ((t ())))
-   `(meow-motion-indicator          ((t ())))
+   `(meow-keypad-indicator          ((t (:bold t))))
+   `(meow-insert-indicator          ((t (:bold t))))
+   `(meow-normal-indicator          ((t (:bold t))))
+   `(meow-motion-indicator          ((t (:bold t))))
+   `(meow-beacon-indicator          ((t (:bold t))))
    `(meow-keypad-cursor             ((t ())))
    `(meow-insert-cursor             ((t ())))
    `(meow-normal-cursor             ((t ())))
    `(meow-motion-cursor             ((t ())))
+   `(meow-beacon-cursor             ((t ())))
 
    ;; colorful paren
    `(colorful-round           ((t (:foreground ,cm))))
