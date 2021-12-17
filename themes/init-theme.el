@@ -42,13 +42,14 @@ Argument COLORS items in plist format, following keys are required.
 
        (custom-theme-set-faces
         (quote ,theme)
-        '(default ((t :foreground ,fg :background ,bg)))
-        '(hl-line ((t :background ,hb)))
-        '(region ((t :background ,hb)))
-        '(fringe ((t :background ,sb)))
-        '(highlight ((t :background ,hb)))
+        '(default                        ((t :foreground ,fg :background ,bg)))
+        '(cursor                         ((t :background ,c)))
+        '(hl-line                        ((t :background ,sb)))
+        '(region                         ((t :background ,hb)))
+        '(fringe                         ((t :background ,sb)))
+        '(highlight                      ((t :background ,hb)))
 
-        '(show-paren-match ((t :box (:line-width (-1 . -1)))))
+        '(show-paren-match               ((t :box (:line-width (-1 . -1)))))
         '(line-number                    ((t (:foreground ,ff))))
         '(line-number-current-line       ((t (:foreground ,fg))))
         '(parenthesis                    ((t (:foreground ,fg))))
@@ -120,11 +121,6 @@ Argument COLORS items in plist format, following keys are required.
         '(meow-normal-indicator          ((t (:bold t))))
         '(meow-motion-indicator          ((t (:bold t))))
         '(meow-beacon-indicator          ((t (:bold t))))
-        '(meow-keypad-cursor             ((t ())))
-        '(meow-insert-cursor             ((t ())))
-        '(meow-normal-cursor             ((t ())))
-        '(meow-motion-cursor             ((t ())))
-        '(meow-beacon-cursor             ((t ())))
 
         ;; colorful paren
         '(colorful-round           ((t (:foreground ,ff))))
