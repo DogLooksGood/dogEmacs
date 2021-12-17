@@ -30,4 +30,7 @@ If the window is wide enough, split at right, otherwise split at below."
           do (set-window-buffer w b))
     (select-window (next-window))))
 
+(setq window-numbering-assign-func
+      (lambda () (when (equal major-mode 'dired-sidebar-mode) 9)))
+
 (provide 'init-window)
