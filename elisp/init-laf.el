@@ -40,8 +40,8 @@
 
 ;;; Transparency
 
-;; (let ((alpha 100))
-;;   (add-to-list 'default-frame-alist (cons 'alpha alpha)))
+(let ((alpha 100))
+  (add-to-list 'default-frame-alist (cons 'alpha alpha)))
 
 ;;; No window decoration
 

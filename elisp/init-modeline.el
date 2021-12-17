@@ -1,7 +1,23 @@
 ;; Mode Line  -*- lexical-binding: t; -*-
 
+(defun +win-num ()
+  (let ((n (window-numbering-get-number)))
+    (alist-get
+     n
+     '((0 . "🄌")
+       (1 . "❶")
+       (2 . "❷")
+       (3 . "❸")
+       (4 . "❹")
+       (5 . "❺")
+       (6 . "❻")
+       (7 . "❼")
+       (8 . "❽")
+       (9 . "❾")))))
+
 (defun +format-mode-line ()
-  (let* ((lhs '((:eval (when (fboundp 'rime-lighter) (rime-lighter)))
+  (let* ((lhs '((:eval (concat " " (+win-num)))
+                (:eval (when (fboundp 'rime-lighter) (rime-lighter)))
                 (:eval (meow-indicator))
                 (:eval "L%l C%C")
                 (:eval (when (bound-and-true-p flycheck-mode) flycheck-mode-line))

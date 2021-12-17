@@ -204,6 +204,7 @@
    `(web-mode-function-name-face    ((t ())))
    `(web-mode-html-tag-bracket-face ((t (:inherit parenthesis))))
    `(web-mode-symbol-face           ((t (:inherit font-lock-constant-face))))
+   `(web-mode-doctype-face          ((t (:inherit shadow))))
    ;; `(css-selector                   ((t (:foreground ,purple))))
    ;;
    ;; ;; Markdown
@@ -250,9 +251,9 @@
    `(flymake-note     ((t (:underline (:style wave :color ,hl)))))
 
 
-   `(tab-bar                        ((t (:bold t :background ,hl))))
+   `(tab-bar                        ((t (:background ,hl))))
    `(tab-bar-tab-group-current      ((t ())))
-   `(tab-bar-tab                    ((t (:inverse-video t))))
+   `(tab-bar-tab                    ((t (:bold t))))
    `(tab-bar-tab-group-inactive     ((t ())))
    `(tab-bar-tab-inactive           ((t (:bold nil :inherit shadow))))
 

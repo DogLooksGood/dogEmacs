@@ -18,6 +18,7 @@
 
 (autoload #'web-mode "web-mode" nil t)
 
+
 (add-to-list 'auto-mode-alist '("\\.eex\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.leex\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.sface\\'" . web-mode))

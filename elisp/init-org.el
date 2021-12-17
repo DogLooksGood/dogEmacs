@@ -92,12 +92,17 @@
   (org-roam-setup)
   (require 'org-roam-protocol))
 
-(global-set-key (kbd "C-x M-n l") 'org-roam-buffer-toggle)
-(global-set-key (kbd "C-x M-n f") 'org-roam-node-find)
-(global-set-key (kbd "C-x M-n g") 'org-roam-graph)
-(global-set-key (kbd "C-x M-n i") 'org-roam-node-insert)
-(global-set-key (kbd "C-x M-n c") 'org-roam-capture)
-(global-set-key (kbd "C-x M-n s") 'org-roam-db-sync)
+(defvar org-roam-keymap
+  (let ((keymap (make-keymap)))
+    (define-key keymap "l" 'org-roam-buffer-toggle)
+    (define-key keymap "f" 'org-roam-node-find)
+    (define-key keymap "g" 'org-roam-graph)
+    (define-key keymap "i" 'org-roam-node-insert)
+    (define-key keymap "c" 'org-roam-capture)
+    (define-key keymap "s" 'org-roam-db-sync)
+    keymap))
+
+(defalias 'org-roam-keymap org-roam-keymap)
 
 (autoload #'org-roam-capture "org-roam" nil t)
 (autoload #'org-roam-node-insert "org-roam" nil t)

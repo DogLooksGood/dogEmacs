@@ -1,5 +1,13 @@
 ;;; -*- lexical-binding: t -*-
 
+(straight-use-package '(window-numbering
+                        :repo "DogLooksGood/window-numbering.el"
+                        :host github
+                        :type git))
+
+(require 'window-numbering)
+(window-numbering-mode 1)
+
 (defun +split-window-dwim ()
   "Split window.
 

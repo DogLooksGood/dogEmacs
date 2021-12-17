@@ -266,7 +266,7 @@
    `(erc-timestamp-face             ((t (:inherit font-lock-constant-face))))
    `(erc-notice-face                ((t (:inherit font-lock-comment-face))))
 
-   `(tab-bar                        ((t (:background ,tb))))
+   `(tab-bar                        ((t (:background ,fg :foreground ,bg))))
    `(tab-bar-tab                    ((t (:inverse-video t :bold t))))
    `(tab-bar-tab-inactive           ((t ())))
 

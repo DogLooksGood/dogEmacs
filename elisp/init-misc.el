@@ -1,5 +1,6 @@
 (straight-use-package 'dumb-jump)
 (straight-use-package 'highlight-numbers)
+(straight-use-package 'eldoc-overlay)
 
 (add-hook 'prog-mode-hook 'highlight-numbers-mode)
 
@@ -17,14 +18,5 @@
 (require 'view)
 (define-key Info-mode-map [remap scroll-up-command] #'View-scroll-half-page-forward)
 (define-key Info-mode-map [remap scroll-down-command] #'View-scroll-half-page-backward)
-
-;;; embark
-(autoload 'embark-act "embark" nil t)
-
-(global-set-key (kbd "<f2>") #'embark-act)
-
-(with-eval-after-load "embark"
-  (setq embark-mixed-indicator-delay 0)
-  (define-key embark-meta-map (kbd "<escape>") #'keyboard-quit))
 
 (provide 'init-misc)
