@@ -103,7 +103,9 @@
  ;; hscroll only for current line
  auto-hscroll-mode 'current-line
  ;; set fill column indicator to 80
- display-fill-column-indicator-column 80)
+ display-fill-column-indicator-column 80
+ ;; max mini window height, 15%
+ max-mini-window-height 0.15)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -127,7 +129,6 @@
   (find-alternate-file (format "/sudo::%s" (buffer-file-name))))
 
 (global-set-key (kbd "C-x C-z") #'+reopen-file-with-sudo)
-(setq-default max-mini-window-height 0.3)
 
 (defvar +proxy-host "localhost")
 (defvar +proxy-port 1089)
