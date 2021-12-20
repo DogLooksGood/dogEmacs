@@ -16,10 +16,10 @@
        (9 . "❾")))))
 
 (defun +format-mode-line ()
-  (let* ((lhs '((:eval (concat " " (+win-num)))
+  (let* ((lhs '((:eval (when (bound-and-true-p window-numbering-mode) (concat " " (+win-num))))
                 (:eval (when (fboundp 'rime-lighter) (rime-lighter)))
-                (:eval (meow-indicator))
-                (:eval "L%l C%C")
+                (:eval (when (bound-and-true-p meow-mode) (meow-indicator)))
+                (:eval " L%l C%C")
                 (:eval (when (bound-and-true-p flycheck-mode) flycheck-mode-line))
                 (:eval (when (bound-and-true-p flymake-mode) flymake-mode-line-format))))
          (rhs '((:eval (+smart-file-name-cached))

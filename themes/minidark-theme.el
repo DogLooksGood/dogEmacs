@@ -129,7 +129,7 @@
    `(company-template-field         ((t (:inherit yas-field-highlight-face))))
 
    ;; Yasnippet
-   `(yas-field-highlight-face       ((t (:background ,hl))))
+   `(yas-field-highlight-face       ((t (:underline t))))
 
    ;; Meow
    `(meow-beacon-indicator          ((t (:bold t))))

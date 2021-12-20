@@ -39,7 +39,9 @@
  company-frontends '(company-tng-frontend
                      company-pseudo-tooltip-frontend
                      company-echo-metadata-frontend)
- company-begin-commands '(self-insert-command)
+ company-begin-commands '(self-insert-command
+                          backward-delete-char
+                          sp-backward-delete-char)
  company-idle-delay 0
  company-tooltip-limit 10
  company-tooltip-align-annotations t
@@ -74,7 +76,6 @@
   (define-key company-active-map [escape] nil)
   (define-key company-active-map [return] nil)
   (define-key company-active-map (kbd "RET") nil)
-  (define-key company-active-map (kbd "SPC") nil)
   (define-key company-active-map (kbd "SPC") nil)
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous)

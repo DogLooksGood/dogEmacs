@@ -75,8 +75,8 @@ Argument COLORS items in plist format, following keys are required.
 
         ;; Font Locks
         '(font-lock-comment-face         ((t (:foreground ,ff :italic t))))
-        '(font-lock-comment-delimiter-face ((t (:foreground ,ff :italic t))))
-        '(font-lock-string-face          ((t (:foreground ,ff))))
+        '(font-lock-comment-delimiter-face ((t (:foreground ,ff))))
+        '(font-lock-string-face          ((t (:foreground ,ff :italic t))))
         '(font-lock-doc-face             ((t (:foreground ,ff))))
         '(font-lock-builtin-face         ((t ())))
         '(font-lock-type-face            ((t ())))
@@ -113,7 +113,7 @@ Argument COLORS items in plist format, following keys are required.
         '(company-template-field         ((t (:inherit yas-field-highlight-face))))
 
         ;; Yasnippet
-        '(yas-field-highlight-face       ((t (:background ,hb))))
+        '(yas-field-highlight-face       ((t (:underline t))))
 
         ;; Meow
         '(meow-keypad-indicator          ((t (:bold t))))
