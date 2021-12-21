@@ -2,13 +2,13 @@
 
 (+make-theme
  storybook
- "My gray theme"
+ "Monochrome light theme"
  :c  "#5e5744"
  :fg "#515144"
  :bg "#e8e8be"
  :ff "#88896a"
- :hb "#bfd1a5"
- :sb "#d6d8a2")
+ :hb "#c0d3a2"
+ :sb "#dadbb6")
 
 (provide-theme 'storybook)
 ;;; storybook-theme.el ends here

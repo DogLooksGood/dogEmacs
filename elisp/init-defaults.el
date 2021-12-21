@@ -105,7 +105,10 @@
  ;; set fill column indicator to 80
  display-fill-column-indicator-column 80
  ;; max mini window height, 15%
- max-mini-window-height 0.15)
+ max-mini-window-height 0.15
+ ;; smooth scroll
+ mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil))
+ mouse-wheel-progressive-speed nil)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 

@@ -4,7 +4,6 @@
 (require 'minidark-theme)
 
 ;;; No scroll bar
-(setq-default scroll-bar-width 10)
 (scroll-bar-mode -1)
 
 ;;; No tool bar
