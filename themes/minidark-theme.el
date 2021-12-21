@@ -42,7 +42,7 @@
       (hl "#2A2A2A")
       (lh "#0DA59B")
       (ss "#353535")
-      (kw "#BEBEBE")
+      (kw "#EEEEEE")
       (fn "#bfaa6b")
       (st "#4b9e6b")
       (str "#4a95b5")

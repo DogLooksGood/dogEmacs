@@ -5,8 +5,9 @@
 
 ;; dired
 
-(setq dired-dwim-target t)
-(setq dired-listing-switches "-lXGh --group-directories-first")
+(setq dired-dwim-target t
+      dired-sidebar-no-delete-other-windows t
+      dired-listing-switches "-lXGh --group-directories-first")
 
 (with-eval-after-load "dired"
   (define-key dired-mode-map "w" #'wdired-change-to-wdired-mode))
