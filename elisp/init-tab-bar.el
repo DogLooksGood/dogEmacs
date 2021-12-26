@@ -5,7 +5,8 @@
       tab-bar-back-button nil
       tab-bar-new-button nil
       tab-bar-format '(tab-bar-format-tabs +tab-bar-right)
-      tab-bar-tab-name-format-function '+tab-bar-tab-format-function)
+      tab-bar-tab-name-format-function '+tab-bar-tab-format-function
+      tab-bar-tab-name-truncated-max 10)
 
 (defun +tab-bar-right ()
   (let* ((p (cdr (project-current)))

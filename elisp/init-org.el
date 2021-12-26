@@ -41,6 +41,7 @@
   (variable-pitch-mode 1))
 
 (with-eval-after-load  "org"
+  (setq org-highlight-latex-and-related '(latex))
   ;; (define-key org-mode-map (kbd "<f8>") 'org-latex-auto-toggle)
   (define-key org-mode-map (kbd "<f5>") 'visible-mode)
 
@@ -58,7 +59,8 @@
    '(org-table ((t :inherit 'fixed-pitch)))
    '(org-code ((t :inherit 'fixed-pitch)))
    '(org-block ((t :inherit 'fixed-pitch)))
-   '(org-checkbox ((t :inherit 'fixed-pitch))))
+   '(org-checkbox ((t :inherit 'fixed-pitch)))
+   '(org-latex-and-related ((t (:inherit 'fixed-pitch)))))
 
   (add-hook 'org-mode-hook #'+org-init)
   (require 'ob)
