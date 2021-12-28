@@ -158,22 +158,32 @@
 (meow-global-mode 1)
 
 (with-eval-after-load "meow"
+  ;; disable expand hint in telega
+  (add-to-list 'meow-expand-exclude-mode-list 'telega-chat-mode)
+
   ;; make Meow usable in TUI Emacs
   (add-to-list 'meow-mode-state-list '(inf-iex-mode . normal))
   (add-to-list 'meow-mode-state-list '(haskell-interactive-mode . normal))
   (add-to-list 'meow-mode-state-list '(erc-mode . normal))
-  (setq meow-grab-fill-commands nil)
+
   ;; use << and >> to select to bol/eol
   (add-to-list 'meow-char-thing-table '(?> . line))
   (add-to-list 'meow-char-thing-table '(?< . line))
   (add-to-list 'meow-char-thing-table '(?o . do/end))
+
   (meow-thing-register 'do/end
                        '(pair ("do" "fn") ("end"))
                        '(pair ("do" "fn") ("end")))
   (meow-thing-register 'quoted
                        '(regexp "`" "`\\|'")
                        '(regexp "`" "`\\|'"))
-  (setq meow-esc-delay 0.001)
+
+  (setq meow-grab-fill-commands '(meow-query-replace
+                                  meow-query-replace-regexp
+                                  eval-expression)
+        meow-esc-delay 0.001)
+
+
   ;; define our command layout
   (meow-setup))
 

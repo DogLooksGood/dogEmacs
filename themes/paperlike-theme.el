@@ -219,7 +219,13 @@
    `(fill-column-indicator          ((t (:foreground ,cm))))
    `(scroll-bar                     ((t (:foreground ,fg))))
    `(sp-pair-overlay-face           ((t (:background ,hl))))
-   `(sp-wrap-overlay-face           ((t (:background ,hl))))))
+   `(sp-wrap-overlay-face           ((t (:background ,hl))))
+
+   `(tab-bar                        ((t ())))
+   `(tab-bar-tab-group-current      ((t ())))
+   `(tab-bar-tab                    ((t (:inverse-video t))))
+   `(tab-bar-tab-group-inactive     ((t ())))
+   `(tab-bar-tab-inactive           ((t (:bold nil))))))
 
 (and load-file-name
      (boundp 'custom-theme-load-path)
