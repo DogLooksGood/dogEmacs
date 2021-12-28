@@ -7,7 +7,7 @@
 (straight-use-package 'rg)
 (straight-use-package 'prescient)
 (straight-use-package 'yasnippet)
-(straight-use-package 'embark)
+(straight-use-package 'marginalia)
 
 (defun +complete ()
   (interactive)
@@ -121,5 +121,11 @@
 (require 'wgrep)
 (with-eval-after-load "wgrep"
   (define-key wgrep-mode-map (kbd "C-c C-c") #'wgrep-finish-edit))
+
+;; marginalia
+
+(require 'marginalia)
+
+(marginalia-mode 1)
 
 (provide 'init-completion)
